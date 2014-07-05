@@ -31,6 +31,7 @@ public class XMLState : IState
 
 	[XmlElement("StartedGame")]
 	private bool _startedGame;
+	[XmlIgnore]
 	public bool StartedGame
 	{
 		get { return _startedGame; }
@@ -40,7 +41,8 @@ public class XMLState : IState
 
 	#region MAIN_PROPERTIES
 	[XmlElement("TotalDays")]
-	private int _totalDays;
+	private int _totalDays = 8;
+	[XmlIgnore]
 	public int TotalDays
 	{
 		get { return _totalDays; }
@@ -48,7 +50,8 @@ public class XMLState : IState
 	}
 
 	[XmlElement("CurrentDay")]
-	private int _currentDay;
+	private int _currentDay = 1;
+	[XmlIgnore]
 	public int CurrentDay
 	{
 		get { return _currentDay; }
@@ -86,6 +89,8 @@ public class XMLState : IState
 		stringWriter.Close();
 		PlayerPrefs.SetString("XMLState", xml);
 		PlayerPrefs.Save();
+
+		Debug.Log("SAVED");
 	}
 
 	public void Reset ()
