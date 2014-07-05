@@ -6,4 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_scenes/scn_TempView.unity
+    path: Assets/_scenes/scn_MainMenu.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_SimpleView.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_StateEditor.unity
