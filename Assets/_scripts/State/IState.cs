@@ -1,7 +1,7 @@
 ﻿
 public interface IState
 {
-	void Reset ();
+	IState Reset ();
 
 	#region CONFIG
 	int VersionMajor { get; set; }
@@ -14,5 +14,7 @@ public interface IState
 	#region MAIN_PROPERTIES
 	int TotalDays { get; set; }
 	int CurrentDay { get; set; }
+	int MaxAP { get; set; }
+	int CurrentAP { get; set; }
 	#endregion
 }

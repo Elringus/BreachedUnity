@@ -28,8 +28,10 @@ public abstract class BaseController : MonoBehaviour
 		State = ServiceLocator.State;
 		if (State.VersionMiddle < GlobalConfig.VERSION_MIDDLE || State.VersionMajor < GlobalConfig.VERSION_MAJOR)
 		{
+			Debug.LogWarning("The saved state is outdated and will be reseted!");
 			State.Reset();
-			Debug.LogWarning("The saved state is outdated and was reseted!");
+			Initialize();
+			return;
 		}
 
 		Initialized = true;

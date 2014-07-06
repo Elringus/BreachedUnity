@@ -6,6 +6,9 @@ using System.Xml.Serialization;
 [XmlRoot("XMLState")]
 public class XMLState : IState
 {
+	// prevent calling Save() from all the property setters when loading state
+	private static bool preventSave;
+
 	#region CONFIG
 	[XmlElement("VersionMajor")]
 	private int _versionMajor;
@@ -31,7 +34,6 @@ public class XMLState : IState
 
 	[XmlElement("StartedGame")]
 	private bool _startedGame;
-	[XmlIgnore]
 	public bool StartedGame
 	{
 		get { return _startedGame; }
@@ -42,7 +44,6 @@ public class XMLState : IState
 	#region MAIN_PROPERTIES
 	[XmlElement("TotalDays")]
 	private int _totalDays = 8;
-	[XmlIgnore]
 	public int TotalDays
 	{
 		get { return _totalDays; }
@@ -51,11 +52,26 @@ public class XMLState : IState
 
 	[XmlElement("CurrentDay")]
 	private int _currentDay = 1;
-	[XmlIgnore]
 	public int CurrentDay
 	{
 		get { return _currentDay; }
 		set { _currentDay = value; Save(); }
+	}
+
+	[XmlElement("MaxAP")]
+	private int _maxAP = 10;
+	public int MaxAP
+	{
+		get { return _maxAP; }
+		set { _maxAP = value; Save(); }
+	}
+
+	[XmlElement("CurrentAP")]
+	private int _currentAP = 10;
+	public int CurrentAP
+	{
+		get { return _currentAP; }
+		set { _currentAP = value; Save(); }
 	}
 	#endregion
 
@@ -63,12 +79,14 @@ public class XMLState : IState
 	{
 		if (PlayerPrefs.HasKey("XMLState"))
 		{
+			preventSave = true;
 			XmlSerializer serializer = new XmlSerializer(typeof(XMLState));
 			StringReader stringReader = new StringReader(PlayerPrefs.GetString("XMLState"));
 			XmlTextReader xmlReader = new XmlTextReader(stringReader);
 			XMLState state = (XMLState)serializer.Deserialize(xmlReader);
 			xmlReader.Close();
 			stringReader.Close();
+			preventSave = false;
 			return state;
 		}
 		else return new XMLState();
@@ -76,6 +94,8 @@ public class XMLState : IState
 
 	private void Save ()
 	{
+		if (preventSave) return;
+
 		VersionMajor = GlobalConfig.VERSION_MAJOR;
 		VersionMiddle = GlobalConfig.VERSION_MIDDLE;
 		VersionMinor = GlobalConfig.VERSION_MINOR;
@@ -89,13 +109,12 @@ public class XMLState : IState
 		stringWriter.Close();
 		PlayerPrefs.SetString("XMLState", xml);
 		PlayerPrefs.Save();
-
-		Debug.Log("SAVED");
 	}
 
-	public void Reset ()
+	public IState Reset ()
 	{
 		XMLState state = new XMLState();
 		state.Save();
+		return state;
 	}
 }

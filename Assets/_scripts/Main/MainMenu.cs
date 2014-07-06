@@ -23,12 +23,16 @@ public class MainMenu : BaseController
 
 	private void StartNewGame ()
 	{
-
+		ServiceLocator.State = State.Reset();
+		State = ServiceLocator.State;
+		State.StartedGame = true;
+		Application.LoadLevel("scn_SimpleView");
 	}
 
 	private void ContinueGame ()
 	{
-
+		if (!State.StartedGame) return;
+		Application.LoadLevel("scn_SimpleView");
 	}
 
 	private void ExitGame ()
