@@ -114,6 +114,12 @@ public class XMLState : IState
 	public IState Reset ()
 	{
 		XMLState state = new XMLState();
+
+		// creat a seperate xml for the non-state data (TotalDays, APCost, etc.)
+		// add button to edit non-state data
+		// add checkbox for using the simple view
+		// show simple view, edit state and edit non-state data when release type is alpha
+
 		state.Save();
 		return state;
 	}

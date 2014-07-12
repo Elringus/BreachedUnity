@@ -1,14 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SimpleView : BaseController
+public class SimpleView : BaseView
 {
 	private readonly float WIDTH = 600;
-
 	private Vector2 scrollPosition;
 
-	private void OnGUI ()
+	private SimpleController simpleController;
+	private BridgeController bridgeController;
+
+	protected override void Awake ()
 	{
+		base.Awake();
+
+		simpleController = new SimpleController();
+		bridgeController = new BridgeController();
+	}
+
+	protected override void OnGUI ()
+	{
+		base.OnGUI();
+
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
 		GUILayout.Box("Breached simple view\n--------------------------------------------------------------------------------------------------------------------------------------");
 		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 80));
@@ -29,7 +41,7 @@ public class SimpleView : BaseController
 
 		GUILayout.Space(10);
 		GUILayout.Box("Bridge");
-		if (GUILayout.Button("End day")) EndDay();
+		if (GUILayout.Button("End day")) bridgeController.EndDay();
 
 		GUILayout.Space(10);
 		GUILayout.Box("Workshop");
@@ -44,18 +56,7 @@ public class SimpleView : BaseController
 		GUILayout.Box("Flight");
 
 		GUILayout.EndScrollView();
-		if (GUILayout.Button("Return to menu")) ReturnToMenu();
+		if (GUILayout.Button("Return to menu")) simpleController.Navigate(ScreenType.MainMenu);
 		GUILayout.EndArea();
-	}
-
-	private void ReturnToMenu ()
-	{
-		Application.LoadLevel("scn_MainMenu");
-	}
-
-	private void EndDay ()
-	{
-		State.CurrentDay++;
-		State.CurrentAP = State.MaxAP;
 	}
 }

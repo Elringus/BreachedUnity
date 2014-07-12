@@ -2,7 +2,6 @@
 public enum ReleaseType
 {
 	RTM,
-	Beta,
-	Alpha,
-	PreAlpha
+	beta,
+	alpha
 }

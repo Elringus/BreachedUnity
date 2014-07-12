@@ -168,7 +168,7 @@ GameObject:
   - 4: {fileID: 1217206466}
   - 114: {fileID: 1217206467}
   m_Layer: 0
-  m_Name: _manager
+  m_Name: _view
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,6 +194,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1217206465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad74f189973f8c24484bd0046a283002, type: 3}
+  m_Script: {fileID: 11500000, guid: 6584661261721e34f804de905de31aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

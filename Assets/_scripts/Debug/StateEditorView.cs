@@ -1,14 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StateEditor : BaseController
+public class StateEditorView : BaseView
 {
 	private readonly float WIDTH = 600;
-
 	private Vector2 scrollPosition;
 
-	private void OnGUI ()
+	private StateEditorController controller;
+
+	protected override void Awake ()
 	{
+		base.Awake();
+
+		controller = new StateEditorController();
+	}
+
+	protected override void OnGUI ()
+	{
+		base.OnGUI();
+
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
 		GUILayout.Box("Breached state editor | ʕノ•ᴥ•ʔノ ︵ ┻━┻\n--------------------------------------------------------------------------------------------------------------------------------------");
 		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 80));
@@ -38,12 +48,7 @@ public class StateEditor : BaseController
 		GUILayout.EndHorizontal();
 
 		GUILayout.EndScrollView();
-		if (GUILayout.Button("Return to menu")) ReturnToMenu();
+		if (GUILayout.Button("Return to menu")) controller.Navigate(ScreenType.MainMenu);
 		GUILayout.EndArea();
-	}
-
-	private void ReturnToMenu ()
-	{
-		Application.LoadLevel("scn_MainMenu");
 	}
 }
