@@ -3,12 +3,14 @@
 public abstract class BaseView : MonoBehaviour
 {
 	protected IState State;
+	protected ILogger Logger;
 
 	protected virtual void Awake ()
 	{
 		ServiceLocator.Initialize();
 
 		State = ServiceLocator.State;
+		Logger = ServiceLocator.Logger;
 	}
 
 	protected virtual void Start ()

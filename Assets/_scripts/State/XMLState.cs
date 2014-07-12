@@ -108,6 +108,7 @@ public class XMLState : IState
 		{
 			var state = new XMLState();
 			state.Reset(true);
+			ServiceLocator.Logger.Log("The save file cannot be found and was created.");
 			return state;
 		}
 	}
