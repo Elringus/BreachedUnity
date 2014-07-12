@@ -1,7 +1,7 @@
 ﻿
 public interface IState
 {
-	IState Reset ();
+	void Reset (bool resetRules = false);
 
 	#region CONFIG
 	int VersionMajor { get; set; }
@@ -11,10 +11,13 @@ public interface IState
 	bool StartedGame { get; set; }
 	#endregion
 
-	#region MAIN_PROPERTIES
+	#region RULES
 	int TotalDays { get; set; }
-	int CurrentDay { get; set; }
 	int MaxAP { get; set; }
+	#endregion
+
+	#region STATE
+	int CurrentDay { get; set; }
 	int CurrentAP { get; set; }
 	#endregion
 }

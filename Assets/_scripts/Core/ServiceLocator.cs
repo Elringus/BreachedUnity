@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 public static class ServiceLocator
 {
 	public static bool Initialized;
@@ -13,7 +12,6 @@ public static class ServiceLocator
 		State = XMLState.Load();
 		if (State.VersionMiddle < GlobalConfig.VERSION_MIDDLE || State.VersionMajor < GlobalConfig.VERSION_MAJOR)
 		{
-			Debug.LogWarning("The saved state is outdated and will be reseted!");
 			State.Reset();
 			Initialize();
 			return;

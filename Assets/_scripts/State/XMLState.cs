@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -41,33 +41,35 @@ public class XMLState : IState
 	}
 	#endregion
 
-	#region MAIN_PROPERTIES
+	#region RULES
 	[XmlElement("TotalDays")]
-	private int _totalDays = 8;
+	private int _totalDays;
 	public int TotalDays
 	{
 		get { return _totalDays; }
 		set { _totalDays = value; Save(); }
 	}
 
+	[XmlElement("MaxAP")]
+	private int _maxAP;
+	public int MaxAP
+	{
+		get { return _maxAP; }
+		set { _maxAP = value; Save(); }
+	}
+	#endregion
+
+	#region STATE
 	[XmlElement("CurrentDay")]
-	private int _currentDay = 1;
+	private int _currentDay;
 	public int CurrentDay
 	{
 		get { return _currentDay; }
 		set { _currentDay = value; Save(); }
 	}
 
-	[XmlElement("MaxAP")]
-	private int _maxAP = 10;
-	public int MaxAP
-	{
-		get { return _maxAP; }
-		set { _maxAP = value; Save(); }
-	}
-
 	[XmlElement("CurrentAP")]
-	private int _currentAP = 10;
+	private int _currentAP;
 	public int CurrentAP
 	{
 		get { return _currentAP; }
@@ -77,19 +79,37 @@ public class XMLState : IState
 
 	public static XMLState Load ()
 	{
-		if (PlayerPrefs.HasKey("XMLState"))
+		//if (PlayerPrefs.HasKey("XMLState"))
+		//{
+		//	preventSave = true;
+		//	XmlSerializer serializer = new XmlSerializer(typeof(XMLState));
+		//	StringReader stringReader = new StringReader(PlayerPrefs.GetString("XMLState"));
+		//	XmlTextReader xmlReader = new XmlTextReader(stringReader);
+		//	XMLState state = (XMLState)serializer.Deserialize(xmlReader);
+		//	xmlReader.Close();
+		//	stringReader.Close();
+		//	preventSave = false;
+		//	return state;
+		//}
+		//else return new XMLState();
+
+		if (File.Exists(Path.Combine(Environment.CurrentDirectory, "state.xml")))
 		{
 			preventSave = true;
-			XmlSerializer serializer = new XmlSerializer(typeof(XMLState));
-			StringReader stringReader = new StringReader(PlayerPrefs.GetString("XMLState"));
-			XmlTextReader xmlReader = new XmlTextReader(stringReader);
-			XMLState state = (XMLState)serializer.Deserialize(xmlReader);
-			xmlReader.Close();
-			stringReader.Close();
-			preventSave = false;
+			var serializer = new XmlSerializer(typeof(XMLState));
+			using (var stream = new FileStream(Path.Combine(Environment.CurrentDirectory, "state.xml"), FileMode.Open))
+			{
+				var state = serializer.Deserialize(stream) as XMLState;
+				preventSave = false;
+				return state;
+			}
+		}
+		else
+		{
+			var state = new XMLState();
+			state.Reset(true);
 			return state;
 		}
-		else return new XMLState();
 	}
 
 	private void Save ()
@@ -100,27 +120,41 @@ public class XMLState : IState
 		VersionMiddle = GlobalConfig.VERSION_MIDDLE;
 		VersionMinor = GlobalConfig.VERSION_MINOR;
 
-		XmlSerializer serializer = new XmlSerializer(typeof(XMLState));
-		StringWriter stringWriter = new StringWriter();
-		XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
-		serializer.Serialize(xmlWriter, this);
-		string xml = stringWriter.ToString();
-		xmlWriter.Close();
-		stringWriter.Close();
-		PlayerPrefs.SetString("XMLState", xml);
-		PlayerPrefs.Save();
+		//XmlSerializer serializer = new XmlSerializer(typeof(XMLState));
+		//StringWriter stringWriter = new StringWriter();
+		//XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
+		//serializer.Serialize(xmlWriter, this);
+		//string xml = stringWriter.ToString();
+		//xmlWriter.Close();
+		//stringWriter.Close();
+		//PlayerPrefs.SetString("XMLState", xml);
+		//PlayerPrefs.Save();
+
+		var serializer = new XmlSerializer(typeof(XMLState));
+		using (var stream = new FileStream(Path.Combine(Environment.CurrentDirectory, "state.xml"), FileMode.Create)) 
+			serializer.Serialize(stream, this);
 	}
 
-	public IState Reset ()
+	public void Reset (bool resetRules = false)
 	{
-		XMLState state = new XMLState();
+		preventSave = true;
 
-		// creat a seperate xml for the non-state data (TotalDays, APCost, etc.)
-		// add button to edit non-state data
-		// add checkbox for using the simple view
-		// show simple view, edit state and edit non-state data when release type is alpha
+		StartedGame = false;
 
-		state.Save();
-		return state;
+		#region RULES
+		if (resetRules)
+		{
+			TotalDays = 8;
+			MaxAP = 10;
+		}
+		#endregion
+
+		#region STATE
+		CurrentDay = 1;
+		CurrentAP = MaxAP;
+		#endregion
+
+		preventSave = false;
+		this.Save();
 	}
 }

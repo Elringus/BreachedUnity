@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class SimpleView : BaseView
 {
@@ -13,7 +12,7 @@ public class SimpleView : BaseView
 	{
 		base.Awake();
 
-		simpleController = new SimpleController();
+		//simpleController = new SimpleController();
 		bridgeController = new BridgeController();
 	}
 
@@ -56,7 +55,7 @@ public class SimpleView : BaseView
 		GUILayout.Box("Flight");
 
 		GUILayout.EndScrollView();
-		if (GUILayout.Button("Return to menu")) simpleController.Navigate(ScreenType.MainMenu);
+		if (GUILayout.Button("Return to menu")) SwitchView(ViewType.MainMenu);
 		GUILayout.EndArea();
 	}
 }
