@@ -31,14 +31,6 @@ public class XMLState : IState
 		get { return _versionMinor; }
 		set { _versionMinor = value; }
 	}
-
-	[XmlElement("StartedGame")]
-	private bool _startedGame;
-	public bool StartedGame
-	{
-		get { return _startedGame; }
-		set { _startedGame = value; Save(); }
-	}
 	#endregion
 
 	#region RULES
@@ -60,6 +52,14 @@ public class XMLState : IState
 	#endregion
 
 	#region STATE
+	[XmlElement("GameProgress")]
+	private int _gameProgress;
+	public GameProgressType GameProgress
+	{
+		get { return (GameProgressType)_gameProgress; }
+		set { _gameProgress = (int)value; Save(); }
+	}
+
 	[XmlElement("CurrentDay")]
 	private int _currentDay;
 	public int CurrentDay
@@ -140,11 +140,11 @@ public class XMLState : IState
 	{
 		preventSave = true;
 
-		StartedGame = false;
-
 		#region RULES
 		if (resetRules)
 		{
+			GameProgress = GameProgressType.FirstLaunch;
+
 			TotalDays = 8;
 			MaxAP = 10;
 		}

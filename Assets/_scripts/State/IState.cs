@@ -7,8 +7,6 @@ public interface IState
 	int VersionMajor { get; set; }
 	int VersionMiddle { get; set; }
 	int VersionMinor { get; set; }
-
-	bool StartedGame { get; set; }
 	#endregion
 
 	#region RULES
@@ -17,6 +15,8 @@ public interface IState
 	#endregion
 
 	#region STATE
+	GameProgressType GameProgress { get; set; }
+
 	int CurrentDay { get; set; }
 	int CurrentAP { get; set; }
 	#endregion

@@ -30,8 +30,8 @@ public class StateEditorView : BaseView
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Started game: ", GUILayout.Width(300));
-		GUILayout.Label(State.StartedGame.ToString());
+		GUILayout.Label("Game progress: ", GUILayout.Width(300));
+		GUILayout.Label(State.GameProgress.ToString());
 		GUILayout.EndHorizontal();
 
 		GUILayout.Box("Rules constants (cross-session invariant)");

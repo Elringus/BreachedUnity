@@ -38,21 +38,26 @@ public class SimpleView : BaseView
 		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", 0, 0, 0));
 		GUILayout.EndHorizontal();
 
-		GUILayout.Space(10);
-		GUILayout.Box("Bridge");
-		if (GUILayout.Button("End day")) bridgeController.EndDay();
+		if (State.GameProgress == GameProgressType.InProgress)
+		{
 
-		GUILayout.Space(10);
-		GUILayout.Box("Workshop");
+			GUILayout.Space(10);
+			GUILayout.Box("Bridge");
+			if (GUILayout.Button("End day")) bridgeController.EndDay();
 
-		GUILayout.Space(10);
-		GUILayout.Box("Map");
+			GUILayout.Space(10);
+			GUILayout.Box("Workshop");
 
-		GUILayout.Space(10);
-		GUILayout.Box("Horizon");
+			GUILayout.Space(10);
+			GUILayout.Box("Map");
 
-		GUILayout.Space(10);
-		GUILayout.Box("Flight");
+			GUILayout.Space(10);
+			GUILayout.Box("Horizon");
+
+			GUILayout.Space(10);
+			GUILayout.Box("Flight");
+		}
+		else GUILayout.Box(State.GameProgress.ToString());
 
 		GUILayout.EndScrollView();
 		if (GUILayout.Button("Return to menu")) SwitchView(ViewType.MainMenu);

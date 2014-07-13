@@ -30,7 +30,8 @@ public class MainMenuView : BaseView
 			controller.StartNewGame();
 			SwitchView(useSimpleView ? ViewType.SimpleView : ViewType.Intro);
 		}
-		if (State.StartedGame && GUI.Button(new Rect(10, debugEnabled ? 150 : 70, 280, 40), "Continue")) SwitchView(useSimpleView ? ViewType.SimpleView : ViewType.Bridge);
+		if (State.GameProgress == GameProgressType.InProgress && GUI.Button(new Rect(10, debugEnabled ? 150 : 70, 280, 40), "Continue")) 
+			SwitchView(useSimpleView ? ViewType.SimpleView : ViewType.Bridge);
 		if (GUI.Button(new Rect(10, debugEnabled ? 190 : 110, 280, 40), "Exit")) Application.Quit();
 		GUI.EndGroup();
 	}

@@ -5,5 +5,8 @@ public class BridgeController : BaseController
 	{
 		State.CurrentDay++;
 		State.CurrentAP = State.MaxAP;
+
+		if (State.CurrentDay > State.TotalDays) 
+			State.GameProgress = GameProgressType.GameOver;
 	}
 }
