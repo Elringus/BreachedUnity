@@ -46,6 +46,11 @@ public class StateEditorView : BaseView
 		State.MaxAP = int.Parse(GUILayout.TextField(State.MaxAP.ToString()));
 		GUILayout.EndHorizontal();
 
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Enter sector AP cost: ", GUILayout.Width(300));
+		State.EnterSectorAPCost = int.Parse(GUILayout.TextField(State.EnterSectorAPCost.ToString()));
+		GUILayout.EndHorizontal();
+
 		GUILayout.Box("State variables (specific for the current game session)");
 
 		GUILayout.BeginHorizontal();

@@ -12,6 +12,8 @@ public interface IState
 	#region RULES
 	int TotalDays { get; set; }
 	int MaxAP { get; set; }
+
+	int EnterSectorAPCost { get; set; }
 	#endregion
 
 	#region STATE

@@ -1,12 +1,16 @@
 ﻿
 public class BridgeController : BaseController
 {
-	public void EndDay ()
+	public bool EndDay ()
 	{
+		if (State.CurrentDay > State.TotalDays) return false;
+
 		State.CurrentDay++;
 		State.CurrentAP = State.MaxAP;
 
 		if (State.CurrentDay > State.TotalDays) 
 			State.GameProgress = GameProgressType.GameOver;
+
+		return true;
 	}
 }

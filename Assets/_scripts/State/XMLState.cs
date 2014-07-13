@@ -49,6 +49,14 @@ public class XMLState : IState
 		get { return _maxAP; }
 		set { _maxAP = value; Save(); }
 	}
+
+	[XmlElement("EnterSectorAPCost")]
+	private int _enterSectorAPCost;
+	public int EnterSectorAPCost
+	{
+		get { return _enterSectorAPCost; }
+		set { _enterSectorAPCost = value; Save(); }
+	}
 	#endregion
 
 	#region STATE
@@ -147,6 +155,8 @@ public class XMLState : IState
 
 			TotalDays = 8;
 			MaxAP = 10;
+
+			EnterSectorAPCost = 3;
 		}
 		#endregion
 

@@ -7,6 +7,9 @@ public class SimpleView : BaseView
 
 	private SimpleController simpleController;
 	private BridgeController bridgeController;
+	private MapController mapController;
+
+	private bool inFlightMode;
 
 	protected override void Awake ()
 	{
@@ -14,6 +17,7 @@ public class SimpleView : BaseView
 
 		//simpleController = new SimpleController();
 		bridgeController = new BridgeController();
+		mapController = new MapController();
 	}
 
 	protected override void OnGUI ()
@@ -40,22 +44,30 @@ public class SimpleView : BaseView
 
 		if (State.GameProgress == GameProgressType.InProgress)
 		{
+			if (inFlightMode)
+			{
+				GUILayout.Space(10);
+				GUILayout.Box("Flight mode");
 
-			GUILayout.Space(10);
-			GUILayout.Box("Bridge");
-			if (GUILayout.Button("End day")) bridgeController.EndDay();
+				if (GUILayout.Button("Recall dron")) inFlightMode = false;
+			}
+			else
+			{
+				GUILayout.Space(10);
+				GUILayout.Box("Bridge");
+				if (GUILayout.Button(string.Format("End day [AP = {0}]", State.MaxAP))) bridgeController.EndDay();
 
-			GUILayout.Space(10);
-			GUILayout.Box("Workshop");
+				GUILayout.Space(10);
+				GUILayout.Box("Workshop");
 
-			GUILayout.Space(10);
-			GUILayout.Box("Map");
+				GUILayout.Space(10);
+				GUILayout.Box("Map");
+				if (GUILayout.Button(string.Format("Enter flight mode [-{0}AP]", State.EnterSectorAPCost)))
+					inFlightMode = mapController.EnterSector();
 
-			GUILayout.Space(10);
-			GUILayout.Box("Horizon");
-
-			GUILayout.Space(10);
-			GUILayout.Box("Flight");
+				GUILayout.Space(10);
+				GUILayout.Box("Horizon");
+			}
 		}
 		else GUILayout.Box(State.GameProgress.ToString());
 
