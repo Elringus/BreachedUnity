@@ -104,6 +104,13 @@ public class StateEditorView : BaseView
 		GUILayout.Label("Current AP: ", GUILayout.Width(300));
 		State.CurrentAP = int.Parse(GUILayout.TextField(State.CurrentAP.ToString()));
 		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Minerals A, B, C: ", GUILayout.Width(300));
+		State.MineralA = int.Parse(GUILayout.TextField(State.MineralA.ToString()));
+		State.MineralB = int.Parse(GUILayout.TextField(State.MineralB.ToString()));
+		State.MineralC = int.Parse(GUILayout.TextField(State.MineralC.ToString()));
+		GUILayout.EndHorizontal();
 		#endregion
 
 		GUILayout.EndScrollView();
