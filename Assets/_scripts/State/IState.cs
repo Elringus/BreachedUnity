@@ -15,6 +15,7 @@ public interface IState
 	int MaxAP { get; set; }
 
 	int EnterSectorAPCost { get; set; }
+	int LootCharges { get; set; }
 	List<SectorParameters> SectorsParameters { get; set; }
 	#endregion
 
@@ -23,5 +24,9 @@ public interface IState
 
 	int CurrentDay { get; set; }
 	int CurrentAP { get; set; }
+
+	int MineralA { get; set; }
+	int MineralB { get; set; }
+	int MineralC { get; set; }
 	#endregion
 }

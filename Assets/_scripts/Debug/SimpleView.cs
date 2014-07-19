@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class SimpleView : BaseView
 {
@@ -8,8 +9,11 @@ public class SimpleView : BaseView
 	private SimpleController simpleController;
 	private BridgeController bridgeController;
 	private MapController mapController;
+	private FlightController flightController;
 
 	private bool inFlightMode;
+	private int lootCharges;
+	private List<Loot> sectorLoot = new List<Loot>();
 
 	protected override void Awake ()
 	{
@@ -18,6 +22,7 @@ public class SimpleView : BaseView
 		//simpleController = new SimpleController();
 		bridgeController = new BridgeController();
 		mapController = new MapController();
+		flightController = new FlightController();
 	}
 
 	protected override void OnGUI ()
@@ -38,7 +43,7 @@ public class SimpleView : BaseView
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("AP: {0}/{1}", State.CurrentAP, State.MaxAP));
-		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", 0, 0, 0));
+		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC));
 		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", 0, 0, 0));
 		GUILayout.EndHorizontal();
 
@@ -47,7 +52,16 @@ public class SimpleView : BaseView
 			if (inFlightMode)
 			{
 				GUILayout.Space(10);
-				GUILayout.Box("Flight mode");
+				GUILayout.Box(string.Format("In flight mode. Loot charges: {0}/{1}", lootCharges, State.LootCharges));
+
+				for (int i = 0; i < sectorLoot.Count; i++ )
+					if (GUILayout.Button(string.Format("Loot spot of {0}", sectorLoot[i].LootType)))
+					{
+						flightController.RecieveLoot(sectorLoot[i]);
+						sectorLoot.Remove(sectorLoot[i]);
+						lootCharges--;
+						if (lootCharges <= 0) inFlightMode = false;
+					}
 
 				if (GUILayout.Button("Recall dron")) inFlightMode = false;
 			}
@@ -62,8 +76,10 @@ public class SimpleView : BaseView
 
 				GUILayout.Space(10);
 				GUILayout.Box("Map");
-				if (GUILayout.Button(string.Format("Enter flight mode [-{0}AP]", State.EnterSectorAPCost)))
-					inFlightMode = mapController.EnterSector();
+				if (GUILayout.Button(string.Format("Enter 1st sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(1);
+				if (GUILayout.Button(string.Format("Enter 2nt sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(2);
+				if (GUILayout.Button(string.Format("Enter 3rd sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(3);
+				if (GUILayout.Button(string.Format("Enter 4th sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(4);
 
 				GUILayout.Space(10);
 				GUILayout.Box("Horizon");
@@ -74,5 +90,19 @@ public class SimpleView : BaseView
 		GUILayout.EndScrollView();
 		if (GUILayout.Button("Return to menu")) SwitchView(ViewType.MainMenu);
 		GUILayout.EndArea();
+	}
+
+	private void InitFlightMode (int sector)
+	{
+		if (!mapController.EnterSector()) return;
+
+		inFlightMode = true;
+
+		lootCharges = State.LootCharges;
+
+		var sectorParams = State.SectorsParameters.Find(x => x.SectorID == sector);
+		sectorLoot.Clear();
+		for (int i = 0; i < sectorParams.LootSpotCount; i++)
+			sectorLoot.Add(flightController.GenerateLoot(sectorParams));
 	}
 }

@@ -59,6 +59,14 @@ public class XMLState : IState
 		set { _enterSectorAPCost = value; Save(); }
 	}
 
+	[XmlElement("LootCharges")]
+	private int _lootCharges;
+	public int LootCharges
+	{
+		get { return _lootCharges; }
+		set { _lootCharges = value; Save(); }
+	}
+
 	[XmlElement("SectorsParameters")]
 	private List<SectorParameters> _sectorsParameters;
 	public List<SectorParameters> SectorsParameters
@@ -91,6 +99,28 @@ public class XMLState : IState
 	{
 		get { return _currentAP; }
 		set { _currentAP = value; Save(); }
+	}
+
+	[XmlElement("MineralA")]
+	private int _mineralA;
+	public int MineralA
+	{
+		get { return _mineralA; }
+		set { _mineralA = value; Save(); }
+	}
+	[XmlElement("MineralB")]
+	private int _mineralB;
+	public int MineralB
+	{
+		get { return _mineralB; }
+		set { _mineralB = value; Save(); }
+	}
+	[XmlElement("MineralC")]
+	private int _mineralC;
+	public int MineralC
+	{
+		get { return _mineralC; }
+		set { _mineralC = value; Save(); }
 	}
 	#endregion
 
@@ -166,12 +196,12 @@ public class XMLState : IState
 			MaxAP = 10;
 
 			EnterSectorAPCost = 3;
-
+			LootCharges = 3;
 			SectorsParameters = new List<SectorParameters> { 
-				new SectorParameters(1, 0, 3, 3), 
-				new SectorParameters(2, 3, 0, 3), 
-				new SectorParameters(3, 3, 3, 0), 
-				new SectorParameters(4, 2, 2, 2) 
+				new SectorParameters(1, 4, 0, 3, 3), 
+				new SectorParameters(2, 5, 3, 0, 3), 
+				new SectorParameters(3, 3, 3, 3, 0), 
+				new SectorParameters(4, 6, 2, 2, 2) 
 			};
 		}
 		#endregion
@@ -179,6 +209,10 @@ public class XMLState : IState
 		#region STATE
 		CurrentDay = 1;
 		CurrentAP = MaxAP;
+
+		MineralA = 0;
+		MineralB = 0;
+		MineralC = 0;
 		#endregion
 
 		preventSave = false;
