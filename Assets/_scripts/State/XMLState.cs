@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -56,6 +57,14 @@ public class XMLState : IState
 	{
 		get { return _enterSectorAPCost; }
 		set { _enterSectorAPCost = value; Save(); }
+	}
+
+	[XmlElement("SectorsParameters")]
+	private List<SectorParameters> _sectorsParameters;
+	public List<SectorParameters> SectorsParameters
+	{
+		get { return _sectorsParameters; }
+		set { _sectorsParameters = value; Save(); }
 	}
 	#endregion
 
@@ -157,6 +166,13 @@ public class XMLState : IState
 			MaxAP = 10;
 
 			EnterSectorAPCost = 3;
+
+			SectorsParameters = new List<SectorParameters> { 
+				new SectorParameters(1, 0, 3, 3), 
+				new SectorParameters(2, 3, 0, 3), 
+				new SectorParameters(3, 3, 3, 0), 
+				new SectorParameters(4, 2, 2, 2) 
+			};
 		}
 		#endregion
 

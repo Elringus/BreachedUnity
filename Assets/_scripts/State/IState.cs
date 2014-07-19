@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 public interface IState
 {
 	void Reset (bool resetRules = false);
@@ -14,6 +15,7 @@ public interface IState
 	int MaxAP { get; set; }
 
 	int EnterSectorAPCost { get; set; }
+	List<SectorParameters> SectorsParameters { get; set; }
 	#endregion
 
 	#region STATE

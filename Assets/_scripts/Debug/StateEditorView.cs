@@ -22,6 +22,7 @@ public class StateEditorView : BaseView
 		GUILayout.Box("Breached state editor | ʕノ•ᴥ•ʔノ ︵ ┻━┻\n--------------------------------------------------------------------------------------------------------------------------------------");
 		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 120));
 
+		#region CONFIG
 		GUILayout.Box("Configuration info (not editable)");
 
 		GUILayout.BeginHorizontal();
@@ -33,7 +34,9 @@ public class StateEditorView : BaseView
 		GUILayout.Label("Game progress: ", GUILayout.Width(300));
 		GUILayout.Label(State.GameProgress.ToString());
 		GUILayout.EndHorizontal();
+		#endregion
 
+		#region RULES
 		GUILayout.Box("Rules constants (cross-session invariant)");
 
 		GUILayout.BeginHorizontal();
@@ -51,6 +54,36 @@ public class StateEditorView : BaseView
 		State.EnterSectorAPCost = int.Parse(GUILayout.TextField(State.EnterSectorAPCost.ToString()));
 		GUILayout.EndHorizontal();
 
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Sector 1 parameters (minerals: A, B, C): ", GUILayout.Width(300));
+		State.SectorsParameters.Find(x => x.SectorID == 1).MineralA = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 1).MineralA.ToString()));
+		State.SectorsParameters.Find(x => x.SectorID == 1).MineralB = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 1).MineralB.ToString()));
+		State.SectorsParameters.Find(x => x.SectorID == 1).MineralC = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 1).MineralC.ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Sector 2 parameters (minerals: A, B, C): ", GUILayout.Width(300));
+		State.SectorsParameters.Find(x => x.SectorID == 2).MineralA = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 2).MineralA.ToString()));
+		State.SectorsParameters.Find(x => x.SectorID == 2).MineralB = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 2).MineralB.ToString()));
+		State.SectorsParameters.Find(x => x.SectorID == 2).MineralC = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 2).MineralC.ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Sector 3 parameters (minerals: A, B, C): ", GUILayout.Width(300));
+		State.SectorsParameters.Find(x => x.SectorID == 3).MineralA = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 3).MineralA.ToString()));
+		State.SectorsParameters.Find(x => x.SectorID == 3).MineralB = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 3).MineralB.ToString()));
+		State.SectorsParameters.Find(x => x.SectorID == 3).MineralC = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 3).MineralC.ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Sector 4 parameters (minerals: A, B, C): ", GUILayout.Width(300));
+		State.SectorsParameters.Find(x => x.SectorID == 4).MineralA = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 4).MineralA.ToString()));
+		State.SectorsParameters.Find(x => x.SectorID == 4).MineralB = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 4).MineralB.ToString()));
+		State.SectorsParameters.Find(x => x.SectorID == 4).MineralC = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 4).MineralC.ToString()));
+		GUILayout.EndHorizontal();
+		#endregion
+
+		#region STATE
 		GUILayout.Box("State variables (specific for the current game session)");
 
 		GUILayout.BeginHorizontal();
@@ -62,6 +95,7 @@ public class StateEditorView : BaseView
 		GUILayout.Label("Current AP: ", GUILayout.Width(300));
 		State.CurrentAP = int.Parse(GUILayout.TextField(State.CurrentAP.ToString()));
 		GUILayout.EndHorizontal();
+		#endregion
 
 		GUILayout.EndScrollView();
 		if (GUILayout.Button("Total reset (including rules)", GUILayout.Height(30))) controller.TotalReset();
