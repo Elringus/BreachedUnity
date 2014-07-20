@@ -2,6 +2,7 @@
 
 public interface IState
 {
+	void HoldAutoSave (bool hold);
 	void Reset (bool resetRules = false);
 
 	#region CONFIG

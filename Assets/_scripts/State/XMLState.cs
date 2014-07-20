@@ -7,7 +7,8 @@ using System.Xml.Serialization;
 [XmlRoot("XMLState")]
 public class XMLState : IState
 {
-	// prevent calling Save() from all the property setters when loading state
+	// prevent calling Save() from all the property setters
+	[XmlIgnore]
 	private static bool preventSave;
 
 	#region CONFIG
@@ -183,8 +184,15 @@ public class XMLState : IState
 			serializer.Serialize(stream, this);
 	}
 
+	public void HoldAutoSave (bool hold)
+	{
+		preventSave = hold;
+		if (!hold) Save();
+	}
+
 	public void Reset (bool resetRules = false)
 	{
+		bool autoSaveWasTurnedOff = preventSave;
 		preventSave = true;
 
 		#region RULES
@@ -215,7 +223,7 @@ public class XMLState : IState
 		MineralC = 0;
 		#endregion
 
-		preventSave = false;
+		preventSave = autoSaveWasTurnedOff;
 		this.Save();
 	}
 }

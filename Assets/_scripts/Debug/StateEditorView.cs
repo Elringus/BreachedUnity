@@ -12,6 +12,7 @@ public class StateEditorView : BaseView
 		base.Awake();
 
 		controller = new StateEditorController();
+		State.HoldAutoSave(true);
 	}
 
 	protected override void OnGUI ()
@@ -115,7 +116,11 @@ public class StateEditorView : BaseView
 
 		GUILayout.EndScrollView();
 		if (GUILayout.Button("Total reset (including rules)", GUILayout.Height(30))) controller.TotalReset();
-		if (GUILayout.Button("Return to menu", GUILayout.Height(30))) SwitchView(ViewType.MainMenu);
+		if (GUILayout.Button("Save and return to menu", GUILayout.Height(30)))
+		{
+			State.HoldAutoSave(false);
+			SwitchView(ViewType.MainMenu);
+		}
 		GUILayout.EndArea();
 	}
 }
