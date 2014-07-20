@@ -53,13 +53,13 @@ public class FlightController : BaseController
 				loot.Artifact.ArtifactStatus = ArtifactStatus.Found;
 				break;
 			case LootType.MineralA:
-				State.MineralB += loot.MineralA;
+				State.MineralA += loot.MineralA;
 				break;
 			case LootType.MineralB:
-				State.MineralC += loot.MineralB;
+				State.MineralB += loot.MineralB;
 				break;
 			case LootType.MineralC:
-				State.MineralA += loot.MineralC;
+				State.MineralC += loot.MineralC;
 				break;
 		}
 	}
