@@ -52,7 +52,7 @@ public class SimpleView : BaseView
 		GUILayout.Label("Analyzed artifacts:");
 		foreach (var artifact in State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.Analyzed)) GUILayout.Label(artifact.Name);
 
-		if (State.GameProgress == GameProgressType.InProgress)
+		if (State.GameProgress == GameStatus.InProgress)
 		{
 			if (inFlightMode)
 			{

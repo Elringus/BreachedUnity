@@ -1,5 +1,5 @@
 ﻿
-public enum GameProgressType
+public enum GameStatus
 {
 	FirstLaunch = 0,
 	NotStarted = 1,

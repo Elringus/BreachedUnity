@@ -25,7 +25,7 @@ public interface IState
 	#endregion
 
 	#region STATE
-	GameProgressType GameProgress { get; set; }
+	GameStatus GameProgress { get; set; }
 
 	int CurrentDay { get; set; }
 	int CurrentAP { get; set; }

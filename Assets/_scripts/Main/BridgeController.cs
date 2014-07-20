@@ -9,7 +9,7 @@ public class BridgeController : BaseController
 		State.CurrentAP = State.MaxAP;
 
 		if (State.CurrentDay > State.TotalDays) 
-			State.GameProgress = GameProgressType.GameOver;
+			State.GameProgress = GameStatus.GameOver;
 
 		foreach (var artifact in State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.Analyzing))
 		{

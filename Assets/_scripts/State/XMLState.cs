@@ -96,9 +96,9 @@ public class XMLState : IState
 	#region STATE
 	[XmlElement("GameProgress")]
 	private int _gameProgress;
-	public GameProgressType GameProgress
+	public GameStatus GameProgress
 	{
-		get { return (GameProgressType)_gameProgress; }
+		get { return (GameStatus)_gameProgress; }
 		set { _gameProgress = (int)value; Save(); }
 	}
 
@@ -236,7 +236,7 @@ public class XMLState : IState
 		#region RULES
 		if (resetRules)
 		{
-			GameProgress = GameProgressType.FirstLaunch;
+			GameProgress = GameStatus.FirstLaunch;
 
 			TotalDays = 8;
 			MaxAP = 10;
