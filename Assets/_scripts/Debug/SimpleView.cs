@@ -10,6 +10,7 @@ public class SimpleView : BaseView
 	private BridgeController bridgeController;
 	private MapController mapController;
 	private FlightController flightController;
+	private WorkshopController workshopController;
 
 	private bool inFlightMode;
 	private int lootCharges;
@@ -23,6 +24,7 @@ public class SimpleView : BaseView
 		bridgeController = new BridgeController();
 		mapController = new MapController();
 		flightController = new FlightController();
+		workshopController = new WorkshopController();
 	}
 
 	protected override void OnGUI ()
@@ -44,8 +46,11 @@ public class SimpleView : BaseView
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("AP: {0}/{1}", State.CurrentAP, State.MaxAP));
 		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC));
-		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", 0, 0, 0));
+		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips));
 		GUILayout.EndHorizontal();
+
+		GUILayout.Label("Analyzed artifacts:");
+		foreach (var artifact in State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.Analyzed)) GUILayout.Label(artifact.Name);
 
 		if (State.GameProgress == GameProgressType.InProgress)
 		{
@@ -73,6 +78,9 @@ public class SimpleView : BaseView
 
 				GUILayout.Space(10);
 				GUILayout.Box("Workshop");
+				foreach (var artifact in State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.Found))
+					if (GUILayout.Button(string.Format("Start analyzing {0} [-{1}AP]", artifact.Name, State.AnalyzeArtifactAPCost)))
+						workshopController.AnalyzeArtifact(artifact);
 
 				GUILayout.Space(10);
 				GUILayout.Box("Map");
@@ -92,17 +100,12 @@ public class SimpleView : BaseView
 		GUILayout.EndArea();
 	}
 
-	private void InitFlightMode (int sector)
+	private void InitFlightMode (int sectorID)
 	{
 		if (!mapController.EnterSector()) return;
 
 		inFlightMode = true;
-
 		lootCharges = State.LootCharges;
-
-		var sectorParams = State.SectorsParameters.Find(x => x.SectorID == sector);
-		sectorLoot.Clear();
-		for (int i = 0; i < sectorParams.LootSpotCount; i++)
-			sectorLoot.Add(flightController.GenerateLoot(sectorParams));
+		flightController.GenerateLoot(sectorID, out sectorLoot);
 	}
 }

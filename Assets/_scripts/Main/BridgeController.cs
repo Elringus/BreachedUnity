@@ -11,6 +11,14 @@ public class BridgeController : BaseController
 		if (State.CurrentDay > State.TotalDays) 
 			State.GameProgress = GameProgressType.GameOver;
 
+		foreach (var artifact in State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.Analyzing))
+		{
+			artifact.ArtifactStatus = ArtifactStatus.Analyzed;
+			State.Wiring += artifact.Wiring;
+			State.Alloy += artifact.Alloy;
+			State.Chips += artifact.Chips;
+		}
+
 		return true;
 	}
 }

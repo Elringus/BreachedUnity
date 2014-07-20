@@ -3,6 +3,8 @@ public struct Loot
 {
 	public LootType LootType { get; set; }
 
+	public Artifact Artifact { get; set; }
+
 	public int MineralA { get; set; }
 	public int MineralB { get; set; }
 	public int MineralC { get; set; }

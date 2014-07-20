@@ -1,31 +1,66 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class FlightController : BaseController
 {
-	public Loot GenerateLoot (SectorParameters sectorParameters)
+	public void GenerateLoot (int sectorID, out List<Loot> lootList)
 	{
-		var loot = new Loot();
+		var sectorParameters = State.SectorsParameters.Find(x => x.SectorID == sectorID);
+		lootList = new List<Loot>();
+		List<Artifact> chosenArtifacts = new List<Artifact>();
+		int artefactsLeft = State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.NotFound).Count;
 
-		while (true)
+		for (int i = 0; i < sectorParameters.LootSpotCount; i++)
 		{
-			LootType[] values = (LootType[])Enum.GetValues(typeof(LootType));
-			loot.LootType = values[Rand.RND.Next(0, 3)];
+			var loot = new Loot();
 
-			int mineralCount = sectorParameters.GetMineralByType(loot.LootType);
-			if (mineralCount != 0)
+			// static artifact spawn rate for now
+			if (Rand.RND.Next(0, 4) == 0 && artefactsLeft > 0)
 			{
-				loot.AddMineralsByType(loot.LootType, mineralCount);
-				break;
+				loot.LootType = LootType.Artefact;
+				var newArtifacts = State.Artifacts.FindAll(x => 
+					x.ArtifactStatus == ArtifactStatus.NotFound && !chosenArtifacts.Contains(x));
+				loot.Artifact = newArtifacts[Rand.RND.Next(0, newArtifacts.Count - 1)];
+				chosenArtifacts.Add(loot.Artifact);
+				artefactsLeft--;
 			}
-		}
+			else
+			{
+				// 33% probability for each not-zero mineral
+				while (true)
+				{
+					LootType[] values = (LootType[])Enum.GetValues(typeof(LootType));
+					loot.LootType = values[Rand.RND.Next(0, 3)];
 
-		return loot;
+					int mineralCount = sectorParameters.GetMineralByType(loot.LootType);
+					if (mineralCount != 0)
+					{
+						loot.AddMineralsByType(loot.LootType, mineralCount);
+						break;
+					}
+				}
+			}
+
+			lootList.Add(loot);
+		}
 	}
 
 	public void RecieveLoot (Loot loot)
 	{
-		State.MineralA += loot.MineralA;
-		State.MineralB += loot.MineralB;
-		State.MineralC += loot.MineralC;
+		switch (loot.LootType)
+		{
+			case LootType.Artefact:
+				loot.Artifact.ArtifactStatus = ArtifactStatus.Found;
+				break;
+			case LootType.MineralA:
+				State.MineralB += loot.MineralA;
+				break;
+			case LootType.MineralB:
+				State.MineralC += loot.MineralB;
+				break;
+			case LootType.MineralC:
+				State.MineralA += loot.MineralC;
+				break;
+		}
 	}
 }

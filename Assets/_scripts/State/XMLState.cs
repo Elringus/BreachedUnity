@@ -75,6 +75,22 @@ public class XMLState : IState
 		get { return _sectorsParameters; }
 		set { _sectorsParameters = value; Save(); }
 	}
+
+	[XmlElement("Artifacts")]
+	private List<Artifact> _artifacts;
+	public List<Artifact> Artifacts
+	{
+		get { return _artifacts; }
+		set { _artifacts = value; Save(); }
+	}
+
+	[XmlElement("AnalyzeArtifactAPCost")]
+	private int _analyzeArtifactAPCost;
+	public int AnalyzeArtifactAPCost
+	{
+		get { return _analyzeArtifactAPCost; }
+		set { _analyzeArtifactAPCost = value; Save(); }
+	}
 	#endregion
 
 	#region STATE
@@ -123,6 +139,28 @@ public class XMLState : IState
 		get { return _mineralC; }
 		set { _mineralC = value; Save(); }
 	}
+
+	[XmlElement("Wiring")]
+	private int _wiring;
+	public int Wiring
+	{
+		get { return _wiring; }
+		set { _wiring = value; Save(); }
+	}
+	[XmlElement("Alloy")]
+	private int _alloy;
+	public int Alloy
+	{
+		get { return _alloy; }
+		set { _alloy = value; Save(); }
+	}
+	[XmlElement("Chips")]
+	private int _chips;
+	public int Chips
+	{
+		get { return _chips; }
+		set { _chips = value; Save(); }
+	}
 	#endregion
 
 	public static XMLState Load ()
@@ -156,7 +194,7 @@ public class XMLState : IState
 		{
 			var state = new XMLState();
 			state.Reset(true);
-			ServiceLocator.Logger.Log("The save file cannot be found and was created.");
+			ServiceLocator.Logger.Log("The state.xml file cannot be found and was created.");
 			return state;
 		}
 	}
@@ -211,6 +249,26 @@ public class XMLState : IState
 				new SectorParameters(3, 3, 3, 3, 0), 
 				new SectorParameters(4, 6, 2, 2, 2) 
 			};
+
+			Artifacts = new List<Artifact> { 
+				new Artifact("Artifact1", "Infotrace for Artifact1",   BreakageType.BRK1, 30, 20, 15), 
+				new Artifact("Artifact2", "Infotrace for Artifact2",   null,              05, 00, 15), 
+				new Artifact("Artifact3", "Infotrace for Artifact3",   null,              15, 10, 00), 
+				new Artifact("Artifact4", "Infotrace for Artifact4",   null,              00, 30, 00), 
+				new Artifact("Artifact5", "Infotrace for Artifact5",   null,              00, 00, 35), 
+				new Artifact("Artifact6", "Infotrace for Artifact6",   BreakageType.BRK2, 40, 10, 15), 
+				new Artifact("Artifact7", "Infotrace for Artifact7",   null,              20, 05, 15), 
+				new Artifact("Artifact8", "Infotrace for Artifact8",   null,              15, 00, 15), 
+				new Artifact("Artifact9", "Infotrace for Artifact9",   null,              05, 00, 30), 
+				new Artifact("Artifact10", "Infotrace for Artifact10", BreakageType.BRK3, 00, 50, 05), 
+				new Artifact("Artifact11", "Infotrace for Artifact11", null,              15, 00, 15), 
+				new Artifact("Artifact12", "Infotrace for Artifact12", null,              20, 00, 00),
+				new Artifact("Artifact13", "Infotrace for Artifact13", null,              10, 10, 15),
+				new Artifact("Artifact14", "Infotrace for Artifact14", null,              05, 15, 10),
+				new Artifact("Artifact15", "Infotrace for Artifact15", BreakageType.BRK4, 30, 10, 20),
+			};
+
+			AnalyzeArtifactAPCost = 2;
 		}
 		#endregion
 
@@ -221,6 +279,13 @@ public class XMLState : IState
 		MineralA = 0;
 		MineralB = 0;
 		MineralC = 0;
+
+		Wiring = 0;
+		Alloy = 0;
+		Chips = 0;
+
+		foreach (var artifact in Artifacts) 
+			artifact.ArtifactStatus = ArtifactStatus.NotFound;
 		#endregion
 
 		preventSave = autoSaveWasTurnedOff;

@@ -18,6 +18,10 @@ public interface IState
 	int EnterSectorAPCost { get; set; }
 	int LootCharges { get; set; }
 	List<SectorParameters> SectorsParameters { get; set; }
+
+	List<Artifact> Artifacts { get; set; }
+
+	int AnalyzeArtifactAPCost { get; set; }
 	#endregion
 
 	#region STATE
@@ -29,5 +33,9 @@ public interface IState
 	int MineralA { get; set; }
 	int MineralB { get; set; }
 	int MineralC { get; set; }
+
+	int Wiring { get; set; }
+	int Alloy { get; set; }
+	int Chips { get; set; }
 	#endregion
 }

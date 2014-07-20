@@ -61,7 +61,7 @@ public class StateEditorView : BaseView
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Sector 1 parameters (loot spots, A,B,C): ", GUILayout.Width(300));
+		GUILayout.Label("Sector 1 parameters (loot spots, A, B, C): ", GUILayout.Width(300));
 		State.SectorsParameters.Find(x => x.SectorID == 1).LootSpotCount = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 1).LootSpotCount.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 1).MineralA = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 1).MineralA.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 1).MineralB = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 1).MineralB.ToString()));
@@ -69,7 +69,7 @@ public class StateEditorView : BaseView
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Sector 2 parameters (loot spots, A,B,C): ", GUILayout.Width(300));
+		GUILayout.Label("Sector 2 parameters (loot spots, A, B, C): ", GUILayout.Width(300));
 		State.SectorsParameters.Find(x => x.SectorID == 2).LootSpotCount = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 2).LootSpotCount.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 2).MineralA = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 2).MineralA.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 2).MineralB = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 2).MineralB.ToString()));
@@ -77,7 +77,7 @@ public class StateEditorView : BaseView
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Sector 3 parameters (loot spots, A,B,C): ", GUILayout.Width(300));
+		GUILayout.Label("Sector 3 parameters (loot spots, A, B, C): ", GUILayout.Width(300));
 		State.SectorsParameters.Find(x => x.SectorID == 3).LootSpotCount = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 3).LootSpotCount.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 3).MineralA = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 3).MineralA.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 3).MineralB = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 3).MineralB.ToString()));
@@ -85,11 +85,38 @@ public class StateEditorView : BaseView
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Sector 4 parameters (loot spots, A,B,C): ", GUILayout.Width(300));
+		GUILayout.Label("Sector 4 parameters (loot spots, A, B, C): ", GUILayout.Width(300));
 		State.SectorsParameters.Find(x => x.SectorID == 4).LootSpotCount = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 4).LootSpotCount.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 4).MineralA = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 4).MineralA.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 4).MineralB = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 4).MineralB.ToString()));
 		State.SectorsParameters.Find(x => x.SectorID == 4).MineralC = int.Parse(GUILayout.TextField(State.SectorsParameters.Find(x => x.SectorID == 4).MineralC.ToString()));
+		GUILayout.EndHorizontal();
+
+		foreach (var artifact in State.Artifacts)
+		{
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("Artifact (name, infotrace, identity, W, A, C:", GUILayout.Width(300));
+			artifact.Name = GUILayout.TextField(artifact.Name);
+			artifact.Infotrace = GUILayout.TextField(artifact.Infotrace, GUILayout.Width(30));
+			GUILayout.Label(artifact.Identity.ToString());
+			artifact.Wiring = int.Parse(GUILayout.TextField(artifact.Wiring.ToString()));
+			artifact.Alloy = int.Parse(GUILayout.TextField(artifact.Alloy.ToString()));
+			artifact.Chips = int.Parse(GUILayout.TextField(artifact.Chips.ToString()));
+			GUILayout.EndHorizontal();
+
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("---------- choose identiy:", GUILayout.Width(300));
+			if (GUILayout.Button("NONE")) artifact.Identity = null;
+			if (GUILayout.Button("BRK1")) artifact.Identity = BreakageType.BRK1;
+			if (GUILayout.Button("BRK2")) artifact.Identity = BreakageType.BRK2;
+			if (GUILayout.Button("BRK3")) artifact.Identity = BreakageType.BRK3;
+			if (GUILayout.Button("BRK4")) artifact.Identity = BreakageType.BRK4;
+			GUILayout.EndHorizontal();
+		}
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Analyze artifact AP cost: ", GUILayout.Width(300));
+		State.AnalyzeArtifactAPCost = int.Parse(GUILayout.TextField(State.AnalyzeArtifactAPCost.ToString()));
 		GUILayout.EndHorizontal();
 		#endregion
 
@@ -112,6 +139,25 @@ public class StateEditorView : BaseView
 		State.MineralB = int.Parse(GUILayout.TextField(State.MineralB.ToString()));
 		State.MineralC = int.Parse(GUILayout.TextField(State.MineralC.ToString()));
 		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Wiring, Alloy, Chips: ", GUILayout.Width(300));
+		State.Wiring = int.Parse(GUILayout.TextField(State.Wiring.ToString()));
+		State.Alloy = int.Parse(GUILayout.TextField(State.Alloy.ToString()));
+		State.Chips = int.Parse(GUILayout.TextField(State.Chips.ToString()));
+		GUILayout.EndHorizontal();
+
+		foreach (var artifact in State.Artifacts)
+		{
+			GUILayout.BeginHorizontal();
+			GUILayout.Label(string.Format("{0} status is {1}. Set it to:", 
+				artifact.Name, artifact.ArtifactStatus.ToString()), GUILayout.Width(300));
+			if (GUILayout.Button("NotFound")) artifact.ArtifactStatus = ArtifactStatus.NotFound;
+			if (GUILayout.Button("Found")) artifact.ArtifactStatus = ArtifactStatus.Found;
+			if (GUILayout.Button("Analyzing")) artifact.ArtifactStatus = ArtifactStatus.Analyzing;
+			if (GUILayout.Button("Analyzed")) artifact.ArtifactStatus = ArtifactStatus.Analyzed;
+			GUILayout.EndHorizontal();
+		}
 		#endregion
 
 		GUILayout.EndScrollView();
