@@ -8,7 +8,7 @@ public class Artifact
 	public int Wiring { get; set; }
 	public int Alloy { get; set; }
 	public int Chips { get; set; }
-	public ArtifactStatus ArtifactStatus { get; set; }
+	public ArtifactStatus Status { get; set; }
 
 	[Obsolete("For XML serialization only.", true)]
 	public Artifact ()

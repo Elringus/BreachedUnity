@@ -5,7 +5,7 @@ public static class GlobalConfig
 
 	public static readonly int VERSION_MAJOR =    0;
 	public static readonly int VERSION_MIDDLE =   1;
-	public static readonly int VERSION_MINOR =    20140620;
+	public static readonly int VERSION_MINOR =    20140626;
 
 	public static readonly string STATE_EDITOR_SCENE =  "scn_StateEditor";
 	public static readonly string SIMPLE_VIEW_SCENE =   "scn_SimpleView";

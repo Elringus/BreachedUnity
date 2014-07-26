@@ -20,12 +20,17 @@ public interface IState
 	List<SectorParameters> SectorsParameters { get; set; }
 
 	List<Artifact> Artifacts { get; set; }
-
 	int AnalyzeArtifactAPCost { get; set; }
+
+	int FixEngineAPCost { get; set; }
+	SerializableDictionary<BreakageType, int[]> FixEngineRequirements { get; set; }
 	#endregion
 
 	#region STATE
-	GameStatus GameProgress { get; set; }
+	GameStatus GameStatus { get; set; }
+
+	BreakageType BreakageType { get; set; }
+	bool EngineFixed { get; set; }
 
 	int CurrentDay { get; set; }
 	int CurrentAP { get; set; }

@@ -8,7 +8,7 @@ public class FlightController : BaseController
 		var sectorParameters = State.SectorsParameters.Find(x => x.SectorID == sectorID);
 		lootList = new List<Loot>();
 		List<Artifact> chosenArtifacts = new List<Artifact>();
-		int artefactsLeft = State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.NotFound).Count;
+		int artefactsLeft = State.Artifacts.FindAll(x => x.Status == ArtifactStatus.NotFound).Count;
 
 		for (int i = 0; i < sectorParameters.LootSpotCount; i++)
 		{
@@ -19,7 +19,7 @@ public class FlightController : BaseController
 			{
 				loot.LootType = LootType.Artefact;
 				var newArtifacts = State.Artifacts.FindAll(x => 
-					x.ArtifactStatus == ArtifactStatus.NotFound && !chosenArtifacts.Contains(x));
+					x.Status == ArtifactStatus.NotFound && !chosenArtifacts.Contains(x));
 				loot.Artifact = newArtifacts[Rand.RND.Next(0, newArtifacts.Count - 1)];
 				chosenArtifacts.Add(loot.Artifact);
 				artefactsLeft--;
@@ -50,7 +50,7 @@ public class FlightController : BaseController
 		switch (loot.LootType)
 		{
 			case LootType.Artefact:
-				loot.Artifact.ArtifactStatus = ArtifactStatus.Found;
+				loot.Artifact.Status = ArtifactStatus.Found;
 				break;
 			case LootType.MineralA:
 				State.MineralA += loot.MineralA;

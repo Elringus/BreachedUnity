@@ -33,7 +33,7 @@ public class StateEditorView : BaseView
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Game progress: ", GUILayout.Width(300));
-		GUILayout.Label(State.GameProgress.ToString());
+		GUILayout.Label(State.GameStatus.ToString());
 		GUILayout.EndHorizontal();
 		#endregion
 
@@ -95,7 +95,7 @@ public class StateEditorView : BaseView
 		foreach (var artifact in State.Artifacts)
 		{
 			GUILayout.BeginHorizontal();
-			GUILayout.Label("Artifact (name, infotrace, identity, W, A, C:", GUILayout.Width(300));
+			GUILayout.Label("Artifact (name, infotrace, identity, W, A, C):", GUILayout.Width(300));
 			artifact.Name = GUILayout.TextField(artifact.Name);
 			artifact.Infotrace = GUILayout.TextField(artifact.Infotrace, GUILayout.Width(30));
 			GUILayout.Label(artifact.Identity.ToString());
@@ -118,10 +118,57 @@ public class StateEditorView : BaseView
 		GUILayout.Label("Analyze artifact AP cost: ", GUILayout.Width(300));
 		State.AnalyzeArtifactAPCost = int.Parse(GUILayout.TextField(State.AnalyzeArtifactAPCost.ToString()));
 		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Fix engine AP cost: ", GUILayout.Width(300));
+		State.FixEngineAPCost = int.Parse(GUILayout.TextField(State.FixEngineAPCost.ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Fix BRK1 requirements (wiring, alloy, chips): ", GUILayout.Width(300));
+		State.FixEngineRequirements[BreakageType.BRK1][0] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK1][0].ToString()));
+		State.FixEngineRequirements[BreakageType.BRK1][1] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK1][1].ToString()));
+		State.FixEngineRequirements[BreakageType.BRK1][2] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK1][2].ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Fix BRK2 requirements (wiring, alloy, chips): ", GUILayout.Width(300));
+		State.FixEngineRequirements[BreakageType.BRK2][0] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK2][0].ToString()));
+		State.FixEngineRequirements[BreakageType.BRK2][1] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK2][1].ToString()));
+		State.FixEngineRequirements[BreakageType.BRK2][2] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK2][2].ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Fix BRK3 requirements (wiring, alloy, chips): ", GUILayout.Width(300));
+		State.FixEngineRequirements[BreakageType.BRK3][0] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK3][0].ToString()));
+		State.FixEngineRequirements[BreakageType.BRK3][1] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK3][1].ToString()));
+		State.FixEngineRequirements[BreakageType.BRK3][2] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK3][2].ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Fix BRK4 requirements (wiring, alloy, chips): ", GUILayout.Width(300));
+		State.FixEngineRequirements[BreakageType.BRK4][0] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK4][0].ToString()));
+		State.FixEngineRequirements[BreakageType.BRK4][1] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK4][1].ToString()));
+		State.FixEngineRequirements[BreakageType.BRK4][2] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK4][2].ToString()));
+		GUILayout.EndHorizontal();
 		#endregion
 
 		#region STATE
 		GUILayout.Box("State variables (specific for the current game session)");
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label(string.Format("Breakage type is {0}. Set it to:", 
+			State.BreakageType, GUILayout.Width(300)));
+		if (GUILayout.Button("BRK1")) State.BreakageType = BreakageType.BRK1;
+		if (GUILayout.Button("BRK2")) State.BreakageType = BreakageType.BRK2;
+		if (GUILayout.Button("BRK3")) State.BreakageType = BreakageType.BRK3;
+		if (GUILayout.Button("BRK4")) State.BreakageType = BreakageType.BRK4;
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Engine is fixed: ", GUILayout.Width(300));
+		State.EngineFixed = GUILayout.Toggle(State.EngineFixed, "");
+		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Current day: ", GUILayout.Width(300));
@@ -151,11 +198,11 @@ public class StateEditorView : BaseView
 		{
 			GUILayout.BeginHorizontal();
 			GUILayout.Label(string.Format("{0} status is {1}. Set it to:", 
-				artifact.Name, artifact.ArtifactStatus.ToString()), GUILayout.Width(300));
-			if (GUILayout.Button("NotFound")) artifact.ArtifactStatus = ArtifactStatus.NotFound;
-			if (GUILayout.Button("Found")) artifact.ArtifactStatus = ArtifactStatus.Found;
-			if (GUILayout.Button("Analyzing")) artifact.ArtifactStatus = ArtifactStatus.Analyzing;
-			if (GUILayout.Button("Analyzed")) artifact.ArtifactStatus = ArtifactStatus.Analyzed;
+				artifact.Name, artifact.Status.ToString()), GUILayout.Width(300));
+			if (GUILayout.Button("NotFound")) artifact.Status = ArtifactStatus.NotFound;
+			if (GUILayout.Button("Found")) artifact.Status = ArtifactStatus.Found;
+			if (GUILayout.Button("Analyzing")) artifact.Status = ArtifactStatus.Analyzing;
+			if (GUILayout.Button("Analyzed")) artifact.Status = ArtifactStatus.Analyzed;
 			GUILayout.EndHorizontal();
 		}
 		#endregion

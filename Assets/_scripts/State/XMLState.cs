@@ -83,7 +83,6 @@ public class XMLState : IState
 		get { return _artifacts; }
 		set { _artifacts = value; Save(); }
 	}
-
 	[XmlElement("AnalyzeArtifactAPCost")]
 	private int _analyzeArtifactAPCost;
 	public int AnalyzeArtifactAPCost
@@ -91,15 +90,45 @@ public class XMLState : IState
 		get { return _analyzeArtifactAPCost; }
 		set { _analyzeArtifactAPCost = value; Save(); }
 	}
+
+	[XmlElement("FixEngineAPCost")]
+	private int _fixEngineAPCost;
+	public int FixEngineAPCost
+	{
+		get { return _fixEngineAPCost; }
+		set { _fixEngineAPCost = value; Save(); }
+	}
+	[XmlElement("FixEngineRequirements")]
+	private SerializableDictionary<BreakageType, int[]> _fixEngineRequirements;
+	public SerializableDictionary<BreakageType, int[]> FixEngineRequirements
+	{
+		get { return _fixEngineRequirements; }
+		set { _fixEngineRequirements = value as SerializableDictionary<BreakageType, int[]>; Save(); }
+	}
 	#endregion
 
 	#region STATE
 	[XmlElement("GameProgress")]
 	private int _gameProgress;
-	public GameStatus GameProgress
+	public GameStatus GameStatus
 	{
 		get { return (GameStatus)_gameProgress; }
 		set { _gameProgress = (int)value; Save(); }
+	}
+
+	[XmlElement("BreakageType")]
+	private int _breakageType;
+	public BreakageType BreakageType
+	{
+		get { return (BreakageType)_breakageType; }
+		set { _breakageType = (int)value; Save(); }
+	}
+	[XmlElement("EngineFixed")]
+	private bool _engineFixed;
+	public bool EngineFixed
+	{
+		get { return _engineFixed; }
+		set { _engineFixed = value; Save(); }
 	}
 
 	[XmlElement("CurrentDay")]
@@ -236,7 +265,7 @@ public class XMLState : IState
 		#region RULES
 		if (resetRules)
 		{
-			GameProgress = GameStatus.FirstLaunch;
+			GameStatus = GameStatus.FirstLaunch;
 
 			TotalDays = 8;
 			MaxAP = 10;
@@ -267,12 +296,24 @@ public class XMLState : IState
 				new Artifact("Artifact14", "Infotrace for Artifact14", null,              05, 15, 10),
 				new Artifact("Artifact15", "Infotrace for Artifact15", BreakageType.BRK4, 30, 10, 20),
 			};
-
 			AnalyzeArtifactAPCost = 2;
+
+			FixEngineAPCost = 5;
+			FixEngineRequirements = new SerializableDictionary<BreakageType, int[]>
+			{
+				{BreakageType.BRK1, new int[3] {30, 35, 40}},
+				{BreakageType.BRK2, new int[3] {35, 40, 30}},
+				{BreakageType.BRK3, new int[3] {40, 30, 35}},
+				{BreakageType.BRK4, new int[3] {30, 40, 35}},
+			};
 		}
 		#endregion
 
 		#region STATE
+		BreakageType[] possibleBRK = (BreakageType[])Enum.GetValues(typeof(BreakageType));
+		BreakageType = possibleBRK[Rand.RND.Next(0, 4)];
+		EngineFixed = false;
+
 		CurrentDay = 1;
 		CurrentAP = MaxAP;
 
@@ -285,7 +326,7 @@ public class XMLState : IState
 		Chips = 0;
 
 		foreach (var artifact in Artifacts) 
-			artifact.ArtifactStatus = ArtifactStatus.NotFound;
+			artifact.Status = ArtifactStatus.NotFound;
 		#endregion
 
 		preventSave = autoSaveWasTurnedOff;

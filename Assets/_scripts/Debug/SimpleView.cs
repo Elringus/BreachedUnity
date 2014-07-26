@@ -39,20 +39,28 @@ public class SimpleView : BaseView
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Day: {0}/{1}", State.CurrentDay, State.TotalDays));
+		GUILayout.Label(string.Format("AP: {0}/{1}", State.CurrentAP, State.MaxAP));
 		GUILayout.Label(string.Format("Fuel tank: empty"));
-		GUILayout.Label(string.Format("Breakage: BRK1"));
+		GUILayout.Label(string.Format("Breakage: {0}", State.EngineFixed ? "fixed" : State.BreakageType.ToString()));
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label(string.Format("AP: {0}/{1}", State.CurrentAP, State.MaxAP));
 		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC));
+		GUILayout.Label("Here will be fuel synth requirments...");
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips));
+		GUILayout.Label(string.Format("Fix engine requirments: W{0} A{1} C{2}", 
+			State.FixEngineRequirements[State.BreakageType][0], 
+			State.FixEngineRequirements[State.BreakageType][1], 
+			State.FixEngineRequirements[State.BreakageType][2]));
 		GUILayout.EndHorizontal();
 
 		GUILayout.Label("Analyzed artifacts:");
-		foreach (var artifact in State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.Analyzed)) GUILayout.Label(artifact.Name);
+		foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed)) GUILayout.Label(artifact.Name);
 
-		if (State.GameProgress == GameStatus.InProgress)
+		if (State.GameStatus == GameStatus.InProgress)
 		{
 			if (inFlightMode)
 			{
@@ -78,7 +86,9 @@ public class SimpleView : BaseView
 
 				GUILayout.Space(10);
 				GUILayout.Box("Workshop");
-				foreach (var artifact in State.Artifacts.FindAll(x => x.ArtifactStatus == ArtifactStatus.Found))
+				if (workshopController.CanFixEngine() &&
+					GUILayout.Button(string.Format("Fix engine [AP = {0}]", State.FixEngineAPCost))) workshopController.FixEngine();
+				foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Found))
 					if (GUILayout.Button(string.Format("Start analyzing {0} [-{1}AP]", artifact.Name, State.AnalyzeArtifactAPCost)))
 						workshopController.AnalyzeArtifact(artifact);
 
@@ -93,7 +103,7 @@ public class SimpleView : BaseView
 				GUILayout.Box("Horizon");
 			}
 		}
-		else GUILayout.Box(State.GameProgress.ToString());
+		else GUILayout.Box(State.GameStatus.ToString());
 
 		GUILayout.EndScrollView();
 		if (GUILayout.Button("Return to menu")) SwitchView(ViewType.MainMenu);
