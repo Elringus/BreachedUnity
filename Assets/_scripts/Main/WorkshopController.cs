@@ -26,6 +26,6 @@ public class WorkshopController : BaseController
 		var requirements = State.FixEngineRequirements[State.BreakageType];
 		return !State.EngineFixed && 
 			State.Wiring >= requirements[0] && State.Alloy >= requirements[1] && State.Chips >= requirements[2] && 
-			State.Artifacts.Find(x => x.Identity.Value == State.BreakageType).Status == ArtifactStatus.Analyzed;
+			State.Artifacts.Find(x => x.Identity.GetValueOrDefault() == State.BreakageType).Status == ArtifactStatus.Analyzed;
 	}
 }
