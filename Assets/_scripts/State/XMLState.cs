@@ -248,7 +248,7 @@ public class XMLState : IState
 
 		var serializer = new XmlSerializer(typeof(XMLState));
 		using (var stream = new FileStream(Path.Combine(Environment.CurrentDirectory, "state.xml"), FileMode.Create)) 
-			serializer.Serialize(stream, this);
+			serializer.Serialize(new StreamWriter(stream, System.Text.Encoding.UTF8), this);
 	}
 
 	public void HoldAutoSave (bool hold)
