@@ -151,6 +151,16 @@ public class StateEditorView : BaseView
 		State.FixEngineRequirements[BreakageType.BRK4][1] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK4][1].ToString()));
 		State.FixEngineRequirements[BreakageType.BRK4][2] = int.Parse(GUILayout.TextField(State.FixEngineRequirements[BreakageType.BRK4][2].ToString()));
 		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Synth fuel AP cost: ", GUILayout.Width(300));
+		State.FuelSynthAPCost = int.Parse(GUILayout.TextField(State.FuelSynthAPCost.ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Synth fuel grace: ", GUILayout.Width(300));
+		State.FuelSynthGrace = int.Parse(GUILayout.TextField(State.FuelSynthGrace.ToString()));
+		GUILayout.EndHorizontal();
 		#endregion
 
 		#region STATE
@@ -168,6 +178,18 @@ public class StateEditorView : BaseView
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Engine is fixed: ", GUILayout.Width(300));
 		State.EngineFixed = GUILayout.Toggle(State.EngineFixed, "");
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Fuel synth formula (A, B, C): ", GUILayout.Width(300));
+		State.FuelSynthFormula[0] = int.Parse(GUILayout.TextField(State.FuelSynthFormula[0].ToString()));
+		State.FuelSynthFormula[1] = int.Parse(GUILayout.TextField(State.FuelSynthFormula[1].ToString()));
+		State.FuelSynthFormula[2] = int.Parse(GUILayout.TextField(State.FuelSynthFormula[2].ToString()));
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Fuel is synthed: ", GUILayout.Width(300));
+		State.FuelSynthed = GUILayout.Toggle(State.FuelSynthed, "");
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();

@@ -16,6 +16,8 @@ public class SimpleView : BaseView
 	private int lootCharges;
 	private List<Loot> sectorLoot = new List<Loot>();
 
+	private int[] synthProbe = new int[3];
+
 	protected override void Awake ()
 	{
 		base.Awake();
@@ -40,8 +42,8 @@ public class SimpleView : BaseView
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Day: {0}/{1}", State.CurrentDay, State.TotalDays));
 		GUILayout.Label(string.Format("AP: {0}/{1}", State.CurrentAP, State.MaxAP));
-		GUILayout.Label(string.Format("Fuel tank: empty"));
-		GUILayout.Label(string.Format("Breakage: {0}", State.EngineFixed ? "fixed" : State.BreakageType.ToString()));
+		GUILayout.Label(string.Format("Fuel tank: {0}", State.FuelSynthed ? "FULL" : "EMPTY"));
+		GUILayout.Label(string.Format("Breakage: {0}", State.EngineFixed ? "FIXED" : State.BreakageType.ToString()));
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
@@ -56,6 +58,16 @@ public class SimpleView : BaseView
 			State.FixEngineRequirements[State.BreakageType][1], 
 			State.FixEngineRequirements[State.BreakageType][2]));
 		GUILayout.EndHorizontal();
+
+		GUILayout.Label("Fuel synth probes:");
+		foreach (var probe in State.FuelSynthProbes)
+		{
+			GUILayout.BeginHorizontal();
+			GUILayout.Label(string.Format("Probe №{0} [A: {1}, B: {2}, C: {3}] is {4}.",
+				State.FuelSynthProbes.FindIndex(x => x == probe), probe[0], probe[1], probe[2], 
+				workshopController.MeasureProbe(probe)), GUILayout.Width(300));
+			GUILayout.EndHorizontal();
+		}
 
 		GUILayout.Label("Analyzed artifacts:");
 		foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed)) GUILayout.Label(artifact.Name);
@@ -88,6 +100,19 @@ public class SimpleView : BaseView
 				GUILayout.Box("Workshop");
 				if (workshopController.CanFixEngine() &&
 					GUILayout.Button(string.Format("Fix engine [AP = {0}]", State.FixEngineAPCost))) workshopController.FixEngine();
+				if (!State.FuelSynthed)
+				{
+					GUILayout.BeginHorizontal();
+					if (GUILayout.Button(string.Format("Synth fuel [AP = {0}] (A + B + C must be 9)", State.FuelSynthAPCost)))
+					{
+						workshopController.SynthFuel(synthProbe);
+						synthProbe = new int[3];
+					}
+					synthProbe[0] = int.Parse(GUILayout.TextField(synthProbe[0].ToString()));
+					synthProbe[1] = int.Parse(GUILayout.TextField(synthProbe[1].ToString()));
+					synthProbe[2] = int.Parse(GUILayout.TextField(synthProbe[2].ToString()));
+					GUILayout.EndHorizontal();
+				}
 				foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Found))
 					if (GUILayout.Button(string.Format("Start analyzing {0} [-{1}AP]", artifact.Name, State.AnalyzeArtifactAPCost)))
 						workshopController.AnalyzeArtifact(artifact);

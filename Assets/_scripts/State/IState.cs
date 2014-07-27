@@ -24,6 +24,9 @@ public interface IState
 
 	int FixEngineAPCost { get; set; }
 	SerializableDictionary<BreakageType, int[]> FixEngineRequirements { get; set; }
+
+	int FuelSynthAPCost { get; set; }
+	int FuelSynthGrace { get; set; }
 	#endregion
 
 	#region STATE
@@ -31,6 +34,10 @@ public interface IState
 
 	BreakageType BreakageType { get; set; }
 	bool EngineFixed { get; set; }
+
+	int[] FuelSynthFormula { get; set; }
+	List<int[]> FuelSynthProbes { get; set; }
+	bool FuelSynthed { get; set; }
 
 	int CurrentDay { get; set; }
 	int CurrentAP { get; set; }

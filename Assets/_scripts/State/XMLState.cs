@@ -105,6 +105,21 @@ public class XMLState : IState
 		get { return _fixEngineRequirements; }
 		set { _fixEngineRequirements = value as SerializableDictionary<BreakageType, int[]>; Save(); }
 	}
+
+	[XmlElement("FuelSynthAPCost")]
+	private int _synthFuelAPCost;
+	public int FuelSynthAPCost
+	{
+		get { return _synthFuelAPCost; }
+		set { _synthFuelAPCost = value; Save(); }
+	}
+	[XmlElement("FuelSynthGrace")]
+	private int _synthFuelGrace;
+	public int FuelSynthGrace
+	{
+		get { return _synthFuelGrace; }
+		set { _synthFuelGrace = value; Save(); }
+	}
 	#endregion
 
 	#region STATE
@@ -129,6 +144,28 @@ public class XMLState : IState
 	{
 		get { return _engineFixed; }
 		set { _engineFixed = value; Save(); }
+	}
+
+	[XmlElement("FuelSynthFormula")]
+	private int[] _synthFuelFormula;
+	public int[] FuelSynthFormula
+	{
+		get { return _synthFuelFormula; }
+		set { _synthFuelFormula = value; Save(); }
+	}
+	[XmlElement("FuelSynthProbes")]
+	private List<int[]> _fuelSynthProbes;
+	public List<int[]> FuelSynthProbes
+	{
+		get { return _fuelSynthProbes; }
+		set { _fuelSynthProbes = value; Save(); }
+	}
+	[XmlElement("FuelSynthed")]
+	private bool _fuelSynthed;
+	public bool FuelSynthed
+	{
+		get { return _fuelSynthed; }
+		set { _fuelSynthed = value; Save(); }
 	}
 
 	[XmlElement("CurrentDay")]
@@ -306,6 +343,9 @@ public class XMLState : IState
 				{BreakageType.BRK3, new int[3] {40, 30, 35}},
 				{BreakageType.BRK4, new int[3] {30, 40, 35}},
 			};
+
+			FuelSynthAPCost = 2;
+			FuelSynthGrace = 1;
 		}
 		#endregion
 
@@ -313,6 +353,16 @@ public class XMLState : IState
 		BreakageType[] possibleBRK = (BreakageType[])Enum.GetValues(typeof(BreakageType));
 		BreakageType = possibleBRK[Rand.RND.Next(0, 4)];
 		EngineFixed = false;
+
+		FuelSynthFormula = new int[3];
+		while ((FuelSynthFormula[0] + FuelSynthFormula[1] + FuelSynthFormula[2]) != 9)
+		{
+			FuelSynthFormula[0] = Rand.RND.Next(1, 10);
+			FuelSynthFormula[1] = Rand.RND.Next(1, 10);
+			FuelSynthFormula[2] = Rand.RND.Next(1, 10);
+		}
+		FuelSynthProbes = new List<int[]>();
+		FuelSynthed = false;
 
 		CurrentDay = 1;
 		CurrentAP = MaxAP;
