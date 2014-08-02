@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 public static class Events
 {
@@ -8,8 +9,20 @@ public static class Events
 	public static event EventHandler FuelSynthed = delegate { };
 	public static void RaiseFuelSynthed () { FuelSynthed(null, EventArgs.Empty); }
 
-	public static string Log ()
+	public static void LogHandlersCount ()
 	{
-		return FuelSynthed.GetInvocationList().Length.ToString();
+		int handlersCount = 0;
+
+		Type t = typeof(Events);
+		foreach (EventInfo e in t.GetEvents())
+		{
+			FieldInfo f = t.GetField(e.Name, BindingFlags.Static | 
+				BindingFlags.NonPublic | BindingFlags.Instance | 
+				BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.GetField);
+			Delegate d = (Delegate)f.GetValue(t);
+			handlersCount += d.GetInvocationList().Length;
+		}
+
+		ServiceLocator.Logger.Log("Event handlers count: " + handlersCount.ToString());
 	}
 }

@@ -30,7 +30,7 @@ public abstract class BaseView : MonoBehaviour
 
 	protected virtual void Awake ()
 	{
-
+		Events.LogHandlersCount();
 	}
 
 	protected virtual void Start ()
