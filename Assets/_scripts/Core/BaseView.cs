@@ -7,17 +7,17 @@ public abstract class BaseView : MonoBehaviour
 
 	private void Initialize ()
 	{
-		ServiceLocator.State = XMLState.Load();
+		ServiceLocator.Logger = new UnityLogger();
+		ServiceLocator.State = FileState.Load();
+
 		if (ServiceLocator.State.VersionMiddle < GlobalConfig.VERSION_MIDDLE || 
 			ServiceLocator.State.VersionMajor < GlobalConfig.VERSION_MAJOR)
 		{
 			ServiceLocator.State.Reset(true);
 			Initialize();
-			Logger.LogWarning("The saved state is outdated and will be reseted!");
+			ServiceLocator.Logger.LogWarning("The saved state is outdated and will be reseted!");
 			return;
 		}
-
-		ServiceLocator.Logger = new UnityLogger();
 	}
 
 	protected virtual void Awake ()

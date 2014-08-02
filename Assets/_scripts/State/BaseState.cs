@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 
-[XmlRoot("XMLState")]
-public class XMLState : IState
+[XmlRoot("GameState")]
+public abstract class BaseState : IState
 {
-	// prevent calling Save() from all the property setters
 	[XmlIgnore]
-	private static bool preventSave;
+	protected static bool preventSave;
 
 	#region CONFIG
 	[XmlElement("VersionMajor")]
@@ -19,6 +16,7 @@ public class XMLState : IState
 		get { return _versionMajor; }
 		set { _versionMajor = value; }
 	}
+
 	[XmlElement("VersionMiddle")]
 	private int _versionMiddle;
 	public int VersionMiddle
@@ -26,6 +24,7 @@ public class XMLState : IState
 		get { return _versionMiddle; }
 		set { _versionMiddle = value; }
 	}
+
 	[XmlElement("VersionMinor")]
 	private int _versionMinor;
 	public int VersionMinor
@@ -83,6 +82,7 @@ public class XMLState : IState
 		get { return _artifacts; }
 		set { _artifacts = value; Save(); }
 	}
+
 	[XmlElement("AnalyzeArtifactAPCost")]
 	private int _analyzeArtifactAPCost;
 	public int AnalyzeArtifactAPCost
@@ -98,6 +98,7 @@ public class XMLState : IState
 		get { return _fixEngineAPCost; }
 		set { _fixEngineAPCost = value; Save(); }
 	}
+
 	[XmlElement("FixEngineRequirements")]
 	private SerializableDictionary<BreakageType, int[]> _fixEngineRequirements;
 	public SerializableDictionary<BreakageType, int[]> FixEngineRequirements
@@ -113,6 +114,7 @@ public class XMLState : IState
 		get { return _synthFuelAPCost; }
 		set { _synthFuelAPCost = value; Save(); }
 	}
+
 	[XmlElement("FuelSynthGrace")]
 	private int _synthFuelGrace;
 	public int FuelSynthGrace
@@ -138,6 +140,7 @@ public class XMLState : IState
 		get { return (BreakageType)_breakageType; }
 		set { _breakageType = (int)value; Save(); }
 	}
+
 	[XmlElement("EngineFixed")]
 	private bool _engineFixed;
 	public bool EngineFixed
@@ -153,6 +156,7 @@ public class XMLState : IState
 		get { return _synthFuelFormula; }
 		set { _synthFuelFormula = value; Save(); }
 	}
+
 	[XmlElement("FuelSynthProbes")]
 	private List<int[]> _fuelSynthProbes;
 	public List<int[]> FuelSynthProbes
@@ -160,6 +164,7 @@ public class XMLState : IState
 		get { return _fuelSynthProbes; }
 		set { _fuelSynthProbes = value; Save(); }
 	}
+
 	[XmlElement("FuelSynthed")]
 	private bool _fuelSynthed;
 	public bool FuelSynthed
@@ -191,6 +196,7 @@ public class XMLState : IState
 		get { return _mineralA; }
 		set { _mineralA = value; Save(); }
 	}
+
 	[XmlElement("MineralB")]
 	private int _mineralB;
 	public int MineralB
@@ -198,6 +204,7 @@ public class XMLState : IState
 		get { return _mineralB; }
 		set { _mineralB = value; Save(); }
 	}
+
 	[XmlElement("MineralC")]
 	private int _mineralC;
 	public int MineralC
@@ -213,6 +220,7 @@ public class XMLState : IState
 		get { return _wiring; }
 		set { _wiring = value; Save(); }
 	}
+
 	[XmlElement("Alloy")]
 	private int _alloy;
 	public int Alloy
@@ -220,6 +228,7 @@ public class XMLState : IState
 		get { return _alloy; }
 		set { _alloy = value; Save(); }
 	}
+
 	[XmlElement("Chips")]
 	private int _chips;
 	public int Chips
@@ -229,63 +238,15 @@ public class XMLState : IState
 	}
 	#endregion
 
-	public static XMLState Load ()
+	protected virtual bool Save ()
 	{
-		//if (PlayerPrefs.HasKey("XMLState"))
-		//{
-		//	preventSave = true;
-		//	XmlSerializer serializer = new XmlSerializer(typeof(XMLState));
-		//	StringReader stringReader = new StringReader(PlayerPrefs.GetString("XMLState"));
-		//	XmlTextReader xmlReader = new XmlTextReader(stringReader);
-		//	XMLState state = (XMLState)serializer.Deserialize(xmlReader);
-		//	xmlReader.Close();
-		//	stringReader.Close();
-		//	preventSave = false;
-		//	return state;
-		//}
-		//else return new XMLState();
-
-		if (File.Exists(Path.Combine(Environment.CurrentDirectory, "state.xml")))
-		{
-			preventSave = true;
-			var serializer = new XmlSerializer(typeof(XMLState));
-			using (var stream = new FileStream(Path.Combine(Environment.CurrentDirectory, "state.xml"), FileMode.Open))
-			{
-				var state = serializer.Deserialize(stream) as XMLState;
-				preventSave = false;
-				return state;
-			}
-		}
-		else
-		{
-			var state = new XMLState();
-			state.Reset(true);
-			ServiceLocator.Logger.Log("The state.xml file cannot be found and was created.");
-			return state;
-		}
-	}
-
-	private void Save ()
-	{
-		if (preventSave) return;
+		if (preventSave) return false;
 
 		VersionMajor = GlobalConfig.VERSION_MAJOR;
 		VersionMiddle = GlobalConfig.VERSION_MIDDLE;
 		VersionMinor = GlobalConfig.VERSION_MINOR;
 
-		//XmlSerializer serializer = new XmlSerializer(typeof(XMLState));
-		//StringWriter stringWriter = new StringWriter();
-		//XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
-		//serializer.Serialize(xmlWriter, this);
-		//string xml = stringWriter.ToString();
-		//xmlWriter.Close();
-		//stringWriter.Close();
-		//PlayerPrefs.SetString("XMLState", xml);
-		//PlayerPrefs.Save();
-
-		var serializer = new XmlSerializer(typeof(XMLState));
-		using (var stream = new FileStream(Path.Combine(Environment.CurrentDirectory, "state.xml"), FileMode.Create)) 
-			serializer.Serialize(new StreamWriter(stream, System.Text.Encoding.UTF8), this);
+		return true;
 	}
 
 	public void HoldAutoSave (bool hold)
