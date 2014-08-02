@@ -146,7 +146,12 @@ public abstract class BaseState : IState
 	public bool EngineFixed
 	{
 		get { return _engineFixed; }
-		set { _engineFixed = value; Save(); }
+		set
+		{
+			if (value && value != _engineFixed)
+				Events.RaiseEngineFixed();
+			_engineFixed = value; Save();
+		}
 	}
 
 	[XmlElement("FuelSynthFormula")]
@@ -170,7 +175,12 @@ public abstract class BaseState : IState
 	public bool FuelSynthed
 	{
 		get { return _fuelSynthed; }
-		set { _fuelSynthed = value; Save(); }
+		set
+		{
+			if (value && value != _fuelSynthed)
+				Events.RaiseFuelSynthed();
+			_fuelSynthed = value; Save();
+		}
 	}
 
 	[XmlElement("CurrentDay")]

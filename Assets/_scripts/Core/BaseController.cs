@@ -1,12 +1,24 @@
 ﻿
 public abstract class BaseController
 {
-	protected IState State;
-	protected ILogger Logger;
+	protected static IState State;
+	protected static ILogger Logger;
 
-	public BaseController ()
+	static BaseController ()
 	{
 		State = ServiceLocator.State;
 		Logger = ServiceLocator.Logger;
+
+		Events.EngineFixed += (c, e) =>
+		{
+			if (State.FuelSynthed)
+				State.GameStatus = GameStatus.GameWin;
+		};
+
+		Events.FuelSynthed += (c, e) =>
+		{
+			if (State.EngineFixed)
+				State.GameStatus = GameStatus.GameWin;
+		};
 	}
 }

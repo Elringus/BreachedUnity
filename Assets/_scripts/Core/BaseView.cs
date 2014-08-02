@@ -2,10 +2,18 @@
 
 public abstract class BaseView : MonoBehaviour
 {
-	protected IState State;
-	protected ILogger Logger;
+	protected static IState State;
+	protected static ILogger Logger;
 
-	private void Initialize ()
+	static BaseView ()
+	{
+		Initialize();
+
+		State = ServiceLocator.State;
+		Logger = ServiceLocator.Logger;
+	}
+
+	private static void Initialize ()
 	{
 		ServiceLocator.Logger = new UnityLogger();
 		ServiceLocator.State = FileState.Load();
@@ -22,10 +30,7 @@ public abstract class BaseView : MonoBehaviour
 
 	protected virtual void Awake ()
 	{
-		Initialize();
 
-		State = ServiceLocator.State;
-		Logger = ServiceLocator.Logger;
 	}
 
 	protected virtual void Start ()

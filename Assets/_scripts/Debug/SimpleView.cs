@@ -6,7 +6,6 @@ public class SimpleView : BaseView
 	private readonly float WIDTH = 600;
 	private Vector2 scrollPosition;
 
-	private SimpleController simpleController;
 	private BridgeController bridgeController;
 	private MapController mapController;
 	private FlightController flightController;
@@ -22,7 +21,6 @@ public class SimpleView : BaseView
 	{
 		base.Awake();
 
-		//simpleController = new SimpleController();
 		bridgeController = new BridgeController();
 		mapController = new MapController();
 		flightController = new FlightController();
