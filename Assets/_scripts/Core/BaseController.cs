@@ -6,8 +6,6 @@ public abstract class BaseController
 
 	public BaseController ()
 	{
-		ServiceLocator.Initialize();
-
 		State = ServiceLocator.State;
 		Logger = ServiceLocator.Logger;
 	}

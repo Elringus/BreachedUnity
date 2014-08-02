@@ -48,7 +48,6 @@ public class SimpleView : BaseView
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC));
-		GUILayout.Label("Here will be fuel synth requirments...");
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
