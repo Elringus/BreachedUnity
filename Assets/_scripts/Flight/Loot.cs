@@ -1,5 +1,5 @@
 ﻿
-public struct Loot
+public class Loot
 {
 	public LootType LootType { get; set; }
 
