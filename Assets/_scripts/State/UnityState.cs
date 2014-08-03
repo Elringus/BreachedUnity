@@ -6,13 +6,15 @@ using System.Xml.Serialization;
 
 public class UnityState : BaseState
 {
+	private const string KEY_NAME = "GameState";
+
 	public static IState Load ()
 	{
-		if (!PlayerPrefs.HasKey("GameState")) return new UnityState();
+		if (!PlayerPrefs.HasKey(KEY_NAME)) return new UnityState();
 
 		preventSave = true;
 		var serializer = new XmlSerializer(typeof(BaseState), new Type[] { typeof(UnityState) });
-		var stringReader = new StringReader(PlayerPrefs.GetString("GameState"));
+		var stringReader = new StringReader(PlayerPrefs.GetString(KEY_NAME));
 		var xmlReader = new XmlTextReader(stringReader);
 		var state = serializer.Deserialize(xmlReader) as UnityState;
 		xmlReader.Close();
@@ -32,7 +34,7 @@ public class UnityState : BaseState
 		string xmlString = stringWriter.ToString();
 		xmlWriter.Close();
 		stringWriter.Close();
-		PlayerPrefs.SetString("GameState", xmlString);
+		PlayerPrefs.SetString(KEY_NAME, xmlString);
 		PlayerPrefs.Save();
 
 		return true;
