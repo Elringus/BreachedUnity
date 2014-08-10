@@ -1,6 +1,8 @@
 ﻿
 public class NullText : IText
 {
+	public TextLanguage Language { get; set; }
+
 	public string GetText (string term)
 	{
 		if (term == "QuestNullStart")
