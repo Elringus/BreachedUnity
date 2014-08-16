@@ -3,6 +3,9 @@ using System.Reflection;
 
 public static class Events
 {
+	public static event EventHandler StateUpdated = delegate { };
+	public static void RaiseStateUpdated () { StateUpdated(null, EventArgs.Empty); }
+
 	public static event EventHandler EngineFixed = delegate { };
 	public static void RaiseEngineFixed () { EngineFixed(null, EventArgs.Empty); }
 

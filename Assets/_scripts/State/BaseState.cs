@@ -104,7 +104,7 @@ public abstract class BaseState : IState
 	public SerializableDictionary<BreakageType, int[]> FixEngineRequirements
 	{
 		get { return _fixEngineRequirements; }
-		set { _fixEngineRequirements = value as SerializableDictionary<BreakageType, int[]>; Save(); }
+		set { _fixEngineRequirements = value; Save(); }
 	}
 
 	[XmlElement("FuelSynthAPCost")]
@@ -125,12 +125,28 @@ public abstract class BaseState : IState
 	#endregion
 
 	#region STATE
-	[XmlElement("GameProgress")]
-	private int _gameProgress;
+	[XmlElement("GameStatus")]
+	private int _gameStatus;
 	public GameStatus GameStatus
 	{
-		get { return (GameStatus)_gameProgress; }
-		set { _gameProgress = (int)value; Save(); }
+		get { return (GameStatus)_gameStatus; }
+		set { _gameStatus = (int)value; Save(); }
+	}
+
+	[XmlElement("CurrentQuest")]
+	private string _currentQuest;
+	public string CurrentQuest
+	{
+		get { return _currentQuest; }
+		set { _currentQuest = value; Save(); }
+	}
+
+	[XmlElement("QuestRecords")]
+	private SerializableDictionary<string, string> _questRecords;
+	public SerializableDictionary<string, string> QuestRecords
+	{
+		get { return _questRecords; }
+		set { _questRecords = value; Save(); }
 	}
 
 	[XmlElement("BreakageType")]
@@ -252,6 +268,8 @@ public abstract class BaseState : IState
 	{
 		if (preventSave) return false;
 
+		Events.RaiseStateUpdated();
+
 		VersionMajor = GlobalConfig.VERSION_MAJOR;
 		VersionMiddle = GlobalConfig.VERSION_MIDDLE;
 		VersionMinor = GlobalConfig.VERSION_MINOR;
@@ -273,8 +291,6 @@ public abstract class BaseState : IState
 		#region RULES
 		if (resetRules)
 		{
-			GameStatus = GameStatus.FirstLaunch;
-
 			TotalDays = 8;
 			MaxAP = 10;
 
@@ -321,6 +337,16 @@ public abstract class BaseState : IState
 		#endregion
 
 		#region STATE
+		GameStatus = GameStatus.FirstLaunch;
+
+		CurrentQuest = string.Empty;
+		QuestRecords = new SerializableDictionary<string, string>()
+		{
+			{"Abroad", string.Empty},
+			{"Dalia", string.Empty},
+			{"Echo", string.Empty},
+		};
+
 		BreakageType[] possibleBRK = (BreakageType[])Enum.GetValues(typeof(BreakageType));
 		BreakageType = possibleBRK[Rand.RND.Next(0, 4)];
 		EngineFixed = false;

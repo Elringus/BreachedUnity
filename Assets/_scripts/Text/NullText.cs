@@ -3,32 +3,36 @@ public class NullText : IText
 {
 	public TextLanguage Language { get; set; }
 
-	public string GetText (string term)
+	public string Get (string term)
 	{
-		if (term == "QuestNullStart")
-			return @"
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut tellus ut lacus adipiscing commodo ut eget tellus. Fusce at rutrum augue. Sed venenatis magna bibendum ornare scelerisque. In sagittis dolor et turpis sagittis, non pretium ante placerat. Aenean sit amet vulputate quam. Suspendisse in sagittis libero. 
+		if (term == "QuestDalia#0")
+			return 
+@"<conditions>
+<ap>3</ap>
+<day>5</day>
+</conditions>
 ";
-
-		if (term == "QuestNullGoodDecision")
-			return @"[action][ap]-1[/ap][mineralA]+25[/mineralA][/action]
-Ut non erat vitae velit suscipit vulputate vitae sit amet sem. Aenean nulla nisl, volutpat non tortor non, interdum sollicitudin nibh. Vestibulum fermentum nulla mauris, a condimentum orci tempor in. Nulla dictum diam sapien, rutrum dignissim nulla feugiat non. Vestibulum aliquam cursus risus a vehicula.
-
-Vestibulum varius volutpat ante, molestie ornare mi feugiat at. Pellentesque ac elit neque. Nullam augue ante, sagittis ut porta eget, interdum sit amet magna. Mauris sit amet vulputate nunc, et rhoncus dui. Praesent in metus non risus bibendum elementum. Aenean pharetra faucibus feugiat. Curabitur diam enim, consectetur ac bibendum convallis, sollicitudin congue leo. 
+// <quest name='Abroad'>QuestAbroad#3</quest>
+		if (term == "QuestDalia#1")
+			return 
+@"<block>Это... Мне кажется, я в бреду? Кругом так пыльно... Это ты, Кор?
+Что-то не так? Ах, мои слова... Не бойся, я научилась говорить. Совсем-совсем недавно. Теперь мне нужно сказать тебе так много. Не уходи.
+Помнишь тот ледяной мирок, который мы создали вдвоем? Пришлось найти фотографии вымерших зверей. Большие, белые, и черная точка – нос. Забыла, как их звали... Ты помнишь? Мы вообразили его и пустили гулять по белой пустоши. Помнишь?..
+Ты <choise to='END' ap='-1'>торопишься</choise> куда-то?.. Пожалуйста, задержись еще немножко. Мне есть что <choise to='QuestDalia#2' ap='-1'>рассказать</choise> тебе.
+</block>
 ";
-
-		if (term == "QuestNullBadDecision")
-			return @"[action][ap]-10[/ap][/action]
-In in blandit risus. Nam tempus justo ac est scelerisque, id venenatis ligula scelerisque. Fusce dui metus, lobortis vitae vestibulum at, malesuada vel nisi. Aenean aliquam elit ac justo eleifend adipiscing. Nullam ut erat erat. In sed commodo massa. Sed blandit sollicitudin lorem non accumsan. Etiam sodales vestibulum quam, eu fringilla purus eleifend et.
+		if (term == "QuestDalia#2")
+			return
+@"<block>Помнишь, как мы прибыли на Новую Каледонию? Мы сбежали. Тандемократия начала войну за глупые ресурсы. Какая радость – мы же можем жить где угодно. С нашим-то занятием. Почему ты бросил нас, Кор?..
+<choise to='END' ap='-2'>Бросишь</choise> меня и сейчас? Еще раз? Болид, починка? Понимаю... Еще <choise to='QuestDalia#3' ap='-1' mineralA='10' alloy='25' artifact='Artifact5'>пару минут</choise>, пожалуйста.
+</block>
 ";
-
-		if (term == "QuestNullGoodDecisionEnd")
-			return @"
-Vestibulum varius volutpat ante, molestie ornare mi feugiat at. Pellentesque ac elit neque. Nullam augue ante, sagittis ut porta eget, interdum sit amet magna. Mauris sit amet vulputate nunc, et rhoncus dui. Praesent in metus non risus bibendum elementum. Aenean pharetra faucibus feugiat. Curabitur diam enim, consectetur ac bibendum convallis, sollicitudin congue leo. 
-
-In in blandit risus. Nam tempus justo ac est scelerisque, id venenatis ligula scelerisque. Fusce dui metus, lobortis vitae vestibulum at, malesuada vel nisi. accumsan. 
+		if (term == "QuestDalia#3")
+			return
+@"<block>Ты хороший. Только с тобой я могла говорить – не с другими. Ты понимал меня. Здесь хорошо. Оставайся. Мне больше нечего сказать, но зачем слова? Просто будь рядом... Ты мой брат, а я твоя сестра. Пусть мы и не ведаем, что это значит...
+Да. Это я, Далия. Почему ты снова сбегаешь? Я же простила тебя тогда...
+</block>
 ";
-
 		return string.Format("Null text for the {0} term.", term);
 	}
 }

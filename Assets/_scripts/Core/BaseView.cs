@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using System.Xml.Linq;
 
 public abstract class BaseView : MonoBehaviour
 {
 	protected static IState State;
 	protected static ILogger Logger;
+	protected static IText Text;
 
 	static BaseView ()
 	{
@@ -11,6 +13,7 @@ public abstract class BaseView : MonoBehaviour
 
 		State = ServiceLocator.State;
 		Logger = ServiceLocator.Logger;
+		Text = ServiceLocator.Text;
 	}
 
 	private static void Initialize ()

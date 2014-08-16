@@ -32,6 +32,9 @@ public interface IState
 	#region STATE
 	GameStatus GameStatus { get; set; }
 
+	string CurrentQuest { get; set; }
+	SerializableDictionary<string, string> QuestRecords { get; set; }
+
 	BreakageType BreakageType { get; set; }
 	bool EngineFixed { get; set; }
 

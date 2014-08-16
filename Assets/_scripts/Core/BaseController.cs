@@ -3,11 +3,13 @@ public abstract class BaseController
 {
 	protected static IState State;
 	protected static ILogger Logger;
+	protected static IText Text;
 
 	static BaseController ()
 	{
 		State = ServiceLocator.State;
 		Logger = ServiceLocator.Logger;
+		Text = ServiceLocator.Text;
 
 		Events.EngineFixed += (c, e) =>
 		{

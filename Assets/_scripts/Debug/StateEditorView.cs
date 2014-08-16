@@ -30,11 +30,6 @@ public class StateEditorView : BaseView
 		GUILayout.Label("Save data verion: ", GUILayout.Width(300));
 		GUILayout.Label(string.Format("{0}.{1}.{2}", State.VersionMajor, State.VersionMiddle, State.VersionMinor));
 		GUILayout.EndHorizontal();
-
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("Game progress: ", GUILayout.Width(300));
-		GUILayout.Label(State.GameStatus.ToString());
-		GUILayout.EndHorizontal();
 		#endregion
 
 		#region RULES
@@ -165,6 +160,31 @@ public class StateEditorView : BaseView
 
 		#region STATE
 		GUILayout.Box("State variables (specific for the current game session)");
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Game status: ", GUILayout.Width(300));
+		GUILayout.Label(State.GameStatus.ToString());
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Current quest: ", GUILayout.Width(300));
+		State.CurrentQuest = GUILayout.TextField(State.CurrentQuest);
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Quest record for 'Abroad': ", GUILayout.Width(300));
+		State.QuestRecords["Abroad"] = GUILayout.TextField(State.QuestRecords["Abroad"]);
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Quest record for 'Dalia': ", GUILayout.Width(300));
+		State.QuestRecords["Dalia"] = GUILayout.TextField(State.QuestRecords["Dalia"]);
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Quest record for 'Echo': ", GUILayout.Width(300));
+		State.QuestRecords["Echo"] = GUILayout.TextField(State.QuestRecords["Echo"]);
+		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Breakage type is {0}. Set it to:", 
