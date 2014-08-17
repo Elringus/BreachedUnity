@@ -129,11 +129,11 @@ public class SimpleView : BaseView
 				GUILayout.Space(10);
 				GUILayout.Box("Workshop");
 				if (workshopController.CanFixEngine() &&
-					GUILayout.Button(string.Format("Fix engine [AP = {0}]", State.FixEngineAPCost))) workshopController.FixEngine();
+					GUILayout.Button(string.Format("Fix engine [-{0}AP]", State.FixEngineAPCost))) workshopController.FixEngine();
 				if (!State.FuelSynthed)
 				{
 					GUILayout.BeginHorizontal();
-					if (GUILayout.Button(string.Format("Synth fuel [AP = {0}] (A + B + C must be 9)", State.FuelSynthAPCost)))
+					if (GUILayout.Button(string.Format("Synth fuel [-{0}AP] (A + B + C must be 9)", State.FuelSynthAPCost)))
 					{
 						workshopController.SynthFuel(synthProbe);
 						synthProbe = new int[3];
