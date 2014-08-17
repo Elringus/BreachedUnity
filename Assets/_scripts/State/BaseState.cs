@@ -133,17 +133,9 @@ public abstract class BaseState : IState
 		set { _gameStatus = (int)value; Save(); }
 	}
 
-	[XmlElement("CurrentQuest")]
-	private string _currentQuest;
-	public string CurrentQuest
-	{
-		get { return _currentQuest; }
-		set { _currentQuest = value; Save(); }
-	}
-
 	[XmlElement("QuestRecords")]
-	private SerializableDictionary<string, string> _questRecords;
-	public SerializableDictionary<string, string> QuestRecords
+	private List<Quest> _questRecords;
+	public List<Quest> QuestRecords
 	{
 		get { return _questRecords; }
 		set { _questRecords = value; Save(); }
@@ -291,6 +283,13 @@ public abstract class BaseState : IState
 		#region RULES
 		if (resetRules)
 		{
+			QuestRecords = new List<Quest>()
+			{
+				new Quest("Abroad", 5, 2),
+				new Quest("Dalia", 4, 5, "QuestAbroad#2"),
+				new Quest("Echo", 0, 8),
+			};
+
 			TotalDays = 8;
 			MaxAP = 10;
 
@@ -339,13 +338,7 @@ public abstract class BaseState : IState
 		#region STATE
 		GameStatus = GameStatus.FirstLaunch;
 
-		CurrentQuest = string.Empty;
-		QuestRecords = new SerializableDictionary<string, string>()
-		{
-			{"Abroad", string.Empty},
-			{"Dalia", string.Empty},
-			{"Echo", string.Empty},
-		};
+		if (QuestRecords != null) foreach (var quest in QuestRecords) quest.ResetProgress();
 
 		BreakageType[] possibleBRK = (BreakageType[])Enum.GetValues(typeof(BreakageType));
 		BreakageType = possibleBRK[Rand.RND.Next(0, 4)];

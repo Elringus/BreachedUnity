@@ -1,39 +1,31 @@
 ﻿using System.Xml.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 public class QuestController : BaseController
 {
-	public bool CheckQuest (string questName)
+	public bool CheckQuest (Quest quest)
 	{
-		XDocument conditions = XDocument.Parse(Text.Get(string.Format("Quest{0}#0", questName)));
-
-		if (conditions.Root.Name != "conditions" || State.QuestRecords[questName] != string.Empty) 
-			return false;
-
-		if (conditions.Root.Element("ap") != null && State.CurrentAP < int.Parse(conditions.Root.Element("ap").Value))
-			return false;
-
-		if (conditions.Root.Element("day") != null && State.CurrentDay < int.Parse(conditions.Root.Element("day").Value))
-			return false;
-
-		if (conditions.Root.Element("quest") != null && 
-			State.QuestRecords[conditions.Root.Element("quest").Attribute("name").Value] != conditions.Root.Element("quest").Value)
-			return false;
+		if (quest.Status != QuestStatus.NotStarted) return false;
+		if (quest.RequireAP > State.CurrentAP) return false;
+		if (quest.RequireDay > State.CurrentDay) return false;
+		if (quest.RequireQuest != string.Empty &&
+			State.QuestRecords.Find(q => q.CurrentBlock == quest.RequireQuest) == null) return false;
 
 		return true;
 	}
 
-	public bool StartQuest (string questName)
+	public bool StartQuest (Quest quest)
 	{
-		if (State.CurrentQuest != string.Empty || !CheckQuest(questName)) return false;
+		if (GetCurrentQuest() != null || !CheckQuest(quest)) return false;
 
-		State.CurrentQuest = questName;
-		State.QuestRecords[questName] = string.Format("Quest{0}#1", questName);
+		quest.Status = QuestStatus.Started;
 		return true;
 	}
 
 	public bool MakeChoise (string choiseText)
 	{
-		XDocument block = XDocument.Parse(Text.Get(State.QuestRecords[State.CurrentQuest]));
+		XDocument block = XDocument.Parse(Text.Get(GetCurrentQuest().CurrentBlock));
 
 		XElement choise = new XElement("temp");
 		foreach (var c in block.Root.Elements("choise"))
@@ -69,7 +61,8 @@ public class QuestController : BaseController
 		if (choise.Attribute("to").Value == "END") EndQuest();
 		else
 		{
-			State.QuestRecords[State.CurrentQuest] = choise.Attribute("to").Value;
+			GetCurrentQuest().CurrentBlock = choise.Attribute("to").Value;
+			State.Save(); // very sad :(
 		}
 
 		return true;
@@ -77,6 +70,11 @@ public class QuestController : BaseController
 
 	public void EndQuest ()
 	{
-		State.CurrentQuest = string.Empty;
+		GetCurrentQuest().Status = QuestStatus.Completed;
+	}
+
+	public Quest GetCurrentQuest ()
+	{
+		return State.QuestRecords.Find(q => q.Status == QuestStatus.Started);
 	}
 }

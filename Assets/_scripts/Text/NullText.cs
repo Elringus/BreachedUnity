@@ -5,14 +5,19 @@ public class NullText : IText
 
 	public string Get (string term)
 	{
-		if (term == "QuestDalia#0")
+		if (term == "QuestAbroad#1")
 			return
-@"<conditions>
-<ap>3</ap>
-<day>5</day>
-<quest name='Abroad'>QuestAbroad#3</quest>
-</conditions>
+@"<block>Это... тест аброуда :)
+<choise to='END'>закончить квест сейчас - не откроется Далия</choise>
+<choise to='QuestAbroad#2'>перейти на второй блок - на 5 дне откроется Далия</choise>
+</block>
 ";
+		if (term == "QuestAbroad#2")
+			return
+@"<block>....... второй блок аброуда
+</block>
+";
+
 		if (term == "QuestDalia#1")
 			return 
 @"<block>Это... Мне кажется, я в бреду? Кругом так пыльно... Это ты, Кор?
@@ -31,6 +36,11 @@ public class NullText : IText
 			return
 @"<block>Ты хороший. Только с тобой я могла говорить – не с другими. Ты понимал меня. Здесь хорошо. Оставайся. Мне больше нечего сказать, но зачем слова? Просто будь рядом... Ты мой брат, а я твоя сестра. Пусть мы и не ведаем, что это значит...
 Да. Это я, Далия. Почему ты снова сбегаешь? Я же простила тебя тогда...
+</block>
+";
+		if (term == "QuestEcho#1")
+			return
+@"<block>эко-квест ^___^
 </block>
 ";
 		return string.Format("Null text for the {0} term.", term);

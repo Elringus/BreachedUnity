@@ -25,7 +25,8 @@ public class SimpleView : BaseView
 	{
 		Events.StateUpdated += (c, e) =>
 		{
-			questController.StartQuest("Dalia");
+			foreach (var quest in State.QuestRecords.Where(q => q.Status == QuestStatus.NotStarted))
+				questController.StartQuest(quest);
 		};
 	}
 
@@ -101,12 +102,12 @@ public class SimpleView : BaseView
 
 				if (GUILayout.Button("Recall dron")) inFlightMode = false;
 			}
-			else if (State.CurrentQuest != string.Empty)
+			else if (questController.GetCurrentQuest() != null)
 			{
 				GUILayout.Space(10);
-				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", State.CurrentQuest, State.QuestRecords[State.CurrentQuest]));
-				GUILayout.Box(XDocument.Parse(Text.Get(State.QuestRecords[State.CurrentQuest])).Root.Value, GUILayout.Width(600));
-				var choises = XDocument.Parse(Text.Get(State.QuestRecords[State.CurrentQuest])).Root.Elements("choise");
+				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", questController.GetCurrentQuest().Name, questController.GetCurrentQuest().CurrentBlock));
+				GUILayout.Box(XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(600));
+				var choises = XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Elements("choise");
 				if (choises.Count() == 0) { if (GUILayout.Button("End quest")) questController.EndQuest(); }
 				else foreach (var choise in choises) if (GUILayout.Button(choise.Value, GUILayout.Width(600))) questController.MakeChoise(choise.Value);
 			}

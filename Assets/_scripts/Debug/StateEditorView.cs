@@ -35,6 +35,20 @@ public class StateEditorView : BaseView
 		#region RULES
 		GUILayout.Box("Rules constants (cross-session invariant)");
 
+		GUILayout.Label("Quests requirements: ", GUILayout.Width(300));
+		foreach (var quest in State.QuestRecords)
+		{
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("Name: " + quest.Name);
+			GUILayout.Label("AP required: " + quest.Name);
+			quest.RequireAP = int.Parse(GUILayout.TextField(quest.RequireAP.ToString()));
+			GUILayout.Label("Day required: ");
+			quest.RequireDay = int.Parse(GUILayout.TextField(quest.RequireDay.ToString()));
+			GUILayout.Label("Quest required: ");
+			quest.RequireQuest = GUILayout.TextField(quest.RequireQuest);
+			GUILayout.EndHorizontal();
+		}
+
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Total days: ", GUILayout.Width(300));
 		State.TotalDays = int.Parse(GUILayout.TextField(State.TotalDays.ToString()));
@@ -166,25 +180,17 @@ public class StateEditorView : BaseView
 		GUILayout.Label(State.GameStatus.ToString());
 		GUILayout.EndHorizontal();
 
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("Current quest: ", GUILayout.Width(300));
-		State.CurrentQuest = GUILayout.TextField(State.CurrentQuest);
-		GUILayout.EndHorizontal();
-
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("Quest record for 'Abroad': ", GUILayout.Width(300));
-		State.QuestRecords["Abroad"] = GUILayout.TextField(State.QuestRecords["Abroad"]);
-		GUILayout.EndHorizontal();
-
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("Quest record for 'Dalia': ", GUILayout.Width(300));
-		State.QuestRecords["Dalia"] = GUILayout.TextField(State.QuestRecords["Dalia"]);
-		GUILayout.EndHorizontal();
-
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("Quest record for 'Echo': ", GUILayout.Width(300));
-		State.QuestRecords["Echo"] = GUILayout.TextField(State.QuestRecords["Echo"]);
-		GUILayout.EndHorizontal();
+		GUILayout.Label("Quests progress: ", GUILayout.Width(300));
+		foreach (var quest in State.QuestRecords)
+		{
+			GUILayout.BeginHorizontal();
+			GUILayout.Label(string.Format("'{0}' is {1}. Change to: ", quest.Name, quest.Status));
+			if (GUILayout.Button("NotStarted")) quest.Status = QuestStatus.NotStarted;
+			if (GUILayout.Button("Started")) quest.Status = QuestStatus.Started;
+			if (GUILayout.Button("Completed")) quest.Status = QuestStatus.Completed;
+			quest.CurrentBlock = GUILayout.TextField(quest.CurrentBlock);
+			GUILayout.EndHorizontal();
+		}
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Breakage type is {0}. Set it to:", 
