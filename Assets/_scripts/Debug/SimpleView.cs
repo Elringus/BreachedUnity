@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System.Linq;
 
 public class SimpleView : BaseView
 {
@@ -12,7 +13,7 @@ public class SimpleView : BaseView
 	private FlightController flightController;
 	private WorkshopController workshopController;
 
-	private QuestController questController;
+	private static QuestController questController;
 
 	private bool inFlightMode;
 	private int lootCharges;
@@ -22,10 +23,10 @@ public class SimpleView : BaseView
 
 	static SimpleView ()
 	{
-		//Events.StateUpdated += (c, e) =>
-		//{
-		//	questController.StartQuest("Dalia");
-		//};
+		Events.StateUpdated += (c, e) =>
+		{
+			questController.StartQuest("Dalia");
+		};
 	}
 
 	protected override void Awake ()
@@ -43,7 +44,6 @@ public class SimpleView : BaseView
 	protected override void OnGUI ()
 	{
 		base.OnGUI();
-		questController.StartQuest("Dalia");
 
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
 		GUILayout.Box("Breached simple view\n--------------------------------------------------------------------------------------------------------------------------------------");
@@ -107,7 +107,7 @@ public class SimpleView : BaseView
 				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", State.CurrentQuest, State.QuestRecords[State.CurrentQuest]));
 				GUILayout.Box(XDocument.Parse(Text.Get(State.QuestRecords[State.CurrentQuest])).Root.Value, GUILayout.Width(600));
 				var choises = XDocument.Parse(Text.Get(State.QuestRecords[State.CurrentQuest])).Root.Elements("choise");
-				if (choises == null) { if (GUILayout.Button("End quest")) questController.EndQuest(); }
+				if (choises.Count() == 0) { if (GUILayout.Button("End quest")) questController.EndQuest(); }
 				else foreach (var choise in choises) if (GUILayout.Button(choise.Value, GUILayout.Width(600))) questController.MakeChoise(choise.Value);
 			}
 			else

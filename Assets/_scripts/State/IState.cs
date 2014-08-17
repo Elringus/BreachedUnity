@@ -2,6 +2,7 @@
 
 public interface IState
 {
+	bool Save ();
 	void HoldAutoSave (bool hold);
 	void Reset (bool resetRules = false);
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Xml.Linq;
 
 public abstract class BaseView : MonoBehaviour
 {

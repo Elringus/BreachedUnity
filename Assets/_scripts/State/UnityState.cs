@@ -23,7 +23,7 @@ public class UnityState : BaseState
 		return state;
 	}
 
-	protected override bool Save ()
+	public override bool Save ()
 	{
 		if (!base.Save()) return false;
 

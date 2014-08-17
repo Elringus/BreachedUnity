@@ -15,8 +15,8 @@ public class QuestController : BaseController
 		if (conditions.Root.Element("day") != null && State.CurrentDay < int.Parse(conditions.Root.Element("day").Value))
 			return false;
 
-		if (conditions.Root.Element("quest") != null &&
-			State.QuestRecords[conditions.Element("quest").Attribute("name").Value] != conditions.Root.Element("quest").Value)
+		if (conditions.Root.Element("quest") != null && 
+			State.QuestRecords[conditions.Root.Element("quest").Attribute("name").Value] != conditions.Root.Element("quest").Value)
 			return false;
 
 		return true;
@@ -24,7 +24,7 @@ public class QuestController : BaseController
 
 	public bool StartQuest (string questName)
 	{
-		if (!CheckQuest(questName)) return false;
+		if (State.CurrentQuest != string.Empty || !CheckQuest(questName)) return false;
 
 		State.CurrentQuest = questName;
 		State.QuestRecords[questName] = string.Format("Quest{0}#1", questName);
@@ -35,7 +35,7 @@ public class QuestController : BaseController
 	{
 		XDocument block = XDocument.Parse(Text.Get(State.QuestRecords[State.CurrentQuest]));
 
-		XElement choise = new XElement("");
+		XElement choise = new XElement("temp");
 		foreach (var c in block.Root.Elements("choise"))
 			if (c.Value == choiseText)
 			{
@@ -62,12 +62,15 @@ public class QuestController : BaseController
 
 		if (choise.Attribute("artifact") != null)
 		{
-			Artifact artifact = State.Artifacts.Find(a => a.Name == choise.Attribute("artifact").Value);
+			var artifact = State.Artifacts.Find(a => a.Name == choise.Attribute("artifact").Value);
 			if (artifact.Status == ArtifactStatus.NotFound) artifact.Status = ArtifactStatus.Found;
 		}
 
 		if (choise.Attribute("to").Value == "END") EndQuest();
-		else State.QuestRecords[State.CurrentQuest] = choise.Attribute("to").Value;
+		else
+		{
+			State.QuestRecords[State.CurrentQuest] = choise.Attribute("to").Value;
+		}
 
 		return true;
 	}

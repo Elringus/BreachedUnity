@@ -7,6 +7,18 @@ using System.Xml.Serialization;
 public class SerializableDictionary<TKey, TValue> 
 	: Dictionary<TKey, TValue>, IXmlSerializable
 {
+	new public TValue this[TKey key]
+	{
+		get { return base[key]; }
+
+		set
+		{
+			base[key] = value;
+			if (ServiceLocator.State != null)
+				ServiceLocator.State.Save();
+		}
+	}
+
 	public System.Xml.Schema.XmlSchema GetSchema ()
 	{
 		return null;

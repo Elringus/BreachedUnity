@@ -6,13 +6,13 @@ public class NullText : IText
 	public string Get (string term)
 	{
 		if (term == "QuestDalia#0")
-			return 
+			return
 @"<conditions>
 <ap>3</ap>
 <day>5</day>
+<quest name='Abroad'>QuestAbroad#3</quest>
 </conditions>
 ";
-// <quest name='Abroad'>QuestAbroad#3</quest>
 		if (term == "QuestDalia#1")
 			return 
 @"<block>Это... Мне кажется, я в бреду? Кругом так пыльно... Это ты, Кор?

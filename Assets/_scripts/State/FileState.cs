@@ -28,7 +28,7 @@ public class FileState : BaseState
 		}
 	}
 
-	protected override bool Save ()
+	public override bool Save ()
 	{
 		if (!base.Save()) return false;
 

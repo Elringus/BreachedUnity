@@ -264,7 +264,7 @@ public abstract class BaseState : IState
 	}
 	#endregion
 
-	protected virtual bool Save ()
+	public virtual bool Save ()
 	{
 		if (preventSave) return false;
 
@@ -372,7 +372,7 @@ public abstract class BaseState : IState
 		Alloy = 0;
 		Chips = 0;
 
-		foreach (var artifact in Artifacts) 
+		foreach (var artifact in Artifacts)
 			artifact.Status = ArtifactStatus.NotFound;
 		#endregion
 
