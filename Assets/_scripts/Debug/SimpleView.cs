@@ -64,11 +64,15 @@ public class SimpleView : BaseView
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC));
+		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC), GUILayout.Width(250));
+		GUILayout.Label(string.Format("Fuel synth formula: A{0} B{1} C{2}",
+			State.FuelSynthFormula[0],
+			State.FuelSynthFormula[1],
+			State.FuelSynthFormula[2]));
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips));
+		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips), GUILayout.Width(250));
 		GUILayout.Label(string.Format("Fix engine requirments: W{0} A{1} C{2}", 
 			State.FixEngineRequirements[State.BreakageType][0], 
 			State.FixEngineRequirements[State.BreakageType][1], 
