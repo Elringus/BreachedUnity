@@ -23,11 +23,15 @@ public class SimpleView : BaseView
 
 	static SimpleView ()
 	{
-		Events.StateUpdated += (c, e) =>
+		// disable quests invoking if we don't have the text provider
+		if (Text.GetType() != typeof(NullText))
 		{
-			foreach (var quest in State.QuestRecords.Where(q => q.Status == QuestStatus.NotStarted))
-				questController.StartQuest(quest);
-		};
+			Events.StateUpdated += (c, e) =>
+			{
+				foreach (var quest in State.QuestRecords.Where(q => q.Status == QuestStatus.NotStarted))
+					questController.StartQuest(quest);
+			};
+		}
 	}
 
 	protected override void Awake ()

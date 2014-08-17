@@ -12,6 +12,9 @@ public static class Events
 	public static event EventHandler FuelSynthed = delegate { };
 	public static void RaiseFuelSynthed () { FuelSynthed(null, EventArgs.Empty); }
 
+	public static event EventHandler TextUpdated = delegate { };
+	public static void RaiseTextUpdated () { TextUpdated(null, EventArgs.Empty); }
+
 	public static void LogHandlersCount ()
 	{
 		int handlersCount = 0;

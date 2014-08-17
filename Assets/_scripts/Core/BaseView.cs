@@ -19,7 +19,7 @@ public abstract class BaseView : MonoBehaviour
 	{
 		ServiceLocator.Logger = new UnityLogger();
 		ServiceLocator.State = FileState.Load();
-		ServiceLocator.Text = new NullText();
+		ServiceLocator.Text = new GoogleText();
 
 		if (ServiceLocator.State.VersionMiddle < GlobalConfig.VERSION_MIDDLE || 
 			ServiceLocator.State.VersionMajor < GlobalConfig.VERSION_MAJOR)
