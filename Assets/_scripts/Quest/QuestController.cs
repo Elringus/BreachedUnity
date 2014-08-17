@@ -8,7 +8,7 @@ public class QuestController : BaseController
 	{
 		if (quest.Status != QuestStatus.NotStarted) return false;
 		if (quest.RequireAP > State.CurrentAP) return false;
-		if (quest.RequireDay > State.CurrentDay) return false;
+		if (quest.RequireDay < 0 || quest.RequireDay > State.CurrentDay) return false;
 		if (quest.RequireQuest != string.Empty &&
 			State.QuestRecords.Find(q => q.CurrentBlock == quest.RequireQuest) == null) return false;
 

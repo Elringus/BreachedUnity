@@ -109,11 +109,12 @@ public class SimpleView : BaseView
 			else if (questController.GetCurrentQuest() != null)
 			{
 				GUILayout.Space(10);
-				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", questController.GetCurrentQuest().Name, questController.GetCurrentQuest().CurrentBlock));
-				GUILayout.Box(XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(600));
+				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", 
+					questController.GetCurrentQuest().Name, questController.GetCurrentQuest().CurrentBlock), GUILayout.Width(590));
+				GUILayout.Label(XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(590));
 				var choises = XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Elements("choise");
 				if (choises.Count() == 0) { if (GUILayout.Button("End quest")) questController.EndQuest(); }
-				else foreach (var choise in choises) if (GUILayout.Button(choise.Value, GUILayout.Width(600))) questController.MakeChoise(choise.Value);
+				else foreach (var choise in choises) if (GUILayout.Button(choise.Value, GUILayout.Width(590))) questController.MakeChoise(choise.Value);
 			}
 			else
 			{

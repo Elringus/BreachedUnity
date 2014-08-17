@@ -288,6 +288,10 @@ public abstract class BaseState : IState
 				new Quest("Abroad", 5, 2),
 				new Quest("Dalia", 4, 5, "QuestAbroad#2"),
 				new Quest("Echo", 0, 8),
+
+				new Quest("Test1", 0, -1),
+				new Quest("Test2", 0, -1),
+				new Quest("Test3", 0, -1),
 			};
 
 			TotalDays = 8;
