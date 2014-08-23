@@ -71,6 +71,7 @@ public class QuestController : BaseController
 	public void EndQuest ()
 	{
 		GetCurrentQuest().Status = QuestStatus.Completed;
+		State.Save();
 	}
 
 	public Quest GetCurrentQuest ()
