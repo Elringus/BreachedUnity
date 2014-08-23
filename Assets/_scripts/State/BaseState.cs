@@ -9,7 +9,6 @@ public abstract class BaseState : IState
 	protected static bool preventSave;
 
 	#region CONFIG
-	[XmlElement("VersionMajor")]
 	private int _versionMajor;
 	public int VersionMajor
 	{
@@ -17,7 +16,6 @@ public abstract class BaseState : IState
 		set { _versionMajor = value; }
 	}
 
-	[XmlElement("VersionMiddle")]
 	private int _versionMiddle;
 	public int VersionMiddle
 	{
@@ -25,7 +23,6 @@ public abstract class BaseState : IState
 		set { _versionMiddle = value; }
 	}
 
-	[XmlElement("VersionMinor")]
 	private int _versionMinor;
 	public int VersionMinor
 	{
@@ -35,7 +32,6 @@ public abstract class BaseState : IState
 	#endregion
 
 	#region RULES
-	[XmlElement("TotalDays")]
 	private int _totalDays;
 	public int TotalDays
 	{
@@ -43,7 +39,6 @@ public abstract class BaseState : IState
 		set { _totalDays = value; Save(); }
 	}
 
-	[XmlElement("MaxAP")]
 	private int _maxAP;
 	public int MaxAP
 	{
@@ -51,7 +46,6 @@ public abstract class BaseState : IState
 		set { _maxAP = value; Save(); }
 	}
 
-	[XmlElement("EnterSectorAPCost")]
 	private int _enterSectorAPCost;
 	public int EnterSectorAPCost
 	{
@@ -59,7 +53,6 @@ public abstract class BaseState : IState
 		set { _enterSectorAPCost = value; Save(); }
 	}
 
-	[XmlElement("LootCharges")]
 	private int _lootCharges;
 	public int LootCharges
 	{
@@ -67,7 +60,6 @@ public abstract class BaseState : IState
 		set { _lootCharges = value; Save(); }
 	}
 
-	[XmlElement("SectorsParameters")]
 	private List<SectorParameters> _sectorsParameters;
 	public List<SectorParameters> SectorsParameters
 	{
@@ -75,7 +67,6 @@ public abstract class BaseState : IState
 		set { _sectorsParameters = value; Save(); }
 	}
 
-	[XmlElement("Artifacts")]
 	private List<Artifact> _artifacts;
 	public List<Artifact> Artifacts
 	{
@@ -83,7 +74,6 @@ public abstract class BaseState : IState
 		set { _artifacts = value; Save(); }
 	}
 
-	[XmlElement("AnalyzeArtifactAPCost")]
 	private int _analyzeArtifactAPCost;
 	public int AnalyzeArtifactAPCost
 	{
@@ -91,7 +81,6 @@ public abstract class BaseState : IState
 		set { _analyzeArtifactAPCost = value; Save(); }
 	}
 
-	[XmlElement("FixEngineAPCost")]
 	private int _fixEngineAPCost;
 	public int FixEngineAPCost
 	{
@@ -99,7 +88,6 @@ public abstract class BaseState : IState
 		set { _fixEngineAPCost = value; Save(); }
 	}
 
-	[XmlElement("FixEngineRequirements")]
 	private SerializableDictionary<BreakageType, int[]> _fixEngineRequirements;
 	public SerializableDictionary<BreakageType, int[]> FixEngineRequirements
 	{
@@ -107,7 +95,6 @@ public abstract class BaseState : IState
 		set { _fixEngineRequirements = value; Save(); }
 	}
 
-	[XmlElement("FuelSynthAPCost")]
 	private int _synthFuelAPCost;
 	public int FuelSynthAPCost
 	{
@@ -115,7 +102,6 @@ public abstract class BaseState : IState
 		set { _synthFuelAPCost = value; Save(); }
 	}
 
-	[XmlElement("FuelSynthGrace")]
 	private int _synthFuelGrace;
 	public int FuelSynthGrace
 	{
@@ -125,7 +111,6 @@ public abstract class BaseState : IState
 	#endregion
 
 	#region STATE
-	[XmlElement("GameStatus")]
 	private GameStatus _gameStatus;
 	public GameStatus GameStatus
 	{
@@ -133,7 +118,6 @@ public abstract class BaseState : IState
 		set { _gameStatus = value; Save(); }
 	}
 
-	[XmlElement("QuestRecords")]
 	private List<Quest> _questRecords;
 	public List<Quest> QuestRecords
 	{
@@ -141,7 +125,6 @@ public abstract class BaseState : IState
 		set { _questRecords = value; Save(); }
 	}
 
-	[XmlElement("BreakageType")]
 	private BreakageType _breakageType;
 	public BreakageType BreakageType
 	{
@@ -149,7 +132,6 @@ public abstract class BaseState : IState
 		set { _breakageType = value; Save(); }
 	}
 
-	[XmlElement("EngineFixed")]
 	private bool _engineFixed;
 	public bool EngineFixed
 	{
@@ -162,7 +144,6 @@ public abstract class BaseState : IState
 		}
 	}
 
-	[XmlElement("FuelSynthFormula")]
 	private int[] _synthFuelFormula;
 	public int[] FuelSynthFormula
 	{
@@ -170,7 +151,6 @@ public abstract class BaseState : IState
 		set { _synthFuelFormula = value; Save(); }
 	}
 
-	[XmlElement("FuelSynthProbes")]
 	private List<int[]> _fuelSynthProbes;
 	public List<int[]> FuelSynthProbes
 	{
@@ -178,7 +158,6 @@ public abstract class BaseState : IState
 		set { _fuelSynthProbes = value; Save(); }
 	}
 
-	[XmlElement("FuelSynthed")]
 	private bool _fuelSynthed;
 	public bool FuelSynthed
 	{
@@ -191,7 +170,6 @@ public abstract class BaseState : IState
 		}
 	}
 
-	[XmlElement("CurrentDay")]
 	private int _currentDay;
 	public int CurrentDay
 	{
@@ -199,7 +177,6 @@ public abstract class BaseState : IState
 		set { _currentDay = value; Save(); }
 	}
 
-	[XmlElement("CurrentAP")]
 	private int _currentAP;
 	public int CurrentAP
 	{
@@ -207,7 +184,6 @@ public abstract class BaseState : IState
 		set { _currentAP = value; Save(); }
 	}
 
-	[XmlElement("MineralA")]
 	private int _mineralA;
 	public int MineralA
 	{
@@ -215,7 +191,6 @@ public abstract class BaseState : IState
 		set { _mineralA = value; Save(); }
 	}
 
-	[XmlElement("MineralB")]
 	private int _mineralB;
 	public int MineralB
 	{
@@ -223,7 +198,6 @@ public abstract class BaseState : IState
 		set { _mineralB = value; Save(); }
 	}
 
-	[XmlElement("MineralC")]
 	private int _mineralC;
 	public int MineralC
 	{
@@ -231,7 +205,6 @@ public abstract class BaseState : IState
 		set { _mineralC = value; Save(); }
 	}
 
-	[XmlElement("Wiring")]
 	private int _wiring;
 	public int Wiring
 	{
@@ -239,7 +212,6 @@ public abstract class BaseState : IState
 		set { _wiring = value; Save(); }
 	}
 
-	[XmlElement("Alloy")]
 	private int _alloy;
 	public int Alloy
 	{
@@ -247,7 +219,6 @@ public abstract class BaseState : IState
 		set { _alloy = value; Save(); }
 	}
 
-	[XmlElement("Chips")]
 	private int _chips;
 	public int Chips
 	{
