@@ -35,6 +35,7 @@ public class GoogleText : IText
 			foreach (var row in rows)
 			{
 				string key = row.Split(',')[0];
+				if (result.ContainsKey(key)) continue;
 				string value = row.Replace(key + ',', string.Empty).Replace("\"", string.Empty);
 				result.Add(key, value);
 			}
