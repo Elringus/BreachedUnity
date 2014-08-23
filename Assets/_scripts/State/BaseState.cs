@@ -126,11 +126,11 @@ public abstract class BaseState : IState
 
 	#region STATE
 	[XmlElement("GameStatus")]
-	private int _gameStatus;
+	private GameStatus _gameStatus;
 	public GameStatus GameStatus
 	{
-		get { return (GameStatus)_gameStatus; }
-		set { _gameStatus = (int)value; Save(); }
+		get { return _gameStatus; }
+		set { _gameStatus = value; Save(); }
 	}
 
 	[XmlElement("QuestRecords")]
@@ -142,11 +142,11 @@ public abstract class BaseState : IState
 	}
 
 	[XmlElement("BreakageType")]
-	private int _breakageType;
+	private BreakageType _breakageType;
 	public BreakageType BreakageType
 	{
-		get { return (BreakageType)_breakageType; }
-		set { _breakageType = (int)value; Save(); }
+		get { return _breakageType; }
+		set { _breakageType = value; Save(); }
 	}
 
 	[XmlElement("EngineFixed")]
