@@ -59,11 +59,7 @@ public class QuestController : BaseController
 		}
 
 		if (choise.Attribute("to").Value == "END") EndQuest();
-		else
-		{
-			GetCurrentQuest().CurrentBlock = choise.Attribute("to").Value;
-			State.Save(); // very sad :(
-		}
+		else GetCurrentQuest().CurrentBlock = choise.Attribute("to").Value;
 
 		return true;
 	}
@@ -71,7 +67,6 @@ public class QuestController : BaseController
 	public void EndQuest ()
 	{
 		GetCurrentQuest().Status = QuestStatus.Completed;
-		State.Save();
 	}
 
 	public Quest GetCurrentQuest ()

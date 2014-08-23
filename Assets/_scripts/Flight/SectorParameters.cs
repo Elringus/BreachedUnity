@@ -2,13 +2,40 @@
 
 public class SectorParameters
 {
-	public int SectorID { get; set; }
+	private int _sectorID;
+	public int SectorID
+	{
+		get { return _sectorID; }
+		set { _sectorID = value; ServiceLocator.State.Save(); }
+	}
 
-	public int LootSpotCount { get; set; }
+	private int _lootSpotCount;
+	public int LootSpotCount
+	{
+		get { return _lootSpotCount; }
+		set { _lootSpotCount = value; ServiceLocator.State.Save(); }
+	}
 
-	public int MineralA { get; set; }
-	public int MineralB { get; set; }
-	public int MineralC { get; set; }
+	private int _mineralA;
+	public int MineralA
+	{
+		get { return _mineralA; }
+		set { _mineralA = value; ServiceLocator.State.Save(); }
+	}
+
+	private int _mineralB;
+	public int MineralB
+	{
+		get { return _mineralB; }
+		set { _mineralB = value; ServiceLocator.State.Save(); }
+	}
+
+	private int _mineralC;
+	public int MineralC
+	{
+		get { return _mineralC; }
+		set { _mineralC = value; ServiceLocator.State.Save(); }
+	}
 
 	[Obsolete("For XML serialization only.", true)]
 	public SectorParameters () 

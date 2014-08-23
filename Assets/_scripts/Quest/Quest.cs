@@ -2,18 +2,52 @@
 
 public class Quest
 {
-	public string Name { get; set; }
-	public QuestStatus Status;
-	public string CurrentBlock { get; set; }
+	private string _name;
+	public string Name
+	{
+		get { return _name; }
+		set { _name = value; ServiceLocator.State.Save(); }
+	}
 
-	public int RequireAP { get; set; }
-	public int RequireDay { get; set; }
-	public string RequireQuest { get; set; }
+	private QuestStatus _status;
+	public QuestStatus Status
+	{
+		get { return _status; }
+		set { _status = value; ServiceLocator.State.Save(); }
+	}
+
+	private string _currentBlock;
+	public string CurrentBlock
+	{
+		get { return _currentBlock; }
+		set { _currentBlock = value; ServiceLocator.State.Save(); }
+	}
+
+	private int _requireAP;
+	public int RequireAP
+	{
+		get { return _requireAP; }
+		set { _requireAP = value; ServiceLocator.State.Save(); }
+	}
+
+	private int _requireDay;
+	public int RequireDay
+	{
+		get { return _requireDay; }
+		set { _requireDay = value; ServiceLocator.State.Save(); }
+	}
+
+	private string _requireQuest;
+	public string RequireQuest
+	{
+		get { return _requireQuest; }
+		set { _requireQuest = value; ServiceLocator.State.Save(); }
+	}
 
 	[Obsolete("For XML serialization only.", true)]
 	public Quest ()
 	{
-
+		
 	}
 
 	public Quest (string name, int requireAP = 0, int requireDay = 0, string requireQuest = "")
