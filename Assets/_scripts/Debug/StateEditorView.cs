@@ -6,13 +6,10 @@ public class StateEditorView : BaseView
 	private readonly float WIDTH = 600;
 	private Vector2 scrollPosition;
 
-	private StateEditorController controller;
-
 	protected override void Awake ()
 	{
 		base.Awake();
 
-		controller = new StateEditorController();
 		State.HoldAutoSave(true);
 	}
 
@@ -284,7 +281,7 @@ public class StateEditorView : BaseView
 		#endregion
 
 		GUILayout.EndScrollView();
-		if (GUILayout.Button("Total reset (including rules)", GUILayout.Height(30))) controller.TotalReset();
+		if (GUILayout.Button("Total reset (including rules)", GUILayout.Height(30))) State.Reset(true);
 		if (GUILayout.Button("Save and return to menu", GUILayout.Height(30)))
 		{
 			State.HoldAutoSave(false);
