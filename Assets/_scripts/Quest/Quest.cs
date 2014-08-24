@@ -41,7 +41,7 @@ public class Quest
 		this.Name = name;
 		this.Status = QuestStatus.NotStarted;
 		this.CurrentBlock = string.Format("Quest{0}#1", name);
-		this.Requirements = requirements ?? new Requirements(-1, -1, null);
+		this.Requirements = requirements ?? new Requirements(-1);
 	}
 
 	public bool Check ()
