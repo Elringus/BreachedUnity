@@ -57,10 +57,10 @@ public class Requirements
 	{
 		IState state = ServiceLocator.State;
 
-		if (MinAP < 0 || MinAP > state.CurrentAP) return false;
-		if (MinDay < 0 || MinDay > state.CurrentDay) return false;
-		if (Day < 0 || Day != state.CurrentDay) return false;
-		if (MaxDay < 0 || MaxDay < state.CurrentDay) return false;
+		if (MinAP < 0 || MinDay != 0 && MinAP > state.CurrentAP) return false;
+		if (MinDay != 0 && MinDay > state.CurrentDay) return false;
+		if (Day != 0 && Day != state.CurrentDay) return false;
+		if (MaxDay != 0 && MaxDay < state.CurrentDay) return false;
 		if (CompletedQuests != null)
 			foreach (var qBlock in CompletedQuests)
 				if (qBlock != string.Empty && state.QuestRecords.Find(q => q.CurrentBlock == qBlock) == null) return false;
