@@ -13,6 +13,9 @@ public interface IState
 	#endregion
 
 	#region RULES
+	List<Quest> QuestRecords { get; set; }
+	List<Phrase> PhraseRecords { get; set; }
+
 	int TotalDays { get; set; }
 	int MaxAP { get; set; }
 
@@ -32,8 +35,6 @@ public interface IState
 
 	#region STATE
 	GameStatus GameStatus { get; set; }
-
-	List<Quest> QuestRecords { get; set; }
 
 	BreakageType BreakageType { get; set; }
 	bool EngineFixed { get; set; }

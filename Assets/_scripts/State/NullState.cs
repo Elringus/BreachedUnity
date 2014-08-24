@@ -13,6 +13,9 @@ public class NullState : IState
 	#endregion
 
 	#region RULES
+	public List<Quest> QuestRecords { get; set; }
+	public List<Phrase> PhraseRecords { get; set; }
+
 	public int TotalDays { get; set; }
 	public int MaxAP { get; set; }
 
@@ -32,8 +35,6 @@ public class NullState : IState
 
 	#region STATE
 	public GameStatus GameStatus { get; set; }
-
-	public List<Quest> QuestRecords { get; set; }
 
 	public BreakageType BreakageType { get; set; }
 	public bool EngineFixed { get; set; }

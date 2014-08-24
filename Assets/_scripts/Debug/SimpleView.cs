@@ -12,6 +12,7 @@ public class SimpleView : BaseView
 	private MapController mapController;
 	private FlightController flightController;
 	private WorkshopController workshopController;
+	private HorizonController horizonController;
 
 	private static QuestController questController;
 
@@ -42,6 +43,7 @@ public class SimpleView : BaseView
 		mapController = new MapController();
 		flightController = new FlightController();
 		workshopController = new WorkshopController();
+		horizonController = new HorizonController();
 
 		questController = new QuestController();
 	}
@@ -156,6 +158,8 @@ public class SimpleView : BaseView
 
 				GUILayout.Space(10);
 				GUILayout.Box("Horizon");
+				foreach (var phrase in horizonController.GetPhrases())
+					GUILayout.Label(string.Format("[{0}] {1}", phrase.Name, Text.Get(phrase.Name)));
 			}
 		}
 		else GUILayout.Box(State.GameStatus.ToString());

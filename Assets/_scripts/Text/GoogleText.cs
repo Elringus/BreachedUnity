@@ -9,7 +9,9 @@ public class GoogleText : IText
 {
 	public TextLanguage Language { get; set; }
 
-	private const string TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=0";
+	private const string QUESTS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=0";
+	private const string PHRASES_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=1387093746";
+
 	private Dictionary<string, string> cachedText = new Dictionary<string, string>();
 	private bool updateFailed;
 
@@ -24,14 +26,22 @@ public class GoogleText : IText
 		try
 		{
 			SSLValidator.OverrideValidation();
-			var request = (HttpWebRequest)WebRequest.Create(TABLE_URL);
+
+			var request = (HttpWebRequest)WebRequest.Create(QUESTS_TABLE_URL);
 			request.Method = WebRequestMethods.Http.Get;
 			request.Timeout = 5000;
 			var response = (HttpWebResponse)request.GetResponse();
 			var reader = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8);
+			List<string> rows = new List<string>(reader.ReadToEnd().Split((char)10));
+
+			request = (HttpWebRequest)WebRequest.Create(PHRASES_TABLE_URL);
+			request.Method = WebRequestMethods.Http.Get;
+			request.Timeout = 5000;
+			response = (HttpWebResponse)request.GetResponse();
+			reader = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8);
+			rows.AddRange(reader.ReadToEnd().Split((char)10));
 
 			var result = new Dictionary<string, string>();
-			string[] rows = reader.ReadToEnd().Split((char)10);
 			foreach (var row in rows)
 			{
 				string key = row.Split(',')[0];

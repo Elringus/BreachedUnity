@@ -32,6 +32,20 @@ public abstract class BaseState : IState
 	#endregion
 
 	#region RULES
+	private List<Quest> _questRecords;
+	public List<Quest> QuestRecords
+	{
+		get { return _questRecords; }
+		set { _questRecords = value; Save(); }
+	}
+
+	private List<Phrase> _phraseRecords;
+	public List<Phrase> PhraseRecords
+	{
+		get { return _phraseRecords; }
+		set { _phraseRecords = value; Save(); }
+	}
+
 	private int _totalDays;
 	public int TotalDays
 	{
@@ -116,13 +130,6 @@ public abstract class BaseState : IState
 	{
 		get { return _gameStatus; }
 		set { _gameStatus = value; Save(); }
-	}
-
-	private List<Quest> _questRecords;
-	public List<Quest> QuestRecords
-	{
-		get { return _questRecords; }
-		set { _questRecords = value; Save(); }
 	}
 
 	private BreakageType _breakageType;
@@ -263,6 +270,52 @@ public abstract class BaseState : IState
 				new Quest("Test1"),
 				new Quest("Test2"),
 				new Quest("Test3"),
+			};
+
+			PhraseRecords = new List<Phrase>()
+			{
+				new Phrase("Phrase1", new Requirements(day: 1)),
+				new Phrase("Phrase2", new Requirements(day: 1)),
+				new Phrase("Phrase3", new Requirements(day: 1)),
+				new Phrase("Phrase4", new Requirements(day: 1)),
+				new Phrase("Phrase5", new Requirements(day: 1)),
+
+				new Phrase("Phrase6", new Requirements(day: 2)),
+				new Phrase("Phrase7", new Requirements(day: 2)),
+				new Phrase("Phrase8", new Requirements(day: 2)),
+				new Phrase("Phrase9", new Requirements(day: 2)),
+				new Phrase("Phrase10", new Requirements(day: 2)),
+
+				new Phrase("Phrase11", new Requirements(day: 3)),
+				new Phrase("Phrase12", new Requirements(day: 3)),
+				new Phrase("Phrase13", new Requirements(day: 3)),
+				new Phrase("Phrase14", new Requirements(day: 3)),
+				new Phrase("Phrase15", new Requirements(day: 3)),
+
+				new Phrase("Phrase16", new Requirements(day: 4)),
+				new Phrase("Phrase17", new Requirements(day: 4)),
+				new Phrase("Phrase18", new Requirements(day: 4)),
+				new Phrase("Phrase19", new Requirements(day: 4)),
+				new Phrase("Phrase20", new Requirements(day: 4)),
+
+				new Phrase("Phrase21", new Requirements(day: 5)),
+				new Phrase("Phrase22", new Requirements(day: 5)),
+				new Phrase("Phrase23", new Requirements(day: 5)),
+				new Phrase("Phrase24", new Requirements(day: 5)),
+				new Phrase("Phrase25", new Requirements(day: 5)),
+
+				new Phrase("Phrase26", new Requirements(day: 6)),
+				new Phrase("Phrase27", new Requirements(day: 6)),
+				new Phrase("Phrase28", new Requirements(day: 6)),
+				new Phrase("Phrase29", new Requirements(day: 6)),
+				new Phrase("Phrase30", new Requirements(day: 6)),
+
+				new Phrase("Phrase31", new Requirements(day: 7)),
+				new Phrase("Phrase32", new Requirements(day: 7)),
+				new Phrase("Phrase33", new Requirements(day: 7)),
+				new Phrase("Phrase34", new Requirements(day: 7)),
+				new Phrase("Phrase35", new Requirements(day: 7)),
+
 			};
 
 			TotalDays = 8;

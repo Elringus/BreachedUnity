@@ -55,6 +55,23 @@ public class StateEditorView : BaseView
 			GUILayout.EndHorizontal();
 		}
 
+		GUILayout.Label("Phrases requirements: ", GUILayout.Width(300));
+		foreach (var phrase in State.PhraseRecords)
+		{
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("Name: " + phrase.Name);
+			GUILayout.Label("day: ");
+			phrase.Requirements.Day = int.Parse(GUILayout.TextField(phrase.Requirements.Day.ToString()));
+			GUILayout.Label("compl. quests: ");
+			if (phrase.Requirements.CompletedQuests.Count < 1) phrase.Requirements.CompletedQuests = new List<string>() { "" };
+			phrase.Requirements.CompletedQuests[0] = GUILayout.TextField(phrase.Requirements.CompletedQuests[0]);
+			if (phrase.Requirements.CompletedQuests.Count < 2) phrase.Requirements.CompletedQuests = new List<string>() { phrase.Requirements.CompletedQuests[0], "" };
+			phrase.Requirements.CompletedQuests[1] = GUILayout.TextField(phrase.Requirements.CompletedQuests[1]);
+			if (phrase.Requirements.CompletedQuests.Count < 3) phrase.Requirements.CompletedQuests = new List<string>() { phrase.Requirements.CompletedQuests[0], phrase.Requirements.CompletedQuests[1], "" };
+			phrase.Requirements.CompletedQuests[2] = GUILayout.TextField(phrase.Requirements.CompletedQuests[2]);
+			GUILayout.EndHorizontal();
+		}
+
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Total days: ", GUILayout.Width(300));
 		State.TotalDays = int.Parse(GUILayout.TextField(State.TotalDays.ToString()));
