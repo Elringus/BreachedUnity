@@ -257,7 +257,7 @@ public abstract class BaseState : IState
 			QuestRecords = new List<Quest>()
 			{
 				new Quest("Abroad", new Requirements(5, 2)),
-				new Quest("Dalia", new Requirements(4, 5, new List<string>() {"QuestAbroad#2"})),
+				new Quest("Dalia", new Requirements(minAP: 4, minDay: 5, completedQuests: new List<string>() {"QuestAbroad#2"})),
 				new Quest("Echo", new Requirements(0, 8)),
 
 				new Quest("Test1"),
