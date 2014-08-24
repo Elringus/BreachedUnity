@@ -193,6 +193,11 @@ public class StateEditorView : BaseView
 		GUILayout.Label("Synth fuel grace: ", GUILayout.Width(300));
 		State.FuelSynthGrace = int.Parse(GUILayout.TextField(State.FuelSynthGrace.ToString()));
 		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label("Synth fuel summ: ", GUILayout.Width(300));
+		State.FuelSynthSumm = int.Parse(GUILayout.TextField(State.FuelSynthSumm.ToString()));
+		GUILayout.EndHorizontal();
 		#endregion
 
 		#region STATE

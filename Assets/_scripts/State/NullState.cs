@@ -31,6 +31,7 @@ public class NullState : IState
 
 	public int FuelSynthAPCost { get; set; }
 	public int FuelSynthGrace { get; set; }
+	public int FuelSynthSumm { get; set; }
 	#endregion
 
 	#region STATE

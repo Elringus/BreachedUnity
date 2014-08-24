@@ -109,18 +109,25 @@ public abstract class BaseState : IState
 		set { _fixEngineRequirements = value; Save(); }
 	}
 
-	private int _synthFuelAPCost;
+	private int _fuelSynthAPCost;
 	public int FuelSynthAPCost
 	{
-		get { return _synthFuelAPCost; }
-		set { _synthFuelAPCost = value; Save(); }
+		get { return _fuelSynthAPCost; }
+		set { _fuelSynthAPCost = value; Save(); }
 	}
 
-	private int _synthFuelGrace;
+	private int _fuelSynthGrace;
 	public int FuelSynthGrace
 	{
-		get { return _synthFuelGrace; }
-		set { _synthFuelGrace = value; Save(); }
+		get { return _fuelSynthGrace; }
+		set { _fuelSynthGrace = value; Save(); }
+	}
+
+	private int _fuelSynthSumm;
+	public int FuelSynthSumm
+	{
+		get { return _fuelSynthSumm; }
+		set { _fuelSynthSumm = value; Save(); }
 	}
 	#endregion
 
@@ -360,6 +367,7 @@ public abstract class BaseState : IState
 
 			FuelSynthAPCost = 2;
 			FuelSynthGrace = 1;
+			FuelSynthSumm = 9;
 		}
 		#endregion
 
@@ -373,7 +381,7 @@ public abstract class BaseState : IState
 		EngineFixed = false;
 
 		FuelSynthFormula = new int[3];
-		while ((FuelSynthFormula[0] + FuelSynthFormula[1] + FuelSynthFormula[2]) != 9)
+		while ((FuelSynthFormula[0] + FuelSynthFormula[1] + FuelSynthFormula[2]) != FuelSynthSumm)
 		{
 			FuelSynthFormula[0] = Rand.RND.Next(1, 10);
 			FuelSynthFormula[1] = Rand.RND.Next(1, 10);

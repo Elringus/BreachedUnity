@@ -35,7 +35,7 @@ public class WorkshopController : BaseController
 		if (State.FuelSynthed || State.CurrentAP < State.FuelSynthAPCost || 
 			State.MineralA < probe[0] || State.MineralB < probe[1] || State.MineralC < probe[2] ||
 			probe[0] == 0 || probe[1] == 0 || probe[2] == 0 ||
-			probe[0] + probe[1] + probe[2] != 9) return false;
+			probe[0] + probe[1] + probe[2] != State.FuelSynthSumm) return false;
 
 		State.MineralA -= probe[0];
 		State.MineralB -= probe[1];
@@ -56,7 +56,7 @@ public class WorkshopController : BaseController
 			Math.Abs(probe[1] - State.FuelSynthFormula[1]) +
 			Math.Abs(probe[2] - State.FuelSynthFormula[2]);
 
-		return distance <= State.FuelSynthGrace * 3 ? ProbeType.True :
-			distance <= 6 ? ProbeType.Close : ProbeType.Wrong;
+		return distance <= State.FuelSynthGrace * State.FuelSynthSumm / 3 ? ProbeType.True :
+			distance <= State.FuelSynthSumm / 1.5f ? ProbeType.Close : ProbeType.Wrong;
 	}
 }

@@ -31,6 +31,7 @@ public interface IState
 
 	int FuelSynthAPCost { get; set; }
 	int FuelSynthGrace { get; set; }
+	int FuelSynthSumm { get; set; }
 	#endregion
 
 	#region STATE

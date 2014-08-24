@@ -141,7 +141,7 @@ public class SimpleView : BaseView
 				if (!State.FuelSynthed)
 				{
 					GUILayout.BeginHorizontal();
-					if (GUILayout.Button(string.Format("Synth fuel [-{0}AP] (A + B + C must be 9)", State.FuelSynthAPCost)))
+					if (GUILayout.Button(string.Format("Synth fuel [-{0}AP] (A + B + C must be {1})", State.FuelSynthAPCost, State.FuelSynthSumm)))
 					{
 						workshopController.SynthFuel(synthProbe);
 						synthProbe = new int[3];
