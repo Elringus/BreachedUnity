@@ -256,13 +256,13 @@ public abstract class BaseState : IState
 		{
 			QuestRecords = new List<Quest>()
 			{
-				new Quest("Abroad", 5, 2),
-				new Quest("Dalia", 4, 5, "QuestAbroad#2"),
-				new Quest("Echo", 0, 8),
+				new Quest("Abroad", new Requirements(5, 2)),
+				new Quest("Dalia", new Requirements(4, 5, new List<string>() {"QuestAbroad#2"})),
+				new Quest("Echo", new Requirements(0, 8)),
 
-				new Quest("Test1", 0, -1),
-				new Quest("Test2", 0, -1),
-				new Quest("Test3", 0, -1),
+				new Quest("Test1"),
+				new Quest("Test2"),
+				new Quest("Test3"),
 			};
 
 			TotalDays = 8;

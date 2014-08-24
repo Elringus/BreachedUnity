@@ -4,20 +4,9 @@ using System.Linq;
 
 public class QuestController : BaseController
 {
-	public bool CheckQuest (Quest quest)
-	{
-		if (quest.Status != QuestStatus.NotStarted) return false;
-		if (quest.RequireAP > State.CurrentAP) return false;
-		if (quest.RequireDay < 0 || quest.RequireDay > State.CurrentDay) return false;
-		if (quest.RequireQuest != string.Empty &&
-			State.QuestRecords.Find(q => q.CurrentBlock == quest.RequireQuest) == null) return false;
-
-		return true;
-	}
-
 	public bool StartQuest (Quest quest)
 	{
-		if (GetCurrentQuest() != null || !CheckQuest(quest)) return false;
+		if (GetCurrentQuest() != null || !quest.Check()) return false;
 
 		quest.Status = QuestStatus.Started;
 		return true;

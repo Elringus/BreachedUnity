@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class StateEditorView : BaseView
 {
@@ -40,12 +41,17 @@ public class StateEditorView : BaseView
 		{
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("Name: " + quest.Name);
-			GUILayout.Label("AP required: " + quest.Name);
-			quest.RequireAP = int.Parse(GUILayout.TextField(quest.RequireAP.ToString()));
-			GUILayout.Label("Day required: ");
-			quest.RequireDay = int.Parse(GUILayout.TextField(quest.RequireDay.ToString()));
-			GUILayout.Label("Quest required: ");
-			quest.RequireQuest = GUILayout.TextField(quest.RequireQuest);
+			GUILayout.Label("min AP: ");
+			quest.Requirements.MinAP = int.Parse(GUILayout.TextField(quest.Requirements.MinAP.ToString()));
+			GUILayout.Label("min day: ");
+			quest.Requirements.MinDay = int.Parse(GUILayout.TextField(quest.Requirements.MinDay.ToString()));
+			GUILayout.Label("compl. quests: ");
+			if (quest.Requirements.CompletedQuests.Count < 1) quest.Requirements.CompletedQuests = new List<string>() { "" };
+			quest.Requirements.CompletedQuests[0] = GUILayout.TextField(quest.Requirements.CompletedQuests[0]);
+			if (quest.Requirements.CompletedQuests.Count < 2) quest.Requirements.CompletedQuests = new List<string>() { quest.Requirements.CompletedQuests[0], "" };
+			quest.Requirements.CompletedQuests[1] = GUILayout.TextField(quest.Requirements.CompletedQuests[1]);
+			if (quest.Requirements.CompletedQuests.Count < 3) quest.Requirements.CompletedQuests = new List<string>() { quest.Requirements.CompletedQuests[0], quest.Requirements.CompletedQuests[1], "" };
+			quest.Requirements.CompletedQuests[2] = GUILayout.TextField(quest.Requirements.CompletedQuests[2]);
 			GUILayout.EndHorizontal();
 		}
 
