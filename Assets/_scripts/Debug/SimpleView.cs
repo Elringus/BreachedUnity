@@ -16,6 +16,7 @@ public class SimpleView : BaseView
 
 	private static QuestController questController;
 
+	private bool showSynthFormula;
 	private bool inFlightMode;
 	private int lootCharges;
 	private List<Loot> sectorLoot = new List<Loot>();
@@ -67,11 +68,16 @@ public class SimpleView : BaseView
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC), GUILayout.Width(250));
-		GUILayout.Label(string.Format("Fuel synth formula: A{0} B{1} C{2}",
-			State.FuelSynthFormula[0],
-			State.FuelSynthFormula[1],
-			State.FuelSynthFormula[2]));
+		showSynthFormula = GUILayout.Toggle(showSynthFormula, "show sync formula");
+		if (showSynthFormula)
+		{
+			GUILayout.Label(string.Format("Fuel synth formula: A{0} B{1} C{2}",
+				State.FuelSynthFormula[0],
+				State.FuelSynthFormula[1],
+				State.FuelSynthFormula[2]));
+		}
 		GUILayout.EndHorizontal();
+
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips), GUILayout.Width(250));
