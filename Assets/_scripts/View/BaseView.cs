@@ -37,14 +37,14 @@ public abstract class BaseView : MonoBehaviour
 		ServiceLocator.State = FileState.Load();
 		ServiceLocator.Text = new GoogleText();
 
-		if (ServiceLocator.State.VersionMiddle < GlobalConfig.VERSION_MIDDLE || 
-			ServiceLocator.State.VersionMajor < GlobalConfig.VERSION_MAJOR)
-		{
-			ServiceLocator.State.Reset(true);
-			Initialize();
-			ServiceLocator.Logger.LogWarning("The saved state is outdated and will be reseted!");
-			return;
-		}
+		//if (ServiceLocator.State.VersionMiddle < GlobalConfig.VERSION_MIDDLE || 
+		//	ServiceLocator.State.VersionMajor < GlobalConfig.VERSION_MAJOR)
+		//{
+		//	ServiceLocator.State.Reset(true);
+		//	Initialize();
+		//	ServiceLocator.Logger.LogWarning("The saved state is outdated and will be reseted!");
+		//	return;
+		//}
 	}
 
 	protected virtual void Awake ()
@@ -60,12 +60,6 @@ public abstract class BaseView : MonoBehaviour
 	protected virtual void Update ()
 	{
 
-	}
-
-	protected virtual void OnGUI ()
-	{
-		GUI.Label(new Rect(10, Screen.height - 40, 150, 80), string.Format("Breached {0}\nver. {1}.{2}.{3}",
-			GlobalConfig.RELEASE_TYPE, GlobalConfig.VERSION_MAJOR, GlobalConfig.VERSION_MIDDLE, GlobalConfig.VERSION_MINOR));
 	}
 
 	protected void SwitchView (ViewType to)
