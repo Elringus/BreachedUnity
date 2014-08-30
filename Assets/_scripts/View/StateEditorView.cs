@@ -13,10 +13,8 @@ public class StateEditorView : BaseView
 		State.HoldAutoSave(true);
 	}
 
-	protected override void OnGUI ()
+	private void OnGUI_ ()
 	{
-		base.OnGUI();
-
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
 		GUILayout.Box("Breached state editor | ʕノ•ᴥ•ʔノ ︵ ┻━┻\n--------------------------------------------------------------------------------------------------------------------------------------");
 		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 120));

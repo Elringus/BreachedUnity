@@ -35,10 +35,8 @@ public class MainMenuView : BaseView
 		useSimpleView = debugEnabled;
 	}
 
-	protected override void OnGUI ()
+	private void OnGUI_ ()
 	{
-		base.OnGUI();
-
 		GUI.Box(new Rect(Screen.width / 2 - 160, Screen.height / 2 - 135, 320, 270), "");
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 125, 300, 250));
 		if (waitingForTextUpdate)
