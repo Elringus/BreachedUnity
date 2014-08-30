@@ -1,77 +1,70 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuView : BaseView
 {
-	private MainMenuController controller;
-
-	private bool debugEnabled;
-	private bool useSimpleView;
-	private static bool usingGoogleText;
-	private static bool waitingForTextUpdate;
-	private static bool updateFailed;
+	private static bool connecting;
+	private static GameObject googlePanel;
 
 	static MainMenuView ()
 	{
-		usingGoogleText = Text.GetType() == typeof(GoogleText);
-		waitingForTextUpdate = usingGoogleText;
-
-		if (usingGoogleText)
+		if (Text.GetType() == typeof(GoogleText))
 		{
+			connecting = true;
 			Events.TextUpdated += (c, e) =>
 			{
-				if (Text.Get("Google") == "FAIL") updateFailed = true;
-				else waitingForTextUpdate = false;
+				connecting = false;
 			};
 		}
 	}
 
-	protected override void Awake ()
+	protected override void Start ()
 	{
-		base.Awake();
+		base.Start();
 
-		controller = new MainMenuController();
-
-		if (GlobalConfig.RELEASE_TYPE == ReleaseType.alpha) debugEnabled = true;
-		useSimpleView = debugEnabled;
-	}
-
-	private void OnGUI_ ()
-	{
-		GUI.Box(new Rect(Screen.width / 2 - 160, Screen.height / 2 - 135, 320, 270), "");
-		GUILayout.BeginArea(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 125, 300, 250));
-		if (waitingForTextUpdate)
+		if (GlobalConfig.RELEASE_TYPE != ReleaseType.RTM)
 		{
-			GUILayout.Box("------------------------------ Updating text. Please wait... ------------------------------");
-			if (updateFailed)
-			{
-				GUILayout.Label("Update failed. Check internet connection and try again.");
-				if (GUILayout.Button("Try again", GUILayout.Height(30)))
-				{
-					updateFailed = false;
-					ServiceLocator.Text = new GoogleText();
-				}
-			}
+			var menu = AddUIElement("panel_main-menu-dev").transform;
+			menu.FindChild("button_state-editor").GetComponent<Button>()
+				.onClick.AddListener(() => SwitchView(ViewType.StateEditor));
+			menu.FindChild("button_simple-view").GetComponent<Button>()
+				.onClick.AddListener(() => SwitchView(ViewType.SimpleView));
+			menu.FindChild("button_update-text").GetComponent<Button>()
+				.onClick.AddListener(() => {
+					connecting = true;
+					ServiceLocator.Text = new GoogleText(); 
+					googlePanel = AddUIElement("panel_google-text"); 
+				});
+			menu.FindChild("button_new-game").GetComponent<Button>()
+				.onClick.AddListener(() => { });
+			menu.FindChild("button_continue").GetComponent<Button>()
+				.onClick.AddListener(() => { });
+			menu.FindChild("button_settings").GetComponent<Button>()
+				.onClick.AddListener(() => { });
+			menu.FindChild("button_exit").GetComponent<Button>()
+				.onClick.AddListener(() => Application.Quit());
+
+			if (Text.GetType() == typeof(GoogleText)) 
+				googlePanel = AddUIElement("panel_google-text");
 		}
 		else
 		{
-			GUILayout.Box("------------------------------ Main menu ------------------------------");
-			if (debugEnabled) useSimpleView = GUILayout.Toggle(useSimpleView, "Use simple view (debug / design mode)");
-			GUILayout.Space(20);
-			if (debugEnabled && GUILayout.Button("State editor", GUILayout.Height(30))) SwitchView(ViewType.StateEditor);
-			if (usingGoogleText && GUILayout.Button("Update text cache", GUILayout.Height(30)))
-			{
-				waitingForTextUpdate = true;
-				ServiceLocator.Text = new GoogleText();
-			}
-			if (GUILayout.Button("New game", GUILayout.Height(30)))
-			{
-				controller.StartNewGame();
-				SwitchView(useSimpleView ? ViewType.SimpleView : ViewType.Intro);
-			}
-			if (State.GameStatus == GameStatus.InProgress && GUILayout.Button("Continue", GUILayout.Height(30)))
-				SwitchView(useSimpleView ? ViewType.SimpleView : ViewType.Bridge);
-			if (GUILayout.Button("Exit", GUILayout.Height(30))) Application.Quit();
+			var menu = AddUIElement("panel_main-menu").transform;
+			menu.FindChild("button_new-game").GetComponent<Button>()
+				.onClick.AddListener(() => { });
+			menu.FindChild("button_continue").GetComponent<Button>()
+				.onClick.AddListener(() => { });
+			menu.FindChild("button_settings").GetComponent<Button>()
+				.onClick.AddListener(() => { });
+			menu.FindChild("button_exit").GetComponent<Button>()
+				.onClick.AddListener(() => Application.Quit());
 		}
-		GUILayout.EndArea();
+	}
+
+	protected override void Update ()
+	{
+		base.Update();
+
+		if (!connecting && googlePanel) Destroy(googlePanel);
 	}
 }

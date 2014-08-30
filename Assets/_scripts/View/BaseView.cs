@@ -41,7 +41,7 @@ public abstract class BaseView : MonoBehaviour
 
 	protected virtual void Start ()
 	{
-		var versionText = AddUiElement("text_version").GetComponent<Text>();
+		var versionText = AddUIElement("text_version").GetComponent<Text>();
 		versionText.text = string.Format("Breached {0}\nver. {1}.{2}.{3}", 
 			GlobalConfig.RELEASE_TYPE, GlobalConfig.VERSION_MAJOR, GlobalConfig.VERSION_MIDDLE, GlobalConfig.VERSION_MINOR);
 	}
@@ -56,12 +56,12 @@ public abstract class BaseView : MonoBehaviour
 		Application.LoadLevel("scn_" + to);
 	}
 
-	protected GameObject AddUiElement (string prefabName)
+	protected GameObject AddUIElement (string prefabName)
 	{
 		if (!uiCanvas) uiCanvas = GameObject.Find("_ui").transform;
 
 		GameObject uiElement = Instantiate(Resources.Load(prefabName)) as GameObject;
-		uiElement.transform.parent = uiCanvas;
+		uiElement.transform.SetParent(uiCanvas, false);
 
 		return uiElement;
 	}
