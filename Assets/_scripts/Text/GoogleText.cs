@@ -51,14 +51,20 @@ public class GoogleText : IText
 			}
 
 			cachedText = result;
+			updateFailed = false;
 		}
 		catch (Exception e)
 		{
 			updateFailed = true;
 			ServiceLocator.Logger.Log(e.Message);
+			Thread.Sleep(1000);
+			RetrieveData();
+			return;
 		}
 
 		Events.RaiseTextUpdated();
+
+		Thread.CurrentThread.Abort();
 	}
 
 	public string Get (string term)
