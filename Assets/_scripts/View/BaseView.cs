@@ -58,7 +58,7 @@ public abstract class BaseView : MonoBehaviour
 
 	protected GameObject AddUIElement (string prefabName)
 	{
-		if (!uiCanvas) uiCanvas = GameObject.Find("_ui").transform;
+		if (!uiCanvas) uiCanvas = GameObject.Find("ui-canvas").transform;
 
 		GameObject uiElement = Instantiate(Resources.Load(prefabName)) as GameObject;
 		uiElement.transform.SetParent(uiCanvas, false);

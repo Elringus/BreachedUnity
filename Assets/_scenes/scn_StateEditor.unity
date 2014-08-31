@@ -128,7 +128,7 @@ GameObject:
   - 4: {fileID: 1217206466}
   - 114: {fileID: 1217206467}
   m_Layer: 0
-  m_Name: _view
+  m_Name: view
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ GameObject:
   - 124: {fileID: 1605912410}
   - 81: {fileID: 1605912409}
   m_Layer: 0
-  m_Name: _camera-main
+  m_Name: camera-main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

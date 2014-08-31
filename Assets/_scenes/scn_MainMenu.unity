@@ -86,7 +86,7 @@ GameObject:
   - 114: {fileID: 143197773}
   - 114: {fileID: 143197772}
   m_Layer: 5
-  m_Name: _ui
+  m_Name: ui-canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,7 @@ GameObject:
   - 114: {fileID: 583930351}
   - 114: {fileID: 583930350}
   m_Layer: 0
-  m_Name: _event-system
+  m_Name: event-system
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,7 +281,7 @@ GameObject:
   - 124: {fileID: 873887205}
   - 81: {fileID: 873887203}
   m_Layer: 0
-  m_Name: _camera-main
+  m_Name: camera-main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,7 +358,7 @@ GameObject:
   - 4: {fileID: 1217206466}
   - 114: {fileID: 1217206467}
   m_Layer: 0
-  m_Name: _view
+  m_Name: view
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

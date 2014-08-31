@@ -12,7 +12,7 @@ GameObject:
   - 124: {fileID: 12400000}
   - 81: {fileID: 8100000}
   m_Layer: 0
-  m_Name: _camera-main
+  m_Name: camera-main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
