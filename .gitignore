@@ -58,3 +58,5 @@ $RECYCLE.BIN/
 # =========================
 state.xml
 game-state.xml
+Assets/Examples/
+Assets/Examples.meta
