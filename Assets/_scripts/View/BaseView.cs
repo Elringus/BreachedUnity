@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class BaseView : MonoBehaviour
@@ -6,6 +7,11 @@ public abstract class BaseView : MonoBehaviour
 	protected static IState State;
 	protected static ILogger Logger;
 	protected static IText Text;
+
+	protected ViewType ActiveView
+	{
+		get { return (ViewType)Enum.Parse(typeof(ViewType), Application.loadedLevelName.Replace("scn_", string.Empty), true); }
+	}
 
 	private Transform uiCanvas;
 
@@ -41,9 +47,12 @@ public abstract class BaseView : MonoBehaviour
 
 	protected virtual void Start ()
 	{
-		var versionText = AddUIElement("text_version").GetComponent<Text>();
-		versionText.text = string.Format("Breached {0}\nver. {1}.{2}.{3}", 
-			GlobalConfig.RELEASE_TYPE, GlobalConfig.VERSION_MAJOR, GlobalConfig.VERSION_MIDDLE, GlobalConfig.VERSION_MINOR);
+		if (ActiveView == ViewType.MainMenu)
+		{
+			var versionText = AddUIElement("text_version").GetComponent<Text>();
+			versionText.text = string.Format("Breached {0}\nver. {1}.{2}.{3}",
+				GlobalConfig.RELEASE_TYPE, GlobalConfig.VERSION_MAJOR, GlobalConfig.VERSION_MIDDLE, GlobalConfig.VERSION_MINOR);
+		}
 	}
 
 	protected virtual void Update ()

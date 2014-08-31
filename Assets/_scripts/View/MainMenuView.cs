@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class MainMenuView : BaseView
 {
 	private static bool connecting;
-	private static GameObject googlePanel;
+	private GameObject googlePanel;
 
 	static MainMenuView ()
 	{
