@@ -13,7 +13,6 @@ public class GoogleText : IText
 	private const string PHRASES_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=1387093746";
 
 	private Dictionary<string, string> cachedText = new Dictionary<string, string>();
-	private bool updateFailed;
 
 	public GoogleText ()
 	{
@@ -51,11 +50,9 @@ public class GoogleText : IText
 			}
 
 			cachedText = result;
-			updateFailed = false;
 		}
 		catch (Exception e)
 		{
-			updateFailed = true;
 			ServiceLocator.Logger.Log(e.Message);
 			Thread.Sleep(1000);
 			RetrieveData();
