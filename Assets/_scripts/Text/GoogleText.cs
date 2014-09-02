@@ -69,7 +69,7 @@ public class GoogleText : IText
 
 	public string Get (string term)
 	{
-		if (term == "Google") return updateFailed ? "FAIL" : "OK";
+		if (term == "STATE") return cachedText.Count > 0 ? "OK" : "NONE";
 
 		if (cachedText.ContainsKey(term)) return cachedText[term];
 		else return string.Format("Null text for the {0} term.", term);
