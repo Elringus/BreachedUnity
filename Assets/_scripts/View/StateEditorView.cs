@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class StateEditorView : BaseView
 {
@@ -11,6 +12,21 @@ public class StateEditorView : BaseView
 		base.Awake();
 
 		State.HoldAutoSave(true);
+	}
+
+	protected override void Start ()
+	{
+		base.Start();
+
+		GameObject.Find("button_back-to-menu").GetComponent<Button>()
+				.onClick.AddListener(() =>
+				{
+					State.HoldAutoSave(false);
+					SwitchView(ViewType.MainMenu);
+				});
+
+		//GameObject.Find("field_total-days").GetComponent<InputField>()
+		// http://answers.unity3d.com/questions/780097/how-to-use-the-new-input-field.html
 	}
 
 	private void OnGUI_ ()
