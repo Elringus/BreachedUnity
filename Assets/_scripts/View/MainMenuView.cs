@@ -8,13 +8,10 @@ public class MainMenuView : BaseView
 
 	static MainMenuView ()
 	{
-		if (Text.GetType() == typeof(GoogleText) && Text.Get("STATE") == "NONE")
+		if (Text.GetType() == typeof(GoogleText))
 		{
-			connecting = true;
-			Events.TextUpdated += (c, e) =>
-			{
-				connecting = false;
-			};
+			Events.TextUpdated += (c, e) => connecting = false;
+			if (Text.Get("STATE") == "NONE") connecting = true;
 		}
 	}
 
