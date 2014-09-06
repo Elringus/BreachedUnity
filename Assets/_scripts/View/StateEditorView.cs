@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class StateEditorView : BaseView
 {
@@ -11,6 +12,9 @@ public class StateEditorView : BaseView
 		base.Awake();
 
 		State.HoldAutoSave(true);
+
+		GameObject.Find("button_back-to-menu").GetComponent<Button>()
+			.onClick.AddListener(() => SwitchView(ViewType.MainMenu));
 	}
 
 	private void OnGUI_ ()
