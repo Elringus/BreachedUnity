@@ -5,7 +5,7 @@ using System.Linq;
 
 public class SimpleView : BaseView
 {
-	private readonly float WIDTH = 600;
+	private readonly float WIDTH = 800;
 	private Vector2 scrollPosition;
 
 	private BridgeController bridgeController;
@@ -49,11 +49,11 @@ public class SimpleView : BaseView
 		questController = new QuestController();
 	}
 
-	private void OnGUI_ ()
+	private void OnGUI ()
 	{
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
 		GUILayout.Box("Breached simple view\n--------------------------------------------------------------------------------------------------------------------------------------");
-		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 80));
+		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 120));
 
 		GUILayout.Box("Info");
 
@@ -169,7 +169,12 @@ public class SimpleView : BaseView
 		else GUILayout.Box(State.GameStatus.ToString());
 
 		GUILayout.EndScrollView();
-		if (GUILayout.Button("Return to menu")) SwitchView(ViewType.MainMenu);
+		if (GUILayout.Button("Reset and start new game", GUILayout.Height(30)))
+		{
+					State.Reset();
+		State.GameStatus = GameStatus.InProgress;
+		}
+		if (GUILayout.Button("Return to menu", GUILayout.Height(30))) SwitchView(ViewType.MainMenu);
 		GUILayout.EndArea();
 	}
 

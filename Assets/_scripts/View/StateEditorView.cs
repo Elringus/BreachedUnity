@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class StateEditorView : BaseView
 {
-	private readonly float WIDTH = 600;
+	private readonly float WIDTH = 800;
 	private Vector2 scrollPosition;
 
 	protected override void Awake ()
@@ -14,41 +14,13 @@ public class StateEditorView : BaseView
 		State.HoldAutoSave(true);
 	}
 
-	protected override void Start ()
-	{
-		base.Start();
-
-		GameObject.Find("button_back-to-menu").GetComponent<Button>()
-				.onClick.AddListener(() => SaveAndExit());
-
-
-	}
-
-	protected override void Update ()
-	{
-		base.Update();
-
-		if (Input.GetKeyDown(KeyCode.Escape)) SaveAndExit();
-	}
-
-	private void AddContent (string page, string label, GameObject value)
-	{
-		Transform content = GameObject.Find("page_" + page).transform.FindChild("content");
-
-		var text = (Instantiate(Resources.Load("text_content-label")) as GameObject).GetComponent<Text>();
-		text.text = label;
-		text.transform.SetParent(content, false);
-
-		value.transform.SetParent(content, false);
-	}
-
 	private void SaveAndExit ()
 	{
 		State.HoldAutoSave(false);
 		SwitchView(ViewType.MainMenu);
 	}
 
-	private void OnGUI_ ()
+	private void OnGUI ()
 	{
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
 		GUILayout.Box("Breached state editor | ʕノ•ᴥ•ʔノ ︵ ┻━┻\n--------------------------------------------------------------------------------------------------------------------------------------");
