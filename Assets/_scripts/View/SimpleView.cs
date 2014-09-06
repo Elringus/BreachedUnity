@@ -16,6 +16,7 @@ public class SimpleView : BaseView
 
 	private static QuestController questController;
 
+	private SimpleViewPage selectedPage;
 	private bool showSynthFormula;
 	private bool inFlightMode;
 	private int lootCharges;
@@ -55,54 +56,22 @@ public class SimpleView : BaseView
 		GUILayout.Box("Breached simple view");
 		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 100));
 
-		GUILayout.Box("Info");
-
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Day: {0}/{1}", State.CurrentDay, State.TotalDays));
 		GUILayout.Label(string.Format("AP: {0}/{1}", State.CurrentAP, State.MaxAP));
-		GUILayout.Label(string.Format("Fuel tank: {0}", State.FuelSynthed ? "FULL" : "EMPTY"));
-		GUILayout.Label(string.Format("Breakage: {0}", State.EngineFixed ? "FIXED" : State.BreakageType.ToString()));
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC), GUILayout.Width(250));
-		showSynthFormula = GUILayout.Toggle(showSynthFormula, "show sync formula");
-		if (showSynthFormula)
-		{
-			GUILayout.Label(string.Format("Fuel synth formula: A{0} B{1} C{2}",
-				State.FuelSynthFormula[0],
-				State.FuelSynthFormula[1],
-				State.FuelSynthFormula[2]));
-		}
+		if (GUILayout.Button("Bridge")) selectedPage = SimpleViewPage.Bridge;
+		if (GUILayout.Button("Workshop")) selectedPage = SimpleViewPage.Workshop;
+		if (GUILayout.Button("Map")) selectedPage = SimpleViewPage.Map;
+		if (GUILayout.Button("Horizon")) selectedPage = SimpleViewPage.Horizon;
 		GUILayout.EndHorizontal();
-
-
-		GUILayout.BeginHorizontal();
-		GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips), GUILayout.Width(250));
-		GUILayout.Label(string.Format("Fix engine requirments: W{0} A{1} C{2}", 
-			State.FixEngineRequirements[State.BreakageType][0], 
-			State.FixEngineRequirements[State.BreakageType][1], 
-			State.FixEngineRequirements[State.BreakageType][2]));
-		GUILayout.EndHorizontal();
-
-		GUILayout.Label("Fuel synth probes:");
-		foreach (var probe in State.FuelSynthProbes)
-		{
-			GUILayout.BeginHorizontal();
-			GUILayout.Label(string.Format("Probe №{0} [A: {1}, B: {2}, C: {3}] is {4}.",
-				State.FuelSynthProbes.FindIndex(x => x == probe), probe[0], probe[1], probe[2], 
-				workshopController.MeasureProbe(probe)), GUILayout.Width(300));
-			GUILayout.EndHorizontal();
-		}
-
-		GUILayout.Label("Analyzed artifacts:");
-		foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed)) GUILayout.Label(artifact.Name);
 
 		if (State.GameStatus == GameStatus.InProgress)
 		{
 			if (inFlightMode)
 			{
-				GUILayout.Space(10);
 				GUILayout.Box(string.Format("In flight mode. Loot charges: {0}/{1}", lootCharges, State.LootCharges));
 
 				for (int i = 0; i < sectorLoot.Count; i++ )
@@ -118,7 +87,6 @@ public class SimpleView : BaseView
 			}
 			else if (questController.GetCurrentQuest() != null)
 			{
-				GUILayout.Space(10);
 				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", 
 					questController.GetCurrentQuest().Name, questController.GetCurrentQuest().CurrentBlock), GUILayout.Width(790));
 				GUILayout.Label(XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(790));
@@ -128,42 +96,92 @@ public class SimpleView : BaseView
 			}
 			else
 			{
-				GUILayout.Space(10);
-				GUILayout.Box("Bridge");
-				if (GUILayout.Button(string.Format("End day [AP = {0}]", State.MaxAP))) bridgeController.EndDay();
-
-				GUILayout.Space(10);
-				GUILayout.Box("Workshop");
-				if (workshopController.CanFixEngine() &&
-					GUILayout.Button(string.Format("Fix engine [-{0}AP]", State.FixEngineAPCost))) workshopController.FixEngine();
-				if (!State.FuelSynthed)
+				if (selectedPage == SimpleViewPage.Bridge)
 				{
-					GUILayout.BeginHorizontal();
-					if (GUILayout.Button(string.Format("Synth fuel [-{0}AP] (A + B + C must be {1})", State.FuelSynthAPCost, State.FuelSynthSumm)))
-					{
-						workshopController.SynthFuel(synthProbe);
-						synthProbe = new int[3];
-					}
-					synthProbe[0] = int.Parse(GUILayout.TextField(synthProbe[0].ToString()));
-					synthProbe[1] = int.Parse(GUILayout.TextField(synthProbe[1].ToString()));
-					synthProbe[2] = int.Parse(GUILayout.TextField(synthProbe[2].ToString()));
-					GUILayout.EndHorizontal();
+					GUILayout.Box("Bridge");
+
+					GUILayout.Label("Here will be quest records...");
+
+					if (GUILayout.Button(string.Format("End day [AP = {0}]", State.MaxAP))) bridgeController.EndDay();
 				}
-				foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Found))
-					if (GUILayout.Button(string.Format("Start analyzing {0} [-{1}AP]", artifact.Name, State.AnalyzeArtifactAPCost)))
-						workshopController.AnalyzeArtifact(artifact);
 
-				GUILayout.Space(10);
-				GUILayout.Box("Map");
-				if (GUILayout.Button(string.Format("Enter 1st sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(1);
-				if (GUILayout.Button(string.Format("Enter 2nt sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(2);
-				if (GUILayout.Button(string.Format("Enter 3rd sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(3);
-				if (GUILayout.Button(string.Format("Enter 4th sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(4);
+				if (selectedPage == SimpleViewPage.Workshop)
+				{
+					GUILayout.Box("Workshop");
 
-				GUILayout.Space(10);
-				GUILayout.Box("Horizon");
-				foreach (var phrase in horizonController.GetPhrases())
-					GUILayout.Label(string.Format("[{0}] {1}", phrase.Name, Text.Get(phrase.Name)));
+					GUILayout.BeginHorizontal();
+					GUILayout.Label(string.Format("Fuel tank: {0}", State.FuelSynthed ? "FULL" : "EMPTY"));
+					GUILayout.Label(string.Format("Breakage: {0}", State.EngineFixed ? "FIXED" : State.BreakageType.ToString()));
+					GUILayout.EndHorizontal();
+
+					GUILayout.BeginHorizontal();
+					GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC), GUILayout.Width(400));
+					showSynthFormula = GUILayout.Toggle(showSynthFormula, "show sync formula");
+					if (showSynthFormula)
+					{
+						GUILayout.Label(string.Format("Fuel synth formula: A{0} B{1} C{2}",
+							State.FuelSynthFormula[0],
+							State.FuelSynthFormula[1],
+							State.FuelSynthFormula[2]));
+					}
+					GUILayout.EndHorizontal();
+
+					GUILayout.BeginHorizontal();
+					GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips), GUILayout.Width(400));
+					GUILayout.Label(string.Format("Fix engine requirments: W{0} A{1} C{2}",
+						State.FixEngineRequirements[State.BreakageType][0],
+						State.FixEngineRequirements[State.BreakageType][1],
+						State.FixEngineRequirements[State.BreakageType][2]));
+					GUILayout.EndHorizontal();
+
+					GUILayout.Label("Fuel synth probes:");
+					foreach (var probe in State.FuelSynthProbes)
+					{
+						GUILayout.BeginHorizontal();
+						GUILayout.Label(string.Format("Probe №{0} [A: {1}, B: {2}, C: {3}] is {4}.",
+							State.FuelSynthProbes.FindIndex(x => x == probe), probe[0], probe[1], probe[2],
+							workshopController.MeasureProbe(probe)), GUILayout.Width(300));
+						GUILayout.EndHorizontal();
+					}
+
+					GUILayout.Label("Analyzed artifacts:");
+					foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed)) GUILayout.Label(artifact.Name);
+
+					if (workshopController.CanFixEngine() &&
+						GUILayout.Button(string.Format("Fix engine [-{0}AP]", State.FixEngineAPCost))) workshopController.FixEngine();
+					if (!State.FuelSynthed)
+					{
+						GUILayout.BeginHorizontal();
+						if (GUILayout.Button(string.Format("Synth fuel [-{0}AP] (A + B + C must be {1})", State.FuelSynthAPCost, State.FuelSynthSumm)))
+						{
+							workshopController.SynthFuel(synthProbe);
+							synthProbe = new int[3];
+						}
+						synthProbe[0] = int.Parse(GUILayout.TextField(synthProbe[0].ToString()));
+						synthProbe[1] = int.Parse(GUILayout.TextField(synthProbe[1].ToString()));
+						synthProbe[2] = int.Parse(GUILayout.TextField(synthProbe[2].ToString()));
+						GUILayout.EndHorizontal();
+					}
+					foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Found))
+						if (GUILayout.Button(string.Format("Start analyzing {0} [-{1}AP]", artifact.Name, State.AnalyzeArtifactAPCost)))
+							workshopController.AnalyzeArtifact(artifact);
+				}
+
+				if (selectedPage == SimpleViewPage.Map)
+				{
+					GUILayout.Box("Map");
+					if (GUILayout.Button(string.Format("Enter 1st sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(1);
+					if (GUILayout.Button(string.Format("Enter 2nt sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(2);
+					if (GUILayout.Button(string.Format("Enter 3rd sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(3);
+					if (GUILayout.Button(string.Format("Enter 4th sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(4);
+				}
+
+				if (selectedPage == SimpleViewPage.Horizon)
+				{
+					GUILayout.Box("Horizon");
+					foreach (var phrase in horizonController.GetPhrases())
+						GUILayout.Label(string.Format("[{0}] {1}", phrase.Name, Text.Get(phrase.Name)));
+				}
 			}
 		}
 		else GUILayout.Box(State.GameStatus.ToString());
