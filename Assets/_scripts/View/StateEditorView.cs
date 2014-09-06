@@ -12,9 +12,6 @@ public class StateEditorView : BaseView
 		base.Awake();
 
 		State.HoldAutoSave(true);
-
-		GameObject.Find("button_back-to-menu").GetComponent<Button>()
-			.onClick.AddListener(() => SwitchView(ViewType.MainMenu));
 	}
 
 	protected override void Start ()
@@ -27,9 +24,6 @@ public class StateEditorView : BaseView
 					State.HoldAutoSave(false);
 					SwitchView(ViewType.MainMenu);
 				});
-
-		//GameObject.Find("field_total-days").GetComponent<InputField>()
-		// http://answers.unity3d.com/questions/780097/how-to-use-the-new-input-field.html
 	}
 
 	private void OnGUI_ ()
