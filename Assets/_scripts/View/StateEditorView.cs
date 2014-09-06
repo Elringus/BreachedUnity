@@ -20,6 +20,8 @@ public class StateEditorView : BaseView
 
 		GameObject.Find("button_back-to-menu").GetComponent<Button>()
 				.onClick.AddListener(() => SaveAndExit());
+
+
 	}
 
 	protected override void Update ()
@@ -27,6 +29,17 @@ public class StateEditorView : BaseView
 		base.Update();
 
 		if (Input.GetKeyDown(KeyCode.Escape)) SaveAndExit();
+	}
+
+	private void AddContent (string page, string label, GameObject value)
+	{
+		Transform content = GameObject.Find("page_" + page).transform.FindChild("content");
+
+		var text = (Instantiate(Resources.Load("text_content-label")) as GameObject).GetComponent<Text>();
+		text.text = label;
+		text.transform.SetParent(content, false);
+
+		value.transform.SetParent(content, false);
 	}
 
 	private void SaveAndExit ()
