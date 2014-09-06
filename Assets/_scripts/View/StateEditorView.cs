@@ -19,11 +19,20 @@ public class StateEditorView : BaseView
 		base.Start();
 
 		GameObject.Find("button_back-to-menu").GetComponent<Button>()
-				.onClick.AddListener(() =>
-				{
-					State.HoldAutoSave(false);
-					SwitchView(ViewType.MainMenu);
-				});
+				.onClick.AddListener(() => SaveAndExit());
+	}
+
+	protected override void Update ()
+	{
+		base.Update();
+
+		if (Input.GetKeyDown(KeyCode.Escape)) SaveAndExit();
+	}
+
+	private void SaveAndExit ()
+	{
+		State.HoldAutoSave(false);
+		SwitchView(ViewType.MainMenu);
 	}
 
 	private void OnGUI_ ()
@@ -293,11 +302,8 @@ public class StateEditorView : BaseView
 
 		GUILayout.EndScrollView();
 		if (GUILayout.Button("Total reset (including rules)", GUILayout.Height(30))) State.Reset(true);
-		if (GUILayout.Button("Save and return to menu", GUILayout.Height(30)))
-		{
-			State.HoldAutoSave(false);
-			SwitchView(ViewType.MainMenu);
-		}
+		if (GUILayout.Button("Save and return to menu", GUILayout.Height(30))) SaveAndExit();
+
 		GUILayout.EndArea();
 	}
 }
