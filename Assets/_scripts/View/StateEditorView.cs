@@ -25,7 +25,7 @@ public class StateEditorView : BaseView
 	private void OnGUI ()
 	{
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
-		GUILayout.Box("Breached state editor | ʕノ•ᴥ•ʔノ ︵ ┻━┻");
+		GUILayout.Box("Breached state editor");
 		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 100));
 
 		GUILayout.BeginHorizontal();
@@ -233,7 +233,7 @@ public class StateEditorView : BaseView
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label(string.Format("✎ Current quest status is {1}. Change to: ", quest.ID, quest.Status), GUILayout.Width(300));
+				GUILayout.Label(string.Format("✎ Current quest status is <b>{1}</b>. Change to: ", quest.ID, quest.Status), GUILayout.Width(300));
 				if (GUILayout.Button("NotStarted", GUILayout.Width(80))) quest.Status = QuestStatus.NotStarted;
 				if (GUILayout.Button("Started", GUILayout.Width(80))) quest.Status = QuestStatus.Started;
 				if (GUILayout.Button("Completed", GUILayout.Width(80))) quest.Status = QuestStatus.Completed;
@@ -251,20 +251,23 @@ public class StateEditorView : BaseView
 
 		if (selectedPage == StateEditorPage.Artifacts)
 		{
-			foreach (var artifact in State.Artifacts)
+			for (int i = 0; i < State.Artifacts.Count; i++)
 			{
+				var artifact = State.Artifacts[i];
+
 				GUILayout.Space(20);
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label("Artifact (id, W, A, C):", GUILayout.Width(300));
-				artifact.ID = GUILayout.TextField(artifact.ID, GUILayout.Width(280));
+				GUILayout.Label("Artifact (id, sector, W, A, C):", GUILayout.Width(300));
+				artifact.ID = GUILayout.TextField(artifact.ID, GUILayout.Width(215));
+				artifact.Sector = int.Parse(GUILayout.TextField(artifact.Sector.ToString(), GUILayout.Width(60)));
 				artifact.Wiring = int.Parse(GUILayout.TextField(artifact.Wiring.ToString(), GUILayout.Width(60)));
 				artifact.Alloy = int.Parse(GUILayout.TextField(artifact.Alloy.ToString(), GUILayout.Width(60)));
 				artifact.Chips = int.Parse(GUILayout.TextField(artifact.Chips.ToString(), GUILayout.Width(60)));
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label(string.Format("Identity is {0} Choose another:", artifact.Identity == null ? "NONE" : artifact.Identity.ToString()), GUILayout.Width(300));
+				GUILayout.Label(string.Format("Identity is <b>{0}</b> Choose another:", artifact.Identity == null ? "NONE" : artifact.Identity.ToString()), GUILayout.Width(300));
 				if (GUILayout.Button("NONE")) artifact.Identity = null;
 				if (GUILayout.Button("BRK1")) artifact.Identity = BreakageType.BRK1;
 				if (GUILayout.Button("BRK2")) artifact.Identity = BreakageType.BRK2;
@@ -273,12 +276,18 @@ public class StateEditorView : BaseView
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label(string.Format("✎ Current status is {0}. Set it to:",
+				GUILayout.Label(string.Format("✎ Current status is <b>{0}</b>. Set it to:",
 					artifact.Status.ToString()), GUILayout.Width(300));
 				if (GUILayout.Button("NotFound")) artifact.Status = ArtifactStatus.NotFound;
 				if (GUILayout.Button("Found")) artifact.Status = ArtifactStatus.Found;
 				if (GUILayout.Button("Analyzing")) artifact.Status = ArtifactStatus.Analyzing;
 				if (GUILayout.Button("Analyzed")) artifact.Status = ArtifactStatus.Analyzed;
+				GUILayout.EndHorizontal();
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Space(700);
+				if (GUILayout.Button("✂")) State.Artifacts.Remove(artifact);
+				if (GUILayout.Button("✚")) State.Artifacts.Insert(i, new Artifact("Artifact" + (State.Artifacts.Count + 1).ToString(), 0, null, 0, 0, 0));
 				GUILayout.EndHorizontal();
 			}
 		}

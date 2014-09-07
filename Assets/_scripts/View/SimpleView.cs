@@ -110,8 +110,8 @@ public class SimpleView : BaseView
 					GUILayout.Box("Workshop");
 
 					GUILayout.BeginHorizontal();
-					GUILayout.Label(string.Format("Fuel tank: {0}", State.FuelSynthed ? "FULL" : "EMPTY"));
-					GUILayout.Label(string.Format("Breakage: {0}", State.EngineFixed ? "FIXED" : State.BreakageType.ToString()));
+					GUILayout.Label(string.Format("Fuel tank: <b>{0}</b>", State.FuelSynthed ? "FULL" : "EMPTY"));
+					GUILayout.Label(string.Format("Breakage: <b>{0}</b>", State.EngineFixed ? "FIXED" : State.BreakageType.ToString()));
 					GUILayout.EndHorizontal();
 
 					GUILayout.BeginHorizontal();

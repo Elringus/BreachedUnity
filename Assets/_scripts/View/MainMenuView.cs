@@ -69,7 +69,7 @@ public class MainMenuView : BaseView
 			var slider = GameObject.Find("slider_progress").GetComponent<Slider>();
 			var progress = float.Parse(Text.Get("PROGRESS"));
 
-			slider.value = progress >= .75f ? 1 :
+			slider.value = progress >= .8f ? 1 :
 				Mathf.Lerp(slider.value, progress, Time.deltaTime * 5);
 		}
 	}

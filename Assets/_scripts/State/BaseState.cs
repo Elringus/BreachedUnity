@@ -337,21 +337,21 @@ public abstract class BaseState : IState
 			};
 
 			Artifacts = new List<Artifact> { 
-				new Artifact("Artifact1",   BreakageType.BRK1, 30, 20, 15), 
-				new Artifact("Artifact2",   null,              05, 00, 15), 
-				new Artifact("Artifact3",	null,              15, 10, 00), 
-				new Artifact("Artifact4",   null,              00, 30, 00), 
-				new Artifact("Artifact5",	null,              00, 00, 35), 
-				new Artifact("Artifact6",	BreakageType.BRK2, 40, 10, 15), 
-				new Artifact("Artifact7",	null,              20, 05, 15), 
-				new Artifact("Artifact8",	null,              15, 00, 15), 
-				new Artifact("Artifact9",	null,              05, 00, 30), 
-				new Artifact("Artifact10",	BreakageType.BRK3, 00, 50, 05), 
-				new Artifact("Artifact11",	null,              15, 00, 15), 
-				new Artifact("Artifact12",	null,              20, 00, 00),
-				new Artifact("Artifact13",	null,              10, 10, 15),
-				new Artifact("Artifact14",	null,              05, 15, 10),
-				new Artifact("Artifact15",	BreakageType.BRK4, 30, 10, 20),
+				new Artifact("Artifact1", 0,	BreakageType.BRK1, 30, 20, 15), 
+				new Artifact("Artifact2", 0,	null,              05, 00, 15), 
+				new Artifact("Artifact3", 0,	null,              15, 10, 00), 
+				new Artifact("Artifact4", 0,	null,              00, 30, 00), 
+				new Artifact("Artifact5", 0,	null,              00, 00, 35), 
+				new Artifact("Artifact6", 0,	BreakageType.BRK2, 40, 10, 15), 
+				new Artifact("Artifact7", 0,	null,              20, 05, 15), 
+				new Artifact("Artifact8", 0,	null,              15, 00, 15), 
+				new Artifact("Artifact9", 0,	null,              05, 00, 30), 
+				new Artifact("Artifact10", 0,	BreakageType.BRK3, 00, 50, 05), 
+				new Artifact("Artifact11", 0,	null,              15, 00, 15), 
+				new Artifact("Artifact12", 0,	null,              20, 00, 00),
+				new Artifact("Artifact13", 0,	null,              10, 10, 15),
+				new Artifact("Artifact14", 0,	null,              05, 15, 10),
+				new Artifact("Artifact15", 0,	BreakageType.BRK4, 30, 10, 20),
 			};
 			AnalyzeArtifactAPCost = 2;
 
