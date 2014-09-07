@@ -27,10 +27,11 @@ public class MainMenuView : BaseView
 			menu.FindChild("button_simple-view").GetComponent<Button>()
 				.onClick.AddListener(() => SwitchView(ViewType.SimpleView));
 			menu.FindChild("button_update-text").GetComponent<Button>()
-				.onClick.AddListener(() => {
+				.onClick.AddListener(() =>
+				{
 					connecting = true;
-					ServiceLocator.Text = new GoogleText(); 
-					googlePanel = AddUIElement("panel_google-text"); 
+					ServiceLocator.Text = new GoogleText();
+					googlePanel = AddUIElement("panel_google-text");
 				});
 			menu.FindChild("button_new-game").GetComponent<Button>()
 				.onClick.AddListener(() => { });
@@ -41,7 +42,7 @@ public class MainMenuView : BaseView
 			menu.FindChild("button_exit").GetComponent<Button>()
 				.onClick.AddListener(() => Application.Quit());
 
-			if (Text.GetType() == typeof(GoogleText)) 
+			if (Text.GetType() == typeof(GoogleText))
 				googlePanel = AddUIElement("panel_google-text");
 		}
 		else
@@ -64,8 +65,12 @@ public class MainMenuView : BaseView
 
 		if (!connecting && googlePanel) Destroy(googlePanel);
 		else if (connecting)
-			GameObject.Find("slider_progress").GetComponent<Slider>().value = 
-				Mathf.Lerp(GameObject.Find("slider_progress").GetComponent<Slider>().value, 
-				float.Parse(Text.Get("PROGRESS")), Time.deltaTime * 5);
+		{
+			var slider = GameObject.Find("slider_progress").GetComponent<Slider>();
+			var progress = float.Parse(Text.Get("PROGRESS"));
+
+			slider.value = progress >= .75f ? 1 :
+				Mathf.Lerp(slider.value, progress, Time.deltaTime * 5);
+		}
 	}
 }
