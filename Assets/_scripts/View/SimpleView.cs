@@ -33,6 +33,8 @@ public class SimpleView : BaseView
 			{
 				foreach (var quest in State.QuestRecords.Where(q => q.Status == QuestStatus.NotStarted))
 					questController.StartQuest(quest);
+				foreach (var record in State.JournalRecords.Where(r => r.Check()))
+					record.AssignedDay = State.CurrentDay;
 			};
 		}
 	}
@@ -100,7 +102,9 @@ public class SimpleView : BaseView
 				{
 					GUILayout.Box("Bridge");
 
-					GUILayout.Label("Here will be quest records...");
+					for (int i = 1; i <= State.CurrentDay; i++)
+						foreach (var record in State.JournalRecords.Where(r => r.AssignedDay == i))
+							GUILayout.Label(Text.Get(record.ID));
 
 					if (GUILayout.Button(string.Format("End day [AP = {0}]", State.MaxAP))) bridgeController.EndDay();
 				}

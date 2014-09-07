@@ -30,6 +30,7 @@ public class StateEditorView : BaseView
 
 		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Main")) selectedPage = StateEditorPage.Main;
+		if (GUILayout.Button("Journal")) selectedPage = StateEditorPage.Journal;
 		if (GUILayout.Button("Quests")) selectedPage = StateEditorPage.Quests;
 		if (GUILayout.Button("Artifacts")) selectedPage = StateEditorPage.Artifacts;
 		if (GUILayout.Button("Phrases")) selectedPage = StateEditorPage.Phrases;
@@ -201,6 +202,69 @@ public class StateEditorView : BaseView
 			GUILayout.Label("Analyze artifact AP cost: ", GUILayout.Width(300));
 			State.AnalyzeArtifactAPCost = int.Parse(GUILayout.TextField(State.AnalyzeArtifactAPCost.ToString()));
 			GUILayout.EndHorizontal();
+		}
+
+		if (selectedPage == StateEditorPage.Journal)
+		{
+			for (int i = 0; i < State.JournalRecords.Count; i++)
+			{
+				GUILayout.Space(20);
+
+				var record = State.JournalRecords[i];
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("ID: ", GUILayout.Width(30));
+				record.ID = GUILayout.TextField(record.ID, GUILayout.Width(100));
+
+				GUILayout.Label("Min day: ", GUILayout.Width(55));
+				record.Requirements.MinDay = int.Parse(GUILayout.TextField(record.Requirements.MinDay.ToString(), GUILayout.Width(50)));
+				GUILayout.Label("Day: ", GUILayout.Width(35));
+				record.Requirements.Day = int.Parse(GUILayout.TextField(record.Requirements.Day.ToString(), GUILayout.Width(50)));
+				GUILayout.Label("Max day: ", GUILayout.Width(55));
+				record.Requirements.MaxDay = int.Parse(GUILayout.TextField(record.Requirements.MaxDay.ToString(), GUILayout.Width(50)));
+
+				GUILayout.Label("Min AP: ", GUILayout.Width(55));
+				record.Requirements.MinAP = int.Parse(GUILayout.TextField(record.Requirements.MinAP.ToString(), GUILayout.Width(50)));
+				GUILayout.Label("Max AP: ", GUILayout.Width(55));
+				record.Requirements.MaxAP = int.Parse(GUILayout.TextField(record.Requirements.MaxAP.ToString(), GUILayout.Width(50)));
+				GUILayout.EndHorizontal();
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("Compl. quests: ", GUILayout.Width(100));
+				if (record.Requirements.CompletedQuests.Count < 1)
+					record.Requirements.CompletedQuests = new List<string>() { "" };
+				record.Requirements.CompletedQuests[0] = GUILayout.TextField(record.Requirements.CompletedQuests[0], GUILayout.Width(189));
+				if (record.Requirements.CompletedQuests.Count < 2)
+					record.Requirements.CompletedQuests = new List<string>() { record.Requirements.CompletedQuests[0], "" };
+				record.Requirements.CompletedQuests[1] = GUILayout.TextField(record.Requirements.CompletedQuests[1], GUILayout.Width(189));
+				if (record.Requirements.CompletedQuests.Count < 3)
+					record.Requirements.CompletedQuests = new List<string>() { record.Requirements.CompletedQuests[0], record.Requirements.CompletedQuests[1], "" };
+				record.Requirements.CompletedQuests[2] = GUILayout.TextField(record.Requirements.CompletedQuests[2], GUILayout.Width(189));
+				GUILayout.EndHorizontal();
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("Anl-d artifacts: ", GUILayout.Width(100));
+				if (record.Requirements.AnalyzedArtifacts.Count < 1)
+					record.Requirements.AnalyzedArtifacts = new List<string>() { "" };
+				record.Requirements.AnalyzedArtifacts[0] = GUILayout.TextField(record.Requirements.AnalyzedArtifacts[0], GUILayout.Width(189));
+				if (record.Requirements.AnalyzedArtifacts.Count < 2)
+					record.Requirements.AnalyzedArtifacts = new List<string>() { record.Requirements.AnalyzedArtifacts[0], "" };
+				record.Requirements.AnalyzedArtifacts[1] = GUILayout.TextField(record.Requirements.AnalyzedArtifacts[1], GUILayout.Width(189));
+				if (record.Requirements.AnalyzedArtifacts.Count < 3)
+					record.Requirements.AnalyzedArtifacts = new List<string>() { record.Requirements.AnalyzedArtifacts[0], record.Requirements.AnalyzedArtifacts[1], "" };
+				record.Requirements.AnalyzedArtifacts[2] = GUILayout.TextField(record.Requirements.AnalyzedArtifacts[2], GUILayout.Width(189));
+				GUILayout.EndHorizontal();
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("✎ Assigned day: ", GUILayout.Width(100));
+				record.AssignedDay = int.Parse(GUILayout.TextField(record.AssignedDay.ToString(), GUILayout.Width(50)));
+
+				GUILayout.Space(415);
+
+				if (GUILayout.Button("✂", GUILayout.Width(50))) State.JournalRecords.Remove(record);
+				if (GUILayout.Button("✚", GUILayout.Width(50))) State.JournalRecords.Insert(i, (new JournalRecord("Journal" + (State.JournalRecords.Count + 1).ToString(), new Requirements(day: -1))));
+				GUILayout.EndHorizontal();
+			}
 		}
 
 		if (selectedPage == StateEditorPage.Quests)

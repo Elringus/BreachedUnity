@@ -46,6 +46,13 @@ public abstract class BaseState : IState
 		set { _phrases = value; Save(); }
 	}
 
+	private List<JournalRecord> _journalRecords;
+	public List<JournalRecord> JournalRecords
+	{
+		get { return _journalRecords; }
+		set { _journalRecords = value; Save(); }
+	}
+
 	private int _totalDays;
 	public int TotalDays
 	{
@@ -270,9 +277,9 @@ public abstract class BaseState : IState
 		{
 			QuestRecords = new List<Quest>()
 			{
-				new Quest("Abroad", new Requirements(5, 2)),
+				new Quest("Abroad", new Requirements(minAP: 5, day: 2)),
 				new Quest("Dalia", new Requirements(minAP: 4, minDay: 5, completedQuests: new List<string>() {"QuestAbroad#2"})),
-				new Quest("Echo", new Requirements(0, 8)),
+				new Quest("Echo", new Requirements(day: 8)),
 
 				new Quest("Test1"),
 				new Quest("Test2"),
@@ -322,6 +329,21 @@ public abstract class BaseState : IState
 				new Phrase("Phrase33", new Requirements(day: 7)),
 				new Phrase("Phrase34", new Requirements(day: 7)),
 				new Phrase("Phrase35", new Requirements(day: 7)),
+			};
+
+			JournalRecords = new List<JournalRecord>()
+			{
+				new JournalRecord("Journal1", new Requirements(day: 1)),
+				new JournalRecord("Journal2", new Requirements(day: 2, completedQuests: new List<string>() {"QuestAbroad#8"})),
+				new JournalRecord("Journal3", new Requirements(analyzedArtifacts: new List<string>() {"Artifact1"})),
+				new JournalRecord("Journal4", new Requirements(day: 3, maxAP: 5)),
+				new JournalRecord("Journal5", new Requirements(day: 2)),
+				new JournalRecord("Journal6", new Requirements(day: 3)),
+				new JournalRecord("Journal7", new Requirements(day: 4)),
+				new JournalRecord("Journal8", new Requirements(day: 5)),
+				new JournalRecord("Journal9", new Requirements(day: 6)),
+				new JournalRecord("Journal10", new Requirements(day: 7)),
+				new JournalRecord("Journal11", new Requirements(day: 8)),
 			};
 
 			TotalDays = 8;
@@ -374,6 +396,8 @@ public abstract class BaseState : IState
 		GameStatus = GameStatus.FirstLaunch;
 
 		if (QuestRecords != null) foreach (var quest in QuestRecords) quest.ResetProgress();
+
+		if (JournalRecords != null) foreach (var record in JournalRecords) record.AssignedDay = 0;
 
 		BreakageType[] possibleBRK = (BreakageType[])Enum.GetValues(typeof(BreakageType));
 		BreakageType = possibleBRK[Rand.RND.Next(0, 4)];

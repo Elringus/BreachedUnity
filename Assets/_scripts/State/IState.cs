@@ -15,6 +15,7 @@ public interface IState
 	#region RULES
 	List<Quest> QuestRecords { get; set; }
 	List<Phrase> Phrases { get; set; }
+	List<JournalRecord> JournalRecords { get; set; }
 
 	int TotalDays { get; set; }
 	int MaxAP { get; set; }

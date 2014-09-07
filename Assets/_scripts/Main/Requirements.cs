@@ -10,6 +10,13 @@ public class Requirements
 		set { _minAP = value; ServiceLocator.State.Save(); }
 	}
 
+	private int _maxAP;
+	public int MaxAP
+	{
+		get { return _maxAP; }
+		set { _maxAP = value; ServiceLocator.State.Save(); }
+	}
+
 	private int _minDay;
 	public int MinDay
 	{
@@ -51,9 +58,10 @@ public class Requirements
 
 	}
 
-	public Requirements (int minAP = 0, int minDay = 0, int day = 0, int maxDay = 0, List<string> completedQuests = null, List<string> analyzedArtifacts = null)
+	public Requirements (int minAP = 0, int maxAP = 0, int minDay = 0, int day = 0, int maxDay = 0, List<string> completedQuests = null, List<string> analyzedArtifacts = null)
 	{
 		this.MinAP = minAP;
+		this.MaxAP = maxAP;
 		this.MinDay = minDay;
 		this.Day = day;
 		this.MaxDay = maxDay;
@@ -66,6 +74,7 @@ public class Requirements
 		IState state = ServiceLocator.State;
 
 		if (MinAP < 0 || MinAP != 0 && MinAP > state.CurrentAP) return false;
+		if (MaxAP != 0 && MaxAP < state.CurrentAP) return false;
 		if (MinDay != 0 && MinDay > state.CurrentDay) return false;
 		if (Day != 0 && Day != state.CurrentDay) return false;
 		if (MaxDay != 0 && MaxDay < state.CurrentDay) return false;
