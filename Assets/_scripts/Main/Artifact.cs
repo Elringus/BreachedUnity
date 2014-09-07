@@ -22,6 +22,13 @@ public class Artifact
 		get { return ServiceLocator.Text.Get(ID + "Infotrace"); }
 	}
 
+	private int _sector;
+	public int Sector
+	{
+		get { return _sector; }
+		set { _sector = value; ServiceLocator.State.Save(); }
+	}
+
 	private BreakageType? _identity;
 	public BreakageType? Identity
 	{
@@ -63,9 +70,10 @@ public class Artifact
 
 	}
 
-	public Artifact (string id, BreakageType? identity, int wiring, int alloy, int chips)
+	public Artifact (string id, int sector, BreakageType? identity, int wiring, int alloy, int chips)
 	{
 		this.ID = id;
+		this.Sector = sector;
 		this.Identity = identity;
 		this.Wiring = wiring;
 		this.Alloy = alloy;
