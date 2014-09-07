@@ -205,16 +205,23 @@ public class StateEditorView : BaseView
 
 		if (selectedPage == StateEditorPage.Quests)
 		{
-			foreach (var quest in State.QuestRecords)
+			for (int i = 0; i < State.QuestRecords.Count; i++)
 			{
 				GUILayout.Space(20);
 
+				var quest = State.QuestRecords[i];
+
 				GUILayout.BeginHorizontal();
-				GUILayout.Label("ID: " + quest.ID, GUILayout.Width(160));
+
+				GUILayout.Label("ID: ", GUILayout.Width(30));
+				quest.ID = GUILayout.TextField(quest.ID, GUILayout.Width(125));
+
 				GUILayout.Label("Min AP: ", GUILayout.Width(50));
 				quest.Requirements.MinAP = int.Parse(GUILayout.TextField(quest.Requirements.MinAP.ToString(), GUILayout.Width(50)));
+
 				GUILayout.Label("Min day: ", GUILayout.Width(50));
 				quest.Requirements.MinDay = int.Parse(GUILayout.TextField(quest.Requirements.MinDay.ToString(), GUILayout.Width(50)));
+
 				GUILayout.Label("Compl. quests: ", GUILayout.Width(100));
 				if (quest.Requirements.CompletedQuests.Count < 1) quest.Requirements.CompletedQuests = new List<string>() { "" };
 				quest.Requirements.CompletedQuests[0] = GUILayout.TextField(quest.Requirements.CompletedQuests[0], GUILayout.Width(100));
@@ -222,14 +229,22 @@ public class StateEditorView : BaseView
 				quest.Requirements.CompletedQuests[1] = GUILayout.TextField(quest.Requirements.CompletedQuests[1], GUILayout.Width(100));
 				if (quest.Requirements.CompletedQuests.Count < 3) quest.Requirements.CompletedQuests = new List<string>() { quest.Requirements.CompletedQuests[0], quest.Requirements.CompletedQuests[1], "" };
 				quest.Requirements.CompletedQuests[2] = GUILayout.TextField(quest.Requirements.CompletedQuests[2], GUILayout.Width(100));
+
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label(string.Format("✎ {1}. Change to: ", quest.ID, quest.Status), GUILayout.Width(160));
-				if (GUILayout.Button("NotStarted")) quest.Status = QuestStatus.NotStarted;
-				if (GUILayout.Button("Started")) quest.Status = QuestStatus.Started;
-				if (GUILayout.Button("Completed")) quest.Status = QuestStatus.Completed;
-				quest.CurrentBlock = GUILayout.TextField(quest.CurrentBlock);
+				GUILayout.Label(string.Format("✎ Current quest status is {1}. Change to: ", quest.ID, quest.Status), GUILayout.Width(300));
+				if (GUILayout.Button("NotStarted", GUILayout.Width(80))) quest.Status = QuestStatus.NotStarted;
+				if (GUILayout.Button("Started", GUILayout.Width(80))) quest.Status = QuestStatus.Started;
+				if (GUILayout.Button("Completed", GUILayout.Width(80))) quest.Status = QuestStatus.Completed;
+				GUILayout.EndHorizontal();
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("✎ Current quest block is: ", GUILayout.Width(150));
+				quest.CurrentBlock = GUILayout.TextField(quest.CurrentBlock, GUILayout.Width(150));
+				GUILayout.Space(400);
+				if (GUILayout.Button("✂")) State.QuestRecords.Remove(quest);
+				if (GUILayout.Button("✚")) State.QuestRecords.Insert(i, new Quest("Quest" + (State.QuestRecords.Count + 1).ToString(), new Requirements(minAP: -1)));
 				GUILayout.EndHorizontal();
 			}
 		}
@@ -270,29 +285,29 @@ public class StateEditorView : BaseView
 
 		if (selectedPage == StateEditorPage.Phrases)
 		{
-			GUILayout.Label("Requirements: ", GUILayout.Width(300));
-
 			for (int i = 0; i < State.PhraseRecords.Count; i++)
 			{
+				var phrase = State.PhraseRecords[i];
+
 				GUILayout.BeginHorizontal();
 				GUILayout.Label("ID: ", GUILayout.Width(30));
-				State.PhraseRecords[i].ID = GUILayout.TextField(State.PhraseRecords[i].ID, GUILayout.Width(100));
+				phrase.ID = GUILayout.TextField(phrase.ID, GUILayout.Width(100));
 
 				GUILayout.Label("Day: ", GUILayout.Width(30));
-				State.PhraseRecords[i].Requirements.Day = int.Parse(GUILayout.TextField(State.PhraseRecords[i].Requirements.Day.ToString(), GUILayout.Width(50)));
+				phrase.Requirements.Day = int.Parse(GUILayout.TextField(phrase.Requirements.Day.ToString(), GUILayout.Width(50)));
 
 				GUILayout.Label("Compl. quests: ", GUILayout.Width(100));
-				if (State.PhraseRecords[i].Requirements.CompletedQuests.Count < 1) 
-					State.PhraseRecords[i].Requirements.CompletedQuests = new List<string>() { "" };
-				State.PhraseRecords[i].Requirements.CompletedQuests[0] = GUILayout.TextField(State.PhraseRecords[i].Requirements.CompletedQuests[0], GUILayout.Width(100));
-				if (State.PhraseRecords[i].Requirements.CompletedQuests.Count < 2) 
-					State.PhraseRecords[i].Requirements.CompletedQuests = new List<string>() { State.PhraseRecords[i].Requirements.CompletedQuests[0], "" };
-				State.PhraseRecords[i].Requirements.CompletedQuests[1] = GUILayout.TextField(State.PhraseRecords[i].Requirements.CompletedQuests[1], GUILayout.Width(100));
-				if (State.PhraseRecords[i].Requirements.CompletedQuests.Count < 3) 
-					State.PhraseRecords[i].Requirements.CompletedQuests = new List<string>() { State.PhraseRecords[i].Requirements.CompletedQuests[0], State.PhraseRecords[i].Requirements.CompletedQuests[1], "" };
-				State.PhraseRecords[i].Requirements.CompletedQuests[2] = GUILayout.TextField(State.PhraseRecords[i].Requirements.CompletedQuests[2], GUILayout.Width(100));
+				if (phrase.Requirements.CompletedQuests.Count < 1) 
+					phrase.Requirements.CompletedQuests = new List<string>() { "" };
+				phrase.Requirements.CompletedQuests[0] = GUILayout.TextField(phrase.Requirements.CompletedQuests[0], GUILayout.Width(100));
+				if (phrase.Requirements.CompletedQuests.Count < 2) 
+					phrase.Requirements.CompletedQuests = new List<string>() { phrase.Requirements.CompletedQuests[0], "" };
+				phrase.Requirements.CompletedQuests[1] = GUILayout.TextField(phrase.Requirements.CompletedQuests[1], GUILayout.Width(100));
+				if (phrase.Requirements.CompletedQuests.Count < 3) 
+					phrase.Requirements.CompletedQuests = new List<string>() { phrase.Requirements.CompletedQuests[0], phrase.Requirements.CompletedQuests[1], "" };
+				phrase.Requirements.CompletedQuests[2] = GUILayout.TextField(phrase.Requirements.CompletedQuests[2], GUILayout.Width(100));
 
-				if (GUILayout.Button("✂")) State.PhraseRecords.Remove(State.PhraseRecords[i]);
+				if (GUILayout.Button("✂")) State.PhraseRecords.Remove(phrase);
 				if (GUILayout.Button("✚")) State.PhraseRecords.Insert(i, (new Phrase("Phrase" + (State.PhraseRecords.Count + 1).ToString(), new Requirements(day: -1))));
 				GUILayout.EndHorizontal();
 			}
