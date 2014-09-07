@@ -2,11 +2,11 @@
 
 public class Quest
 {
-	private string _name;
-	public string Name
+	private string _id;
+	public string ID
 	{
-		get { return _name; }
-		set { _name = value; ServiceLocator.State.Save(); }
+		get { return _id; }
+		set { _id = value; ServiceLocator.State.Save(); }
 	}
 
 	private QuestStatus _status;
@@ -36,11 +36,11 @@ public class Quest
 		
 	}
 
-	public Quest (string name, Requirements requirements = null)
+	public Quest (string id, Requirements requirements = null)
 	{
-		this.Name = name;
+		this.ID = id;
 		this.Status = QuestStatus.NotStarted;
-		this.CurrentBlock = string.Format("Quest{0}#1", name);
+		this.CurrentBlock = string.Format("Quest{0}#1", id);
 		this.Requirements = requirements ?? new Requirements(-1);
 	}
 
@@ -52,6 +52,6 @@ public class Quest
 	public void ResetProgress ()
 	{
 		Status = QuestStatus.NotStarted;
-		CurrentBlock = string.Format("Quest{0}#1", Name);
+		CurrentBlock = string.Format("Quest{0}#1", ID);
 	}
 }

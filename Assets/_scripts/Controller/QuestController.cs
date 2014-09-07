@@ -43,7 +43,7 @@ public class QuestController : BaseController
 
 		if (choise.Attribute("artifact") != null)
 		{
-			var artifact = State.Artifacts.Find(a => a.Name == choise.Attribute("artifact").Value);
+			var artifact = State.Artifacts.Find(a => a.ID == choise.Attribute("artifact").Value);
 			if (artifact.Status == ArtifactStatus.NotFound) artifact.Status = ArtifactStatus.Found;
 		}
 

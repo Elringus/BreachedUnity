@@ -322,7 +322,6 @@ public abstract class BaseState : IState
 				new Phrase("Phrase33", new Requirements(day: 7)),
 				new Phrase("Phrase34", new Requirements(day: 7)),
 				new Phrase("Phrase35", new Requirements(day: 7)),
-
 			};
 
 			TotalDays = 8;
@@ -338,21 +337,21 @@ public abstract class BaseState : IState
 			};
 
 			Artifacts = new List<Artifact> { 
-				new Artifact("Artifact1", "Infotrace for Artifact1",   BreakageType.BRK1, 30, 20, 15), 
-				new Artifact("Artifact2", "Infotrace for Artifact2",   null,              05, 00, 15), 
-				new Artifact("Artifact3", "Infotrace for Artifact3",   null,              15, 10, 00), 
-				new Artifact("Artifact4", "Infotrace for Artifact4",   null,              00, 30, 00), 
-				new Artifact("Artifact5", "Infotrace for Artifact5",   null,              00, 00, 35), 
-				new Artifact("Artifact6", "Infotrace for Artifact6",   BreakageType.BRK2, 40, 10, 15), 
-				new Artifact("Artifact7", "Infotrace for Artifact7",   null,              20, 05, 15), 
-				new Artifact("Artifact8", "Infotrace for Artifact8",   null,              15, 00, 15), 
-				new Artifact("Artifact9", "Infotrace for Artifact9",   null,              05, 00, 30), 
-				new Artifact("Artifact10", "Infotrace for Artifact10", BreakageType.BRK3, 00, 50, 05), 
-				new Artifact("Artifact11", "Infotrace for Artifact11", null,              15, 00, 15), 
-				new Artifact("Artifact12", "Infotrace for Artifact12", null,              20, 00, 00),
-				new Artifact("Artifact13", "Infotrace for Artifact13", null,              10, 10, 15),
-				new Artifact("Artifact14", "Infotrace for Artifact14", null,              05, 15, 10),
-				new Artifact("Artifact15", "Infotrace for Artifact15", BreakageType.BRK4, 30, 10, 20),
+				new Artifact("Artifact1",   BreakageType.BRK1, 30, 20, 15), 
+				new Artifact("Artifact2",   null,              05, 00, 15), 
+				new Artifact("Artifact3",	null,              15, 10, 00), 
+				new Artifact("Artifact4",   null,              00, 30, 00), 
+				new Artifact("Artifact5",	null,              00, 00, 35), 
+				new Artifact("Artifact6",	BreakageType.BRK2, 40, 10, 15), 
+				new Artifact("Artifact7",	null,              20, 05, 15), 
+				new Artifact("Artifact8",	null,              15, 00, 15), 
+				new Artifact("Artifact9",	null,              05, 00, 30), 
+				new Artifact("Artifact10",	BreakageType.BRK3, 00, 50, 05), 
+				new Artifact("Artifact11",	null,              15, 00, 15), 
+				new Artifact("Artifact12",	null,              20, 00, 00),
+				new Artifact("Artifact13",	null,              10, 10, 15),
+				new Artifact("Artifact14",	null,              05, 15, 10),
+				new Artifact("Artifact15",	BreakageType.BRK4, 30, 10, 20),
 			};
 			AnalyzeArtifactAPCost = 2;
 

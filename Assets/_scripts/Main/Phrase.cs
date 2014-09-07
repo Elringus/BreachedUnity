@@ -2,11 +2,11 @@
 
 public class Phrase
 {
-	private string _name;
-	public string Name
+	private string _id;
+	public string ID
 	{
-		get { return _name; }
-		set { _name = value; ServiceLocator.State.Save(); }
+		get { return _id; }
+		set { _id = value; ServiceLocator.State.Save(); }
 	}
 
 	private Requirements _requirements;
@@ -22,9 +22,9 @@ public class Phrase
 		
 	}
 
-	public Phrase (string name, Requirements requirements = null)
+	public Phrase (string id, Requirements requirements = null)
 	{
-		this.Name = name;
+		this.ID = id;
 		this.Requirements = requirements ?? new Requirements(-1);
 	}
 

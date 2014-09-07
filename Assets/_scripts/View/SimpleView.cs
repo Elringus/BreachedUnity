@@ -88,7 +88,7 @@ public class SimpleView : BaseView
 			else if (questController.GetCurrentQuest() != null)
 			{
 				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", 
-					questController.GetCurrentQuest().Name, questController.GetCurrentQuest().CurrentBlock), GUILayout.Width(790));
+					questController.GetCurrentQuest().ID, questController.GetCurrentQuest().CurrentBlock), GUILayout.Width(790));
 				GUILayout.Label(XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(790));
 				var choises = XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Elements("choise");
 				if (choises.Count() == 0) { if (GUILayout.Button("End quest")) questController.EndQuest(); }
@@ -145,7 +145,8 @@ public class SimpleView : BaseView
 					}
 
 					GUILayout.Label("Analyzed artifacts:");
-					foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed)) GUILayout.Label(artifact.Name);
+					foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed))
+						GUILayout.Label(string.Format("[{0}] {1} Infotrace: {2}", artifact.ID, artifact.Name, artifact.Infotrace), GUILayout.Width(790));
 
 					if (workshopController.CanFixEngine() &&
 						GUILayout.Button(string.Format("Fix engine [-{0}AP]", State.FixEngineAPCost))) workshopController.FixEngine();
@@ -163,7 +164,7 @@ public class SimpleView : BaseView
 						GUILayout.EndHorizontal();
 					}
 					foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Found))
-						if (GUILayout.Button(string.Format("Start analyzing {0} [-{1}AP]", artifact.Name, State.AnalyzeArtifactAPCost)))
+						if (GUILayout.Button(string.Format("Start analyzing {0} [-{1}AP]", artifact.ID, State.AnalyzeArtifactAPCost)))
 							workshopController.AnalyzeArtifact(artifact);
 				}
 
@@ -180,7 +181,7 @@ public class SimpleView : BaseView
 				{
 					GUILayout.Box("Horizon");
 					foreach (var phrase in horizonController.GetPhrases())
-						GUILayout.Label(string.Format("[{0}] {1}", phrase.Name, Text.Get(phrase.Name)));
+						GUILayout.Label(string.Format("[{0}] {1}", phrase.ID, Text.Get(phrase.ID)));
 				}
 			}
 		}

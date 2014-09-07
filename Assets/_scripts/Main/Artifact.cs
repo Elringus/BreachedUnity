@@ -1,19 +1,25 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 public class Artifact
 {
-	private string _name;
-	public string Name
+	private string _id;
+	public string ID
 	{
-		get { return _name; }
-		set { _name = value; ServiceLocator.State.Save(); }
+		get { return _id; }
+		set { _id = value; ServiceLocator.State.Save(); }
 	}
 
-	private string _infotrace;
+	[XmlIgnore]
+	public string Name
+	{
+		get { return ServiceLocator.Text.Get(ID); }
+	}
+
+	[XmlIgnore]
 	public string Infotrace
 	{
-		get { return _infotrace; }
-		set { _infotrace = value; ServiceLocator.State.Save(); }
+		get { return ServiceLocator.Text.Get(ID + "Infotrace"); }
 	}
 
 	private BreakageType? _identity;
@@ -57,10 +63,9 @@ public class Artifact
 
 	}
 
-	public Artifact (string name, string Infotrace, BreakageType? identity, int wiring, int alloy, int chips)
+	public Artifact (string id, BreakageType? identity, int wiring, int alloy, int chips)
 	{
-		this.Name = name;
-		this.Infotrace = Infotrace;
+		this.ID = id;
 		this.Identity = identity;
 		this.Wiring = wiring;
 		this.Alloy = alloy;

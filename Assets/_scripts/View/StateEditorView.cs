@@ -209,12 +209,12 @@ public class StateEditorView : BaseView
 				GUILayout.Space(20);
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label("Name: " + quest.Name, GUILayout.Width(160));
-				GUILayout.Label("min AP: ", GUILayout.Width(50));
+				GUILayout.Label("ID: " + quest.ID, GUILayout.Width(160));
+				GUILayout.Label("Min AP: ", GUILayout.Width(50));
 				quest.Requirements.MinAP = int.Parse(GUILayout.TextField(quest.Requirements.MinAP.ToString(), GUILayout.Width(50)));
-				GUILayout.Label("min day: ", GUILayout.Width(50));
+				GUILayout.Label("Min day: ", GUILayout.Width(50));
 				quest.Requirements.MinDay = int.Parse(GUILayout.TextField(quest.Requirements.MinDay.ToString(), GUILayout.Width(50)));
-				GUILayout.Label("compl. quests: ", GUILayout.Width(100));
+				GUILayout.Label("Compl. quests: ", GUILayout.Width(100));
 				if (quest.Requirements.CompletedQuests.Count < 1) quest.Requirements.CompletedQuests = new List<string>() { "" };
 				quest.Requirements.CompletedQuests[0] = GUILayout.TextField(quest.Requirements.CompletedQuests[0], GUILayout.Width(100));
 				if (quest.Requirements.CompletedQuests.Count < 2) quest.Requirements.CompletedQuests = new List<string>() { quest.Requirements.CompletedQuests[0], "" };
@@ -224,7 +224,7 @@ public class StateEditorView : BaseView
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label(string.Format("✎ {1}. Change to: ", quest.Name, quest.Status), GUILayout.Width(160));
+				GUILayout.Label(string.Format("✎ {1}. Change to: ", quest.ID, quest.Status), GUILayout.Width(160));
 				if (GUILayout.Button("NotStarted")) quest.Status = QuestStatus.NotStarted;
 				if (GUILayout.Button("Started")) quest.Status = QuestStatus.Started;
 				if (GUILayout.Button("Completed")) quest.Status = QuestStatus.Completed;
@@ -240,8 +240,8 @@ public class StateEditorView : BaseView
 				GUILayout.Space(20);
 
 				GUILayout.BeginHorizontal();
-				GUILayout.Label("Artifact (name, W, A, C):", GUILayout.Width(300));
-				artifact.Name = GUILayout.TextField(artifact.Name, GUILayout.Width(280));
+				GUILayout.Label("Artifact (id, W, A, C):", GUILayout.Width(300));
+				artifact.ID = GUILayout.TextField(artifact.ID, GUILayout.Width(280));
 				artifact.Wiring = int.Parse(GUILayout.TextField(artifact.Wiring.ToString(), GUILayout.Width(60)));
 				artifact.Alloy = int.Parse(GUILayout.TextField(artifact.Alloy.ToString(), GUILayout.Width(60)));
 				artifact.Chips = int.Parse(GUILayout.TextField(artifact.Chips.ToString(), GUILayout.Width(60)));
@@ -273,10 +273,10 @@ public class StateEditorView : BaseView
 			foreach (var phrase in State.PhraseRecords)
 			{
 				GUILayout.BeginHorizontal();
-				GUILayout.Label("Name: " + phrase.Name, GUILayout.Width(130));
-				GUILayout.Label("day: ", GUILayout.Width(50));
+				GUILayout.Label("ID: " + phrase.ID, GUILayout.Width(130));
+				GUILayout.Label("Day: ", GUILayout.Width(50));
 				phrase.Requirements.Day = int.Parse(GUILayout.TextField(phrase.Requirements.Day.ToString(), GUILayout.Width(50)));
-				GUILayout.Label("compl. quests: ", GUILayout.Width(100));
+				GUILayout.Label("Compl. quests: ", GUILayout.Width(100));
 				if (phrase.Requirements.CompletedQuests.Count < 1) phrase.Requirements.CompletedQuests = new List<string>() { "" };
 				phrase.Requirements.CompletedQuests[0] = GUILayout.TextField(phrase.Requirements.CompletedQuests[0], GUILayout.Width(100));
 				if (phrase.Requirements.CompletedQuests.Count < 2) phrase.Requirements.CompletedQuests = new List<string>() { phrase.Requirements.CompletedQuests[0], "" };
