@@ -14,7 +14,7 @@ public class NullState : IState
 
 	#region RULES
 	public List<Quest> QuestRecords { get; set; }
-	public List<Phrase> PhraseRecords { get; set; }
+	public List<Phrase> Phrases { get; set; }
 
 	public int TotalDays { get; set; }
 	public int MaxAP { get; set; }

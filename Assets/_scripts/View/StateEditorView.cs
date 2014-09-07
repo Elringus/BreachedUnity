@@ -294,9 +294,9 @@ public class StateEditorView : BaseView
 
 		if (selectedPage == StateEditorPage.Phrases)
 		{
-			for (int i = 0; i < State.PhraseRecords.Count; i++)
+			for (int i = 0; i < State.Phrases.Count; i++)
 			{
-				var phrase = State.PhraseRecords[i];
+				var phrase = State.Phrases[i];
 
 				GUILayout.BeginHorizontal();
 				GUILayout.Label("ID: ", GUILayout.Width(30));
@@ -316,8 +316,8 @@ public class StateEditorView : BaseView
 					phrase.Requirements.CompletedQuests = new List<string>() { phrase.Requirements.CompletedQuests[0], phrase.Requirements.CompletedQuests[1], "" };
 				phrase.Requirements.CompletedQuests[2] = GUILayout.TextField(phrase.Requirements.CompletedQuests[2], GUILayout.Width(100));
 
-				if (GUILayout.Button("✂")) State.PhraseRecords.Remove(phrase);
-				if (GUILayout.Button("✚")) State.PhraseRecords.Insert(i, (new Phrase("Phrase" + (State.PhraseRecords.Count + 1).ToString(), new Requirements(day: -1))));
+				if (GUILayout.Button("✂")) State.Phrases.Remove(phrase);
+				if (GUILayout.Button("✚")) State.Phrases.Insert(i, (new Phrase("Phrase" + (State.Phrases.Count + 1).ToString(), new Requirements(day: -1))));
 				GUILayout.EndHorizontal();
 			}
 		}

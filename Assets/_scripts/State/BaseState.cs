@@ -39,11 +39,11 @@ public abstract class BaseState : IState
 		set { _questRecords = value; Save(); }
 	}
 
-	private List<Phrase> _phraseRecords;
-	public List<Phrase> PhraseRecords
+	private List<Phrase> _phrases;
+	public List<Phrase> Phrases
 	{
-		get { return _phraseRecords; }
-		set { _phraseRecords = value; Save(); }
+		get { return _phrases; }
+		set { _phrases = value; Save(); }
 	}
 
 	private int _totalDays;
@@ -279,7 +279,7 @@ public abstract class BaseState : IState
 				new Quest("Test3"),
 			};
 
-			PhraseRecords = new List<Phrase>()
+			Phrases = new List<Phrase>()
 			{
 				new Phrase("Phrase1", new Requirements(day: 1)),
 				new Phrase("Phrase2", new Requirements(day: 1)),
