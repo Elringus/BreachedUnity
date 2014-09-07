@@ -63,5 +63,9 @@ public class MainMenuView : BaseView
 		base.Update();
 
 		if (!connecting && googlePanel) Destroy(googlePanel);
+		else if (connecting)
+			GameObject.Find("slider_progress").GetComponent<Slider>().value = 
+				Mathf.Lerp(GameObject.Find("slider_progress").GetComponent<Slider>().value, 
+				float.Parse(Text.Get("PROGRESS")), Time.deltaTime * 5);
 	}
 }

@@ -16,7 +16,7 @@ public class GoogleText : IText
 	private const string ARTIFACTS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=222661492";
 	private const string INFOTRACES_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=1514799521";
 
-	private float downloadProgress = 0;
+	private static float downloadProgress;
 
 	private Dictionary<string, string> cachedText = new Dictionary<string, string>();
 
@@ -28,6 +28,8 @@ public class GoogleText : IText
 
 	private void RetrieveData ()
 	{
+		downloadProgress = 0;
+
 		try
 		{
 			SSLValidator.OverrideValidation();
