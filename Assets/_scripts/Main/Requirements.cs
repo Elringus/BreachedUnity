@@ -38,19 +38,27 @@ public class Requirements
 		set { _completedQuests = value; ServiceLocator.State.Save(); }
 	}
 
+	private List<string> _analyzedArtifacts;
+	public List<string> AnalyzedArtifacts
+	{
+		get { return _analyzedArtifacts; }
+		set { _analyzedArtifacts = value; ServiceLocator.State.Save(); }
+	}
+
 	[Obsolete("For XML serialization only.", true)]
 	public Requirements ()
 	{
 
 	}
 
-	public Requirements (int minAP = 0, int minDay = 0, int day = 0, int maxDay = 0, List<string> completedQuests = null)
+	public Requirements (int minAP = 0, int minDay = 0, int day = 0, int maxDay = 0, List<string> completedQuests = null, List<string> analyzedArtifacts = null)
 	{
 		this.MinAP = minAP;
 		this.MinDay = minDay;
 		this.Day = day;
 		this.MaxDay = maxDay;
 		this.CompletedQuests = completedQuests ?? new List<string>();
+		this.AnalyzedArtifacts = analyzedArtifacts ?? new List<string>();
 	}
 
 	public bool Check ()
@@ -64,6 +72,9 @@ public class Requirements
 		if (CompletedQuests != null)
 			foreach (var qBlock in CompletedQuests)
 				if (qBlock != string.Empty && state.QuestRecords.Find(q => q.CurrentBlock == qBlock) == null) return false;
+		if (AnalyzedArtifacts != null)
+			foreach (string artifactID in AnalyzedArtifacts)
+				if (artifactID != string.Empty && state.Artifacts.Find(artifact => artifact.ID == artifactID).Status != ArtifactStatus.Analyzed) return false;
 
 		return true;
 	}
