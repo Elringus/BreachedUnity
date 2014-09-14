@@ -17,9 +17,9 @@ public class Artifact
 	}
 
 	[XmlIgnore]
-	public string Infotrace
+	public string ScanInfo
 	{
-		get { return ServiceLocator.Text.Get(ID + "Infotrace"); }
+		get { return ServiceLocator.Text.Get(ID + "ScanInfo"); }
 	}
 
 	private int _sector;

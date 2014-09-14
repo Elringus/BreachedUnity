@@ -151,7 +151,7 @@ public class SimpleView : BaseView
 
 					GUILayout.Label("Analyzed artifacts:");
 					foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed))
-						GUILayout.Label(string.Format("[{0}] {1} Infotrace: {2}", artifact.ID, artifact.Name, artifact.Infotrace), GUILayout.Width(790));
+						GUILayout.Label(string.Format("[{0}] {1} ScanInfo: {2}", artifact.ID, artifact.Name, artifact.ScanInfo), GUILayout.Width(790));
 
 					if (workshopController.CanFixEngine() &&
 						GUILayout.Button(string.Format("Fix engine [-{0}AP]", State.FixEngineAPCost))) workshopController.FixEngine();
