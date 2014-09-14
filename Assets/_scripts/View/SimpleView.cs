@@ -74,7 +74,8 @@ public class SimpleView : BaseView
 		{
 			if (inFlightMode)
 			{
-				GUILayout.Box(string.Format("In flight mode. Loot charges: {0}/{1}", lootCharges, State.LootCharges));
+				GUILayout.Box(string.Format("In flight mode. Minerals: A{0} B{1} C{2}. Loot charges: {3}/{4}", 
+					State.MineralA, State.MineralB, State.MineralC, lootCharges, State.LootCharges));
 
 				for (int i = 0; i < sectorLoot.Count; i++ )
 					if (GUILayout.Button(string.Format("Loot spot of {0}", sectorLoot[i].LootType)))
