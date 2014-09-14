@@ -11,11 +11,11 @@ public class GoogleText : IText
 
 	private const int REQUEST_TIMEOUT = 5000;
 
-	private const string QUESTS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=0";
-	private const string JOURNAL_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=291239901";
-	private const string PHRASES_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=1387093746";
-	private const string ARTIFACTS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=222661492";
-	private const string INFOTRACES_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8/export?format=csv&id=1Lgw033KBgGhTew2hDKrcZR4VXxhqMtCh8f8QCOFbLJ8&gid=1514799521";
+	private const string QUESTS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=0";
+	private const string JOURNAL_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=291239901";
+	private const string PHRASES_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=1387093746";
+	private const string ARTIFACTS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=222661492";
+	private const string SCANINFO_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=1514799521";
 
 	private static float downloadProgress;
 
@@ -65,7 +65,7 @@ public class GoogleText : IText
 
 			downloadProgress = .8f;
 
-			request = (HttpWebRequest)WebRequest.Create(INFOTRACES_TABLE_URL);
+			request = (HttpWebRequest)WebRequest.Create(SCANINFO_TABLE_URL);
 			response = (HttpWebResponse)request.GetResponse();
 			reader = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8);
 			rows.AddRange(reader.ReadToEnd().Split((char)10));
