@@ -306,7 +306,18 @@ public class StateEditorView : BaseView
 				GUILayout.BeginHorizontal();
 				GUILayout.Label("✎ Current quest block is: ", GUILayout.Width(150));
 				quest.CurrentBlock = GUILayout.TextField(quest.CurrentBlock, GUILayout.Width(150));
-				GUILayout.Space(400);
+				GUILayout.Space(200);
+				if (i > 0 && GUILayout.Button("▲"))
+				{
+					State.QuestRecords.Remove(quest);
+					State.QuestRecords.Insert(i - 1, quest);
+				}
+				if (i < State.QuestRecords.Count - 1 && GUILayout.Button("▼"))
+				{
+					State.QuestRecords.Remove(quest);
+					State.QuestRecords.Insert(i + 1, quest);
+				}
+				GUILayout.Space(150);
 				if (GUILayout.Button("✂")) State.QuestRecords.Remove(quest);
 				if (GUILayout.Button("✚")) State.QuestRecords.Insert(i, new Quest("Quest" + (State.QuestRecords.Count + 1).ToString(), new Requirements(minAP: -1)));
 				GUILayout.EndHorizontal();

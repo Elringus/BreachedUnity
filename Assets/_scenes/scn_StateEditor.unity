@@ -284,6 +284,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1605912412}
   - 20: {fileID: 1605912411}
+  - 92: {fileID: 1605912413}
   - 124: {fileID: 1605912410}
   - 81: {fileID: 1605912409}
   m_Layer: 0
@@ -319,7 +320,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .274509817, g: .274509817, b: .274509817, a: .0196078438}
+  m_BackGroundColor: {r: .235294119, g: .235294119, b: .235294119, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -354,3 +355,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!92 &1605912413
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 9200000, guid: b902ac0cfa47b39439c9bb0afb61db4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1171206310}
+  m_GameObject: {fileID: 1605912408}
+  m_Enabled: 1
