@@ -25,7 +25,7 @@ public class StateEditorView : BaseView
 	{
 		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
 		GUILayout.Box("Breached state editor");
-		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 100));
+		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 70));
 
 		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Main")) selectedPage = StateEditorPage.Main;
@@ -44,7 +44,7 @@ public class StateEditorView : BaseView
 
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("✎ Game status: ", GUILayout.Width(300));
-			GUILayout.Label(State.GameStatus.ToString());
+			GUILayout.Label(string.Format("<b>{0}</b>", State.GameStatus.ToString()));
 			GUILayout.EndHorizontal();
 
 			GUILayout.BeginHorizontal();
@@ -101,7 +101,7 @@ public class StateEditorView : BaseView
 			GUILayout.EndHorizontal();
 
 			GUILayout.BeginHorizontal();
-			GUILayout.Label(string.Format("✎ Current breakage type is {0}. Set it to:",
+			GUILayout.Label(string.Format("✎ Current breakage type is <b>{0}</b>. Set it to:",
 				State.BreakageType), GUILayout.Width(300));
 			if (GUILayout.Button("BRK1")) State.BreakageType = BreakageType.BRK1;
 			if (GUILayout.Button("BRK2")) State.BreakageType = BreakageType.BRK2;
@@ -397,8 +397,13 @@ public class StateEditorView : BaseView
 		}
 
 		GUILayout.EndScrollView();
-		if (GUILayout.Button("Total reset (including rules)", GUILayout.Height(30))) State.Reset(true);
+
+		GUILayout.Box("", GUILayout.Height(3));
+
+		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Save and return to menu", GUILayout.Height(30))) SaveAndExit();
+		if (GUILayout.Button("<size=45><b>☠</b></size>    Total reset\n", GUILayout.Height(30), GUILayout.Width(150))) State.Reset(true);
+		GUILayout.EndHorizontal();
 
 		GUILayout.EndArea();
 	}
