@@ -1,16 +1,12 @@
 ﻿
 public abstract class BaseController
 {
-	protected static IState State;
-	protected static ILogger Logger;
-	protected static IText Text;
+	protected static IState State { get { return ServiceLocator.State; } }
+	protected static ILogger Logger { get { return ServiceLocator.Logger; } }
+	protected static IText Text { get { return ServiceLocator.Text; } }
 
 	static BaseController ()
 	{
-		State = ServiceLocator.State;
-		Logger = ServiceLocator.Logger;
-		Text = ServiceLocator.Text;
-
 		Events.EngineFixed += (c, e) =>
 		{
 			if (State.FuelSynthed)

@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public abstract class BaseView : MonoBehaviour
 {
-	protected static IState State;
-	protected static ILogger Logger;
-	protected static IText Text;
+	protected static IState State { get { return ServiceLocator.State; } }
+	protected static ILogger Logger { get { return ServiceLocator.Logger; } }
+	protected static IText Text { get { return ServiceLocator.Text; } }
 
 	protected ViewType ActiveView
 	{
@@ -18,10 +18,6 @@ public abstract class BaseView : MonoBehaviour
 	static BaseView ()
 	{
 		Initialize();
-
-		State = ServiceLocator.State;
-		Logger = ServiceLocator.Logger;
-		Text = ServiceLocator.Text;
 	}
 
 	private static void Initialize ()
