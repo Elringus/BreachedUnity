@@ -82,8 +82,20 @@ public class Requirements
 			foreach (var qBlock in CompletedQuests)
 				if (qBlock != string.Empty && state.QuestRecords.Find(q => q.CurrentBlock == qBlock) == null) return false;
 		if (AnalyzedArtifacts != null)
+		{
 			foreach (string artifactID in AnalyzedArtifacts)
-				if (artifactID != string.Empty && state.Artifacts.Find(artifact => artifact.ID == artifactID).Status != ArtifactStatus.Analyzed) return false;
+			{
+				if (artifactID != string.Empty) 
+				{
+					if (!state.Artifacts.Exists(artifact => artifact.ID == artifactID)) 
+					{
+						ServiceLocator.Logger.LogError(string.Format("Can't find an artifact with ID {0}! Aborting requirements check.", artifactID));
+						return false;
+					}
+					else if (state.Artifacts.Find(artifact => artifact.ID == artifactID).Status != ArtifactStatus.Analyzed) return false;
+				}
+			}
+		}
 
 		return true;
 	}

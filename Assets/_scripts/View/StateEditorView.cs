@@ -578,29 +578,6 @@ public class StateEditorView : BaseView
 				GUILayout.EndHorizontal();
 
 				GUILayout.Space(20);
-
-
-				//GUILayout.BeginHorizontal();
-				//GUILayout.Label("ID: ", GUILayout.Width(30));
-				//phrase.ID = GUILayout.TextField(phrase.ID, GUILayout.Width(100));
-
-				//GUILayout.Label("Day: ", GUILayout.Width(30));
-				//phrase.Requirements.Day = int.Parse(GUILayout.TextField(phrase.Requirements.Day.ToString(), GUILayout.Width(50)));
-
-				//GUILayout.Label("Compl. quests: ", GUILayout.Width(100));
-				//if (phrase.Requirements.CompletedQuests.Count < 1) 
-				//	phrase.Requirements.CompletedQuests = new List<string>() { "" };
-				//phrase.Requirements.CompletedQuests[0] = GUILayout.TextField(phrase.Requirements.CompletedQuests[0], GUILayout.Width(100));
-				//if (phrase.Requirements.CompletedQuests.Count < 2) 
-				//	phrase.Requirements.CompletedQuests = new List<string>() { phrase.Requirements.CompletedQuests[0], "" };
-				//phrase.Requirements.CompletedQuests[1] = GUILayout.TextField(phrase.Requirements.CompletedQuests[1], GUILayout.Width(100));
-				//if (phrase.Requirements.CompletedQuests.Count < 3) 
-				//	phrase.Requirements.CompletedQuests = new List<string>() { phrase.Requirements.CompletedQuests[0], phrase.Requirements.CompletedQuests[1], "" };
-				//phrase.Requirements.CompletedQuests[2] = GUILayout.TextField(phrase.Requirements.CompletedQuests[2], GUILayout.Width(100));
-
-				//if (GUILayout.Button("✂")) State.Phrases.Remove(phrase);
-				//if (GUILayout.Button("✚")) State.Phrases.Insert(i, (new Phrase("Phrase" + (State.Phrases.Count + 1).ToString(), new Requirements(day: -1))));
-				//GUILayout.EndHorizontal();
 			}
 		}
 
@@ -611,6 +588,7 @@ public class StateEditorView : BaseView
 		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("<b><color=#60c367><size=45>☑</size></color>    Save and return to menu</b>\n", GUILayout.Height(30))) SaveAndExit();
 		if (GUILayout.Button("<b><color=#d9614d><size=45>☒</size></color>    Total reset</b>\n", GUILayout.Height(30), GUILayout.Width(150))) State.Reset(true);
+		if (GUILayout.Button("<b><color=#6b9fb8><size=45>☯</size></color>    Update text</b>\n", GUILayout.Height(30), GUILayout.Width(150))) ServiceLocator.Text = new GoogleText();
 		GUILayout.EndHorizontal();
 
 		GUILayout.EndArea();
