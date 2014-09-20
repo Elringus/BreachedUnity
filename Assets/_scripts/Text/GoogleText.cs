@@ -105,6 +105,6 @@ public class GoogleText : IText
 		if (term == "PROGRESS") return downloadProgress.ToString();
 
 		if (cachedText.ContainsKey(term)) return cachedText[term];
-		else return string.Format("Null text for the {0} term.", term);
+		else return string.Format("Missing {0} term in GoogleText.", term);
 	}
 }
