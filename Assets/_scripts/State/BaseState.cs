@@ -279,7 +279,7 @@ public abstract class BaseState : IState
 			{
 				new Quest("Abroad", new Requirements(minAP: 5, day: 2)),
 				new Quest("Dalia", new Requirements(minAP: 4, minDay: 5, completedQuests: new List<string>() {"QuestAbroad#2"})),
-				new Quest("Echo", new Requirements(day: 8)),
+				new Quest("Echoes", new Requirements(day: 8)),
 
 				new Quest("Test1"),
 				new Quest("Test2"),
