@@ -4,15 +4,19 @@ using System.Linq;
 
 public class StateEditorView : BaseView
 {
-	private const float WIDTH = 800;
+	private float width = 800;
 
-	private const float SINGLE_W = 458;
-	private const float DOUBLE_W = 226.55f;
-	private const float TRIPLE_W = 149.8f;
-	private const float QUADRO_W = 111.5f;
-	private const float TETTRO_W = 88.4f;
+	private float LABEL_W = 300;
 
-	private const float CONTROL_W = 633.5f;
+	private float NAV_W = 155;
+
+	private float SINGLE_W = 458;
+	private float DOUBLE_W = 226.55f;
+	private float TRIPLE_W = 149.8f;
+	private float QUADRO_W = 111.5f;
+	private float TETTRO_W = 88.4f;
+
+	private float CONTROL_W = 633.5f;
 
 	private Vector2 scrollPosition;
 	private StateEditorPage selectedPage;
@@ -30,30 +34,50 @@ public class StateEditorView : BaseView
 		SwitchView(ViewType.MainMenu);
 	}
 
+	protected override void Update ()
+	{
+		base.Update();
+
+		if (Screen.width < 800) width = Screen.width;
+		else width = 800;
+
+		LABEL_W = width / 2.667f * (width < 800 ? .97f : 1);
+
+		NAV_W = width / 5.161f * (width < 800 ? .97f : 1);
+
+		SINGLE_W = width / 1.747f * (width < 800 ? .97f : 1);
+		DOUBLE_W = width / 3.531f * (width < 800 ? .97f : 1);
+		TRIPLE_W = width / 5.340f * (width < 800 ? .97f : 1);
+		QUADRO_W = width / 7.175f * (width < 800 ? .97f : 1);
+		TETTRO_W = width / 9.050f * (width < 800 ? .97f : 1);
+
+		CONTROL_W = width / 1.263f * (width < 800 ? .9f : 1);
+	}
+
 	private void OnGUI ()
 	{
 		GUI.skin.customStyles[0] = new GUIStyle(GUI.skin.label);
 		GUI.skin.customStyles[0].alignment = TextAnchor.MiddleRight;
-		GUI.skin.customStyles[0].fixedWidth = 300;
+		GUI.skin.customStyles[0].fixedWidth = LABEL_W;
 		GUI.skin.customStyles[0].padding.right = 10;
 
-		GUI.Box(new Rect(Screen.width / 2 - WIDTH / 2 + 4.5f, 25, WIDTH - 10, Screen.height - 64), "");
-		GUI.Box(new Rect(Screen.width / 2 - WIDTH / 2 + 5, 27, WIDTH - 10, 3), "");
-		GUI.Box(new Rect(Screen.width / 2 - WIDTH / 2 + 5, Screen.height - 38, WIDTH - 10, 3), "");
+		GUI.Box(new Rect(Screen.width / 2 - width / 2 + 4.5f, 25, width - 10, Screen.height - 64), "");
+		GUI.Box(new Rect(Screen.width / 2 - width / 2 + 5, 27, width - 10, 3), "");
+		GUI.Box(new Rect(Screen.width / 2 - width / 2 + 5, Screen.height - 38, width - 10, 3), "");
 
-		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, 0, WIDTH, Screen.height));
+		GUILayout.BeginArea(new Rect(Screen.width / 2 - width / 2, 0, width, Screen.height));
 
 		GUILayout.Space(2);
 
 		GUILayout.BeginHorizontal();
-		if (GUILayout.Button(selectedPage == StateEditorPage.Main ? "<b>❖ Main</b>" : "Main", GUILayout.Width(155))) selectedPage = StateEditorPage.Main;
-		if (GUILayout.Button(selectedPage == StateEditorPage.Journal ? "<b>❖ Journal</b>" : "Journal", GUILayout.Width(155))) selectedPage = StateEditorPage.Journal;
-		if (GUILayout.Button(selectedPage == StateEditorPage.Quests ? "<b>❖ Quests</b>" : "Quests", GUILayout.Width(155))) selectedPage = StateEditorPage.Quests;
-		if (GUILayout.Button(selectedPage == StateEditorPage.Artifacts ? "<b>❖ Artifacts</b>" : "Artifacts", GUILayout.Width(155))) selectedPage = StateEditorPage.Artifacts;
-		if (GUILayout.Button(selectedPage == StateEditorPage.Phrases ? "<b>❖ Phrases</b>" : "Phrases", GUILayout.Width(155))) selectedPage = StateEditorPage.Phrases;
+		if (GUILayout.Button(selectedPage == StateEditorPage.Main ? "<b>❖ Main</b>" : "Main", GUILayout.Width(NAV_W))) selectedPage = StateEditorPage.Main;
+		if (GUILayout.Button(selectedPage == StateEditorPage.Journal ? "<b>❖ Journal</b>" : "Journal", GUILayout.Width(NAV_W))) selectedPage = StateEditorPage.Journal;
+		if (GUILayout.Button(selectedPage == StateEditorPage.Quests ? "<b>❖ Quests</b>" : "Quests", GUILayout.Width(NAV_W))) selectedPage = StateEditorPage.Quests;
+		if (GUILayout.Button(selectedPage == StateEditorPage.Artifacts ? "<b>❖ Artifacts</b>" : "Artifacts", GUILayout.Width(NAV_W))) selectedPage = StateEditorPage.Artifacts;
+		if (GUILayout.Button(selectedPage == StateEditorPage.Phrases ? "<b>❖ Phrases</b>" : "Phrases", GUILayout.Width(NAV_W))) selectedPage = StateEditorPage.Phrases;
 		GUILayout.EndHorizontal();
 
-		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH - 5), GUILayout.Height(Screen.height - 64));
+		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(width - 5), GUILayout.Height(Screen.height - 64));
 
 		GUILayout.Space(10);
 
