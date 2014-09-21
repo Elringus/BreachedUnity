@@ -5,7 +5,7 @@ using System.Linq;
 
 public class SimpleView : BaseView
 {
-	private readonly float WIDTH = 800;
+	private float width = 800;
 	private Vector2 scrollPosition;
 
 	private BridgeController bridgeController;
@@ -18,6 +18,8 @@ public class SimpleView : BaseView
 
 	private SimpleViewPage selectedPage;
 	private bool showSynthFormula;
+	private bool showProbes;
+	private bool showArtifacts;
 	private bool inFlightMode;
 	private int lootCharges;
 	private List<Loot> sectorLoot = new List<Loot>();
@@ -52,11 +54,18 @@ public class SimpleView : BaseView
 		questController = new QuestController();
 	}
 
+	protected override void Update ()
+	{
+		base.Update();
+
+		if (Screen.width < 800) width = Screen.width;
+		else width = 800;
+	}
+
 	private void OnGUI ()
 	{
-		GUILayout.BeginArea(new Rect(Screen.width / 2 - WIDTH / 2, Screen.height / 2 - Screen.height / 2, WIDTH, Screen.height));
-		GUILayout.Box("Breached simple view");
-		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(WIDTH), GUILayout.Height(Screen.height - 100));
+		GUILayout.BeginArea(new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - Screen.height / 2, width, Screen.height));
+		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(width), GUILayout.Height(Screen.height - 35));
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(string.Format("Day: {0}/{1}", State.CurrentDay, State.TotalDays));
@@ -91,11 +100,11 @@ public class SimpleView : BaseView
 			else if (questController.GetCurrentQuest() != null)
 			{
 				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", 
-					questController.GetCurrentQuest().ID, questController.GetCurrentQuest().CurrentBlock), GUILayout.Width(790));
-				GUILayout.Label(XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(790));
+					questController.GetCurrentQuest().ID, questController.GetCurrentQuest().CurrentBlock), GUILayout.Width(width - 10));
+				GUILayout.Label(XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(width - 10));
 				var choises = XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Elements("choise");
 				if (choises.Count() == 0) { if (GUILayout.Button("End quest")) questController.EndQuest(); }
-				else foreach (var choise in choises) if (GUILayout.Button(choise.Value, GUILayout.Width(790))) questController.MakeChoise(choise.Value);
+				else foreach (var choise in choises) if (GUILayout.Button(choise.Value, GUILayout.Width(width - 10))) questController.MakeChoise(choise.Value);
 			}
 			else
 			{
@@ -120,11 +129,11 @@ public class SimpleView : BaseView
 					GUILayout.EndHorizontal();
 
 					GUILayout.BeginHorizontal();
-					GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC), GUILayout.Width(400));
+					GUILayout.Label(string.Format("Minerals: A{0} B{1} C{2}", State.MineralA, State.MineralB, State.MineralC), GUILayout.Width(width / 2));
 					showSynthFormula = GUILayout.Toggle(showSynthFormula, "show sync formula");
 					if (showSynthFormula)
 					{
-						GUILayout.Label(string.Format("Fuel synth formula: A{0} B{1} C{2}",
+						GUILayout.Label(string.Format("A{0} B{1} C{2}",
 							State.FuelSynthFormula[0],
 							State.FuelSynthFormula[1],
 							State.FuelSynthFormula[2]));
@@ -132,26 +141,28 @@ public class SimpleView : BaseView
 					GUILayout.EndHorizontal();
 
 					GUILayout.BeginHorizontal();
-					GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips), GUILayout.Width(400));
+					GUILayout.Label(string.Format("Resources: W{0} A{1} C{2}", State.Wiring, State.Alloy, State.Chips), GUILayout.Width(width / 2));
 					GUILayout.Label(string.Format("Fix engine requirments: W{0} A{1} C{2}",
 						State.FixEngineRequirements[State.BreakageType][0],
 						State.FixEngineRequirements[State.BreakageType][1],
 						State.FixEngineRequirements[State.BreakageType][2]));
 					GUILayout.EndHorizontal();
 
-					GUILayout.Label("Fuel synth probes:");
-					foreach (var probe in State.FuelSynthProbes)
-					{
-						GUILayout.BeginHorizontal();
-						GUILayout.Label(string.Format("Probe №{0} [A: {1}, B: {2}, C: {3}] is {4}.",
-							State.FuelSynthProbes.FindIndex(x => x == probe), probe[0], probe[1], probe[2],
-							workshopController.MeasureProbe(probe)), GUILayout.Width(300));
-						GUILayout.EndHorizontal();
-					}
+					GUILayout.Label(string.Format("Fuel synth probes ({0}):", State.FuelSynthProbes.Count));
+					showProbes = GUILayout.Toggle(showProbes, "show all the probes");
+					if (showProbes) foreach (var probe in State.FuelSynthProbes)
+						{
+							GUILayout.BeginHorizontal();
+							GUILayout.Label(string.Format("Probe №{0} [A: {1}, B: {2}, C: {3}] is {4}.",
+								State.FuelSynthProbes.FindIndex(x => x == probe), probe[0], probe[1], probe[2],
+								workshopController.MeasureProbe(probe)), GUILayout.Width(width / 2));
+							GUILayout.EndHorizontal();
+						}
 
-					GUILayout.Label("Analyzed artifacts:");
-					foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed))
-						GUILayout.Label(string.Format("[{0}] {1} ScanInfo: {2}", artifact.ID, artifact.Name, artifact.ScanInfo), GUILayout.Width(790));
+					GUILayout.Label(string.Format("Analyzed artifacts ({0}):", State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed).Count));
+					showArtifacts = GUILayout.Toggle(showArtifacts, "show all analyzed artifacts");
+					if (showArtifacts) foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Analyzed))
+						GUILayout.Label(string.Format("[{0}] {1} ScanInfo: {2}", artifact.ID, artifact.Name, artifact.ScanInfo), GUILayout.Width(width - 10));
 
 					if (workshopController.CanFixEngine() &&
 						GUILayout.Button(string.Format("Fix engine [-{0}AP]", State.FixEngineAPCost))) workshopController.FixEngine();
@@ -193,12 +204,15 @@ public class SimpleView : BaseView
 		else GUILayout.Box(State.GameStatus.ToString());
 
 		GUILayout.EndScrollView();
+
+		GUILayout.BeginHorizontal();
+		if (GUILayout.Button("Return to menu", GUILayout.Height(30))) SwitchView(ViewType.MainMenu);
 		if (GUILayout.Button("Reset and start new game", GUILayout.Height(30)))
 		{
 					State.Reset();
 		State.GameStatus = GameStatus.InProgress;
 		}
-		if (GUILayout.Button("Return to menu", GUILayout.Height(30))) SwitchView(ViewType.MainMenu);
+		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 	}
 
