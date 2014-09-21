@@ -48,7 +48,7 @@ public class StateEditorView : BaseView
 		quadroW = width / 7.175f * (width < 800 ? .97f : 1);
 		tettroW = width / 9.050f * (width < 800 ? .97f : 1);
 
-		controlW = width / 1.263f * (width < 800 ? .9f : 1);
+		controlW = width / 1.263f - (width < 800 ? (800 - width) / 5 : 0);
 	}
 
 	private void OnGUI ()
