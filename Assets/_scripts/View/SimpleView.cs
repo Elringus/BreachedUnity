@@ -14,8 +14,6 @@ public class SimpleView : BaseView
 	private WorkshopController workshopController;
 	private HorizonController horizonController;
 
-	private static QuestController questController;
-
 	private SimpleViewPage selectedPage;
 	private bool showSynthFormula;
 	private bool showProbes;
@@ -34,7 +32,7 @@ public class SimpleView : BaseView
 			Events.StateUpdated += (c, e) =>
 			{
 				foreach (var quest in State.QuestRecords.Where(q => q.Status == QuestStatus.NotStarted))
-					questController.StartQuest(quest);
+					QuestController.StartQuest(quest);
 				foreach (var record in State.JournalRecords.Where(r => r.Check()))
 					record.AssignedDay = State.CurrentDay;
 			};
@@ -50,8 +48,6 @@ public class SimpleView : BaseView
 		flightController = new FlightController();
 		workshopController = new WorkshopController();
 		horizonController = new HorizonController();
-
-		questController = new QuestController();
 	}
 
 	protected override void Update ()
@@ -97,14 +93,14 @@ public class SimpleView : BaseView
 
 				if (GUILayout.Button("Recall dron")) inFlightMode = false;
 			}
-			else if (questController.GetCurrentQuest() != null)
+			else if (QuestController.GetCurrentQuest() != null)
 			{
-				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}", 
-					questController.GetCurrentQuest().ID, questController.GetCurrentQuest().CurrentBlock), GUILayout.Width(width - 10));
-				GUILayout.Label(XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(width - 10));
-				var choises = XDocument.Parse(Text.Get(questController.GetCurrentQuest().CurrentBlock)).Root.Elements("choise");
-				if (choises.Count() == 0) { if (GUILayout.Button("End quest")) questController.EndQuest(); }
-				else foreach (var choise in choises) if (GUILayout.Button(choise.Value, GUILayout.Width(width - 10))) questController.MakeChoise(choise.Value);
+				GUILayout.Box(string.Format("In quest mode. Quest name: {0}. Quest progress: {1}",
+					QuestController.GetCurrentQuest().ID, QuestController.GetCurrentQuest().CurrentBlock), GUILayout.Width(width - 10));
+				GUILayout.Label(XDocument.Parse(Text.Get(QuestController.GetCurrentQuest().CurrentBlock)).Root.Value, GUILayout.Width(width - 10));
+				var choises = XDocument.Parse(Text.Get(QuestController.GetCurrentQuest().CurrentBlock)).Root.Elements("choise");
+				if (choises.Count() == 0) { if (GUILayout.Button("End quest")) QuestController.EndQuest(); }
+				else foreach (var choise in choises) if (GUILayout.Button(choise.Value, GUILayout.Width(width - 10))) QuestController.MakeChoise(choise.Value);
 			}
 			else
 			{

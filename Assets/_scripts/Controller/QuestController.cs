@@ -4,7 +4,7 @@ using System.Linq;
 
 public class QuestController : BaseController
 {
-	public bool StartQuest (Quest quest)
+	public static bool StartQuest (Quest quest)
 	{
 		if (GetCurrentQuest() != null || !quest.Check()) return false;
 
@@ -12,7 +12,7 @@ public class QuestController : BaseController
 		return true;
 	}
 
-	public bool MakeChoise (string choiseText)
+	public static bool MakeChoise (string choiseText)
 	{
 		XDocument block = XDocument.Parse(Text.Get(GetCurrentQuest().CurrentBlock));
 
@@ -53,12 +53,12 @@ public class QuestController : BaseController
 		return true;
 	}
 
-	public void EndQuest ()
+	public static void EndQuest ()
 	{
 		GetCurrentQuest().Status = QuestStatus.Completed;
 	}
 
-	public Quest GetCurrentQuest ()
+	public static Quest GetCurrentQuest ()
 	{
 		return State.QuestRecords.Find(q => q.Status == QuestStatus.Started);
 	}
