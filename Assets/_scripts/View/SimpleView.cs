@@ -193,7 +193,14 @@ public class SimpleView : BaseView
 				{
 					GUILayout.Box("Horizon");
 					foreach (var phrase in horizonController.GetPhrases())
-						GUILayout.Label(string.Format("[{0}] {1}", phrase.ID, Text.Get(phrase.ID)));
+					{
+						string phraseText = string.Format("[{0}] {1}", phrase.ID, Text.Get(phrase.ID));
+						if (phrase.AssociatedQuest != string.Empty)
+						{
+							if (GUILayout.Button(phraseText)) phrase.StartAssociatedQuest();
+						}
+						else GUILayout.Label(string.Format("[{0}] {1}", phrase.ID, Text.Get(phrase.ID)));
+					}
 				}
 			}
 		}

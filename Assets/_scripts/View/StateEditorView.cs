@@ -534,6 +534,11 @@ public class StateEditorView : BaseView
 				GUILayout.EndHorizontal();
 
 				GUILayout.BeginHorizontal();
+				GUILayout.Label("Associated quest: ", GUI.skin.customStyles[0]);
+				phrase.AssociatedQuest = GUILayout.TextField(phrase.AssociatedQuest, GUILayout.Width(singleW));
+				GUILayout.EndHorizontal();
+
+				GUILayout.BeginHorizontal();
 				GUILayout.Label("Day requirements (min, specific, max): ", GUI.skin.customStyles[0]);
 				phrase.Requirements.MinDay = int.Parse(GUILayout.TextField(phrase.Requirements.MinDay.ToString(), GUILayout.Width(tripleW)));
 				phrase.Requirements.Day = int.Parse(GUILayout.TextField(phrase.Requirements.Day.ToString(), GUILayout.Width(tripleW)));

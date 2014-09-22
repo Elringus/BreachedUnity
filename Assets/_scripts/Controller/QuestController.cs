@@ -4,9 +4,9 @@ using System.Linq;
 
 public class QuestController : BaseController
 {
-	public static bool StartQuest (Quest quest)
+	public static bool StartQuest (Quest quest, bool ignoreRequirements = false)
 	{
-		if (GetCurrentQuest() != null || !quest.Check()) return false;
+		if (!ignoreRequirements && (GetCurrentQuest() != null || !quest.Check())) return false;
 
 		quest.Status = QuestStatus.Started;
 		return true;
