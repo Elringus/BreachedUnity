@@ -43,17 +43,15 @@ public abstract class BaseView : MonoBehaviour
 
 	protected virtual void Start ()
 	{
-		if (ActiveView == ViewType.MainMenu)
-		{
-			var versionText = AddUIElement("text_version").GetComponent<Text>();
-			versionText.text = string.Format("Breached {0}\nver. {1}.{2}.{3}",
-				GlobalConfig.RELEASE_TYPE, GlobalConfig.VERSION_MAJOR, GlobalConfig.VERSION_MIDDLE, GlobalConfig.VERSION_MINOR);
-		}
+
 	}
 
 	protected virtual void Update ()
 	{
+		if (GlobalConfig.RELEASE_TYPE == ReleaseType.alpha)
+		{
 
+		}
 	}
 
 	protected void SwitchView (ViewType to)

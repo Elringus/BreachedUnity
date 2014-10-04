@@ -19,6 +19,10 @@ public class MainMenuView : BaseView
 	{
 		base.Start();
 
+		var versionText = AddUIElement("text_version").GetComponent<Text>();
+		versionText.text = string.Format("Breached {0}\nver. {1}.{2}.{3}",
+			GlobalConfig.RELEASE_TYPE, GlobalConfig.VERSION_MAJOR, GlobalConfig.VERSION_MIDDLE, GlobalConfig.VERSION_MINOR);
+
 		if (GlobalConfig.RELEASE_TYPE != ReleaseType.RTM)
 		{
 			var menu = AddUIElement("panel_main-menu-dev").transform;
