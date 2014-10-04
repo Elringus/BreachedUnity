@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>TrueSkyUnity</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>trueSKY alpha for Unity</h1>
+<h2>Getting started</h2>
+<p>Because the current version works only with DirectX 11, you will need to switch your project to DirectX 11 mode to see the rendered output. Do this using Edit:Project Settings:Player. In the Inspector, under &quot;Settings for PC, Mac and Linux Standalone&quot;, in &quot;Other Settings&quot;, chose &quot;Use Direct3D 11*&quot;.</p>
+<p>To activating trueSKY alpha, got to the GameObject menu, and select &quot;<em>initialize trueSKY in scene</em>&quot;. This launches a dialogue - usually the default options will be fine. At the last step, this dialog will create:</p>
+<ul>
+<li>A Sequence asset containing sky and cloud data.</li>
+<li>A trueSKY object in the scene.</li>
+<li>A TrueSkyCamera component for the main camera.</li>
+<li>A SimulSun component for the Directional Light in the scene.</li>
+</ul>
+<p>If there is no Directional Light, one will be created.</p>
+<p>After initialization, select your main Camera, and find the TrueSkyCamera component. This component has a checkbox for &quot;Flipped View&quot;. If you are using Forward rendering (under &quot;Rendering Path&quot; in the Camera component), and have extra post-processing components attached and enabled, you may need to set the &quot;Flipped View&quot; box. This is because Unity reverses the y-component of its framebuffers when performing post-processing.</p>
+<p>trueSKY performs best with a near clipping plane around 1m, and a far plane between 100,000 and 500,000 metres. This is because the appearance of the atmospheric effects is dependent on the numerical precision of the depth buffer.</p>
+<h2>The trueSKY object</h2>
+<p>This is your connection to trueSKY within a scene. Its controls are:</p>
+<p><strong>Render in Edit Mode</strong>: Draw the trueSKY environment in the Game view from the Editor.</p>
+<p><strong>Cloud Steps</strong>: Number of raytracing steps to use - more=higher definition, fewer=faster.</p>
+<p><strong>Downscale</strong>: Resolution to render the clouds to - higher numbers = lower resolution.</p>
+<p><strong>Gamma</strong>: If you are not using Linear Color Space, this controls gamma-correction of the trueSKY environment.</p>
+<p><strong>Sequence Asset</strong>: The asset containing sky sequence data. Double-click this to edit the sky sequence.</p>
+<p><strong>Time</strong>: Time in days, so 0.5 would be midday on the first day, etc.</p>
+<p><strong>Speed</strong>: Determines how quickly Time changes when in-game.</p>
+<p><strong>Diagnostics</strong>: A set of overlays for debugging. Of particular interest is &quot;Show Celestial Display&quot;, which tracks the motion of the Sun and Moon in the sky.</p>
+<h2>The Sky Sequence</h2>
+<p>To control the sky properties from within the Editor, you can edit the sequence asset. This will usually be in the same directory as your scene, with a Simul &quot;S&quot; icon, and named [scene name]_sq. Click on this asset to launch the Sky Sequencer. Then:</p>
+<p>Select the Properties tab or the Map. Click a keyframe to edit its properties. Double-click a line to edit all the keyframes in that line. Click on the title text to the left to edit the properties of the whole layer (sky or clouds).</p>
+<h2>Scripting</h2>
+<p>Script control of the sky is via the trueSKY object. While the Sequence asset represents the initial state, you can change any value in-game from script.</p>
+<p><strong>int GetNumSkyKeyframes()</strong>: Returns the number of sky keyframes in the current sequence.</p>
+<p><strong>int GetNumCloudKeyframes()</strong>: Return the number of (3D) cloud keyframes.</p>
+<p><strong>int GetNumCloud2DKeyframes()</strong>: Returns the number of 2D cloud keyframes.</p>
+<p>We use uint's as unique identifiers (uid's) to represent keyframes. Note: these are unique and persistent for the session, but not across saves or restarts, so don't store these uid's.</p>
+<p><strong>uint GetSkyKeyframeByIndex(int index)</strong>: Get a uid for the specified sky keyframe, between zero and (1-GetNumSkyKeyframes()).</p>
+<p><strong>uint GetCloudKeyframeByIndex(int index)</strong>: Get a uid for the specified 3D cloud keyframe, between zero and (1-GetNumCloudKeyframes()).</p>
+<p><strong>uint GetCloud2DKeyframeByIndex(int index)</strong>: Get a uid for the specified 3D cloud keyframe, between zero and (1-GetNumCloud2DKeyframes()).</p>
+<p><strong>uint InsertSkyKeyframe(float t)</strong>: Insert a sky keyframe at the specified time (0=midnight on the first day, 0.5=midday, etc).</p>
+<p><strong>uint InsertCloudKeyframe(float t)</strong>: Insert a cloud keyframe at the specified time.</p>
+<p><strong>uint Insert2DCloudKeyframe(float t)</strong>: Insert a 2D cloud keyframe.</p>
+<p><strong>void DeleteKeyframe(uint uid)</strong>: Delete the keyframe (sky or clouds).</p>
+<p><strong>void SetKeyframeValue(uint uid,string name,object value)</strong>: Set the property of keyframe <em>uid</em> named by <em>name</em> to the <em>value</em> given, which should be a <em>float</em> or an <em>int</em> (<em>double</em>s are accepted for <em>float</em> values, but <em>float</em> values can't be passed to <em>int</em> properties and vice versa).</p>
+<p><strong>object GetKeyframeValue(uint uid,string name)</strong>: Returns property <em>name</em> of keyframe <em>uid</em>. The result will be a <em>float</em>, or an <em>int</em>.</p>
+<p>For example,in the script KeyframeTesting.cs in the Simul directory, is a function that sets all the cloud keyframes to have a &quot;cloudiness&quot; of 0.8 when the game is run:</p>
+<pre><code>int numk=trueSky.GetNumCloudKeyframes();
+for(int i=0;i&lt;numk;i++)
+{
+    uint uid=trueSky.GetCloudKeyframeByIndex(i);
+    trueSky.SetKeyframeValue(uid,&quot;cloudiness&quot;,0.8);
+}
+</code></pre>
+
+<p>For details of the properties you can change, see the Reference pages below.</p>
+<h2>Reference</h2>
+<p><a href="Sky.html">Sky and Atmospherics</a></p>
+<p><a href="Clouds.html">Clouds</a></p>
+<h2>Techniques</h2>
+<p><a href="FixingDaytime.html">Fixing Time of Day</a></p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

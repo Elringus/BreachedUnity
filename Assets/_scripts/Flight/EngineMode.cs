@@ -3,5 +3,6 @@ public enum EngineMode
 {
 	Stop,
 	Normal,
-	Accel
+	Accel,
+	Freeze
 }

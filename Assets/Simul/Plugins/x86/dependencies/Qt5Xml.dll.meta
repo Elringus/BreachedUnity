@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ea77133c6b890ed46914642cddedc9be
+labels:
+- sky
+- clouds
+- time-of-day
+- sun
+- moon
+- stars
+- volumetric
+- weather
+- SimulExport
+DefaultImporter:
+  userData: 

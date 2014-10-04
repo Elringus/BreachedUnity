@@ -1,0 +1,1 @@
+.\dxsetup.exe /silent
