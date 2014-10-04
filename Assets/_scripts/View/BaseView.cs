@@ -50,7 +50,10 @@ public abstract class BaseView : MonoBehaviour
 	{
 		if (GlobalConfig.RELEASE_TYPE == ReleaseType.alpha)
 		{
-
+			if (Input.GetKeyDown(KeyCode.F1)) SwitchView(ViewType.Sector1);
+			if (Input.GetKeyDown(KeyCode.F2)) SwitchView(ViewType.Sector2);
+			if (Input.GetKeyDown(KeyCode.F3)) SwitchView(ViewType.Sector3);
+			if (Input.GetKeyDown(KeyCode.F4)) SwitchView(ViewType.Sector4);
 		}
 	}
 
