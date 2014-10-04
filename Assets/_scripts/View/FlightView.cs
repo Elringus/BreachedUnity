@@ -22,6 +22,8 @@ public class FlightView : BaseView
 	{
 		base.Update();
 
+		sky.time += Input.GetAxis("Mouse ScrollWheel") * 10 * Time.deltaTime;
+
 		float curTime = sky.time - (float)Math.Truncate(sky.time);
 		if (curTime > .5f) curTime = 1 - curTime;
 		vignetting.blurDistance = MaxAbberation * curTime;
