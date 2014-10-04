@@ -425,11 +425,11 @@ SubShader {
 	ZTest LEqual	
 	Fog { Mode Off }
 	CGPROGRAM
-	#pragma surface surf CustomBlinnPhong vertex:vert  finalcolor:customFog noforwardadd nolightmap
+	#pragma surface surf CustomBlinnPhong vertex:vert  finalcolor:customFog
 	
 	#pragma target 3.0
 	#pragma glsl
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_PM_SHADING
 	
@@ -448,10 +448,10 @@ SubShader {
 ZWrite Off Fog { Mode Off }
 ZTest LEqual	
 CGPROGRAM
-	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog decal:blend noforwardadd nolightmap
+	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog decal:blend
 	#pragma target 3.0
 	#pragma glsl
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_PM_SHADING
 	
@@ -490,10 +490,10 @@ SubShader {
 
 	ZTest LEqual
 CGPROGRAM
-	#pragma surface surf Lambert  vertex:vert  noforwardadd nolightmap
+	#pragma surface surf Lambert  vertex:vert 
 	#include "UnityCG.cginc"
 	
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 	
 /////////////////////////////////////////////////////////////////////
 // RTP specific
@@ -609,13 +609,13 @@ void surf (Input IN, inout SurfaceOutput o) {
 }
 ENDCG  
 
-///* AddPass
+/* AddPass
 ZTest LEqual
 CGPROGRAM
-	#pragma surface surf Lambert  vertex:vert decal:add noforwardadd nolightmap
+	#pragma surface surf Lambert  vertex:vert decal:add
 	#include "UnityCG.cginc"
 	
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 	
 /////////////////////////////////////////////////////////////////////
 // RTP specific
@@ -728,7 +728,7 @@ void surf (Input IN, inout SurfaceOutput o) {
 	o.Albedo = col;
 }
 ENDCG  
-//*/ // AddPass
+*/ // AddPass
 
 }
 // EOF CLASSIC shading

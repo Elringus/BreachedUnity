@@ -78,7 +78,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //// comment below detail when not needed
-//#define RTP_SUPER_DETAIL
+#define RTP_SUPER_DETAIL
 //#define RTP_SUPER_DTL_MULTS
 // comment below if you don't use snow features
 //#define RTP_SNOW
@@ -209,7 +209,7 @@
 
 // we're working in LINEAR / GAMMA (used in IBL  fresnel , PBL fresnel and gloss calcs)
 // if not defined we're rendering in GAMMA
-//#define RTP_COLORSPACE_LINEAR
+#define RTP_COLORSPACE_LINEAR
 
 // if defined we'll use cubemap defined by skyshop in its "Sky" GameObject
 //#define RTP_SKYSHOP_SYNC

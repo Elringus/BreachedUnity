@@ -14,7 +14,7 @@ Properties {
 	_Color ("Main Color", Color) = (1,1,1,1)
 }
 
-/* INIT
+///* INIT
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //
@@ -33,12 +33,12 @@ SubShader {
 	LOD 700
 	Fog { Mode Off }
 	CGPROGRAM
-	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog nolightmap noforwardadd
+	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog
 	#include "UnityCG.cginc"
 	
 	#pragma target 3.0
 	#pragma glsl
-	#pragma only_renderers d3d9 opengl
+	#pragma only_renderers d3d9 opengl d3d11
 	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_POM_SHADING_LO
 	//#define RTP_PM_SHADING
@@ -55,16 +55,16 @@ SubShader {
 
 	ENDCG
 
-///astar AddFar
+/* AddFar
 ZWrite Off Fog { Mode Off }
 CGPROGRAM
-	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog decal:blend nolightmap noforwardadd
+	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog decal:blend
 	#include "UnityCG.cginc"
 	   
 	#pragma target 3.0
 	#pragma glsl
-	#pragma only_renderers d3d9 opengl
-	#pragma multi_compile RTP_SIMPLE_SHADING
+	#pragma only_renderers d3d9 opengl d3d11
+	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_PM_SHADING
 	//#define RTP_SIMPLE_SHADING
 	
@@ -78,7 +78,7 @@ CGPROGRAM
 	#include "RTP_AddBase.cginc"
 
 ENDCG  	
-//astar/ // AddFar
+*/ // AddFar
 
 	// Pass to render object as a shadow caster
 	Pass {
@@ -149,14 +149,14 @@ CGPROGRAM
 #define SHADOW_COLLECTOR_PASS
 #include "UnityCG.cginc"
 
-/astar
+/*
 // Shadow Softener part
 #pragma target 3.0
 // Define the Shadow Filter
 #define SOFTENER_FILTER PCF8x8
 // Include Shadow Softener
 #include "../../../Shadow Softener/Shaders/ShadowSoftener.cginc"
-astar/
+*/
 
 #define RTP_CUT_HOLES
 
@@ -196,7 +196,7 @@ ENDCG
 	
 }
 // EOF POM / PM / SIMPLE shading
-*/ // INIT
+//*/ // INIT
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -217,10 +217,10 @@ SubShader {
 	LOD 100
 
 CGPROGRAM
-	#pragma surface surf Lambert vertex:vert  nolightmap noforwardadd
+	#pragma surface surf Lambert vertex:vert 
 	#include "UnityCG.cginc"
 	
-	#pragma only_renderers d3d9 opengl
+	#pragma only_renderers d3d9 opengl d3d11
 		
 /////////////////////////////////////////////////////////////////////
 // RTP specific
@@ -350,14 +350,14 @@ void surf (Input IN, inout SurfaceOutput o) {
 }
 ENDCG  
 
-///* AddPass
+/* AddPass
 ZTest LEqual
 //Offset -1,-1
 CGPROGRAM
-	#pragma surface surf Lambert vertex:vert decal:add nolightmap noforwardadd
+	#pragma surface surf Lambert vertex:vert decal:add
 	#include "UnityCG.cginc"
 	
-	#pragma only_renderers d3d9 opengl
+	#pragma only_renderers d3d9 opengl d3d11
 		
 /////////////////////////////////////////////////////////////////////
 // RTP specific
@@ -486,7 +486,7 @@ void surf (Input IN, inout SurfaceOutput o) {
 	//o.Specular = dot(_Spec4567, splat_control);
 }
 ENDCG  
-//*/ // AddPass
+*/ // AddPass
 
 }
 // EOF CLASSIC shading

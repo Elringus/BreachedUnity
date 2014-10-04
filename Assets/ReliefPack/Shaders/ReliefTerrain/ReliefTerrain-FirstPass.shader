@@ -2,7 +2,7 @@
 // Relief Terrain Shader
 // Tomasz Stobierski 2014
 //
-Shader "Hidden/TerrainEngine/Splatmap/Lightmap-FirstPass" {
+Shader "Relief Pack/ReliefTerrain-FirstPass" {
 Properties {
 	_Control ("Control (RGBA)", 2D) = "red" {}
 	_Splat3 ("Layer 3 (A)", 2D) = "white" {}
@@ -13,7 +13,7 @@ Properties {
 	_MainTex ("BaseMap (RGB)", 2D) = "white" {}
 	_Color ("Main Color", Color) = (1,1,1,1)
 	
-/* // properties that are needed when using materials	
+// properties that we need to store permanently in material	
 
 // uncomment till line 21-417 if you'd like to get rid of refreshing issues (like alt+tab and saving scene causing props missing)
 // anyway - uncommenting these lines will also affect CPU hit when using materials (for multiple terrains overhead might be quite big !)
@@ -416,11 +416,11 @@ Properties {
 //	
 //	[HideInInspector] RTP_AO_89AB ("", Vector) = (1,1,1,1)
 	
-EOF properties that are needed when using materials */
+// EOF properties that we need to store permanently in material
 
 }
 
-/* INIT
+///* INIT
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //
@@ -439,12 +439,12 @@ SubShader {
 	LOD 700
 	Fog { Mode Off }
 	CGPROGRAM
-	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog noforwardadd nolightmap
+	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog
 	#include "UnityCG.cginc"
 	
 	#pragma target 3.0
 	#pragma glsl
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_SIMPLE_SHADING
 
@@ -529,14 +529,14 @@ CGPROGRAM
 #define SHADOW_COLLECTOR_PASS
 #include "UnityCG.cginc"
 
-/astar
+/*
 // Shadow Softener part
 #pragma target 3.0
 // Define the Shadow Filter
 #define SOFTENER_FILTER PCF8x8
 // Include Shadow Softener
 #include "../../../Shadow Softener/Shaders/ShadowSoftener.cginc"
-astar/
+*/
 
 #define RTP_CUT_HOLES
 
@@ -576,7 +576,7 @@ ENDCG
 	
 }
 // EOF POM / PM / SIMPLE shading
-*/ // INIT
+//*/ // INIT
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -597,10 +597,10 @@ SubShader {
 	LOD 100
 
 CGPROGRAM
-	#pragma surface surf Lambert vertex:vert  noforwardadd nolightmap
+	#pragma surface surf Lambert vertex:vert 
 	#include "UnityCG.cginc"
 	
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 		
 /////////////////////////////////////////////////////////////////////
 // RTP specific
@@ -751,10 +751,10 @@ ENDCG
 ZTest LEqual
 //Offset -1,-1
 CGPROGRAM
-	#pragma surface surf Lambert vertex:vert decal:add noforwardadd nolightmap
+	#pragma surface surf Lambert vertex:vert decal:add
 	#include "UnityCG.cginc"
 	
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 		
 /////////////////////////////////////////////////////////////////////
 // RTP specific

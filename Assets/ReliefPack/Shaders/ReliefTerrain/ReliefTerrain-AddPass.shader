@@ -1,4 +1,4 @@
-Shader "Hidden/TerrainEngine/Splatmap/Lightmap-AddPass" {
+Shader "Relief Pack/ReliefTerrain-AddPass" {
 Properties {
 	_Control ("Control (RGBA)", 2D) = "black" {}
 	_Splat3 ("Layer 3 (A)", 2D) = "white" {}
@@ -29,12 +29,12 @@ LOD 700
 ZTest LEqual
 ZWrite Off Fog { Mode Off }
 CGPROGRAM
-	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog decal:blend noforwardadd nolightmap
+	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog decal:blend
 	#include "UnityCG.cginc"
 	   
 	#pragma target 3.0
 	#pragma glsl
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 	#pragma multi_compile RTP_PM_SHADING RTP_SIMPLE_SHADING
 	//#define RTP_PM_SHADING
 	//#define RTP_SIMPLE_SHADING
@@ -76,10 +76,10 @@ SubShader {
 ZTest LEqual
 //Offset -1,-1
 CGPROGRAM
-	#pragma surface surf Lambert vertex:vert decal:add noforwardadd nolightmap
+	#pragma surface surf Lambert vertex:vert decal:add
 	#include "UnityCG.cginc"
 	
-	#pragma only_renderers d3d9
+	#pragma only_renderers d3d9 opengl d3d11
 	
 /////////////////////////////////////////////////////////////////////
 // RTP specific
