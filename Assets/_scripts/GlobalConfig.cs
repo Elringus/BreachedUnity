@@ -5,5 +5,5 @@ public static class GlobalConfig
 
 	public static readonly int VERSION_MAJOR =    0;
 	public static readonly int VERSION_MIDDLE =   2;
-	public static readonly int VERSION_MINOR =    20140927;
+	public static readonly int VERSION_MINOR =    20141004;
 }
