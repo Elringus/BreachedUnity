@@ -2,7 +2,7 @@
 // Relief Terrain Shader
 // Tomasz Stobierski 2014
 //
-Shader "Relief Pack/ReliefTerrain-FirstPass" {
+Shader "Hidden/TerrainEngine/Splatmap/Lightmap-FirstPass" {
 Properties {
 	_Control ("Control (RGBA)", 2D) = "red" {}
 	_Splat3 ("Layer 3 (A)", 2D) = "white" {}
@@ -13,7 +13,7 @@ Properties {
 	_MainTex ("BaseMap (RGB)", 2D) = "white" {}
 	_Color ("Main Color", Color) = (1,1,1,1)
 	
-// properties that we need to store permanently in material	
+/* // properties that are needed when using materials	
 
 // uncomment till line 21-417 if you'd like to get rid of refreshing issues (like alt+tab and saving scene causing props missing)
 // anyway - uncommenting these lines will also affect CPU hit when using materials (for multiple terrains overhead might be quite big !)
@@ -416,7 +416,7 @@ Properties {
 //	
 //	[HideInInspector] RTP_AO_89AB ("", Vector) = (1,1,1,1)
 	
-// EOF properties that we need to store permanently in material
+EOF properties that are needed when using materials */
 
 }
 

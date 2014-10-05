@@ -14,7 +14,7 @@ Properties {
 	_Color ("Main Color", Color) = (1,1,1,1)
 }
 
-///* INIT
+/* INIT
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //
@@ -55,7 +55,7 @@ SubShader {
 
 	ENDCG
 
-/* AddFar
+/astar AddFar
 ZWrite Off Fog { Mode Off }
 CGPROGRAM
 	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog decal:blend
@@ -78,7 +78,7 @@ CGPROGRAM
 	#include "RTP_AddBase.cginc"
 
 ENDCG  	
-*/ // AddFar
+astar/ // AddFar
 
 	// Pass to render object as a shadow caster
 	Pass {
@@ -149,14 +149,14 @@ CGPROGRAM
 #define SHADOW_COLLECTOR_PASS
 #include "UnityCG.cginc"
 
-/*
+/astar
 // Shadow Softener part
 #pragma target 3.0
 // Define the Shadow Filter
 #define SOFTENER_FILTER PCF8x8
 // Include Shadow Softener
 #include "../../../Shadow Softener/Shaders/ShadowSoftener.cginc"
-*/
+astar/
 
 #define RTP_CUT_HOLES
 
@@ -196,7 +196,7 @@ ENDCG
 	
 }
 // EOF POM / PM / SIMPLE shading
-//*/ // INIT
+*/ // INIT
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

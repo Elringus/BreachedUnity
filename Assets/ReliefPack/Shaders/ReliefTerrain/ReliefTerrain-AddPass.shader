@@ -1,4 +1,4 @@
-Shader "Relief Pack/ReliefTerrain-AddPass" {
+Shader "Hidden/TerrainEngine/Splatmap/Lightmap-AddPass" {
 Properties {
 	_Control ("Control (RGBA)", 2D) = "black" {}
 	_Splat3 ("Layer 3 (A)", 2D) = "white" {}
