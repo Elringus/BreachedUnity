@@ -43,7 +43,7 @@ MonoBehaviour:
   Transform: {fileID: 0}
   AccelMoveSpeed: 9
   NormalMoveSpeed: 5
-  FallSpeed: 5
+  FallSpeed: 9
   GeneralEasing: 3
   HorControlDamping: 1
   VerControlDamping: 15
