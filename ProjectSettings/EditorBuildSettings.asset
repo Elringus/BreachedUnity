@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/_scenes/scn_SimpleView.unity
   - enabled: 1
     path: Assets/_scenes/scn_Sector1.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_Sector2.unity

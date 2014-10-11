@@ -86,7 +86,7 @@ GameObject:
   - 114: {fileID: 583930351}
   - 114: {fileID: 583930350}
   m_Layer: 0
-  m_Name: event-system
+  m_Name: _event-system
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
 --- !u!4 &583930353
 Transform:
   m_ObjectHideFlags: 0
@@ -178,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Resolution: {x: 1920, y: 1080}
+  m_CanvasScaleMode: 0
   m_MatchWidthOrHeight: 1
 --- !u!114 &737492093
 MonoBehaviour:
@@ -209,6 +211,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
+  m_OverrideSorting: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &737492095
@@ -285,7 +288,7 @@ GameObject:
   - 124: {fileID: 873887205}
   - 81: {fileID: 873887203}
   m_Layer: 0
-  m_Name: camera-main
+  m_Name: _camera-main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
