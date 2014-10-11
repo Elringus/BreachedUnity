@@ -127,7 +127,7 @@ MonoBehaviour:
   axialAberration: 10
   blur: .5
   blurSpread: .5
-  luminanceDependency: .100000001
+  luminanceDependency: .349999994
   blurDistance: 4
   vignetteShader: {fileID: 4800000, guid: 627943dc7a9a74286b70a4f694a0acd5, type: 3}
   separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}

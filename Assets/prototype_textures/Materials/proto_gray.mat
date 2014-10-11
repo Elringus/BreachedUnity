@@ -31,16 +31,16 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .078125
+        second: .182930306
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .858208954, g: .858208954, b: .858208954, a: 1}
+        second: {r: .941176474, g: .941176474, b: .941176474, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .850746274, g: .850746274, b: .850746274, a: 1}
+        second: {r: .963235319, g: .963235319, b: .963235319, a: 1}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

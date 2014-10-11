@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 400000}
   - 108: {fileID: 10800000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: _light
   m_TagString: Untagged
@@ -39,8 +38,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 1
-  m_Color: {r: .89191401, g: .828955889, b: .720347524, a: 1}
-  m_Intensity: 1.25999999
+  m_Color: {r: .933398366, g: .867511988, b: .753852069, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -65,18 +64,6 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83d1292242288a641a3d7986961e0de4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightForSelfShadowing: {fileID: 10800000}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204687a6d79e7b545b2483d0f67e1f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: .0430000015
+  multiplier: .0450000018
   trueSky: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
