@@ -95,7 +95,7 @@ CGPROGRAM
 		// if not defined global color map will be blended (lerp)
 		#define COLOR_MAP_BLEND_MULTIPLY
 		
-		#define RTP_CUT_HOLES
+		//#define RTP_CUT_HOLES
 		
 		//#define RTP_SNOW
 	#endif
