@@ -54,6 +54,8 @@ public abstract class BaseView : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.F2)) SwitchView(ViewType.Sector2);
 			if (Input.GetKeyDown(KeyCode.F3)) SwitchView(ViewType.Sector3);
 			if (Input.GetKeyDown(KeyCode.F4)) SwitchView(ViewType.Sector4);
+
+			if (Input.GetKeyDown(KeyCode.F5)) SwitchView(ViewType.MainMenu);
 		}
 	}
 
