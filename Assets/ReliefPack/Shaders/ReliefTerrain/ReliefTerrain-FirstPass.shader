@@ -476,7 +476,7 @@ CGPROGRAM
 #include "UnityCG.cginc"
 #define UNITY_PASS_SHADOWCASTER
 
-//#define RTP_CUT_HOLES
+#define RTP_CUT_HOLES
 
 struct v2f { 
 	V2F_SHADOW_CASTER;
@@ -538,7 +538,7 @@ CGPROGRAM
 #include "../../../Shadow Softener/Shaders/ShadowSoftener.cginc"
 */
 
-//#define RTP_CUT_HOLES
+#define RTP_CUT_HOLES
 
 struct v2f {
 	V2F_SHADOW_COLLECTOR;
@@ -616,7 +616,7 @@ CGPROGRAM
 		// if not defined global color map will be blended (lerp)
 		#define COLOR_MAP_BLEND_MULTIPLY
 
-		//#define RTP_CUT_HOLES
+		#define RTP_CUT_HOLES
 		
 		//#define RTP_SNOW
 	#endif
@@ -770,7 +770,7 @@ CGPROGRAM
 		// if not defined global color map will be blended (lerp)
 		#define COLOR_MAP_BLEND_MULTIPLY
 
-		//#define RTP_CUT_HOLES
+		#define RTP_CUT_HOLES
 		
 		//#define RTP_SNOW
 	#endif

@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   - 143: {fileID: 14300000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
