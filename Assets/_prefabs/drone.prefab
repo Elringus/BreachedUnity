@@ -12,7 +12,7 @@ GameObject:
   - 143: {fileID: 14300000}
   m_Layer: 8
   m_Name: drone
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: .0162866339, y: -.254565865, z: .00428791298, w: .966908813}
-  m_LocalPosition: {x: 292.980011, y: 106.300003, z: 2.27830005}
+  m_LocalPosition: {x: 66.2340012, y: 76.2440033, z: 183.580002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
