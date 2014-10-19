@@ -55,7 +55,7 @@ SubShader {
 
 	ENDCG
 
-/astar AddFar
+///astar AddFar
 ZWrite Off Fog { Mode Off }
 CGPROGRAM
 	#pragma surface surf CustomBlinnPhong vertex:vert finalcolor:customFog decal:blend
@@ -78,7 +78,7 @@ CGPROGRAM
 	#include "RTP_AddBase.cginc"
 
 ENDCG  	
-astar/ // AddFar
+//astar/ // AddFar
 
 	// Pass to render object as a shadow caster
 	Pass {

@@ -77,7 +77,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //// comment below detail when not needed
-#define RTP_SUPER_DETAIL
+//#define RTP_SUPER_DETAIL
 //#define RTP_SUPER_DTL_MULTS
 // comment below if you don't use snow features
 //#define RTP_SNOW
@@ -661,10 +661,11 @@ half4 RTP_ReflexLightSpecColor;
 		
 		return abs(result);
 	}	
+	float4 _ExposureIBL;	
 #endif
 samplerCUBE _CubemapDiff;
 samplerCUBE _CubemapSpec;
-float4x4	SkyMatrix;// set globaly by skyshop
+float4x4	_SkyMatrix;// set globaly by skyshop
 
 // PBL / IBL
 half4 RTP_gloss2mask89AB, RTP_gloss2mask4567;
@@ -786,6 +787,7 @@ float _Fstart,_Fend;
 	#endif
 #endif
 
+fixed3 RTP_ambLight;
 inline fixed4 LightingCustomBlinnPhong_PrePass (in RTPSurfaceOutput s, half4 light)
 {
 	#if defined(RTP_DEFERRED_PBL_NORMALISATION)
@@ -798,8 +800,10 @@ inline fixed4 LightingCustomBlinnPhong_PrePass (in RTPSurfaceOutput s, half4 lig
 	fixed4 c;
 	s.Albedo.rgb*=rtp_customAmbientCorrection*2+1;
 	c.rgb = (s.Albedo * light.rgb + light.rgb * s.SpecColor * spec) *s.RTP.y + rtp_customAmbientCorrection*0.5;
-	// alfa blend na kanale alfa - nie możemy polegać na zawartości bufora (spec - light.a)
-	c.a = s.Alpha;// + spec * _SpecColor.a;
+	#if defined(LIGHTMAP_OFF) && !defined(RTP_AMBIENT_EMISSIVE_MAP)
+		c.rgb += (s.Albedo*RTP_ambLight)*(1-s.RTP.y);
+	#endif
+	c.a = s.Alpha + spec * _SpecColor.a;
 	return c;
 }
 
@@ -5056,11 +5060,11 @@ void surf (Input IN, inout RTPSurfaceOutput o) {
 				#endif
 				reflVec=reflect(normalize(viewW), normalW);
 				#if defined(RTP_SKYSHOP_SYNC) && defined(RTP_SKYSHOP_SKY_ROTATION)
-				 reflVec = SkyMatrix[0].xyz*reflVec.x + SkyMatrix[1].xyz*reflVec.y + SkyMatrix[2].xyz*reflVec.z;
+				 reflVec = _SkyMatrix[0].xyz*reflVec.x + _SkyMatrix[1].xyz*reflVec.y + _SkyMatrix[2].xyz*reflVec.z;
 				#endif		
 			#endif
 	   		#if defined(RTP_SKYSHOP_SYNC) && defined(RTP_SKYSHOP_SKY_ROTATION)
-				normalW = SkyMatrix[0].xyz*normalW.x + SkyMatrix[1].xyz*normalW.y + SkyMatrix[2].xyz*normalW.z;
+				normalW = _SkyMatrix[0].xyz*normalW.x + _SkyMatrix[1].xyz*normalW.y + _SkyMatrix[2].xyz*normalW.z;
 			#endif	
 		}
 	#endif
@@ -5134,6 +5138,9 @@ void surf (Input IN, inout RTPSurfaceOutput o) {
 			half3 IBLDiffuseCol = DecodeRGBM(texCUBElod(_CubemapDiff, float4(normalW,0)))*RTP_IBL_DiffStrength;
 		#endif
 		IBLDiffuseCol*=colBrightnessNotAffectedByColormap * lerp(1, o_RTP_y_without_shadowmap_distancefade, TERRAIN_IBL_DiffAO_Damp);
+		#ifdef RTP_SKYSHOP_SYNC
+			IBLSpecCol.rgb*=_ExposureIBL.y;
+		#endif		
 		#ifndef RTP_IBL_SPEC
 		o.Emission += IBLDiffuseCol.rgb;
 		#else
@@ -5189,6 +5196,9 @@ void surf (Input IN, inout RTPSurfaceOutput o) {
 			half3 IBLSpecCol = DecodeRGBM(texCUBElod (_CubemapSpec, float4(reflVec, o_SpecularInvSquared*(6-exponential*o.RTP.x*3))))*RTP_IBL_SpecStrength;
 		#endif			
 		IBLSpecCol.rgb*=spec_fresnel * SpecColor * lerp(1, o_RTP_y_without_shadowmap_distancefade, TERRAIN_IBLRefl_SpecAO_Damp);
+		#ifdef RTP_SKYSHOP_SYNC
+			IBLSpecCol.rgb*=_ExposureIBL.y;
+		#endif		
 		#ifdef RTP_IBL_DIFFUSE
 			// link difuse and spec IBL together with energy conservation
 			o.Emission += saturate(1-IBLSpecCol.rgb) * IBLDiffuseCol + IBLSpecCol.rgb;
@@ -5271,15 +5281,20 @@ void surf (Input IN, inout RTPSurfaceOutput o) {
 	#endif
 
 	float diff;
-	#if !defined(LIGHTMAP_OFF) && defined (DIRLIGHTMAP_OFF)
+	#if !defined(LIGHTMAP_OFF) && defined (DIRLIGHTMAP_OFF) && !defined(RTP_PLANET)
 		//IN.lightDir.z*=_TERRAIN_ExtrudeHeight;
-		diff = max (0, dot (o.Normal, IN.lightDir.xyz))*lerp(2,2-_BumpMapGlobalStrengthPerLayer,_uv_Relief_z);
-		diff = lerp(diff, 1, _uv_Relief_w*0.75f); // w dużej odleglosci nakladamy tylko 25% diffa
-		diff = diff*_TERRAIN_LightmapShading+(1-_TERRAIN_LightmapShading);
+		diff = ((dot (o.Normal, IN.lightDir.xyz))*0.5+0.5);
+		// mnozenie albedo usuwa oswietlenie ambient - wyrownujemy to ponizej (wsp. dobrane recznie dla forward i deferred)
 		#if defined(UNITY_PASS_PREPASSFINAL)
-			diff=lerp(diff, 1, _uv_Relief_z);
+			// musimy polegac na RTP_ambLight przekazanym w RTPFogUpdate.cs bo deferred z lightmapami ma niezdefiniowane UNITY_LIGHTMODEL_AMBIENT
+			// *0.5 daje taki sam rezultat w forward i deferred
+			o.Emission+=o.Albedo*RTP_ambLight.rgb*(1-diff)*_TERRAIN_LightmapShading*0.5f;//*(1-_uv_Relief_z*0.5);
+		#else
+			o.Emission+=o.Albedo*UNITY_LIGHTMODEL_AMBIENT.rgb*(1-diff)*_TERRAIN_LightmapShading;
 		#endif
-		o.RTP.y*=diff;
+		diff = diff*_TERRAIN_LightmapShading+(1-_TERRAIN_LightmapShading);
+		//o.RTP.y*=diff; // to nie zadziala, bo RTP.y jest uzywane tylko w customowych funkcjach oswietlajacych
+		o.Albedo*=diff;
 	#endif
 	
 	#ifdef RTP_CAUSTICS

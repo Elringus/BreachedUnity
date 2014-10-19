@@ -2432,7 +2432,7 @@ public class ReliefTerrainEditor : Editor {
 					float prev_distance_start=_target.distance_start;
 					float prev_distance_transition=_target.distance_transition;
 					#endif
-					checkChange(ref _target.distance_start, EditorGUILayout.Slider("Distance start", _target.distance_start, 0, 20));
+					checkChange(ref _target.distance_start, EditorGUILayout.Slider("Distance start", _target.distance_start, 0, 50));
 					if (_target.distance_start_bumpglobal<_target.distance_start) _target.distance_start_bumpglobal=_target.distance_start;
 					checkChange(ref _target.distance_transition, EditorGUILayout.Slider("Fade length", _target.distance_transition, 0, 50));
 					#if !UNITY_3_5
@@ -2506,10 +2506,10 @@ public class ReliefTerrainEditor : Editor {
 						EditorGUILayout.EndVertical();
 					}
 					
-					if (RTP_COMPLEMENTARY_LIGHTS) {
+					{
 						EditorGUILayout.Space();	
 						GUI.color=new Color(1,1,0.5f,1);						
-						EditorGUILayout.LabelField("Complementary ambience lighting", EditorStyles.boldLabel);
+						EditorGUILayout.LabelField("Global complementary ambience lighting "+(RTP_COMPLEMENTARY_LIGHTS?"":"(disabled for terrains)"), EditorStyles.boldLabel);
 						GUI.color=skin_color;
 						
 						EditorGUILayout.BeginVertical("Box");
@@ -2544,7 +2544,7 @@ public class ReliefTerrainEditor : Editor {
 					if (showLightmapShading) {
 						EditorGUILayout.Space();	
 						EditorGUILayout.BeginVertical("Box");
-						EditorGUILayout.HelpBox("Helpful when lightmapping in single mode. Shader can mimic diffuse lighting with normal maps used. In dual lightmap mode (deferred) this is applied only beyond near distance, so you need to sync its values tiwh realtime shadows distance/fade.",MessageType.None, true);
+						EditorGUILayout.HelpBox("Helpful when lightmapping in single mode. Shader can mimic diffuse lighting with normal maps used. In dual lightmap mode (deferred) this is applied only beyond near distance, so you need to sync its values with realtime shadows distance/fade.",MessageType.None, true);
 						checkChange(ref _target.LightmapShading, EditorGUILayout.Slider("Shading strength for lightmaps", _target.LightmapShading, 0, 2));
 						EditorGUILayout.EndVertical();
 					}

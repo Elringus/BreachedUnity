@@ -43,5 +43,6 @@ public class RTPFogUpdate : MonoBehaviour {
 			Shader.SetGlobalFloat("_Fstart", 1000000);
 			Shader.SetGlobalFloat("_Fend", 2000000);
 		}
+		Shader.SetGlobalColor ("RTP_ambLight", RenderSettings.ambientLight);
 	}
 }

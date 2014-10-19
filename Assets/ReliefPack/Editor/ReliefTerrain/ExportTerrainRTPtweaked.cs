@@ -182,9 +182,9 @@ class ExportTerrainRTPtweaked : EditorWindow
             StringBuilder sb = new StringBuilder("v ", 20);
             // StringBuilder stuff is done this way because it's faster than using the "{0} {1} {2}"etc. format
             // Which is important when you're exporting huge terrains.
-            sb.Append(tVertices[i].x.ToString()).Append(" ").
-               Append(tVertices[i].y.ToString()).Append(" ").
-               Append(tVertices[i].z.ToString());
+            sb.Append((-tVertices[i].z).ToString()).Append(" ").
+               Append((tVertices[i].y).ToString()).Append(" ").
+               Append((tVertices[i].x).ToString());
             sw.WriteLine(sb);
          }
          // Write UVs
@@ -192,8 +192,8 @@ class ExportTerrainRTPtweaked : EditorWindow
          {
             UpdateProgress();
             StringBuilder sb = new StringBuilder("vt ", 22);
-            sb.Append(tUV[i].x.ToString()).Append(" ").
-               Append(tUV[i].y.ToString());
+            sb.Append(tUV[i].y.ToString()).Append(" ").
+               Append(tUV[i].x.ToString());
             sw.WriteLine(sb);
          }
          if (saveFormat == SaveFormatRTPtweaked.Triangles)

@@ -18,12 +18,6 @@ public class FlightView : BaseView
 		sky = GameObject.Find("trueSky").GetComponent<trueSKY>();
 		vignetting = Camera.main.GetComponent<Vignetting>();
 		RT = FindObjectOfType<ReliefTerrain>();
-	}
-
-	protected override void Start ()
-	{
-		base.Start();
-
 		RT.BumpGlobalCombined = new Texture2D(64, 64);
 	}
 
