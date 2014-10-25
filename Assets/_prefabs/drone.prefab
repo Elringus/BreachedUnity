@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: .0162866339, y: -.254565865, z: .00428791298, w: .966908813}
-  m_LocalPosition: {x: 90.6240005, y: 12.6330004, z: 109.68}
+  m_LocalPosition: {x: 341.290009, y: 117.139999, z: 27.2380009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Transform: {fileID: 0}
   AccelMoveSpeed: 50
-  NormalMoveSpeed: 15
+  NormalMoveSpeed: 10
   FallSpeed: 15
   GeneralEasing: 3
   HorControlDamping: 1
