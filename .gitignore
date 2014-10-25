@@ -66,28 +66,28 @@ game-state.xml
 # Proprietary software
 # =========================
 
-Assets/Plugins/
+Assets/Plugins
 Assets/Plugins.meta
-Assets/CandelaSSRR/
+Assets/CandelaSSRR
 Assets/CandelaSSRR.meta
-Assets/ReliefPack/
+Assets/ReliefPack
 Assets/ReliefPack.meta
-Assets/Simul/
+Assets/Simul
 Assets/Simul.meta
-Assets/Sonic Ether/
+Assets/Sonic Ether
 Assets/Sonic Ether.meta
 
 # Temp, logs, etc
 # =========================
 
-Assets/Standard Assets/
+Assets/Standard Assets
 Assets/Standard Assets.meta
-Assets/Editor/Image Effects/
+Assets/Editor/Image Effects
 Assets/Editor/Image Effects.meta
-Assets/Editor/Water (Pro Only)/
+Assets/Editor/Water (Pro Only)
 Assets/Editor/Water (Pro Only).meta
-Assets/Gizmos/
+Assets/Gizmos
 Assets/Gizmos.meta
-Assets/Examples/
+Assets/Examples
 Assets/Examples.meta
 trueSKYUnityUI.log
