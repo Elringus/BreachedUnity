@@ -19,6 +19,7 @@ public class SimpleView : BaseView
 	private bool showProbes;
 	private bool showArtifacts;
 	private bool inFlightMode;
+	private bool loadSectors;
 	private int lootCharges;
 	private List<Loot> sectorLoot = new List<Loot>();
 
@@ -183,6 +184,7 @@ public class SimpleView : BaseView
 
 				if (selectedPage == SimpleViewPage.Map)
 				{
+					loadSectors = GUILayout.Toggle(loadSectors, " Load sector scenes");
 					if (GUILayout.Button(string.Format("Enter 1st sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(1);
 					if (GUILayout.Button(string.Format("Enter 2nt sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(2);
 					if (GUILayout.Button(string.Format("Enter 3rd sector [-{0}AP]", State.EnterSectorAPCost))) InitFlightMode(3);
@@ -222,8 +224,12 @@ public class SimpleView : BaseView
 	{
 		if (!mapController.EnterSector()) return;
 
-		inFlightMode = true;
-		lootCharges = State.LootCharges;
-		flightController.GenerateLoot(sectorID, out sectorLoot);
+		if (loadSectors) SwitchView(sectorID == 1 ? ViewType.Sector1 : sectorID == 2 ? ViewType.Sector2 : sectorID == 3 ? ViewType.Sector3 : ViewType.Sector4);
+		else
+		{
+			inFlightMode = true;
+			lootCharges = State.LootCharges;
+			flightController.GenerateLoot(sectorID, out sectorLoot);
+		}
 	}
 }
