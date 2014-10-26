@@ -26,11 +26,15 @@ public class DroneController : MonoBehaviour
 	private Transform lookCamera;
 	private CharacterController charController;
 
+	private FlightView flightVew;
+
 	private void Awake ()
 	{
 		Transform = transform;
 		lookCamera = Camera.main.transform;
 		charController = GetComponent<CharacterController>();
+
+		flightVew = FindObjectOfType<FlightView>();
 	}
 
 	private void Update ()
@@ -67,5 +71,10 @@ public class DroneController : MonoBehaviour
 			lookCamera.position = Vector3.Lerp(lookCamera.position, Transform.position, GeneralEasing * Time.deltaTime);
 			lookCamera.rotation = Quaternion.Lerp(lookCamera.rotation, Quaternion.Euler(verDelta, Transform.eulerAngles.y, Transform.eulerAngles.z), GeneralEasing * Time.deltaTime);
 		}
+	}
+
+	private void OnTriggerEnter (Collider colli)
+	{
+		if (colli.CompareTag("Keeper")) flightVew.ExitFlightMode();
 	}
 }

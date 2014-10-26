@@ -31,4 +31,9 @@ public class FlightView : BaseView
 		if (curTime > .5f) curTime = 1 - curTime;
 		vignetting.blurDistance = MaxAbberation * curTime;
 	}
+
+	public void ExitFlightMode ()
+	{
+		SwitchView(ViewType.SimpleView);
+	}
 }
