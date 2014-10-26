@@ -352,10 +352,10 @@ public abstract class BaseState : IState
 			EnterSectorAPCost = 3;
 			LootCharges = 3;
 			SectorsParameters = new List<SectorParameters> { 
-				new SectorParameters(1, 4, 0, 3, 3), 
-				new SectorParameters(2, 5, 3, 0, 3), 
-				new SectorParameters(3, 3, 3, 3, 0), 
-				new SectorParameters(4, 6, 2, 2, 2) 
+				new SectorParameters(1, 10, 0, 3, 3), 
+				new SectorParameters(2, 15, 3, 0, 3), 
+				new SectorParameters(3, 8, 3, 3, 0), 
+				new SectorParameters(4, 5, 2, 2, 2) 
 			};
 
 			Artifacts = new List<Artifact> { 

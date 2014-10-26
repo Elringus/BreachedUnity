@@ -76,5 +76,6 @@ public class DroneController : MonoBehaviour
 	private void OnTriggerEnter (Collider colli)
 	{
 		if (colli.CompareTag("Keeper")) flightVew.ExitFlightMode();
+		if (colli.CompareTag("LootSpot")) colli.GetComponent<LootSpot>().RecieveLoot();
 	}
 }

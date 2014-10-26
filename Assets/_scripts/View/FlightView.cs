@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using simul;
 using System;
 
 public class FlightView : BaseView
 {
+	public int SectorID;
 	public float MaxAbberation = 6;
 
 	private trueSKY sky;
 	private Vignetting vignetting;
 	private ReliefTerrain RT;
+
+	private FlightController flightController;
+	private List<Loot> lootList = new List<Loot>();
 
 	protected override void Awake ()
 	{
@@ -19,6 +23,22 @@ public class FlightView : BaseView
 		vignetting = Camera.main.GetComponent<Vignetting>();
 		RT = FindObjectOfType<ReliefTerrain>();
 		RT.BumpGlobalCombined = new Texture2D(64, 64);
+
+		flightController = new FlightController();
+	}
+
+	protected override void Start ()
+	{
+		base.Start();
+
+		flightController.GenerateLoot(SectorID, out lootList);
+		var lootSpots = new List<LootSpot>(FindObjectsOfType<LootSpot>());
+		lootSpots.Shuffle();
+		for (int i = 0; i < lootList.Count; i++)
+		{
+			lootSpots[i].Loot = lootList[i];
+			lootSpots[i].Active = true;
+		}
 	}
 
 	protected override void Update ()
