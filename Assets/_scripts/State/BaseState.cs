@@ -347,7 +347,7 @@ public abstract class BaseState : IState
 			};
 
 			TotalDays = 8;
-			MaxAP = 5;
+			MaxAP = 10;
 
 			EnterSectorAPCost = 3;
 			LootCharges = 3;
