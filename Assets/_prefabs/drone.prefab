@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: .0162866339, y: -.254565865, z: .00428791298, w: .966908813}
-  m_LocalPosition: {x: 341.290009, y: 117.139999, z: 27.2380009}
+  m_LocalPosition: {x: 210.669998, y: 106.300003, z: 387.910004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,6 +52,9 @@ MonoBehaviour:
   SteeringLimit: 50
   SteeringSpeed: 10
   SteeringSkew: 15
+  EngineMode: 0
+  AccelRegenRate: .100000001
+  AccelBurnRate: .5
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1

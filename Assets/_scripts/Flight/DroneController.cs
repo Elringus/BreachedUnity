@@ -22,7 +22,12 @@ public class DroneController : MonoBehaviour
 	public float SteeringSpeed = 10;
 	public float SteeringSkew = 15;
 
-	private EngineMode engineMode;
+	public EngineMode EngineMode;
+
+	public float AccelRegenRate = .1f;
+	public float AccelBurnRate = .5f;
+	private float accelCharge = 1;
+
 	private Transform lookCamera;
 	private CharacterController charController;
 	private int lootCharges;
@@ -41,15 +46,14 @@ public class DroneController : MonoBehaviour
 
 	private void Update ()
 	{
-		if (Input.GetKeyDown(KeyCode.LeftControl)) engineMode = engineMode == EngineMode.Freeze ? EngineMode.Normal : EngineMode.Freeze;
+		if (Input.GetKeyDown(KeyCode.LeftControl)) EngineMode = EngineMode == EngineMode.Freeze ? EngineMode.Normal : EngineMode.Freeze;
 
-		if (engineMode != EngineMode.Freeze)
+		if (EngineMode != EngineMode.Freeze)
 		{
+			EngineMode = (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) ? EngineMode.Stop :
+						 (Input.GetMouseButton(0) || Input.GetKey(KeyCode.LeftShift)) && accelCharge > 0 ? EngineMode.Accel : EngineMode.Normal;
 
-			engineMode = (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) ? EngineMode.Stop :
-						 (Input.GetMouseButton(0) || Input.GetKey(KeyCode.LeftShift)) ? EngineMode.Accel : EngineMode.Normal;
-
-			if (engineMode != EngineMode.Stop) charController.Move(Transform.forward * (engineMode == EngineMode.Accel ? AccelMoveSpeed : NormalMoveSpeed) * Time.deltaTime);
+			if (EngineMode != EngineMode.Stop) charController.Move(Transform.forward * (EngineMode == EngineMode.Accel ? AccelMoveSpeed : NormalMoveSpeed) * Time.deltaTime);
 			if (!charController.isGrounded) charController.Move(Vector3.down * FallSpeed * Time.deltaTime);
 
 			float horDelta = 0;
@@ -65,7 +69,7 @@ public class DroneController : MonoBehaviour
 
 			if (Mathf.Abs(horDelta) > SteeringLimit)
 			{
-				Transform.Rotate(new Vector3(0, Mathf.Clamp(horDelta, -MaxHorAccel, MaxHorAccel) * Time.deltaTime / (engineMode == EngineMode.Stop ? SteeringSpeed / 2 : SteeringSpeed), 0));
+				Transform.Rotate(new Vector3(0, Mathf.Clamp(horDelta, -MaxHorAccel, MaxHorAccel) * Time.deltaTime / (EngineMode == EngineMode.Stop ? SteeringSpeed / 2 : SteeringSpeed), 0));
 				Transform.rotation = Quaternion.Lerp(Transform.rotation, Quaternion.Euler(0, Transform.eulerAngles.y, horDelta < 0 ? SteeringSkew : -SteeringSkew), GeneralEasing * Time.deltaTime);
 			}
 			else Transform.rotation = Quaternion.Lerp(Transform.rotation, Quaternion.Euler(0, Transform.eulerAngles.y, 0), GeneralEasing * Time.deltaTime);
@@ -73,11 +77,15 @@ public class DroneController : MonoBehaviour
 			lookCamera.position = Vector3.Lerp(lookCamera.position, Transform.position, GeneralEasing * Time.deltaTime);
 			lookCamera.rotation = Quaternion.Lerp(lookCamera.rotation, Quaternion.Euler(verDelta, Transform.eulerAngles.y, Transform.eulerAngles.z), GeneralEasing * Time.deltaTime);
 		}
+
+		if (EngineMode == EngineMode.Accel) accelCharge -= accelCharge <= 0 ? 0 : AccelBurnRate * Time.deltaTime;
+		else accelCharge += accelCharge >= 1 ? 0 : AccelRegenRate * Time.deltaTime * (EngineMode == EngineMode.Stop ? 2 : 1);
 	}
 
 	private void OnGUI ()
 	{
 		GUILayout.Box("Loot Charges: " + lootCharges);
+		GUILayout.Box("Accel Charge: " + accelCharge.ToString("P0"));
 	}
 
 	private void OnTriggerEnter (Collider colli)

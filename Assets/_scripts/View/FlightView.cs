@@ -13,6 +13,7 @@ public class FlightView : BaseView
 	private ReliefTerrain RT;
 
 	private FlightController flightController;
+	private DroneController drone;
 	private List<Loot> lootList = new List<Loot>();
 
 	protected override void Awake ()
@@ -25,6 +26,7 @@ public class FlightView : BaseView
 		RT.BumpGlobalCombined = new Texture2D(64, 64);
 
 		flightController = new FlightController();
+		drone = FindObjectOfType<DroneController>();
 	}
 
 	protected override void Start ()
@@ -50,6 +52,10 @@ public class FlightView : BaseView
 		float curTime = sky.time - (float)Math.Truncate(sky.time);
 		if (curTime > .5f) curTime = 1 - curTime;
 		vignetting.blurDistance = MaxAbberation * curTime;
+
+		vignetting.blur = Mathf.Lerp(vignetting.blur, drone.EngineMode == EngineMode.Accel ? 2 : .5f, Time.deltaTime);
+		vignetting.blurSpread = Mathf.Lerp(vignetting.blurSpread, drone.EngineMode == EngineMode.Accel ? 10 : .5f, Time.deltaTime);
+		vignetting.intensity = Mathf.Lerp(vignetting.intensity, drone.EngineMode == EngineMode.Accel ? 5 : 1, Time.deltaTime);
 	}
 
 	public void ExitFlightMode ()

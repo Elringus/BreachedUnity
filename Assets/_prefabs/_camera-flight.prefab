@@ -30,8 +30,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -.0248738471, y: -.862124264, z: .14980036, w: -.483407706}
-  m_LocalPosition: {x: 151.25, y: 24.0450001, z: 385.950012}
+  m_LocalRotation: {x: .0496892668, y: -.953800797, z: .154912814, w: .252580911}
+  m_LocalPosition: {x: 259.899994, y: 104.300003, z: 442.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -149,7 +149,7 @@ MonoBehaviour:
   chromaticAberration: 3
   axialAberration: .5
   blur: 0
-  blurSpread: .75
+  blurSpread: 0
   luminanceDependency: .25
   blurDistance: 2.5
   vignetteShader: {fileID: 4800000, guid: 627943dc7a9a74286b70a4f694a0acd5, type: 3}
