@@ -3,7 +3,19 @@ using System.Collections;
 
 public class LootSpot : MonoBehaviour
 {
-	public Loot Loot;
+	private Loot _loot;
+	public Loot Loot
+	{
+		get { return _loot; }
+		set { 
+			_loot = value;
+			model.renderer.material.SetColor("_EmissionColor",
+				value.LootType == LootType.MineralA ? Color.blue :
+				value.LootType == LootType.MineralB ? Color.green :
+				value.LootType == LootType.MineralC ? Color.red :
+				Color.white);
+		}
+	}
 
 	private bool _active;
 	public bool Active
