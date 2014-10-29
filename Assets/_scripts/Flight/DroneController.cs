@@ -25,6 +25,7 @@ public class DroneController : MonoBehaviour
 	private EngineMode engineMode;
 	private Transform lookCamera;
 	private CharacterController charController;
+	private int lootCharges;
 
 	private FlightView flightVew;
 
@@ -33,6 +34,7 @@ public class DroneController : MonoBehaviour
 		Transform = transform;
 		lookCamera = Camera.main.transform;
 		charController = GetComponent<CharacterController>();
+		lootCharges = ServiceLocator.State.LootCharges;
 
 		flightVew = FindObjectOfType<FlightView>();
 	}
@@ -73,9 +75,19 @@ public class DroneController : MonoBehaviour
 		}
 	}
 
+	private void OnGUI ()
+	{
+		GUILayout.Box("Loot Charges: " + lootCharges);
+	}
+
 	private void OnTriggerEnter (Collider colli)
 	{
 		if (colli.CompareTag("Keeper")) flightVew.ExitFlightMode();
-		if (colli.CompareTag("LootSpot")) colli.GetComponent<LootSpot>().RecieveLoot();
+		if (colli.CompareTag("LootSpot"))
+		{
+			colli.GetComponent<LootSpot>().RecieveLoot();
+			lootCharges--;
+			if (lootCharges <= 0) flightVew.ExitFlightMode();
+		}
 	}
 }
