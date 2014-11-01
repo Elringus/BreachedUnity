@@ -27,6 +27,7 @@ public class DroneController : MonoBehaviour
 	public float AccelRegenRate = .1f;
 	public float AccelBurnRate = .5f;
 	private float accelCharge = 1;
+	private bool accelBlock;
 
 	private Transform lookCamera;
 	private CharacterController charController;
@@ -51,7 +52,7 @@ public class DroneController : MonoBehaviour
 		if (EngineMode != EngineMode.Freeze)
 		{
 			EngineMode = (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) ? EngineMode.Stop :
-						 (Input.GetMouseButton(0) || Input.GetKey(KeyCode.LeftShift)) && accelCharge > 0 ? EngineMode.Accel : EngineMode.Normal;
+						 (Input.GetMouseButton(0) || Input.GetKey(KeyCode.LeftShift)) && accelCharge > 0 && !accelBlock ? EngineMode.Accel : EngineMode.Normal;
 
 			if (EngineMode != EngineMode.Stop) charController.Move(Transform.forward * (EngineMode == EngineMode.Accel ? AccelMoveSpeed : NormalMoveSpeed) * Time.deltaTime);
 			if (!charController.isGrounded) charController.Move(Vector3.down * FallSpeed * Time.deltaTime);
@@ -80,6 +81,9 @@ public class DroneController : MonoBehaviour
 
 		if (EngineMode == EngineMode.Accel) accelCharge -= accelCharge <= 0 ? 0 : AccelBurnRate * Time.deltaTime;
 		else accelCharge += accelCharge >= 1 ? 0 : AccelRegenRate * Time.deltaTime * (EngineMode == EngineMode.Stop ? 2 : 1);
+
+		if (EngineMode == EngineMode.Accel && accelCharge <= 0 && !accelBlock) { EngineMode = EngineMode.Normal; accelBlock = true; }
+		if (accelBlock && (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftShift))) accelBlock = false;
 	}
 
 	private void OnGUI ()
