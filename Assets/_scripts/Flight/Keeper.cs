@@ -23,7 +23,7 @@ public class Keeper : MonoBehaviour
 					break;
 				case KeeperState.Stalking:
 					if (_state == KeeperState.ConstructingPath) break;
-					if (currentDestination == null || Vector3.Distance(Transform.position, currentDestination) < Transform.localScale.magnitude)
+					if (currentDestination == Vector3.zero || Vector3.Distance(Transform.position, currentDestination) < Transform.localScale.magnitude)
 					{
 						StartCoroutine(SetRandomDestination());
 						break;
