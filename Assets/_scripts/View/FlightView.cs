@@ -53,6 +53,7 @@ public class FlightView : BaseView
 		if (curTime > .5f) curTime = 1 - curTime;
 		vignetting.blurDistance = MaxAbberation * curTime;
 
+		Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, drone.EngineMode == EngineMode.Accel ? 50 : drone.EngineMode == EngineMode.Normal ? 80 : 90, Time.deltaTime);
 		vignetting.blur = Mathf.Lerp(vignetting.blur, drone.EngineMode == EngineMode.Accel ? 2 : .5f, Time.deltaTime);
 		vignetting.blurSpread = Mathf.Lerp(vignetting.blurSpread, drone.EngineMode == EngineMode.Accel ? 10 : .5f, Time.deltaTime);
 		vignetting.intensity = Mathf.Lerp(vignetting.intensity, drone.EngineMode == EngineMode.Accel ? 5 : 1, Time.deltaTime);

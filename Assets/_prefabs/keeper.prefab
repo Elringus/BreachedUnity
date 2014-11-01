@@ -70,7 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afad7f752e9ce44a92f576dc72cd755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Transform: {fileID: 0}
   RandomDestinationArea: 1000
+  PursuitRange: 75
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
