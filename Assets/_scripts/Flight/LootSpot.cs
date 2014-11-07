@@ -21,14 +21,14 @@ public class LootSpot : MonoBehaviour
 	public bool Active
 	{
 		get { return _active; }
-		set { _active = value; collider.enabled = value; model.SetActive(value); }
+		set { _active = value; myCollider.enabled = value; model.SetActive(value); }
 	}
 
 	public float HarvestProgress;
 	public float HarvestTime = 5;
 
 	private GameObject model;
-	private Collider collider;
+	private Collider myCollider;
 	private Vector3 randomRotation;
 
 	private FlightController flightContoller;
@@ -38,7 +38,7 @@ public class LootSpot : MonoBehaviour
 	private void Awake ()
 	{
 		model = transform.Find("model").gameObject;
-		collider = GetComponent<SphereCollider>();
+		myCollider = GetComponent<SphereCollider>();
 		randomRotation = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
 		Active = false;
 
