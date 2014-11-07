@@ -24,11 +24,16 @@ public class LootSpot : MonoBehaviour
 		set { _active = value; collider.enabled = value; model.SetActive(value); }
 	}
 
+	public float HarvestProgress;
+	public float HarvestTime = 5;
+
 	private GameObject model;
 	private Collider collider;
 	private Vector3 randomRotation;
 
 	private FlightController flightContoller;
+	private DroneController drone;
+	private bool droneIn;
 
 	private void Awake ()
 	{
@@ -38,16 +43,39 @@ public class LootSpot : MonoBehaviour
 		Active = false;
 
 		flightContoller = new FlightController();
+		drone = FindObjectOfType<DroneController>();
 	}
 
 	private void Update ()
 	{
-		if (Active) model.transform.Rotate(randomRotation, 100 * Time.deltaTime);
+		if (Active)
+		{
+			model.transform.Rotate(randomRotation, 100 * (1 + HarvestProgress) * Time.deltaTime);
+			if (droneIn && drone.EngineMode == EngineMode.Stop) HarvestProgress += Time.deltaTime;
+			if (HarvestProgress >= HarvestTime) RecieveLoot();
+		}
+	}
+
+	private void OnGUI ()
+	{
+		if (Active && droneIn)
+			GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 15, 200, 25), "Harvesting: " + (HarvestProgress / HarvestTime).ToString("P0"));
+	}
+
+	private void OnTriggerEnter (Collider colli)
+	{
+		if (colli.CompareTag("Player")) droneIn = true;
+	}
+
+	private void OnTriggerExit (Collider colli)
+	{
+		if (colli.CompareTag("Player")) droneIn = false;
 	}
 
 	public void RecieveLoot ()
 	{
 		flightContoller.RecieveLoot(Loot);
+		drone.LootCharges--;
 		Active = false;
 	}
 }

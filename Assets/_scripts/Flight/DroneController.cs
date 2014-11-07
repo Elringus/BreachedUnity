@@ -8,6 +8,17 @@ public class DroneController : MonoBehaviour
 	[HideInInspector]
 	public Transform Transform;
 
+	private int _lootCharges;
+	public int LootCharges
+	{
+		get { return _lootCharges; }
+		set
+		{
+			_lootCharges = value;
+			if (value <= 0) flightVew.ExitFlightMode();
+		}
+	}
+
 	public float AccelMoveSpeed = 170;
 	public float NormalMoveSpeed = 70;
 	public float FallSpeed = 50;
@@ -31,7 +42,6 @@ public class DroneController : MonoBehaviour
 
 	private Transform lookCamera;
 	private CharacterController charController;
-	private int lootCharges;
 
 	private FlightView flightVew;
 
@@ -40,7 +50,7 @@ public class DroneController : MonoBehaviour
 		Transform = transform;
 		lookCamera = Camera.main.transform;
 		charController = GetComponent<CharacterController>();
-		lootCharges = ServiceLocator.State.LootCharges;
+		LootCharges = ServiceLocator.State.LootCharges;
 
 		flightVew = FindObjectOfType<FlightView>();
 	}
@@ -88,18 +98,12 @@ public class DroneController : MonoBehaviour
 
 	private void OnGUI ()
 	{
-		GUILayout.Box("Loot Charges: " + lootCharges);
+		GUILayout.Box("Loot Charges: " + LootCharges);
 		GUILayout.Box("Accel Charge: " + accelCharge.ToString("P0"));
 	}
 
 	private void OnTriggerEnter (Collider colli)
 	{
 		if (colli.CompareTag("Keeper")) flightVew.ExitFlightMode();
-		if (colli.CompareTag("LootSpot"))
-		{
-			colli.GetComponent<LootSpot>().RecieveLoot();
-			lootCharges--;
-			if (lootCharges <= 0) flightVew.ExitFlightMode();
-		}
 	}
 }
