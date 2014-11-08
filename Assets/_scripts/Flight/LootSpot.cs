@@ -74,7 +74,6 @@ public class LootSpot : MonoBehaviour
 
 	public void RecieveLoot ()
 	{
-		flightContoller.RecieveLoot(Loot);
 		drone.LootCharges--;
 		Active = false;
 	}

@@ -43,12 +43,14 @@ public class Keeper : MonoBehaviour
 
 	private float pursuitTimer;
 	private DroneController drone;
+	private FlightView flightView;
 
 	private void Awake () 
 	{
 		Transform = transform;
 		navAgent = GetComponent<NavMeshAgent>();
 		drone = FindObjectOfType<DroneController>();
+		flightView = FindObjectOfType<FlightView>();
 	}
 
 	private void Start ()
@@ -84,5 +86,10 @@ public class Keeper : MonoBehaviour
 		currentDestination = randomDestination.Value;
 		navAgent.SetDestination(randomDestination.Value);
 		_state = State = KeeperState.Stalking;
+	}
+
+	private void OnTriggerEnter (Collider colli)
+	{
+		if (colli.CompareTag("Player")) flightView.ExitFlightMode();
 	}
 }
