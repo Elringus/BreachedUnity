@@ -8,6 +8,7 @@ public class DroneController : MonoBehaviour
 	[HideInInspector]
 	public Transform Transform;
 
+	public List<Loot> CollectedLoot = new List<Loot>();
 	private int _lootCharges;
 	public int LootCharges
 	{

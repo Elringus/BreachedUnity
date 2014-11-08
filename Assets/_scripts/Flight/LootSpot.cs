@@ -12,7 +12,7 @@ public class LootSpot : MonoBehaviour
 			model.renderer.material.SetColor("_EmissionColor",
 				value.LootType == LootType.MineralA ? Color.blue :
 				value.LootType == LootType.MineralB ? Color.green :
-				value.LootType == LootType.MineralC ? Color.red :
+				value.LootType == LootType.MineralC ? Color.yellow :
 				Color.white);
 		}
 	}
@@ -74,6 +74,7 @@ public class LootSpot : MonoBehaviour
 
 	public void RecieveLoot ()
 	{
+		drone.CollectedLoot.Add(Loot);
 		drone.LootCharges--;
 		Active = false;
 	}
