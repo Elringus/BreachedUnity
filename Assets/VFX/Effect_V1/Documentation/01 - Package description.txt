@@ -1,0 +1,41 @@
+Effect Volume 1 : Package description
+=====================================
+
+Effect folder
+-------------
+* 20 highs qualitys various type of 64 images sprites sheet with its material on folder Effects/_Materials.
+
+* A simple particle model on folder Effects/_Model
+
+* A sound for explosion effect on folder Effects/_Sound
+
+* 20 prefabs for each effects
+
+
+Plugins folder
+---------------
+* SpriteEffect.js To lead and set the effects.
+
+
+Examples folder
+---------------
+* A scene with all simples effects
+* A scene with dynamics explosions effects
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

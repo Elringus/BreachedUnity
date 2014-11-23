@@ -1,0 +1,49 @@
+Effect Volume 1 : SpriteEffect.js parameters guide
+==================================================
+
+The inspector for gameObject with SpriteEffect.js is redefined.
+
+You will find in the order :
+
+
+Sprite properties :
+--------------------
+* Keep mesh size : true = the object keep the size from his transform.
+                   false = For redefine a new size at the startup a Vector3 field will  appear under this field.
+                   
+* Speed growing  : Shows the growth rate of the size of the object with the effect. Value = 0 the object will not grow.
+
+* Random rotation : true = At startup the object will take a random rotation on his z axis.
+           	        false = no random rotation.
+           	        
+* Camera facing   : Gives the behavior of the object relative to the camera    
+                        - Always : The object will always face
+                        - Horizontal : the object will always face relative to Y axis       
+                        - Vertical  : the object will always face relative to X axis  
+                        - Never  : the object will never face  	   
+                        
+
+Sprite sheet properties :
+--------------------------
+Tile X : The number of sprites in X on the texture
+
+Tile Y : The number of sprites in Y on the texture    
+
+Frames per second : Playing speed
+
+On shot : true = Play only once the animation, and destroy the effect. 
+				 If there is a light or sound, The effect will be destroyed after the end of the sound or the effect of light fade.
+
+		  false = The effect is played in loop mode
+		  
+		  
+Light properties : 
+-------------------
+Add light effect : A point light will be create at the position of the effect
+
+Light range      : The range of the light
+
+Light color      : The color of the light
+
+Light fad speed  : The rate of decrease of the intensity of the light
+					Value =0 the light intensity never decrease.
