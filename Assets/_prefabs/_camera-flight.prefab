@@ -30,8 +30,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: .0496892668, y: -.953800797, z: .154912814, w: .252580911}
-  m_LocalPosition: {x: 259.899994, y: 104.300003, z: 442.600006}
+  m_LocalRotation: {x: -.178105503, y: .202370882, z: .108127952, w: .956887066}
+  m_LocalPosition: {x: 90.6240005, y: 12.6330004, z: 109.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 0
-  intensity: 1
+  intensity: 3
   chromaticAberration: 2
   axialAberration: .5
   blur: .5
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 282de23ef3023c44dafbf8bc1d3258e5, type: 3}
   DisplacementMap: {fileID: 2800000, guid: bf9c556200cc0c64782fc456fce1bc84, type: 3}
-  Intensity: .140000001
+  Intensity: .300000012
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

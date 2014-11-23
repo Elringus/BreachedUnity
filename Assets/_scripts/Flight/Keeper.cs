@@ -51,6 +51,8 @@ public class Keeper : MonoBehaviour
 		navAgent = GetComponent<NavMeshAgent>();
 		drone = FindObjectOfType<DroneController>();
 		flightView = FindObjectOfType<FlightView>();
+
+		flightView.Keepers.Add(this);
 	}
 
 	private void Start ()
