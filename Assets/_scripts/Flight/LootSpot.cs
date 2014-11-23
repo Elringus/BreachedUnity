@@ -31,7 +31,6 @@ public class LootSpot : MonoBehaviour
 	private Collider myCollider;
 	private Vector3 randomRotation;
 
-	private FlightController flightContoller;
 	private DroneController drone;
 	private bool droneIn;
 
@@ -42,7 +41,6 @@ public class LootSpot : MonoBehaviour
 		randomRotation = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
 		Active = false;
 
-		flightContoller = new FlightController();
 		drone = FindObjectOfType<DroneController>();
 	}
 
