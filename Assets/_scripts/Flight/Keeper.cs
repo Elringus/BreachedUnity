@@ -92,6 +92,6 @@ public class Keeper : MonoBehaviour
 
 	private void OnTriggerEnter (Collider colli)
 	{
-		//if (colli.CompareTag("Player")) flightView.ExitFlightMode();
+		if (colli.CompareTag("Player") && !flightView.GodMode) flightView.ExitFlightMode();
 	}
 }

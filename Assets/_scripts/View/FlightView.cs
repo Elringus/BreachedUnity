@@ -8,6 +8,7 @@ public class FlightView : BaseView
 {
 	public int SectorID;
 	public float MaxAbberation = 6;
+	public bool GodMode;
 
 	public List<Keeper> Keepers = new List<Keeper>();
 
@@ -52,6 +53,8 @@ public class FlightView : BaseView
 	{
 		base.Update();
 
+		if (Input.GetKeyDown(KeyCode.F12)) GodMode = !GodMode;
+
 		sky.speed += Input.GetAxis("Mouse ScrollWheel") * 10000 * Time.deltaTime;
 
 		//float curTime = sky.time - (float)Math.Truncate(sky.time);
@@ -69,5 +72,10 @@ public class FlightView : BaseView
 	public void ExitFlightMode ()
 	{
 		SwitchView(ViewType.SimpleView);
+	}
+
+	private void OnGUI ()
+	{
+		GUI.Box(new Rect(Screen.width - 150, 0, 150, 25), "GodMode (F12): " + (GodMode ? "<color=green>ON</color>" : "<color=red>OFF</color>"));
 	}
 }
