@@ -23,9 +23,11 @@ public class MainMenuView : BaseView
 		versionText.text = string.Format("Breached {0}\nver. {1}.{2}.{3}",
 			GlobalConfig.RELEASE_TYPE, GlobalConfig.VERSION_MAJOR, GlobalConfig.VERSION_MIDDLE, GlobalConfig.VERSION_MINOR);
 
-		if (GlobalConfig.RELEASE_TYPE != ReleaseType.RTM)
+		Transform menu;
+
+		if (GlobalConfig.RELEASE_TYPE == ReleaseType.alpha)
 		{
-			var menu = AddUIElement("panel_main-menu-dev").transform;
+			menu = AddUIElement("panel_main-menu-dev").transform;
 			menu.FindChild("button_state-editor").GetComponent<Button>()
 				.onClick.AddListener(() => SwitchView(ViewType.StateEditor));
 			menu.FindChild("button_simple-view").GetComponent<Button>()
@@ -37,30 +39,20 @@ public class MainMenuView : BaseView
 					ServiceLocator.Text = new GoogleText();
 					googlePanel = AddUIElement("panel_google-text");
 				});
-			menu.FindChild("button_new-game").GetComponent<Button>()
-				.onClick.AddListener(() => { });
-			menu.FindChild("button_continue").GetComponent<Button>()
-				.onClick.AddListener(() => { });
-			menu.FindChild("button_settings").GetComponent<Button>()
-				.onClick.AddListener(() => { });
-			menu.FindChild("button_exit").GetComponent<Button>()
-				.onClick.AddListener(() => Application.Quit());
 
 			if (Text.GetType() == typeof(GoogleText))
 				googlePanel = AddUIElement("panel_google-text");
 		}
-		else
-		{
-			var menu = AddUIElement("panel_main-menu").transform;
-			menu.FindChild("button_new-game").GetComponent<Button>()
-				.onClick.AddListener(() => { });
-			menu.FindChild("button_continue").GetComponent<Button>()
-				.onClick.AddListener(() => { });
-			menu.FindChild("button_settings").GetComponent<Button>()
-				.onClick.AddListener(() => { });
-			menu.FindChild("button_exit").GetComponent<Button>()
-				.onClick.AddListener(() => Application.Quit());
-		}
+		else menu = AddUIElement("panel_main-menu").transform;
+
+		menu.FindChild("button_new-game").GetComponent<Button>()
+			.onClick.AddListener(() => { });
+		menu.FindChild("button_continue").GetComponent<Button>()
+			.onClick.AddListener(() => { });
+		menu.FindChild("button_settings").GetComponent<Button>()
+			.onClick.AddListener(() => { });
+		menu.FindChild("button_exit").GetComponent<Button>()
+			.onClick.AddListener(() => Application.Quit());
 	}
 
 	protected override void Update ()
