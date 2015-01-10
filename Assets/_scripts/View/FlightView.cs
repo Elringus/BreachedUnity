@@ -15,7 +15,7 @@ public class FlightView : BaseView
 	private trueSKY sky;
 	private Vignetting vignetting;
 	private CameraGlitch cameraGlitch;
-	private ReliefTerrain RT;
+	//private ReliefTerrain RT;
 
 	private FlightController flightController;
 	private DroneController drone;
@@ -28,8 +28,8 @@ public class FlightView : BaseView
 		sky = GameObject.Find("trueSky").GetComponent<trueSKY>();
 		vignetting = Camera.main.GetComponent<Vignetting>();
 		cameraGlitch = Camera.main.GetComponent<CameraGlitch>();
-		RT = FindObjectOfType<ReliefTerrain>();
-		RT.BumpGlobalCombined = new Texture2D(64, 64);
+		//RT = FindObjectOfType<ReliefTerrain>();
+		//RT.BumpGlobalCombined = new Texture2D(64, 64);
 
 		flightController = new FlightController();
 		drone = FindObjectOfType<DroneController>();
