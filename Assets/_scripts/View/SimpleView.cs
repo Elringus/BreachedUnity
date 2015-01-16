@@ -213,8 +213,8 @@ public class SimpleView : BaseView
 		if (GUILayout.Button("Return to menu", GUILayout.Height(30))) SwitchView(ViewType.MainMenu);
 		if (GUILayout.Button("Reset and start new game", GUILayout.Height(30)))
 		{
-					State.Reset();
-		State.GameStatus = GameStatus.InProgress;
+			State.Reset();
+			State.GameStatus = GameStatus.InProgress;
 		}
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();

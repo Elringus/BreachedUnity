@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class MainMenuView : BaseView
 {
+	private MainMenuController mainMenuController;
 	private static bool connecting;
 	private GameObject googlePanel;
 
@@ -13,6 +14,13 @@ public class MainMenuView : BaseView
 			Events.TextUpdated += (c, e) => connecting = false;
 			if (Text.Get("STATE") == "NONE") connecting = true;
 		}
+	}
+
+	protected override void Awake ()
+	{
+		base.Awake();
+
+		mainMenuController = new MainMenuController();
 	}
 
 	protected override void Start ()
@@ -46,9 +54,10 @@ public class MainMenuView : BaseView
 		else menu = AddUIElement("panel_main-menu").transform;
 
 		menu.FindChild("button_new-game").GetComponent<Button>()
-			.OnClick(() => { });
+			.OnClick(() => { mainMenuController.StartNewGame(); SwitchView(ViewType.Intro); });
 		menu.FindChild("button_continue").GetComponent<Button>()
-			.OnClick(() => { });
+			.OnClick(() => { SwitchView(ViewType.Bridge); });
+		menu.FindChild("button_continue").GetComponent<Button>().interactable = State.GameStatus == GameStatus.InProgress;
 		menu.FindChild("button_settings").GetComponent<Button>()
 			.OnClick(() => { });
 		menu.FindChild("button_exit").GetComponent<Button>()
