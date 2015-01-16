@@ -343,7 +343,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'STATUS: NEW GAME
+  m_Text: 'STATUS: INTRO
 
     CLICK TO CONTINUE'
 --- !u!222 &687427650

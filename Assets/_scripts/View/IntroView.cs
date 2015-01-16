@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class NewGameView : MonoBehaviour
+public class IntroView : MonoBehaviour
 {
 	private void Awake () 
 	{
