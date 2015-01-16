@@ -50,7 +50,7 @@ public class NavigationPanel : MonoBehaviour
 	private void SetSelectedState (Button button)
 	{
 		button.interactable = false;
-		button.GetComponent<Image>().color = Color.white;
+		button.transform.Find("@1/@2/@3").GetComponent<Image>().color = Color.white;
 		button.transform.Find("Image").GetComponent<Image>().color = Color.white;
 		button.GetComponentInChildren<Text>().color = BaseView.DEFAULT_TEXT_COLOR;
 	}

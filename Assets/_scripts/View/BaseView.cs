@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public abstract class BaseView : MonoBehaviour
 {
-	public static readonly Color32 DEFAULT_TEXT_COLOR = new Color32(110, 250, 150, 255);
+	public static readonly Color32 DEFAULT_TEXT_COLOR = new Color32(186, 255, 129, 255);
 	public ViewType ActiveView
 	{
 		get { return (ViewType)Enum.Parse(typeof(ViewType), Application.loadedLevelName.Replace("scn_", string.Empty), true); }
