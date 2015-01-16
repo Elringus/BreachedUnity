@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 
-public class WorkshopView : MonoBehaviour
+public class WorkshopView : BaseView
 {
-	private void Awake () 
-	{
-    	
-	}
+	private WorkshopController workshopController;
 
-	private void Update () 
+	protected override void Awake ()
 	{
-    	
+		base.Awake();
+
+		workshopController = new WorkshopController();
 	}
 }

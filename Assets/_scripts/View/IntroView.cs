@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
 
-public class IntroView : MonoBehaviour
+public class IntroView : BaseView
 {
-	private void Awake () 
+	protected override void Update ()
 	{
-    	
-	}
+		base.Update();
 
-	private void Update () 
-	{
-    	
+		if (Input.GetMouseButtonDown(0)) SwitchView(ViewType.Bridge);
 	}
 }

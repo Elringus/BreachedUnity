@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 
-public class MapView : MonoBehaviour
+public class MapView : BaseView
 {
-	private void Awake () 
-	{
-    	
-	}
+	private MapController mapController;
 
-	private void Update () 
+	protected override void Awake ()
 	{
-    	
+		base.Awake();
+
+		mapController = new MapController();
 	}
 }

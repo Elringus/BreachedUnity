@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
 
-public class GameFailView : MonoBehaviour
+public class GameFailView : BaseView
 {
-	private void Awake () 
+	protected override void Update ()
 	{
-    	
-	}
+		base.Update();
 
-	private void Update () 
-	{
-    	
+		if (Input.GetMouseButtonDown(0)) { State.Reset(); SwitchView(ViewType.MainMenu); }
 	}
 }

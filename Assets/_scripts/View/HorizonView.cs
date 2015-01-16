@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 
-public class HorizonView : MonoBehaviour
+public class HorizonView : BaseView
 {
-	private void Awake () 
-	{
-    	
-	}
+	private HorizonController horizonController;
 
-	private void Update () 
+	protected override void Awake ()
 	{
-    	
+		base.Awake();
+
+		horizonController = new HorizonController();
 	}
 }

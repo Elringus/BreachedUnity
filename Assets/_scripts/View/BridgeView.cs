@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 
-public class BridgeView : MonoBehaviour
+public class BridgeView : BaseView
 {
-	private void Awake () 
-	{
-    	
-	}
+	private BridgeController bridgeController;
 
-	private void Update () 
+	protected override void Awake ()
 	{
-    	
+		base.Awake();
+
+		bridgeController = new BridgeController();
 	}
 }
