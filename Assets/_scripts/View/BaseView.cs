@@ -4,14 +4,15 @@ using UnityEngine.UI;
 
 public abstract class BaseView : MonoBehaviour
 {
-	protected static IState State { get { return ServiceLocator.State; } }
-	protected static ILogger Logger { get { return ServiceLocator.Logger; } }
-	protected static IText Text { get { return ServiceLocator.Text; } }
-
-	protected ViewType ActiveView
+	public static readonly Color32 DEFAULT_TEXT_COLOR = new Color32(110, 250, 150, 255);
+	public ViewType ActiveView
 	{
 		get { return (ViewType)Enum.Parse(typeof(ViewType), Application.loadedLevelName.Replace("scn_", string.Empty), true); }
 	}
+
+	protected static IState State { get { return ServiceLocator.State; } }
+	protected static ILogger Logger { get { return ServiceLocator.Logger; } }
+	protected static IText Text { get { return ServiceLocator.Text; } }
 
 	private Transform uiCanvas;
 
@@ -59,7 +60,7 @@ public abstract class BaseView : MonoBehaviour
 		}
 	}
 
-	protected void SwitchView (ViewType to)
+	public void SwitchView (ViewType to)
 	{
 		Application.LoadLevel("scn_" + to);
 	}
