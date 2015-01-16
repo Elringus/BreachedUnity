@@ -12,6 +12,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_scenes/scn_SimpleView.unity
   - enabled: 1
+    path: Assets/_scenes/scn_NewGame.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_Bridge.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_Workshop.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_Map.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_Horizon.unity
+  - enabled: 1
     path: Assets/_scenes/scn_Sector1.unity
   - enabled: 1
     path: Assets/_scenes/scn_Sector2.unity
@@ -19,3 +29,7 @@ EditorBuildSettings:
     path: Assets/_scenes/scn_Sector3.unity
   - enabled: 1
     path: Assets/_scenes/scn_Sector4.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_GameFail.unity
+  - enabled: 1
+    path: Assets/_scenes/scn_GameWin.unity
