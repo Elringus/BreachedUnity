@@ -29,11 +29,11 @@ public class MainMenuView : BaseView
 		{
 			menu = AddUIElement("panel_main-menu-dev").transform;
 			menu.FindChild("button_state-editor").GetComponent<Button>()
-				.onClick.AddListener(() => SwitchView(ViewType.StateEditor));
+				.OnClick(() => SwitchView(ViewType.StateEditor));
 			menu.FindChild("button_simple-view").GetComponent<Button>()
-				.onClick.AddListener(() => SwitchView(ViewType.SimpleView));
+				.OnClick(() => SwitchView(ViewType.SimpleView));
 			menu.FindChild("button_update-text").GetComponent<Button>()
-				.onClick.AddListener(() =>
+				.OnClick(() =>
 				{
 					connecting = true;
 					ServiceLocator.Text = new GoogleText();
@@ -46,13 +46,13 @@ public class MainMenuView : BaseView
 		else menu = AddUIElement("panel_main-menu").transform;
 
 		menu.FindChild("button_new-game").GetComponent<Button>()
-			.onClick.AddListener(() => { });
+			.OnClick(() => { });
 		menu.FindChild("button_continue").GetComponent<Button>()
-			.onClick.AddListener(() => { });
+			.OnClick(() => { });
 		menu.FindChild("button_settings").GetComponent<Button>()
-			.onClick.AddListener(() => { });
+			.OnClick(() => { });
 		menu.FindChild("button_exit").GetComponent<Button>()
-			.onClick.AddListener(() => Application.Quit());
+			.OnClick(() => Application.Quit());
 	}
 
 	protected override void Update ()
