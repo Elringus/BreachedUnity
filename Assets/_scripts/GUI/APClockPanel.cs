@@ -6,11 +6,17 @@ public class APClockPanel : MonoBehaviour
 {
 	public float APTransitionSpeeed = 2;
 
+	private BridgeController bridgeController;
 	private List<Image> apImages = new List<Image>(10);
 	private Image arrow;
+	private Button endDayButton;
+	private Text dateText;
+	private int year;
 
 	private void Awake () 
 	{
+		bridgeController = new BridgeController();
+
 		foreach (Transform ap in transform.Find("ap"))
 			apImages.Add(ap.GetComponent<Image>());
 		arrow = transform.Find("image_clock-arrow").GetComponent<Image>();
@@ -18,6 +24,13 @@ public class APClockPanel : MonoBehaviour
 		for (int i = 0; i < apImages.Count; i++)
 			apImages[i].color = ServiceLocator.State.CurrentAP > (9 - i) ? Color.green : Color.red;
 		arrow.transform.rotation = Quaternion.Euler(0, 0, (ServiceLocator.State.MaxAP - ServiceLocator.State.CurrentAP) * -36);
+
+		endDayButton = GetComponentInChildren<Button>();
+		endDayButton.OnClick(() => bridgeController.EndDay());
+
+		dateText = transform.Find("text_date").GetComponent<Text>();
+
+		year = Random.Range(2330, 7777);
 	}
 
 	private void Update () 
@@ -37,5 +50,6 @@ public class APClockPanel : MonoBehaviour
 			Quaternion.Euler(0, 0, (ServiceLocator.State.MaxAP - ServiceLocator.State.CurrentAP) * -36), 
 			Time.deltaTime * APTransitionSpeeed);
 
+		dateText.text = string.Format("{0} December\nyear: {1}", 12 + ServiceLocator.State.CurrentDay, year);
 	}
 }
