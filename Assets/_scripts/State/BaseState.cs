@@ -202,7 +202,7 @@ public abstract class BaseState : IState
 	public int CurrentAP
 	{
 		get { return _currentAP; }
-		set { _currentAP = value; Save(); }
+		set { if (value >= 0 && value <= MaxAP) _currentAP = value; Save(); }
 	}
 
 	private int _mineralA;
