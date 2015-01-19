@@ -15,6 +15,9 @@ public static class Events
 	public static event EventHandler TextUpdated = delegate { };
 	public static void RaiseTextUpdated () { TextUpdated(null, EventArgs.Empty); }
 
+	public static event EventHandler DayEnded = delegate { };
+	public static void RaiseDayEnded () { DayEnded(null, EventArgs.Empty); }
+
 	public static void LogHandlersCount ()
 	{
 		int handlersCount = 0;

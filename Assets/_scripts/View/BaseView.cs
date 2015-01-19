@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,18 @@ public abstract class BaseView : MonoBehaviour
 	static BaseView ()
 	{
 		Initialize();
+
+		// disable quests invoking if we don't have the text provider
+		if (Text.GetType() != typeof(NullText))
+		{
+			Events.StateUpdated += (c, e) =>
+			{
+				foreach (var quest in State.QuestRecords.Where(q => q.Status == QuestStatus.NotStarted))
+					QuestController.StartQuest(quest);
+				foreach (var record in State.JournalRecords.Where(r => r.Check()))
+					record.AssignedDay = State.CurrentDay;
+			};
+		}
 	}
 
 	private static void Initialize ()

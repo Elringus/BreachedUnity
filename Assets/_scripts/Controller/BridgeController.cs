@@ -20,6 +20,8 @@ public class BridgeController : BaseController
 			State.Chips += artifact.Chips;
 		}
 
+		Events.RaiseDayEnded();
+
 		return true;
 	}
 

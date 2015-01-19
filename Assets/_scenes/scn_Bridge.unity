@@ -919,6 +919,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 277487870}
   - 222: {fileID: 277487871}
+  - 114: {fileID: 277487872}
   m_Layer: 5
   m_Name: panel_journal
   m_TagString: Untagged
@@ -939,6 +940,7 @@ RectTransform:
   - {fileID: 1076660313}
   - {fileID: 1197918890}
   - {fileID: 1136676867}
+  - {fileID: 1885188401}
   - {fileID: 1971390902}
   m_Father: {fileID: 1620829242}
   m_RootOrder: 7
@@ -953,6 +955,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 277487869}
+--- !u!114 &277487872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 277487869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e8bb5bf060c10a41ab1c05a2a4eac0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &304005083
 GameObject:
   m_ObjectHideFlags: 0
@@ -6812,6 +6825,105 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 1867708089}
   m_GameObject: {fileID: 1883762431}
+--- !u!1 &1885188400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 186838, guid: 6f873263f137f5d4a9041167bec285a8, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1885188401}
+  - 222: {fileID: 1885188404}
+  - 114: {fileID: 1885188403}
+  - 114: {fileID: 1885188402}
+  m_Layer: 5
+  m_Name: text_journal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1885188401
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22486838, guid: 6f873263f137f5d4a9041167bec285a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885188400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 277487870}
+  m_RootOrder: 3
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 3.05180001e-05, y: -20}
+  m_SizeDelta: {x: 800, y: 450}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1885188402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885188400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 1, b: 1, a: .607843161}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1885188403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11486836, guid: 6f873263f137f5d4a9041167bec285a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885188400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
+    m_FontSize: 18
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur
+    a est quis semper. Ut a tincidunt dui. Aliquam bibendum aliquet orci, a ultrices
+    massa volutpat sed. Cras in malesuada erat, at volutpat dolor. Donec imperdiet
+    arcu sit amet sem tristique, id cursus felis suscipit. \n\nVestibulum eleifend,
+    magna eget pellentesque pretium, neque quam varius elit, eu mattis libero diam
+    quis odio. Maecenas finibus at augue ut egestas. Sed molestie bibendum urna nec
+    volutpat. Donec vestibulum eu magna eget lacinia. Sed condimentum consequat lacinia.
+    In hac habitasse platea dictumst. Quisque augue ipsum, fringilla eget congue et,
+    vehicula vitae risus. Donec pulvinar lectus et dui gravida, at vestibulum nisi
+    iaculis. Aenean et ligula velit.\r\n\r\nInteger turpis magna, pellentesque eget
+    tristique condimentum, vulputate sed diam. Vestibulum non leo et tortor pulvinar
+    elementum eu fringilla ligula. Maecenas ut efficitur libero. Nulla elementum sagittis
+    velit, id dapibus arcu. Sed commodo tellus eu dolor lacinia, sed fermentum orci
+    gravida. Cras elementum et mauris convallis commodo. In hac habitasse platea dictumst.
+    Etiam mi ligula, viverra ut commodo nec, aliquam sit amet nisi. Cras at tristique
+    ipsum, et mattis lorem. Nulla non turpis at lorem vulputate mollis. "
+--- !u!222 &1885188404
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22286838, guid: 6f873263f137f5d4a9041167bec285a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885188400}
 --- !u!1001 &1895718272
 Prefab:
   m_ObjectHideFlags: 0
@@ -7134,7 +7246,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 277487870}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
   m_AnchoredPosition: {x: 0, y: -675}

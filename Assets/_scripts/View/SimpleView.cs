@@ -19,21 +19,6 @@ public class SimpleView : BaseView
 
 	private int[] synthProbe = new int[3];
 
-	static SimpleView ()
-	{
-		// disable quests invoking if we don't have the text provider
-		if (Text.GetType() != typeof(NullText))
-		{
-			Events.StateUpdated += (c, e) =>
-			{
-				foreach (var quest in State.QuestRecords.Where(q => q.Status == QuestStatus.NotStarted))
-					QuestController.StartQuest(quest);
-				foreach (var record in State.JournalRecords.Where(r => r.Check()))
-					record.AssignedDay = State.CurrentDay;
-			};
-		}
-	}
-
 	protected override void Update ()
 	{
 		base.Update();
