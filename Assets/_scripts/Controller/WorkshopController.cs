@@ -2,7 +2,7 @@
 
 public class WorkshopController : BaseController
 {
-	public bool AnalyzeArtifact (Artifact artifact)
+	public static bool AnalyzeArtifact (Artifact artifact)
 	{
 		if (State.CurrentAP < State.AnalyzeArtifactAPCost) return false;
 
@@ -11,7 +11,7 @@ public class WorkshopController : BaseController
 		return true;
 	}
 
-	public bool FixEngine ()
+	public static bool FixEngine ()
 	{
 		if (State.CurrentAP < State.FixEngineAPCost || !CanFixEngine()) 
 			return false;
@@ -22,7 +22,7 @@ public class WorkshopController : BaseController
 		return true;
 	}
 
-	public bool CanFixEngine ()
+	public static bool CanFixEngine ()
 	{
 		var requirements = State.FixEngineRequirements[State.BreakageType];
 		return !State.EngineFixed && 
@@ -30,7 +30,7 @@ public class WorkshopController : BaseController
 			State.Artifacts.Find(x => x.Identity.GetValueOrDefault() == State.BreakageType).Status == ArtifactStatus.Analyzed;
 	}
 
-	public bool SynthFuel (int[] probe)
+	public static bool SynthFuel (int[] probe)
 	{
 		if (State.FuelSynthed || State.CurrentAP < State.FuelSynthAPCost || 
 			State.MineralA < probe[0] || State.MineralB < probe[1] || State.MineralC < probe[2] ||
@@ -50,7 +50,7 @@ public class WorkshopController : BaseController
 		return true;
 	}
 
-	public ProbeType MeasureProbe (int[] probe)
+	public static ProbeType MeasureProbe (int[] probe)
 	{
 		int distance = Math.Abs(probe[0] - State.FuelSynthFormula[0]) +
 			Math.Abs(probe[1] - State.FuelSynthFormula[1]) +

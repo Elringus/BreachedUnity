@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class FlightController : BaseController
 {
-	public void GenerateLoot (int sectorID, out List<Loot> lootList)
+	public static void GenerateLoot (int sectorID, out List<Loot> lootList)
 	{
 		var sectorParameters = State.SectorsParameters.Find(x => x.SectorID == sectorID);
 		lootList = new List<Loot>();
@@ -47,7 +47,7 @@ public class FlightController : BaseController
 		}
 	}
 
-	public void RecieveLoot (Loot loot)
+	public static void RecieveLoot (Loot loot)
 	{
 		switch (loot.LootType)
 		{

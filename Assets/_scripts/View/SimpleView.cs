@@ -8,12 +8,6 @@ public class SimpleView : BaseView
 	private float width = 800;
 	private Vector2 scrollPosition;
 
-	private BridgeController bridgeController;
-	private MapController mapController;
-	private FlightController flightController;
-	private WorkshopController workshopController;
-	private HorizonController horizonController;
-
 	private SimpleViewPage selectedPage;
 	private bool showSynthFormula;
 	private bool showProbes;
@@ -38,17 +32,6 @@ public class SimpleView : BaseView
 					record.AssignedDay = State.CurrentDay;
 			};
 		}
-	}
-
-	protected override void Awake ()
-	{
-		base.Awake();
-
-		bridgeController = new BridgeController();
-		mapController = new MapController();
-		flightController = new FlightController();
-		workshopController = new WorkshopController();
-		horizonController = new HorizonController();
 	}
 
 	protected override void Update ()
@@ -87,7 +70,7 @@ public class SimpleView : BaseView
 				for (int i = 0; i < sectorLoot.Count; i++ )
 					if (GUILayout.Button(string.Format("Loot spot of {0}", sectorLoot[i].LootType)))
 					{
-						flightController.RecieveLoot(sectorLoot[i]);
+						FlightController.RecieveLoot(sectorLoot[i]);
 						sectorLoot.Remove(sectorLoot[i]);
 						lootCharges--;
 						if (lootCharges <= 0) inFlightMode = false;
@@ -110,7 +93,7 @@ public class SimpleView : BaseView
 						foreach (var record in State.JournalRecords.Where(r => r.AssignedDay == i))
 							GUILayout.Label(Text.Get(record.ID));
 
-					if (GUILayout.Button(string.Format("End day [AP = {0}]", State.MaxAP))) bridgeController.EndDay();
+					if (GUILayout.Button(string.Format("End day [AP = {0}]", State.MaxAP))) BridgeController.EndDay();
 				}
 
 				if (selectedPage == SimpleViewPage.Workshop)
@@ -156,20 +139,20 @@ public class SimpleView : BaseView
 							GUILayout.BeginHorizontal();
 							GUILayout.Label(string.Format("Probe №{0} [A: {1}, B: {2}, C: {3}] is {4}.",
 								State.FuelSynthProbes.FindIndex(x => x == probe), probe[0], probe[1], probe[2],
-								workshopController.MeasureProbe(probe)));
+								WorkshopController.MeasureProbe(probe)));
 							GUILayout.EndHorizontal();
 						}
 					GUILayout.EndVertical();
 					GUILayout.EndHorizontal();
 
-					if (workshopController.CanFixEngine() &&
-						GUILayout.Button(string.Format("Fix engine [-{0}AP]", State.FixEngineAPCost))) workshopController.FixEngine();
+					if (WorkshopController.CanFixEngine() &&
+						GUILayout.Button(string.Format("Fix engine [-{0}AP]", State.FixEngineAPCost))) WorkshopController.FixEngine();
 					if (!State.FuelSynthed)
 					{
 						GUILayout.BeginHorizontal();
 						if (GUILayout.Button(string.Format("Synth fuel [-{0}AP] (A + B + C must be {1})", State.FuelSynthAPCost, State.FuelSynthSumm)))
 						{
-							workshopController.SynthFuel(synthProbe);
+							WorkshopController.SynthFuel(synthProbe);
 							synthProbe = new int[3];
 						}
 						synthProbe[0] = int.Parse(GUILayout.TextField(synthProbe[0].ToString()));
@@ -179,7 +162,7 @@ public class SimpleView : BaseView
 					}
 					foreach (var artifact in State.Artifacts.FindAll(x => x.Status == ArtifactStatus.Found))
 						if (GUILayout.Button(string.Format("Start analyzing {0} [-{1}AP]", artifact.ID, State.AnalyzeArtifactAPCost)))
-							workshopController.AnalyzeArtifact(artifact);
+							WorkshopController.AnalyzeArtifact(artifact);
 				}
 
 				if (selectedPage == SimpleViewPage.Map)
@@ -193,7 +176,7 @@ public class SimpleView : BaseView
 
 				if (selectedPage == SimpleViewPage.Horizon)
 				{
-					foreach (var phrase in horizonController.GetPhrases())
+					foreach (var phrase in HorizonController.GetPhrases())
 					{
 						string phraseText = string.Format("[{0}] {1}", phrase.ID, Text.Get(phrase.ID));
 						if (phrase.AssociatedQuest != string.Empty)
@@ -222,14 +205,14 @@ public class SimpleView : BaseView
 
 	private void InitFlightMode (int sectorID)
 	{
-		if (!mapController.EnterSector()) return;
+		if (!MapController.EnterSector()) return;
 
 		if (loadSectors) SwitchView(sectorID == 1 ? ViewType.Sector1 : sectorID == 2 ? ViewType.Sector2 : sectorID == 3 ? ViewType.Sector3 : ViewType.Sector4);
 		else
 		{
 			inFlightMode = true;
 			lootCharges = State.LootCharges;
-			flightController.GenerateLoot(sectorID, out sectorLoot);
+			FlightController.GenerateLoot(sectorID, out sectorLoot);
 		}
 	}
 }

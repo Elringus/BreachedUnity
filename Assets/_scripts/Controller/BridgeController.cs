@@ -1,7 +1,8 @@
-﻿
+﻿using System.Linq;
+
 public class BridgeController : BaseController
 {
-	public bool EndDay ()
+	public static bool EndDay ()
 	{
 		if (State.CurrentDay > State.TotalDays) return false;
 
@@ -20,5 +21,14 @@ public class BridgeController : BaseController
 		}
 
 		return true;
+	}
+
+	public static string GetJournalTextForDay (int day)
+	{
+		string text = "";
+		foreach (var record in State.JournalRecords.Where(r => r.AssignedDay == day))
+			text += Text.Get(record.ID) + "\n";
+
+		return text;
 	}
 }

@@ -1,7 +1,7 @@
 ﻿
 public class MapController : BaseController
 {
-	public bool EnterSector ()
+	public static bool EnterSector ()
 	{
 		if (State.CurrentAP < State.EnterSectorAPCost) return false;
 

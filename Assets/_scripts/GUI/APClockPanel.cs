@@ -6,7 +6,6 @@ public class APClockPanel : MonoBehaviour
 {
 	public float APTransitionSpeeed = 2;
 
-	private BridgeController bridgeController;
 	private List<Image> apImages = new List<Image>(10);
 	private Image arrow;
 	private Button endDayButton;
@@ -15,8 +14,6 @@ public class APClockPanel : MonoBehaviour
 
 	private void Awake () 
 	{
-		bridgeController = new BridgeController();
-
 		foreach (Transform ap in transform.Find("ap"))
 			apImages.Add(ap.GetComponent<Image>());
 		arrow = transform.Find("image_clock-arrow").GetComponent<Image>();
@@ -26,7 +23,7 @@ public class APClockPanel : MonoBehaviour
 		arrow.transform.rotation = Quaternion.Euler(0, 0, (ServiceLocator.State.MaxAP - ServiceLocator.State.CurrentAP) * -36);
 
 		endDayButton = GetComponentInChildren<Button>();
-		endDayButton.OnClick(() => bridgeController.EndDay());
+		endDayButton.OnClick(() => BridgeController.EndDay());
 
 		dateText = transform.Find("text_date").GetComponent<Text>();
 

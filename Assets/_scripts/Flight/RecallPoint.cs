@@ -65,7 +65,7 @@ public class RecallPoint : MonoBehaviour
 	private void RecallDrone ()
 	{
 		foreach (var loot in drone.CollectedLoot)
-			flightContoller.RecieveLoot(loot);
+			FlightController.RecieveLoot(loot);
 		flightView.ExitFlightMode();
 		Active = false;
 	}

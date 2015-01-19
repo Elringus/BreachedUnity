@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class HorizonController : BaseController
 {
-	public List<Phrase> GetPhrases ()
+	public static List<Phrase> GetPhrases ()
 	{
 		return State.Phrases.FindAll(p => p.Check());
 	}

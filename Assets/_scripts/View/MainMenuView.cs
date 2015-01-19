@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MainMenuView : BaseView
 {
-	private MainMenuController mainMenuController;
+	private MainMenuController MainMenuController;
 	private static bool connecting;
 	private GameObject googlePanel;
 
@@ -20,7 +20,7 @@ public class MainMenuView : BaseView
 	{
 		base.Awake();
 
-		mainMenuController = new MainMenuController();
+		MainMenuController = new MainMenuController();
 	}
 
 	protected override void Start ()
@@ -54,7 +54,7 @@ public class MainMenuView : BaseView
 		else menu = AddUIElement("panel_main-menu").transform;
 
 		menu.FindChild("button_new-game").GetComponent<Button>()
-			.OnClick(() => { mainMenuController.StartNewGame(); SwitchView(ViewType.Intro); });
+			.OnClick(() => { MainMenuController.StartNewGame(); SwitchView(ViewType.Intro); });
 		menu.FindChild("button_continue").GetComponent<Button>()
 			.OnClick(() => { SwitchView(ViewType.Bridge); });
 		menu.FindChild("button_continue").GetComponent<Button>().interactable = State.GameStatus == GameStatus.InProgress;

@@ -17,7 +17,7 @@ public class FlightView : BaseView
 	private CameraGlitch cameraGlitch;
 	//private ReliefTerrain RT;
 
-	private FlightController flightController;
+	private FlightController FlightController;
 	private DroneController drone;
 	private List<Loot> lootList = new List<Loot>();
 
@@ -31,7 +31,6 @@ public class FlightView : BaseView
 		//RT = FindObjectOfType<ReliefTerrain>();
 		//RT.BumpGlobalCombined = new Texture2D(64, 64);
 
-		flightController = new FlightController();
 		drone = FindObjectOfType<DroneController>();
 	}
 
@@ -39,7 +38,7 @@ public class FlightView : BaseView
 	{
 		base.Start();
 
-		flightController.GenerateLoot(SectorID, out lootList);
+		FlightController.GenerateLoot(SectorID, out lootList);
 		var lootSpots = new List<LootSpot>(FindObjectsOfType<LootSpot>());
 		lootSpots.Shuffle();
 		for (int i = 0; i < lootList.Count; i++)
