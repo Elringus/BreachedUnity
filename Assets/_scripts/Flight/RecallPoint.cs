@@ -15,7 +15,6 @@ public class RecallPoint : MonoBehaviour
 
 	private GameObject model;
 	private Collider myCollider;
-	private FlightController flightContoller;
 	private FlightView flightView;
 	private DroneController drone;
 	private bool droneIn;
@@ -24,7 +23,6 @@ public class RecallPoint : MonoBehaviour
 	{
 		model = transform.Find("model").gameObject;
 		myCollider = GetComponent<SphereCollider>();
-		flightContoller = new FlightController();
 		drone = FindObjectOfType<DroneController>();
 		flightView = FindObjectOfType<FlightView>();
 

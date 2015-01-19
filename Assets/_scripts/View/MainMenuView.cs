@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class MainMenuView : BaseView
 {
-	private MainMenuController MainMenuController;
 	private static bool connecting;
 	private GameObject googlePanel;
 
@@ -14,13 +13,6 @@ public class MainMenuView : BaseView
 			Events.TextUpdated += (c, e) => connecting = false;
 			if (Text.Get("STATE") == "NONE") connecting = true;
 		}
-	}
-
-	protected override void Awake ()
-	{
-		base.Awake();
-
-		MainMenuController = new MainMenuController();
 	}
 
 	protected override void Start ()
