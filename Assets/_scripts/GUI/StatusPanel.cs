@@ -27,6 +27,6 @@ public class StatusPanel : MonoBehaviour
 		engineStatusText.text = ServiceLocator.State.EngineFixed ? "The core is fixed" : "The core is damaged";
 		fuelStatusImage.sprite = ServiceLocator.State.FuelSynthed ? OKImage : WarningImage;
 		fuelStatusText.text = ServiceLocator.State.FuelSynthed ? "The fuel is synthed" : "Fuel tank is empty";
-		daysRemainingText.text = (ServiceLocator.State.TotalDays - ServiceLocator.State.CurrentDay) + " days reamining";
+		daysRemainingText.text = (ServiceLocator.State.TotalDays - ServiceLocator.State.CurrentDay + 1) + " days reamining";
 	}
 }

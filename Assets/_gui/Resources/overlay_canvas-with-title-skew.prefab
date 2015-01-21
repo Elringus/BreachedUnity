@@ -29,7 +29,7 @@ GameObject:
   - 222: {fileID: 22292606}
   - 114: {fileID: 11492606}
   m_Layer: 5
-  m_Name: canvas-with-title-skew
+  m_Name: overlay_canvas-with-title-skew
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
