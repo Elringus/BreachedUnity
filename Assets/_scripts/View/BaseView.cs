@@ -24,7 +24,7 @@ public abstract class BaseView : MonoBehaviour
 		// disable quests invoking if we don't have the text provider
 		if (Text.GetType() != typeof(NullText))
 		{
-			Events.StateUpdated += (c, e) =>
+			Events.StateUpdated += () =>
 			{
 				foreach (var quest in State.QuestRecords.Where(q => q.Status == QuestStatus.NotStarted))
 					QuestController.StartQuest(quest);

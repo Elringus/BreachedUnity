@@ -5,12 +5,17 @@ public class JournalPanel : MonoBehaviour
 {
 	private Button previousButton;
 	private Button nextButton;
-	private static Text journalText;
-	private static int currentJournalDay;
+	private Text journalText;
+	private int currentJournalDay;
 
-	static JournalPanel ()
+	private void OnEnable ()
 	{
-		Events.DayEnded += (c, e) => { currentJournalDay = ServiceLocator.State.CurrentDay; UpdateJournal(); };
+		Events.DayEnded += OnDayEnded;
+	}
+
+	private void OnDisable ()
+	{
+		Events.DayEnded -= OnDayEnded;
 	}
 
 	private void Awake () 
@@ -33,7 +38,13 @@ public class JournalPanel : MonoBehaviour
 		UpdateJournal();
 	}
 
-	private static void UpdateJournal ()
+	private void OnDayEnded ()
+	{
+		currentJournalDay = ServiceLocator.State.CurrentDay;
+		UpdateJournal();
+	}
+
+	private void UpdateJournal ()
 	{
 		journalText.text = BridgeController.GetJournalTextForDay(currentJournalDay);
 	}

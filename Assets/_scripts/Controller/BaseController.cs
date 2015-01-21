@@ -7,13 +7,13 @@ public abstract class BaseController
 
 	static BaseController ()
 	{
-		Events.EngineFixed += (c, e) =>
+		Events.EngineFixed += () =>
 		{
 			if (State.FuelSynthed)
 				State.GameStatus = GameStatus.GameWin;
 		};
 
-		Events.FuelSynthed += (c, e) =>
+		Events.FuelSynthed += () =>
 		{
 			if (State.EngineFixed)
 				State.GameStatus = GameStatus.GameWin;

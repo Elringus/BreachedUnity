@@ -10,7 +10,7 @@ public class MainMenuView : BaseView
 	{
 		if (Text.GetType() == typeof(GoogleText))
 		{
-			Events.TextUpdated += (c, e) => connecting = false;
+			Events.TextUpdated += () => connecting = false;
 			if (Text.Get("STATE") == "NONE") connecting = true;
 		}
 	}

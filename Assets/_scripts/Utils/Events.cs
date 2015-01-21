@@ -3,20 +3,20 @@ using System.Reflection;
 
 public static class Events
 {
-	public static event EventHandler StateUpdated = delegate { };
-	public static void RaiseStateUpdated () { StateUpdated(null, EventArgs.Empty); }
+	public static event Action StateUpdated = delegate { };
+	public static void RaiseStateUpdated () { StateUpdated(); }
 
-	public static event EventHandler EngineFixed = delegate { };
-	public static void RaiseEngineFixed () { EngineFixed(null, EventArgs.Empty); }
+	public static event Action EngineFixed = delegate { };
+	public static void RaiseEngineFixed () { EngineFixed(); }
 
-	public static event EventHandler FuelSynthed = delegate { };
-	public static void RaiseFuelSynthed () { FuelSynthed(null, EventArgs.Empty); }
+	public static event Action FuelSynthed = delegate { };
+	public static void RaiseFuelSynthed () { FuelSynthed(); }
 
-	public static event EventHandler TextUpdated = delegate { };
-	public static void RaiseTextUpdated () { TextUpdated(null, EventArgs.Empty); }
+	public static event Action TextUpdated = delegate { };
+	public static void RaiseTextUpdated () { TextUpdated(); }
 
-	public static event EventHandler DayEnded = delegate { };
-	public static void RaiseDayEnded () { DayEnded(null, EventArgs.Empty); }
+	public static event Action DayEnded = delegate { };
+	public static void RaiseDayEnded () { DayEnded(); }
 
 	public static void LogHandlersCount ()
 	{
