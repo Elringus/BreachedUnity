@@ -70,7 +70,7 @@ public class FlightView : BaseView
 
 	public void ExitFlightMode ()
 	{
-		SwitchView(ViewType.SimpleView);
+		SwitchView(ViewType.Map);
 	}
 
 	private void OnGUI ()
