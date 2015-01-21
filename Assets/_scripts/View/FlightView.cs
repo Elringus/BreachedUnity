@@ -12,7 +12,7 @@ public class FlightView : BaseView
 
 	public List<Keeper> Keepers = new List<Keeper>();
 
-	private trueSKY sky;
+	//private trueSKY sky;
 	private Vignetting vignetting;
 	private CameraGlitch cameraGlitch;
 	//private ReliefTerrain RT;
@@ -25,7 +25,7 @@ public class FlightView : BaseView
 	{
 		base.Awake();
 
-		sky = GameObject.Find("trueSky").GetComponent<trueSKY>();
+		//sky = GameObject.Find("trueSky").GetComponent<trueSKY>();
 		vignetting = Camera.main.GetComponent<Vignetting>();
 		cameraGlitch = Camera.main.GetComponent<CameraGlitch>();
 		//RT = FindObjectOfType<ReliefTerrain>();
@@ -54,7 +54,7 @@ public class FlightView : BaseView
 
 		if (Input.GetKeyDown(KeyCode.F12)) GodMode = !GodMode;
 
-		sky.speed += Input.GetAxis("Mouse ScrollWheel") * 10000 * Time.deltaTime;
+		//sky.speed += Input.GetAxis("Mouse ScrollWheel") * 10000 * Time.deltaTime;
 
 		//float curTime = sky.time - (float)Math.Truncate(sky.time);
 		//if (curTime > .5f) curTime = 1 - curTime;
