@@ -12,12 +12,12 @@ GameObject:
   - 92: {fileID: 9200000}
   - 124: {fileID: 12400000}
   - 81: {fileID: 8100000}
+  - 45: {fileID: 4577766}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11424508}
-  - 45: {fileID: 4577766}
   m_Layer: 0
   m_Name: _camera-flight
   m_TagString: MainCamera
@@ -31,8 +31,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: .0164414793, y: -.292083353, z: .00364944222, w: .956244588}
-  m_LocalPosition: {x: 418.329987, y: 73.3570023, z: 25.1639996}
+  m_LocalRotation: {x: -.0122536188, y: .413417161, z: -.0608755611, w: -.908421874}
+  m_LocalPosition: {x: 949, y: 21, z: -38}
   m_LocalScale: {x: 1, y: .99999994, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,18 +118,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da8daaf1d21e474bafa968f8f6c9f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensityMultiplier: .25
+  intensityMultiplier: .75
   generalIntensity: .75
   blackIntensity: 2.5
   whiteIntensity: -10
   midGrey: .25
-  dx11Grain: 1
-  softness: .129999995
+  dx11Grain: 0
+  softness: .349999994
   monochrome: 0
   intensities: {x: 1, y: 1, z: 1}
-  tiling: {x: 64, y: 64, z: 64}
+  tiling: {x: 512, y: 256, z: 128}
   monochromeTiling: 64
-  filterMode: 1
+  filterMode: 2
   noiseTexture: {fileID: 2800000, guid: 7a632f967e8ad42f5bd275898151ab6a, type: 3}
   noiseShader: {fileID: 4800000, guid: b0249d8c935344451aa4de6db76f0688, type: 3}
   dx11NoiseShader: {fileID: 4800000, guid: 8b30686bb4322ab42ad5eb50a0210b58, type: 3}

@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using simul;
-using System;
 
 public class FlightView : BaseView
 {
@@ -12,10 +10,8 @@ public class FlightView : BaseView
 
 	public List<Keeper> Keepers = new List<Keeper>();
 
-	//private trueSKY sky;
 	private Vignetting vignetting;
 	private CameraGlitch cameraGlitch;
-	//private ReliefTerrain RT;
 
 	private FlightController FlightController;
 	private DroneController drone;
@@ -25,11 +21,8 @@ public class FlightView : BaseView
 	{
 		base.Awake();
 
-		//sky = GameObject.Find("trueSky").GetComponent<trueSKY>();
 		vignetting = Camera.main.GetComponent<Vignetting>();
 		cameraGlitch = Camera.main.GetComponent<CameraGlitch>();
-		//RT = FindObjectOfType<ReliefTerrain>();
-		//RT.BumpGlobalCombined = new Texture2D(64, 64);
 
 		drone = FindObjectOfType<DroneController>();
 	}
@@ -53,12 +46,6 @@ public class FlightView : BaseView
 		base.Update();
 
 		if (Input.GetKeyDown(KeyCode.F12)) GodMode = !GodMode;
-
-		//sky.speed += Input.GetAxis("Mouse ScrollWheel") * 10000 * Time.deltaTime;
-
-		//float curTime = sky.time - (float)Math.Truncate(sky.time);
-		//if (curTime > .5f) curTime = 1 - curTime;
-		//vignetting.blurDistance = MaxAbberation * curTime;
 
 		cameraGlitch.enabled = Keepers.Any(k => k.State == KeeperState.Pursuiting);
 
