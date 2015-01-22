@@ -5,7 +5,6 @@ using System.Linq;
 public class FlightView : BaseView
 {
 	public int SectorID;
-	public float MaxAbberation = 6;
 	public bool GodMode;
 
 	public List<Keeper> Keepers = new List<Keeper>();
@@ -13,7 +12,6 @@ public class FlightView : BaseView
 	private Vignetting vignetting;
 	private CameraGlitch cameraGlitch;
 
-	private FlightController FlightController;
 	private DroneController drone;
 	private List<Loot> lootList = new List<Loot>();
 

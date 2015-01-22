@@ -62,7 +62,7 @@ public class LootSpot : MonoBehaviour
 
 	private void OnTriggerEnter (Collider colli)
 	{
-		if (colli.CompareTag("Player")) droneIn = true;
+		if (drone.LootCharges > 0 && colli.CompareTag("Player")) droneIn = true;
 	}
 
 	private void OnTriggerExit (Collider colli)
