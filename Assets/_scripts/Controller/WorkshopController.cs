@@ -7,7 +7,11 @@ public class WorkshopController : BaseController
 		if (State.CurrentAP < State.AnalyzeArtifactAPCost) return false;
 
 		State.CurrentAP -= State.AnalyzeArtifactAPCost;
-		artifact.Status = ArtifactStatus.Analyzing;
+		//artifact.Status = ArtifactStatus.Analyzing;
+		artifact.Status = ArtifactStatus.Analyzed;
+		State.Wiring += artifact.Wiring;
+		State.Alloy += artifact.Alloy;
+		State.Chips += artifact.Chips;
 		return true;
 	}
 
