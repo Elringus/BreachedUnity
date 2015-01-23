@@ -35,8 +35,8 @@ public class PhrasePanel : MonoBehaviour
 
 	public void ShowPhrase (string phraseText)
 	{
-		rectTrans.anchoredPosition = RandomWithinShowRect();
-		currentDest = RandomWithinShowRect();
+		rectTrans.anchoredPosition = new Vector2(-25, 240);
+		currentDest = new Vector2(-25, 0);
 
 		text.text = phraseText;
 
