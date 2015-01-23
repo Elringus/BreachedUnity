@@ -16,7 +16,7 @@ public class StatusPanel : MonoBehaviour
 	{
 		engineStatusImage = transform.Find("image_engine-status").GetComponent<Image>();
 		engineStatusText = transform.Find("text_engine-status").GetComponent<Text>();
-		fuelStatusImage = transform.Find("image_engine-status").GetComponent<Image>();
+		fuelStatusImage = transform.Find("image_fuel-status").GetComponent<Image>();
 		fuelStatusText = transform.Find("text_fuel-status").GetComponent<Text>();
 		daysRemainingText = transform.Find("text_days-remaining").GetComponent<Text>();
 	}
