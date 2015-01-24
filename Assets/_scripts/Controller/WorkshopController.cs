@@ -17,8 +17,7 @@ public class WorkshopController : BaseController
 
 	public static bool FixEngine ()
 	{
-		if (State.CurrentAP < State.FixEngineAPCost || !CanFixEngine()) 
-			return false;
+		if (!CanFixEngine()) return false;
 
 		State.EngineFixed = true;
 
@@ -28,10 +27,17 @@ public class WorkshopController : BaseController
 
 	public static bool CanFixEngine ()
 	{
+		if (State.CurrentAP < State.FixEngineAPCost) return false;
+
 		var requirements = State.FixEngineRequirements[State.BreakageType];
 		return !State.EngineFixed && 
 			State.Wiring >= requirements[0] && State.Alloy >= requirements[1] && State.Chips >= requirements[2] && 
-			State.Artifacts.Find(x => x.Identity.GetValueOrDefault() == State.BreakageType).Status == ArtifactStatus.Analyzed;
+			IdenticalArtifactAnalyzed();
+	}
+
+	public static bool IdenticalArtifactAnalyzed ()
+	{
+		return State.Artifacts.Find(x => x.Identity.GetValueOrDefault() == State.BreakageType).Status == ArtifactStatus.Analyzed;
 	}
 
 	public static bool SynthFuel (int[] probe)

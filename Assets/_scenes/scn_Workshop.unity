@@ -431,7 +431,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1819073687}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -85, y: -37}
@@ -2171,7 +2171,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1819073687}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -85, y: 108}
@@ -3005,7 +3005,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1819073687}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 85, y: 60}
@@ -8136,6 +8136,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 1819073687}
   - 222: {fileID: 1819073688}
+  - 114: {fileID: 1819073689}
   m_Layer: 5
   m_Name: panel_engine
   m_TagString: Untagged
@@ -8157,10 +8158,10 @@ RectTransform:
   - {fileID: 253091354}
   - {fileID: 537973262}
   - {fileID: 1450960005}
-  - {fileID: 407511430}
-  - {fileID: 69992337}
   - {fileID: 563776011}
+  - {fileID: 407511430}
   - {fileID: 1831119369}
+  - {fileID: 69992337}
   - {fileID: 1071373756}
   m_Father: {fileID: 1477990362}
   m_RootOrder: 5
@@ -8175,6 +8176,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1819073686}
+--- !u!114 &1819073689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1819073686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54baa025b13f9954f963558358a1d876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1831119368
 GameObject:
   m_ObjectHideFlags: 0
@@ -8205,7 +8217,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1819073687}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 85, y: -140}

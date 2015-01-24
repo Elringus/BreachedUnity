@@ -56,7 +56,10 @@ public class ArtifactsPanel : MonoBehaviour
 
 	private void Update () 
 	{
-		analyzeSelectedArtifactButton.interactable = SelectedArtifact != null && SelectedArtifact.Status == ArtifactStatus.Found;
+		analyzeSelectedArtifactButton.interactable = 
+			ServiceLocator.State.CurrentAP >= ServiceLocator.State.AnalyzeArtifactAPCost 
+			&& SelectedArtifact != null 
+			&& SelectedArtifact.Status == ArtifactStatus.Found;
 	}
 
 	private void UpdateArtifactView ()
