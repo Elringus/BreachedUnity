@@ -24,6 +24,8 @@ public class ArtifactsPanel : MonoBehaviour
 	private Button analyzeSelectedArtifactButton;
 	private Transform contentParent;
 	private ScrollRect artifactsScroll;
+	private Button scrollUpButton;
+	private Button scrollDownButton;
 
 	private void Awake () 
 	{
@@ -52,6 +54,12 @@ public class ArtifactsPanel : MonoBehaviour
 		}
 		artifactsScroll = transform.Find("panel_artifacts/panel_scroll").GetComponent<ScrollRect>();
 		artifactsScroll.verticalNormalizedPosition = 1;
+		scrollUpButton = transform.Find("panel_artifacts/button_scroll-up").GetComponent<Button>();
+		scrollUpButton.OnClick(() => artifactsScroll.verticalNormalizedPosition = 
+			Mathf.Clamp(artifactsScroll.verticalNormalizedPosition + 1 / ((RectTransform)contentParent).sizeDelta.y * 165, 0, 1));
+		scrollDownButton = transform.Find("panel_artifacts/button_scroll-down").GetComponent<Button>();
+		scrollDownButton.OnClick(() => artifactsScroll.verticalNormalizedPosition =
+			Mathf.Clamp(artifactsScroll.verticalNormalizedPosition - 1 / ((RectTransform)contentParent).sizeDelta.y * 165, 0, 1));
 	}
 
 	private void Update () 
