@@ -15,8 +15,6 @@ public abstract class BaseView : MonoBehaviour
 	protected static ILogger Logger { get { return ServiceLocator.Logger; } }
 	protected static IText Text { get { return ServiceLocator.Text; } }
 
-	private Transform uiCanvas;
-
 	static BaseView ()
 	{
 		Initialize();
@@ -78,13 +76,13 @@ public abstract class BaseView : MonoBehaviour
 		Application.LoadLevel("scn_" + to);
 	}
 
-	protected GameObject AddUIElement (string prefabName)
+	public static GameObject AddUIElement (string prefabName, Transform parent = null)
 	{
-		if (!uiCanvas) uiCanvas = GameObject.Find("_gui").transform;
+		if (!parent) parent = GameObject.Find("_gui").transform;
 
 		var uiElement = Instantiate(Resources.Load(prefabName)) as GameObject;
 		uiElement.name = prefabName;
-		uiElement.transform.SetParent(uiCanvas, false);
+		uiElement.transform.SetParent(parent, false);
 
 		return uiElement;
 	}
