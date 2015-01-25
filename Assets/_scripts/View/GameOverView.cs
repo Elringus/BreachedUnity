@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GameFailView : BaseView
+public class GameOverView : BaseView
 {
 	protected override void Update ()
 	{

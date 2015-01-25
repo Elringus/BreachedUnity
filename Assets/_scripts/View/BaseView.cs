@@ -69,6 +69,11 @@ public abstract class BaseView : MonoBehaviour
 
 			if (Input.GetKeyDown(KeyCode.F5)) SwitchView(ViewType.MainMenu);
 		}
+
+		if (State.GameStatus == GameStatus.GameWin && ActiveView != ViewType.GameWin)
+			SwitchView(ViewType.GameWin);
+		if (State.GameStatus == GameStatus.GameOver && ActiveView != ViewType.GameOver)
+			SwitchView(ViewType.GameOver);
 	}
 
 	public void SwitchView (ViewType to)

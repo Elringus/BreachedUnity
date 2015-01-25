@@ -13,6 +13,6 @@ public enum ViewType
 	Sector2,
 	Sector3,
 	Sector4,
-	GameFail,
+	GameOver,
 	GameWin
 }
