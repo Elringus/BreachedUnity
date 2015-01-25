@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 public class WorkshopController : BaseController
 {
@@ -42,10 +43,7 @@ public class WorkshopController : BaseController
 
 	public static bool SynthFuel (int[] probe)
 	{
-		if (State.FuelSynthed || State.CurrentAP < State.FuelSynthAPCost || 
-			State.MineralA < probe[0] || State.MineralB < probe[1] || State.MineralC < probe[2] ||
-			probe[0] == 0 || probe[1] == 0 || probe[2] == 0 ||
-			probe[0] + probe[1] + probe[2] != State.FuelSynthSumm) return false;
+		if (!CanSynthFuel(probe)) return false;
 
 		State.MineralA -= probe[0];
 		State.MineralB -= probe[1];
@@ -58,6 +56,15 @@ public class WorkshopController : BaseController
 
 		State.CurrentAP -= State.FuelSynthAPCost;
 		return true;
+	}
+
+	public static bool CanSynthFuel (int[] probe) 
+	{
+		return !State.FuelSynthed && State.CurrentAP >= State.FuelSynthAPCost 
+			&& !State.FuelSynthProbes.Exists(p => p[0] == probe[0] && p[1] == probe[1] && p[2] == probe[2])
+			&& State.MineralA >= probe[0] && State.MineralB >= probe[1] && State.MineralC >= probe[2] 
+			&& probe[0] > 0 && probe[1] > 0 && probe[2] > 0 
+			&& probe[0] + probe[1] + probe[2] == State.FuelSynthSumm;
 	}
 
 	public static ProbeType MeasureProbe (int[] probe)
