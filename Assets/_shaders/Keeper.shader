@@ -1,9 +1,9 @@
-﻿Shader "Glitch/HeatDistortion" 
+﻿Shader "Glitch/Keeper" 
 {
     Properties 
 	{
         _NoiseTex ("Noise Texture (RG)", 2D) = "white" {}
-        _Strength ("Distortion strength", Range(0.1, 0.3)) = 0.2
+        _Strength ("Distortion strength", Range(0.1, 1)) = 0.2
         _Transparency ("Transparency", Range(0.01, 0.1)) = 0.05
     }
      
@@ -22,7 +22,6 @@
             Name "BASE"
             Tags { "LightMode" = "Always" }
             Lighting Off
-            Cull Off
             ZWrite On
             ZTest LEqual
             Blend SrcAlpha OneMinusSrcAlpha
@@ -55,6 +54,18 @@
 				float2 uvmain : TEXCOORD2;
 				float distortion : TEXCOORD3;
 			};
+			
+			float4 Overlay (float4 a, float4 b)
+			{
+			    float4 r = float4(.0, .0, .0, b.a);
+			    if (a.r > .5) r.r = 1.0 - (1.0 - 2.0 * (a.r - .5)) * (1.0 - b.r);
+			    else r.r = (2.0 * a.r) * b.r;
+			    if (a.g > .5) r.g = 1.0 - (1.0 - 2.0 * (a.g - .5)) * (1.0 - b.g);
+			    else r.g = (2.0 * a.g) * b.g;
+			    if (a.b > .5) r.b = 1.0 - (1.0 - 2.0 * (a.b - .5)) * (1.0 - b.b);
+			    else r.b = (2.0 * a.b) * b.b;
+			    return r;
+			}
  
 			v2f vert (data i) 
 			{
@@ -62,7 +73,7 @@
 				o.position = mul(UNITY_MATRIX_MVP, i.vertex);
 				o.uvmain = TRANSFORM_TEX(i.texcoord, _NoiseTex);
 				float viewAngle = dot(normalize(ObjSpaceViewDir(i.vertex)), i.normal);
-				o.distortion = viewAngle * viewAngle * 5; 
+				o.distortion = viewAngle * viewAngle; 
 				float depth = -mul(UNITY_MATRIX_MV, i.vertex).z; 
 				o.distortion /= 1 + depth / 15; 
 				o.distortion *= _Strength; 
@@ -81,8 +92,8 @@
 					screenPos.y = 1 - screenPos.y;
    
 				// get two offset values by looking up the noise texture shifted in different directions
-				half4 offsetColor1 = tex2D(_NoiseTex, i.uvmain + _Time.xz);
-				half4 offsetColor2 = tex2D(_NoiseTex, i.uvmain - _Time.yx);
+				half4 offsetColor1 = tex2D(_NoiseTex, i.uvmain + _Time.xz / 50);
+				half4 offsetColor2 = tex2D(_NoiseTex, i.uvmain - _Time.yx / 50);
    
 				// use the r values from the noise texture lookups and combine them for x offset
 				// use the g values from the noise texture lookups and combine them for y offset
@@ -93,7 +104,17 @@
    
 				half4 col = tex2D(_GrabTexture, screenPos);
 				col.a = i.distortion / _Transparency;
-				return col;
+				
+				float2 grabTexcoord = i.screenPos.xy / i.screenPos.w; 
+				grabTexcoord.x = (grabTexcoord.x + 1.0) * .5;
+				grabTexcoord.y = (grabTexcoord.y + 1.0) * .5; 
+				#if UNITY_UV_STARTS_AT_TOP
+				grabTexcoord.y = 1.0 - grabTexcoord.y;
+				#endif
+				
+				half4 grabColor = tex2D(_GrabTexture, grabTexcoord); 
+				
+				return Overlay(grabColor, col);
 			}
  
 			ENDCG

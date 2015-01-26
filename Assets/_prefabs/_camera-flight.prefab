@@ -31,8 +31,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: .0164414793, y: -.292083353, z: .00364944222, w: .956244588}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -.0151077081, y: .0550444685, z: -.00744312815, w: -.998341858}
+  m_LocalPosition: {x: 340.690002, y: 5.5999999, z: -18.0300007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   intensity: 3
-  chromaticAberration: 2
+  chromaticAberration: 5
   axialAberration: .5
   blur: .5
   blurSpread: .5

@@ -45,6 +45,8 @@ public class Keeper : MonoBehaviour
 	private DroneController drone;
 	private FlightView flightView;
 
+	private Transform distortion;
+
 	private void Awake () 
 	{
 		Transform = transform;
@@ -53,6 +55,8 @@ public class Keeper : MonoBehaviour
 		flightView = FindObjectOfType<FlightView>();
 
 		flightView.Keepers.Add(this);
+
+		distortion = transform.Find("vfx/distortion");
 	}
 
 	private void Start ()
@@ -63,6 +67,8 @@ public class Keeper : MonoBehaviour
 	private void Update () 
 	{
 		State = Vector3.Distance(Transform.position, drone.Transform.position) < PursuitRange ? KeeperState.Pursuiting : KeeperState.Stalking;
+
+		distortion.LookAt(drone.transform);
 	}
 
 	private IEnumerator SetRandomDestination ()

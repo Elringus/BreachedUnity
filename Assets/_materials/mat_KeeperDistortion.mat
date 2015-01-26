@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: mat_KeeperDistortion
-  m_Shader: {fileID: 4800000, guid: 0e8349bd74cf8284fb9979a8321e5245, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6288d1a5e52cc7348a880867bb61be8d, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,14 +17,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 5173a2723df88ab46b58598b0594fde5, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _NoiseTex
         second:
-          m_Texture: {fileID: 2800000, guid: 1e5aa9d9036aff74abd40ce3b813bc11, type: 3}
+          m_Texture: {fileID: 2800000, guid: 1b474ae27ad42f444a343c4109d0a785, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -39,11 +39,11 @@ Material:
       data:
         first:
           name: _Strength
-        second: .246428579
+        second: .180357143
       data:
         first:
           name: _Transparency
-        second: .0323214307
+        second: .0148214288
     m_Colors:
       data:
         first:
