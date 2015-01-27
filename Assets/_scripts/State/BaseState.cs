@@ -426,6 +426,7 @@ public abstract class BaseState : IState
 
 		foreach (var artifact in Artifacts)
 			artifact.Status = ArtifactStatus.NotFound;
+		Artifacts[0].Status = ArtifactStatus.Found;
 		#endregion
 
 		preventSave = autoSaveWasTurnedOff;
