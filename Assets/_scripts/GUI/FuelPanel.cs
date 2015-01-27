@@ -3,10 +3,16 @@ using UnityEngine.UI;
 
 public class FuelPanel : MonoBehaviour
 {
+	public float FillSpeed = 10;
+
 	private Slider mineralASlider;
 	private Slider mineralBSlider;
 	private Slider mineralCSlider;
 	private Button synthFuelButton;
+
+	private Image mineralAFill;
+	private Image mineralBFill;
+	private Image mineralCFill;
 
 	private void Awake () 
 	{
@@ -18,6 +24,13 @@ public class FuelPanel : MonoBehaviour
 		mineralCSlider.value = 1;
 		synthFuelButton = transform.Find("button_synth-fuel").GetComponent<Button>();
 		synthFuelButton.OnClick(() => WorkshopController.SynthFuel(GetCurrentProbe()));
+
+		mineralAFill = transform.Find("panel_triangle/image_triangle-fill-a").GetComponent<Image>();
+		mineralAFill.fillAmount = 0;
+		mineralBFill = transform.Find("panel_triangle/image_triangle-fill-b").GetComponent<Image>();
+		mineralBFill.fillAmount = 0;
+		mineralCFill = transform.Find("panel_triangle/image_triangle-fill-c").GetComponent<Image>();
+		mineralCFill.fillAmount = 0;
 	}
 
 	private void Update () 
@@ -30,6 +43,10 @@ public class FuelPanel : MonoBehaviour
 		else mineralCSlider.value = Mathf.Clamp(mineralCSlider.value, 1, ServiceLocator.State.MineralC);
 
 		synthFuelButton.interactable = WorkshopController.CanSynthFuel(GetCurrentProbe());
+
+		mineralAFill.fillAmount = Mathf.Lerp(mineralAFill.fillAmount, ServiceLocator.State.MineralA < 1 ? 0 : mineralASlider.normalizedValue, Time.deltaTime * FillSpeed);
+		mineralBFill.fillAmount = Mathf.Lerp(mineralBFill.fillAmount, ServiceLocator.State.MineralB < 1 ? 0 : mineralBSlider.normalizedValue, Time.deltaTime * FillSpeed);
+		mineralCFill.fillAmount = Mathf.Lerp(mineralCFill.fillAmount, ServiceLocator.State.MineralC < 1 ? 0 : mineralCSlider.normalizedValue, Time.deltaTime * FillSpeed);
 	}
 
 	private int[] GetCurrentProbe () 
