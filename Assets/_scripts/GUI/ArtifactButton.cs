@@ -30,7 +30,6 @@ public class ArtifactButton : MonoBehaviour
 	public void Initialize (Artifact artifact)
 	{
 		Artifact = artifact;
-		print("tex_" + Artifact.ID);
 		artifactImage.sprite = Resources.Load<Sprite>("ArtifactIcons/tex_" + Artifact.ID);
 	}
 }

@@ -45,6 +45,7 @@ GameObject:
   - 224: {fileID: 22483578}
   - 222: {fileID: 22283578}
   - 114: {fileID: 11483574}
+  - 114: {fileID: 11474948}
   m_Layer: 5
   m_Name: panel_status
   m_TagString: Untagged
@@ -158,6 +159,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11474948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipPanelStatus
 --- !u!114 &11483574
 MonoBehaviour:
   m_ObjectHideFlags: 1

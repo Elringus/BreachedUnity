@@ -318,6 +318,7 @@ GameObject:
   - 224: {fileID: 22486830}
   - 222: {fileID: 22286830}
   - 114: {fileID: 11486824}
+  - 114: {fileID: 11469868}
   m_Layer: 5
   m_Name: button_end-day
   m_TagString: Untagged
@@ -396,6 +397,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11469868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonEndDay
 --- !u!114 &11486784
 MonoBehaviour:
   m_ObjectHideFlags: 1
