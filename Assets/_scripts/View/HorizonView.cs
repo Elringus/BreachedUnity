@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class HorizonView : BaseView
+public class HorizonView : BolideView
 {
 	[Tooltip("Will show a new phrase every set seconds.")]
 	public float PhraseShowFrequency = 15;
@@ -20,7 +20,8 @@ public class HorizonView : BaseView
 		foreach (var phrase in HorizonController.GetPhrases())
 			phrases.Add(phrase, false);
 
-		InvokeRepeating("NewPhrase", FirstPhraseDelay, PhraseShowFrequency);
+		if (phrases.Count > 0)
+			InvokeRepeating("NewPhrase", FirstPhraseDelay, PhraseShowFrequency);
 	}
 
 	private void NewPhrase ()

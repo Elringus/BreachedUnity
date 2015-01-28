@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class MapView : BaseView
+public class MapView : BolideView
 {
 	private int selectedSector;
 	private Text selectedSectorText;
@@ -12,6 +12,7 @@ public class MapView : BaseView
 	{
 		base.Awake();
 
+		selectedSector = 1;
 		selectedSectorText = GameObject.Find("text_sector-name").GetComponent<Text>();
 
 		for (int i = 1; i < 5; i++)

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WorkshopView : BaseView
+public class WorkshopView : BolideView
 {
 	
 }

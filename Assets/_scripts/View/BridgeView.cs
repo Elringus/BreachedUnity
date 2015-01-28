@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BridgeView : BaseView
+public class BridgeView : BolideView
 {
 	
 }
