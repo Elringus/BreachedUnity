@@ -276,7 +276,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
 --- !u!1 &81825475
 GameObject:
   m_ObjectHideFlags: 0
@@ -6080,6 +6080,7 @@ GameObject:
   - 20: {fileID: 1547451640}
   - 114: {fileID: 1547451639}
   - 114: {fileID: 1547451638}
+  - 114: {fileID: 1547451642}
   m_Layer: 0
   m_Name: _camera-back
   m_TagString: Untagged
@@ -6183,6 +6184,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1547451642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11473950, guid: 3186e5ccf7b7fcf4ab6943a4f1cb454a,
+    type: 2}
+  m_PrefabInternal: {fileID: 791544974}
+  m_GameObject: {fileID: 1547451637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e653d08d21ce9453591b1dc2100fdfcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0
+  threshhold: 0
+  blurSpread: 1
+  separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
+  contrastCompositeShader: {fileID: 4800000, guid: 273404942eede4ea1883ca1fb2942507,
+    type: 3}
 --- !u!1 &1568750441
 GameObject:
   m_ObjectHideFlags: 0
