@@ -60,6 +60,8 @@ public class ArtifactsPanel : MonoBehaviour
 		scrollDownButton = transform.Find("panel_artifacts/button_scroll-down").GetComponent<Button>();
 		scrollDownButton.OnClick(() => artifactsScroll.verticalNormalizedPosition =
 			Mathf.Clamp(artifactsScroll.verticalNormalizedPosition - 1 / ((RectTransform)contentParent).sizeDelta.y * 165, 0, 1));
+
+		SelectedArtifact = ServiceLocator.State.Artifacts[0];
 	}
 
 	private void Update () 
