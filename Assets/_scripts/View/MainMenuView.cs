@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MainMenuView : BaseView
 {
-	private static bool connecting;
+	private static bool loadingText;
 	private GameObject googlePanel;
 
 	protected override void Start ()
@@ -26,7 +26,7 @@ public class MainMenuView : BaseView
 			menu.FindChild("button_update-text").GetComponent<Button>()
 				.OnClick(() =>
 				{
-					connecting = true;
+					loadingText = true;
 					ServiceLocator.Text = new GoogleText();
 					googlePanel = AddUIElement("panel_google-text");
 				});
@@ -51,10 +51,10 @@ public class MainMenuView : BaseView
 	{
 		base.Update();
 
-		if (Text is GoogleText) connecting = Text.Get("STATE") != "OK";
+		if (Text is GoogleText) loadingText = float.Parse(Text.Get("PROGRESS")) < 1;
 
-		if (!connecting && googlePanel) Destroy(googlePanel);
-		else if (connecting)
+		if (!loadingText && googlePanel) Destroy(googlePanel);
+		else if (loadingText)
 		{
 			var slider = GameObject.Find("slider_progress").GetComponent<Slider>();
 			var progress = float.Parse(Text.Get("PROGRESS"));

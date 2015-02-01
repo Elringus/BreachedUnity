@@ -67,7 +67,11 @@ public class GoogleText : IText
 		}
 
 		downloadProgress += .17f;
-		if (downloadProgress > 1) Events.RaiseTextUpdated();
+		if (downloadProgress > 1)
+		{
+			downloadProgress = 1;
+			Events.RaiseTextUpdated();
+		}
 	}
 
 	public string Get (string term)
