@@ -2019,6 +2019,14 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 22486812, guid: 6f873263f137f5d4a9041167bec285a8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: .00602134969
+      objectReference: {fileID: 0}
+    - target: {fileID: 22486812, guid: 6f873263f137f5d4a9041167bec285a8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .99998188
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f873263f137f5d4a9041167bec285a8, type: 2}
   m_RootGameObject: {fileID: 1161950747}
@@ -2901,7 +2909,7 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 510958212}
   m_GameObject: {fileID: 750381836}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: .00602134969, w: .99998188}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

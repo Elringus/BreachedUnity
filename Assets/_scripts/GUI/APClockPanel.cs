@@ -11,6 +11,7 @@ public class APClockPanel : MonoBehaviour
 	private Button endDayButton;
 	private Text dateText;
 	private int year;
+	private float arrowAngle;
 
 	private void Awake () 
 	{
@@ -32,7 +33,7 @@ public class APClockPanel : MonoBehaviour
 
 	private void Update () 
 	{
-		if (GlobalConfig.RELEASE_TYPE == ReleaseType.alpha)
+		if (GlobalConfig.RELEASE_TYPE != ReleaseType.RTM)
 		{
 			if (Input.GetKeyDown(KeyCode.KeypadPlus)) ServiceLocator.State.CurrentAP++;
 			if (Input.GetKeyDown(KeyCode.KeypadMinus)) ServiceLocator.State.CurrentAP--;
@@ -43,9 +44,12 @@ public class APClockPanel : MonoBehaviour
 				ServiceLocator.State.CurrentAP > (9 - i) ? Color.green : Color.red, 
 				Time.deltaTime * APTransitionSpeeed);
 
-		arrow.transform.rotation = Quaternion.Lerp(arrow.transform.rotation, 
-			Quaternion.Euler(0, 0, (ServiceLocator.State.MaxAP - ServiceLocator.State.CurrentAP) * -36), 
-			Time.deltaTime * APTransitionSpeeed);
+		arrowAngle = Mathf.Lerp(arrowAngle, (ServiceLocator.State.MaxAP - ServiceLocator.State.CurrentAP) * -36, Time.deltaTime * APTransitionSpeeed);
+		arrow.transform.eulerAngles = new Vector3(0, 0, arrowAngle);
+
+		//arrow.transform.rotation = Quaternion.Lerp(arrow.transform.rotation, 
+		//	Quaternion.Euler(0, 0, (ServiceLocator.State.MaxAP - ServiceLocator.State.CurrentAP) * -36), 
+		//	Time.deltaTime * APTransitionSpeeed);
 
 		dateText.text = string.Format("{0} December\nyear: {1}", 12 + ServiceLocator.State.CurrentDay, year);
 	}
