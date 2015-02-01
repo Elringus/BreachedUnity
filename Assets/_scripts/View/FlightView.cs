@@ -60,6 +60,7 @@ public class FlightView : BaseView
 
 	private void OnGUI ()
 	{
-		GUI.Box(new Rect(Screen.width - 150, 0, 150, 25), "GodMode (F12): " + (GodMode ? "<color=green>ON</color>" : "<color=red>OFF</color>"));
+		if (GlobalConfig.RELEASE_TYPE == ReleaseType.alpha) 
+			GUI.Box(new Rect(Screen.width - 150, 0, 150, 25), "GodMode (F12): " + (GodMode ? "<color=green>ON</color>" : "<color=red>OFF</color>"));
 	}
 }

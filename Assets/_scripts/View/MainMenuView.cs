@@ -6,15 +6,6 @@ public class MainMenuView : BaseView
 	private static bool connecting;
 	private GameObject googlePanel;
 
-	static MainMenuView ()
-	{
-		if (Text.GetType() == typeof(GoogleText))
-		{
-			Events.TextUpdated += () => connecting = false;
-			if (Text.Get("STATE") == "NONE") connecting = true;
-		}
-	}
-
 	protected override void Start ()
 	{
 		base.Start();
@@ -59,6 +50,8 @@ public class MainMenuView : BaseView
 	protected override void Update ()
 	{
 		base.Update();
+
+		if (Text is GoogleText) connecting = Text.Get("STATE") != "OK";
 
 		if (!connecting && googlePanel) Destroy(googlePanel);
 		else if (connecting)

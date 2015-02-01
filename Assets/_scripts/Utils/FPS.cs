@@ -34,6 +34,6 @@ public class FPS : MonoBehaviour
 
 	private void OnGUI ()
 	{
-		GUI.Box(new Rect(0, 0, 50, 25), fps.ToString());
+		if (ShowFPS) GUI.Box(new Rect(0, 0, 50, 25), fps.ToString());
 	}
 }

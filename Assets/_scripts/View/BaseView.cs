@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public abstract class BaseView : MonoBehaviour
 {
+	public static bool Initialized;
 	public static readonly Color32 DEFAULT_TEXT_COLOR = new Color32(186, 255, 129, 255);
 	public ViewType ActiveView
 	{
@@ -15,9 +16,20 @@ public abstract class BaseView : MonoBehaviour
 	protected static ILogger Logger { get { return ServiceLocator.Logger; } }
 	protected static IText Text { get { return ServiceLocator.Text; } }
 
-	static BaseView ()
+	private static void Initialize ()
 	{
-		Initialize();
+		ServiceLocator.Logger = GlobalConfig.RELEASE_TYPE == ReleaseType.alpha ? new UnityLogger() as ILogger : new NullLogger() as ILogger;
+		ServiceLocator.State = FileState.Load();
+		ServiceLocator.Text = GlobalConfig.RELEASE_TYPE == ReleaseType.alpha ? new GoogleText() as IText : new LocalText() as IText;
+
+		//if (ServiceLocator.State.VersionMiddle < GlobalConfig.VERSION_MIDDLE || 
+		//	ServiceLocator.State.VersionMajor < GlobalConfig.VERSION_MAJOR)
+		//{
+		//	ServiceLocator.State.Reset(true);
+		//	Initialize();
+		//	ServiceLocator.Logger.LogWarning("The saved state is outdated and will be reseted!");
+		//	return;
+		//}
 
 		// disable quests invoking if we don't have the text provider
 		if (Text.GetType() != typeof(NullText))
@@ -30,26 +42,14 @@ public abstract class BaseView : MonoBehaviour
 					record.AssignedDay = State.CurrentDay;
 			};
 		}
-	}
 
-	private static void Initialize ()
-	{
-		ServiceLocator.Logger = new UnityLogger();
-		ServiceLocator.State = FileState.Load();
-		ServiceLocator.Text = new GoogleText();
-
-		//if (ServiceLocator.State.VersionMiddle < GlobalConfig.VERSION_MIDDLE || 
-		//	ServiceLocator.State.VersionMajor < GlobalConfig.VERSION_MAJOR)
-		//{
-		//	ServiceLocator.State.Reset(true);
-		//	Initialize();
-		//	ServiceLocator.Logger.LogWarning("The saved state is outdated and will be reseted!");
-		//	return;
-		//}
+		Initialized = true;
 	}
 
 	protected virtual void Awake ()
 	{
+		if (!Initialized) Initialize();
+
 		Events.LogHandlersCount();
 	}
 
