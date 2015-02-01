@@ -1,0 +1,21 @@
+TooltipPanelAvatar,Name's Corus. Will tell you more when we clarify the situation.
+TooltipPanelAvatarCondition,My hibernation was interrupted. Better to watch after vital parameters carefully.
+TooltipPanelStatus,Machine is damaged and I have a very little amount of oxygen. Already feeling hypoxia...
+TooltipButtonEndDay,Even now rest is neccessary. I will do that tomorrow.
+TooltipButtonToBridge,My main deck. I keep journal and condition reports here.
+TooltipButtonToWorkshop,My workshop deck. For the urgent oxygen production and repair.
+TooltipButtonToMap,Map deck. To scan what's around my machine.
+TooltipButtonToHorizon,"Chamber to relax and meditate. Also, the machine produces great illusions sometimes..."
+TooltipButtonToMenu,Main menu
+TooltipTextDate,I was awakened earlier than needed. Much earlier.
+TooltipClock,My productive time for this day. Let's hurry.
+TooltipJournal,"Previous entries have disappeared. Because of the crash, I think."
+TooltipImageCore,Machine core is severely damaged.
+TooltipButtonFixEngine,"Happily, we can fix the core by analyzing artifacts found with drone."
+TooltipTriangle,"This deck is adapted for oxygen synthesis. Minerals roasting, then water splitting and voila."
+TooltipSliders,"Proportion consists of three mineral types mixed. Min amount of one mineral type is 1, max is 7."
+TooltipButtonSynthFuel,"Each probe can be true or false. We must choose mix proportion wisely, because drone can't found much minerals."
+TooltipPanelArtifacts,Objects found in the desert. Very strange sometimes. Analyze them to fix the machine.
+TooltipButtonAnalyzeArtifact,"We can get additional info about artifact. It will be destroyed, but that's fine."
+TooltipPanelMap,It's a desert. Scanner data can't go wrong. All the water has vanished somehow...
+TooltipButtonSendDrone,My drone must be somewhere in the sands. It was disconnected from system because of the wreckage.

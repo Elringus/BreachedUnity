@@ -18,7 +18,7 @@ public abstract class BaseView : MonoBehaviour
 
 	private static void Initialize ()
 	{
-		ServiceLocator.Logger = GlobalConfig.RELEASE_TYPE == ReleaseType.alpha ? new UnityLogger() as ILogger : new NullLogger() as ILogger;
+		ServiceLocator.Logger = GlobalConfig.RELEASE_TYPE != ReleaseType.RTM ? new UnityLogger() as ILogger : new NullLogger() as ILogger;
 		ServiceLocator.State = FileState.Load();
 		ServiceLocator.Text = GlobalConfig.RELEASE_TYPE == ReleaseType.alpha ? new GoogleText() as IText : new LocalText() as IText;
 

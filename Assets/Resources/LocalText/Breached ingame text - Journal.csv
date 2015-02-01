@@ -1,0 +1,11 @@
+Journal1,"Test, test.<br>Great, the journal function is stable.<br><br>Day one. Hibernation is interrupted. The machine is damaged.<br>Time coordinates: I'm far away from my destination.<br>And it is wasteland outside...<br>I need to log out all the days. It's like to write a book.<br>Can I speak to you, my probable reader?<br>Maybe you will find this journal.<br><br>So, we need to repair the machine.<br>I am Corus Valott. I'm scared.<br>"
+Journal2,"Day two.<br>Night was starry. I could not recognize the constellations.<br>One of them looks like sharpened Ursa Major, though.<br>Workshop is clicking and sizzling, making my sleep restless.<br>Most of all I was looking for those fireball creatures to come.<br>But they seem to protect the minerals. They sound so weird when chasing the drone...<br>However, our oxygen is running out.<br>We must synthetize enough of it and repair the core.<br><br>Future people must be waiting for me.<br>"
+Journal3,"<br>Day three.<br>The only thing that worries me, my friend, is that I see only desert from all sides.<br>The cemetery of buildings. Is this really the future? What has happened after my departure?<br>The guild outpost is ruined. Well, the guildiers felt very comfortable in their VR simulations. Pity I could not.<br>Miss my sister from there. She’s nice.<br>People called sister a person who was blood relative. To tell the truth, she talked little, just a little…<br><br>I'm sorry, brothers.<br>"
+Journal4,"<br>Please, hurry. We need to refill the oxygen tank.<br>"
+Journal5,
+Journal6,"I have a Rudolph-Vierke disease. Scientifically it sounds like: induced atrophy with affection on the temporal lobes. Among millions of virtual residents, someone has no luck. I missed the first symptoms. The taste disturbance? We envelop our stomachs with feeders. The sight deterioration? You think your screen is distorting by an accident?.."
+Journal7,
+Journal8,
+Journal_test_quest1,"Некая запись в журнале под номером 2. Показывается во второй день, если прошёл до конца квест ""Наружу""."
+Journal_test_artifact1,"Некая запись в журнале под номером 3. Показывается в любой день, если проанализирован Artifact1."
+Journal_test_ap,Некая запись в журнале под номером 4. Показывается во второй половине 3 дня (maxAP = 5).
