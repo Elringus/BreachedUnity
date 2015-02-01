@@ -39,17 +39,22 @@ public class APClockPanel : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.KeypadMinus)) ServiceLocator.State.CurrentAP--;
 		}
 
-		for (int i = 0; i < apImages.Count; i++)
-			apImages[i].color = Color.Lerp(apImages[i].color, 
-				ServiceLocator.State.CurrentAP > (9 - i) ? Color.green : Color.red, 
-				Time.deltaTime * APTransitionSpeeed);
-
 		arrowAngle = Mathf.Lerp(arrowAngle, (ServiceLocator.State.MaxAP - ServiceLocator.State.CurrentAP) * -36, Time.deltaTime * APTransitionSpeeed);
 		arrow.transform.eulerAngles = new Vector3(0, 0, arrowAngle);
 
 		//arrow.transform.rotation = Quaternion.Lerp(arrow.transform.rotation, 
 		//	Quaternion.Euler(0, 0, (ServiceLocator.State.MaxAP - ServiceLocator.State.CurrentAP) * -36), 
 		//	Time.deltaTime * APTransitionSpeeed);
+
+		for (int i = 0; i < apImages.Count; i++)
+			apImages[i].color = Color.Lerp(apImages[i].color,
+				(arrowAngle + 15) / -36 > i ? Color.red : Color.green,
+				Time.deltaTime * APTransitionSpeeed);
+
+		//for (int i = 0; i < apImages.Count; i++)
+		//	apImages[i].color = Color.Lerp(apImages[i].color,
+		//		ServiceLocator.State.CurrentAP > (9 - i) ? Color.green : Color.red,
+		//		Time.deltaTime * APTransitionSpeeed);
 
 		dateText.text = string.Format("{0} December\nyear: {1}", 12 + ServiceLocator.State.CurrentDay, year);
 	}
