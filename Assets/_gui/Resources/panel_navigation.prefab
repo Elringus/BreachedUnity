@@ -115,6 +115,7 @@ GameObject:
   - 224: {fileID: 22451284}
   - 222: {fileID: 22251284}
   - 114: {fileID: 11451268}
+  - 114: {fileID: 11421880}
   m_Layer: 5
   m_Name: button_to-bridge
   m_TagString: Untagged
@@ -166,6 +167,7 @@ GameObject:
   - 224: {fileID: 22451290}
   - 222: {fileID: 22251290}
   - 114: {fileID: 11451278}
+  - 114: {fileID: 11422402}
   m_Layer: 5
   m_Name: button_to-workshop
   m_TagString: Untagged
@@ -219,6 +221,7 @@ GameObject:
   - 224: {fileID: 22451296}
   - 222: {fileID: 22251296}
   - 114: {fileID: 11451288}
+  - 114: {fileID: 11426616}
   m_Layer: 5
   m_Name: button_to-map
   m_TagString: Untagged
@@ -270,6 +273,7 @@ GameObject:
   - 224: {fileID: 22451302}
   - 222: {fileID: 22251302}
   - 114: {fileID: 11451298}
+  - 114: {fileID: 11499240}
   m_Layer: 5
   m_Name: button_to-horizon
   m_TagString: Untagged
@@ -305,6 +309,7 @@ GameObject:
   - 224: {fileID: 22451306}
   - 222: {fileID: 22251306}
   - 114: {fileID: 11451304}
+  - 114: {fileID: 11472654}
   m_Layer: 5
   m_Name: button_to-menu
   m_TagString: Untagged
@@ -789,6 +794,42 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11421880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToBridge
+--- !u!114 &11422402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToWorkshop
+--- !u!114 &11426616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToMap
 --- !u!114 &11428924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1275,6 +1316,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11472654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToMenu
 --- !u!114 &11484532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1825,6 +1878,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11499240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToHorizon
 --- !u!222 &22200780
 CanvasRenderer:
   m_ObjectHideFlags: 1

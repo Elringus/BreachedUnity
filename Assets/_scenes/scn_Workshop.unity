@@ -314,6 +314,7 @@ GameObject:
   - 224: {fileID: 45427546}
   - 222: {fileID: 45427548}
   - 114: {fileID: 45427547}
+  - 114: {fileID: 45427549}
   m_Layer: 5
   m_Name: button_synth-fuel
   m_TagString: Untagged
@@ -391,6 +392,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 45427545}
+--- !u!114 &45427549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 45427545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonSynthFuel
 --- !u!1 &67886483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1457,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 268259619}
   - 222: {fileID: 268259620}
+  - 114: {fileID: 268259621}
   m_Layer: 5
   m_Name: panel_sliders
   m_TagString: Untagged
@@ -1480,6 +1494,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 268259618}
+--- !u!114 &268259621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 268259618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipSliders
 --- !u!1 &281584246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3077,6 +3103,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 477968404}
   - 222: {fileID: 477968405}
+  - 114: {fileID: 477968406}
   m_Layer: 5
   m_Name: panel_triangle
   m_TagString: Untagged
@@ -3112,6 +3139,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 477968403}
+--- !u!114 &477968406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477968403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipTriangle
 --- !u!1 &478141545
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,6 +3236,7 @@ GameObject:
   - 224: {fileID: 490918915}
   - 222: {fileID: 490918918}
   - 114: {fileID: 490918916}
+  - 114: {fileID: 490918917}
   m_Layer: 5
   m_Name: button_to-bridge
   m_TagString: Untagged
@@ -3268,6 +3308,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &490918917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11421880, guid: 2b38c289353da1e4d94cc7272bcd93cc,
+    type: 2}
+  m_PrefabInternal: {fileID: 336033529}
+  m_GameObject: {fileID: 490918914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToBridge
 --- !u!222 &490918918
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3893,6 +3946,7 @@ GameObject:
   - 224: {fileID: 565616339}
   - 222: {fileID: 565616341}
   - 114: {fileID: 565616340}
+  - 114: {fileID: 565616342}
   m_Layer: 5
   m_Name: clock
   m_TagString: Untagged
@@ -3948,6 +4002,19 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 1508768709}
   m_GameObject: {fileID: 565616338}
+--- !u!114 &565616342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11406886, guid: 6f873263f137f5d4a9041167bec285a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1508768709}
+  m_GameObject: {fileID: 565616338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipClock
 --- !u!1 &576816161
 GameObject:
   m_ObjectHideFlags: 0
@@ -4635,6 +4702,7 @@ GameObject:
   - 224: {fileID: 756693338}
   - 222: {fileID: 756693341}
   - 114: {fileID: 756693339}
+  - 114: {fileID: 756693340}
   m_Layer: 5
   m_Name: button_to-menu
   m_TagString: Untagged
@@ -4705,6 +4773,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &756693340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11472654, guid: 2b38c289353da1e4d94cc7272bcd93cc,
+    type: 2}
+  m_PrefabInternal: {fileID: 336033529}
+  m_GameObject: {fileID: 756693337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToMenu
 --- !u!222 &756693341
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6157,6 +6238,7 @@ GameObject:
   - 224: {fileID: 1043676407}
   - 222: {fileID: 1043676410}
   - 114: {fileID: 1043676408}
+  - 114: {fileID: 1043676409}
   m_Layer: 5
   m_Name: button_to-horizon
   m_TagString: Untagged
@@ -6228,6 +6310,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1043676409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11499240, guid: 2b38c289353da1e4d94cc7272bcd93cc,
+    type: 2}
+  m_PrefabInternal: {fileID: 336033529}
+  m_GameObject: {fileID: 1043676406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToHorizon
 --- !u!222 &1043676410
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6394,6 +6489,7 @@ GameObject:
   - 224: {fileID: 1071373756}
   - 222: {fileID: 1071373758}
   - 114: {fileID: 1071373757}
+  - 114: {fileID: 1071373759}
   m_Layer: 5
   m_Name: button_fix-engine
   m_TagString: Untagged
@@ -6471,6 +6567,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1071373755}
+--- !u!114 &1071373759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1071373755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonFixEngine
 --- !u!1 &1092260733
 GameObject:
   m_ObjectHideFlags: 0
@@ -6482,6 +6590,7 @@ GameObject:
   - 222: {fileID: 1092260737}
   - 114: {fileID: 1092260736}
   - 114: {fileID: 1092260735}
+  - 114: {fileID: 1092260738}
   m_Layer: 5
   m_Name: text_date
   m_TagString: Untagged
@@ -6558,6 +6667,19 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 1508768709}
   m_GameObject: {fileID: 1092260733}
+--- !u!114 &1092260738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11438622, guid: 6f873263f137f5d4a9041167bec285a8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1508768709}
+  m_GameObject: {fileID: 1092260733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipTextDate
 --- !u!1 &1105128999
 GameObject:
   m_ObjectHideFlags: 0
@@ -8235,6 +8357,7 @@ GameObject:
   - 224: {fileID: 1450960005}
   - 222: {fileID: 1450960007}
   - 114: {fileID: 1450960006}
+  - 114: {fileID: 1450960008}
   m_Layer: 5
   m_Name: image_core
   m_TagString: Untagged
@@ -8286,6 +8409,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1450960004}
+--- !u!114 &1450960008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1450960004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipImageCore
 --- !u!1 &1455007115
 GameObject:
   m_ObjectHideFlags: 0
@@ -8826,6 +8961,7 @@ GameObject:
   - 224: {fileID: 1552052972}
   - 222: {fileID: 1552052975}
   - 114: {fileID: 1552052973}
+  - 114: {fileID: 1552052974}
   m_Layer: 5
   m_Name: button_to-workshop
   m_TagString: Untagged
@@ -8897,6 +9033,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1552052974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11422402, guid: 2b38c289353da1e4d94cc7272bcd93cc,
+    type: 2}
+  m_PrefabInternal: {fileID: 336033529}
+  m_GameObject: {fileID: 1552052971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToWorkshop
 --- !u!222 &1552052975
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9620,6 +9769,7 @@ GameObject:
   - 224: {fileID: 1704346239}
   - 222: {fileID: 1704346241}
   - 114: {fileID: 1704346240}
+  - 114: {fileID: 1704346242}
   m_Layer: 5
   m_Name: button_analyze-artifact
   m_TagString: Untagged
@@ -9697,6 +9847,18 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1704346238}
+--- !u!114 &1704346242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1704346238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonAnalyzeArtifact
 --- !u!1001 &1705907409
 Prefab:
   m_ObjectHideFlags: 0
@@ -10374,6 +10536,7 @@ GameObject:
   - 224: {fileID: 1831440313}
   - 222: {fileID: 1831440316}
   - 114: {fileID: 1831440314}
+  - 114: {fileID: 1831440315}
   m_Layer: 5
   m_Name: button_to-map
   m_TagString: Untagged
@@ -10445,6 +10608,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1831440315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11426616, guid: 2b38c289353da1e4d94cc7272bcd93cc,
+    type: 2}
+  m_PrefabInternal: {fileID: 336033529}
+  m_GameObject: {fileID: 1831440312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipButtonToMap
 --- !u!222 &1831440316
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11259,6 +11435,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 1989898160}
   - 222: {fileID: 1989898161}
+  - 114: {fileID: 1989898162}
   m_Layer: 5
   m_Name: panel_artifacts
   m_TagString: Untagged
@@ -11292,6 +11469,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1989898159}
+--- !u!114 &1989898162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1989898159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b74a76fa8215b4eaff447932b3b9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipID: TooltipPanelArtifacts
 --- !u!1 &2014458166
 GameObject:
   m_ObjectHideFlags: 0
