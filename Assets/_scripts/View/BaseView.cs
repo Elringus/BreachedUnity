@@ -60,7 +60,7 @@ public abstract class BaseView : MonoBehaviour
 
 	protected virtual void Update ()
 	{
-		if (GlobalConfig.RELEASE_TYPE == ReleaseType.alpha)
+		if (GlobalConfig.RELEASE_TYPE != ReleaseType.RTM)
 		{
 			if (Input.GetKeyDown(KeyCode.F1)) SwitchView(ViewType.Sector1);
 			if (Input.GetKeyDown(KeyCode.F2)) SwitchView(ViewType.Sector2);

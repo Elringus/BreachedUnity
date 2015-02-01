@@ -43,7 +43,7 @@ public class FlightView : BaseView
 	{
 		base.Update();
 
-		if (Input.GetKeyDown(KeyCode.F12)) GodMode = !GodMode;
+		if (GlobalConfig.RELEASE_TYPE != ReleaseType.RTM && Input.GetKeyDown(KeyCode.F12)) GodMode = !GodMode;
 
 		cameraGlitch.enabled = Keepers.Any(k => k.State == KeeperState.Pursuiting);
 
