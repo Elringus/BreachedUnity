@@ -11,18 +11,20 @@ public class SynthProbe : MonoBehaviour
 	private RectTransform trs;
 	private RectTransform parentTRS;
 
-	public void Initialize (int[] probe)
+	public void Initialize (int[] probe, bool spot = false)
 	{
 		image = GetComponent<Image>();
 		trs = GetComponent<RectTransform>();
 		parentTRS = trs.parent as RectTransform;
 
+		trs.anchoredPosition = CalculateProbePos(probe[0], probe[2]);
+
+		if (spot) return;
+
 		var probeType = WorkshopController.MeasureProbe(probe);
 		image.sprite = probeType == ProbeType.True ? TrueProbeSprite
 			: probeType == ProbeType.Close ? CloseProbeSprite
 			: WrongProbeSprite;
-
-		trs.anchoredPosition = CalculateProbePos(probe[0], probe[2]);
 	}
 
 	private Vector2 CalculateProbePos (float cA, float cC)

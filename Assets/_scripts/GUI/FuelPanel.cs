@@ -36,6 +36,11 @@ public class FuelPanel : MonoBehaviour
 		mineralCFill.fillAmount = 0;
 
 		probesParent = transform.Find("panel_triangle/image_triangle-segments");
+
+		for (int a = 1; a < 8; a++)
+			for (int c = 1; c < 8; c++)
+				if ((a + c) >= 2 && (a + c) <= 8)
+					AddProbe(new int[] {a, 0, c}, true);
 	}
 
 	private void Start ()
@@ -64,9 +69,9 @@ public class FuelPanel : MonoBehaviour
 		return new int[3] { (int)mineralASlider.value, (int)mineralBSlider.value, (int)mineralCSlider.value };
 	}
 
-	private void AddProbe (int[] probe)
+	private void AddProbe (int[] probe, bool spot = false)
 	{
-		var synthProbe = BaseView.AddUIElement("synth-probe", probesParent).GetComponent<SynthProbe>();
-		synthProbe.Initialize(probe);
+		var synthProbe = BaseView.AddUIElement(spot ? "probe-spot" : "synth-probe", probesParent).GetComponent<SynthProbe>();
+		synthProbe.Initialize(probe, spot);
 	}
 }
