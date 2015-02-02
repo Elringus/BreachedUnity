@@ -6901,7 +6901,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -8165,7 +8165,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -8177,9 +8177,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt
     aliquet nunc vel euismod. Pellentesque facilisis ultricies dolor, eget egestas
-    ligula hendrerit vitae. Integer leo elit, tristique quis tortor eu, fermentum
-    pretium massa. Vestibulum eget laoreet lacus. Praesent dignissim leo et turpis
-    ultrices imperdiet.
+    ligula hendrerit vitae.
 --- !u!222 &2113254099
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -522,8 +522,8 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -85, y: -37}
-  m_SizeDelta: {x: 150, y: 50}
+  m_AnchoredPosition: {x: -85, y: -40.9000015}
+  m_SizeDelta: {x: 150, y: 57.7000008}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &69992338
 MonoBehaviour:
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2681,8 +2681,8 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -85, y: 108}
-  m_SizeDelta: {x: 150, y: 50}
+  m_AnchoredPosition: {x: -85, y: 103.099998}
+  m_SizeDelta: {x: 150, y: 59.7999992}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &407511431
 MonoBehaviour:
@@ -2714,7 +2714,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -3012,7 +3012,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -3883,8 +3883,8 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 85, y: 60}
-  m_SizeDelta: {x: 150, y: 50}
+  m_AnchoredPosition: {x: 85, y: 54.7000008}
+  m_SizeDelta: {x: 150, y: 60.5}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &563776012
 MonoBehaviour:
@@ -3916,7 +3916,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -5889,7 +5889,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fuel tank is empty
+  m_Text: Oxygen tank is empty
 --- !u!222 &975408187
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9325,7 +9325,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -9337,9 +9337,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt
     aliquet nunc vel euismod. Pellentesque facilisis ultricies dolor, eget egestas
-    ligula hendrerit vitae. Integer leo elit, tristique quis tortor eu, fermentum
-    pretium massa. Vestibulum eget laoreet lacus. Praesent dignissim leo et turpis
-    ultrices imperdiet.
+    ligula hendrerit vitae.
 --- !u!222 &1594926921
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10473,8 +10471,8 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 85, y: -140}
-  m_SizeDelta: {x: 150, y: 50}
+  m_AnchoredPosition: {x: 85, y: -146.300003}
+  m_SizeDelta: {x: 150, y: 62.5999985}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1831119370
 MonoBehaviour:
@@ -10506,7 +10504,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -12080,7 +12078,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6d25522d3147c03408bbd736261e5f82, type: 3}
-    m_FontSize: 18
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -12090,11 +12088,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt
+  m_Text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt
     aliquet nunc vel euismod. Pellentesque facilisis ultricies dolor, eget egestas
-    ligula hendrerit vitae. Integer leo elit, tristique quis tortor eu, fermentum
-    pretium massa. Vestibulum eget laoreet lacus. Praesent dignissim leo et turpis
-    ultrices imperdiet.
+    ligula hendrerit vitae. '
 --- !u!222 &2140457907
 CanvasRenderer:
   m_ObjectHideFlags: 0
