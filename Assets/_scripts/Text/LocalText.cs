@@ -11,6 +11,7 @@ public class LocalText : IText
 	private const string ARTIFACTS_TABLE_NAME = @"Breached ingame text - Artifacts";
 	private const string SCANINFO_TABLE_NAME = @"Breached ingame text - ScanInfo";
 	private const string TOOLTIPS_TABLE_NAME = @"Breached ingame text - Tooltips";
+	private const string SECTORS_TABLE_NAME = @"Breached ingame text - Sectors";
 
 	private Dictionary<string, string> cachedText;
 
@@ -24,6 +25,7 @@ public class LocalText : IText
 		RetrieveTable(ARTIFACTS_TABLE_NAME);
 		RetrieveTable(SCANINFO_TABLE_NAME);
 		RetrieveTable(TOOLTIPS_TABLE_NAME);
+		RetrieveTable(SECTORS_TABLE_NAME);
 	}
 
 	private void RetrieveTable (string tablePath)

@@ -16,6 +16,7 @@ public class GoogleText : IText
 	private const string ARTIFACTS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=222661492";
 	private const string SCANINFO_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=1514799521";
 	private const string TOOLTIPS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=469296090";
+	private const string SECTORS_TABLE_URL = @"https://docs.google.com/spreadsheets/d/1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk/export?format=csv&id=1DztvoxCDKT2abEwqtxuRj2oQZNbtPAnYOwrj7tHvphk&gid=2114384986";
 
 	private static float downloadProgress;
 
@@ -32,6 +33,7 @@ public class GoogleText : IText
 		new Thread(() => { RetrieveTable(ARTIFACTS_TABLE_URL); }).Start();
 		new Thread(() => { RetrieveTable(SCANINFO_TABLE_URL); }).Start();
 		new Thread(() => { RetrieveTable(TOOLTIPS_TABLE_URL); }).Start();
+		new Thread(() => { RetrieveTable(SECTORS_TABLE_URL); }).Start();
 	}
 
 	private void RetrieveTable (string tableURL)
@@ -66,7 +68,7 @@ public class GoogleText : IText
 			return;
 		}
 
-		downloadProgress += .17f;
+		downloadProgress += .144f;
 		if (downloadProgress > 1)
 		{
 			downloadProgress = 1;
