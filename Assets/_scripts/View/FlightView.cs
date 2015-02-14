@@ -7,6 +7,7 @@ public class FlightView : BaseView
 	public int SectorID;
 	public bool GodMode;
 
+	[HideInInspector]
 	public List<Keeper> Keepers = new List<Keeper>();
 
 	private Vignetting vignetting;
