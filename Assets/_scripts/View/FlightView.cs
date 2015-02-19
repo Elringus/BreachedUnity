@@ -49,9 +49,9 @@ public class FlightView : BaseView
 		cameraGlitch.enabled = Keepers.Any(k => k.State == KeeperState.Pursuiting);
 
 		Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, drone.EngineMode == EngineMode.Accel ? 90 : drone.EngineMode == EngineMode.Normal ? 70 : 60, Time.deltaTime);
-		vignetting.blur = Mathf.Lerp(vignetting.blur, drone.EngineMode == EngineMode.Accel ? 2 : .5f, Time.deltaTime);
-		vignetting.blurSpread = Mathf.Lerp(vignetting.blurSpread, drone.EngineMode == EngineMode.Accel ? 10 : .5f, Time.deltaTime);
-		vignetting.intensity = Mathf.Lerp(vignetting.intensity, drone.EngineMode == EngineMode.Accel ? 5 : 3, Time.deltaTime);
+		vignetting.blur = Mathf.Lerp(vignetting.blur, drone.EngineMode == EngineMode.Accel ? 3.5f : .5f, Time.deltaTime);
+		vignetting.blurSpread = Mathf.Lerp(vignetting.blurSpread, drone.EngineMode == EngineMode.Accel ? 5 : .5f, Time.deltaTime);
+		vignetting.intensity = Mathf.Lerp(vignetting.intensity, drone.EngineMode == EngineMode.Accel ? 6 : 3, Time.deltaTime);
 	}
 
 	public void ExitFlightMode ()

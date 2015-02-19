@@ -7,9 +7,8 @@ public class DroneController : MonoBehaviour
 {
 	[HideInInspector]
 	public Transform Transform;
-
+	[HideInInspector]
 	public List<Loot> CollectedLoot = new List<Loot>();
-	private int _lootCharges;
 	public int LootCharges
 	{
 		get { return _lootCharges; }
@@ -20,30 +19,35 @@ public class DroneController : MonoBehaviour
 				NormalMoveSpeed *= 1 - SpeedLossByLootCharge;
 		}
 	}
-	[Range(.01f, .99f)]
-	public float SpeedLossByLootCharge = .2f;
+	[HideInInspector]
+	public EngineMode EngineMode;
 
-	public float AccelMoveSpeed = 170;
+	[Header("Speed")]
 	public float NormalMoveSpeed = 70;
 	public float FallSpeed = 50;
+	[Range(.00f, .99f)]
+	public float SpeedLossByLootCharge = .2f;
 
-	public float GeneralEasing = 3;
+	[Header("Acceleration")]
+	public float AccelMoveSpeed = 170;
+	public float AccelSteeringDamp = 5;
+	public float AccelRegenRate = .1f;
+	public float AccelBurnRate = .5f;
 
+	[Header("Control")]
 	public float HorControlDamping = 1;
 	public float VerControlDamping = 15;
 	public float MaxHorAccel = 500;
 	public float MaxVerAccel = 30;
-	public float SteeringLimit = 50;
+	public float SteeringStart = 50;
 	public float SteeringSpeed = 10;
-	public float SteeringSkew = 15;
+	public float SkewAmount = 15;
+	public float CameraEasing = 3;
 
-	[HideInInspector]
-	public EngineMode EngineMode;
-
-	public float AccelRegenRate = .1f;
-	public float AccelBurnRate = .5f;
+	private int _lootCharges;
 	private float accelCharge = 1;
 	private bool accelBlock;
+	private float curSteerSpeed;
 
 	private Transform lookCamera;
 	private CharacterController charController;
@@ -54,6 +58,8 @@ public class DroneController : MonoBehaviour
 		lookCamera = Camera.main.transform;
 		charController = GetComponent<CharacterController>();
 		LootCharges = ServiceLocator.State.LootCharges;
+
+		curSteerSpeed = SteeringSpeed;
 	}
 
 	private void Update ()
@@ -62,32 +68,43 @@ public class DroneController : MonoBehaviour
 
 		if (EngineMode != EngineMode.Freeze)
 		{
+			#region MOVING
 			EngineMode = (Input.GetMouseButton(1) || Input.GetKey(KeyCode.Space)) ? EngineMode.Stop :
-						 (Input.GetMouseButton(0) || Input.GetKey(KeyCode.LeftShift)) && accelCharge > 0 && !accelBlock ? EngineMode.Accel : EngineMode.Normal;
+			 (Input.GetMouseButton(0) || Input.GetKey(KeyCode.LeftShift)) && accelCharge > 0 && !accelBlock ? EngineMode.Accel : EngineMode.Normal;
 
 			if (EngineMode != EngineMode.Stop) charController.Move(Transform.forward * (EngineMode == EngineMode.Accel ? AccelMoveSpeed : NormalMoveSpeed) * Time.deltaTime);
 			if (!charController.isGrounded) charController.Move(Vector3.down * FallSpeed * Time.deltaTime);
+			#endregion
 
+			#region ROTATING
 			float horDelta = 0;
 			float verDelta = 0;
 
-			horDelta = (Input.mousePosition.x - (float)Screen.width / 2f) / HorControlDamping;
-			verDelta = (Input.mousePosition.y - (float)Screen.height / 2f) / -VerControlDamping;
+			horDelta = (Input.mousePosition.x - Screen.width / 2f) / HorControlDamping;
+			verDelta = (Input.mousePosition.y - Screen.height / 2f) / -VerControlDamping;
 
 			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) horDelta = -MaxHorAccel;
 			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) horDelta = MaxHorAccel;
 			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) verDelta = -MaxVerAccel;
 			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) verDelta = MaxVerAccel;
 
-			if (Mathf.Abs(horDelta) > SteeringLimit)
-			{
-				Transform.Rotate(new Vector3(0, Mathf.Clamp(horDelta, -MaxHorAccel, MaxHorAccel) * Time.deltaTime / (EngineMode == EngineMode.Stop ? SteeringSpeed / 2 : SteeringSpeed), 0));
-				Transform.rotation = Quaternion.Lerp(Transform.rotation, Quaternion.Euler(0, Transform.eulerAngles.y, horDelta < 0 ? SteeringSkew : -SteeringSkew), GeneralEasing * Time.deltaTime);
-			}
-			else Transform.rotation = Quaternion.Lerp(Transform.rotation, Quaternion.Euler(0, Transform.eulerAngles.y, 0), GeneralEasing * Time.deltaTime);
+			curSteerSpeed = Mathf.Lerp(curSteerSpeed, 
+				EngineMode == EngineMode.Accel ? SteeringSpeed / AccelSteeringDamp : EngineMode == EngineMode.Stop ? SteeringSpeed + AccelSteeringDamp * 2 : SteeringSpeed,
+				Time.deltaTime);
 
-			lookCamera.position = Vector3.Lerp(lookCamera.position, Transform.position, GeneralEasing * Time.deltaTime);
-			lookCamera.rotation = Quaternion.Lerp(lookCamera.rotation, Quaternion.Euler(verDelta, Transform.eulerAngles.y, Transform.eulerAngles.z), GeneralEasing * Time.deltaTime);
+			if (Mathf.Abs(horDelta) > SteeringStart)
+			{
+				Transform.Rotate(new Vector3(0, Mathf.Clamp(horDelta, -MaxHorAccel, MaxHorAccel) * curSteerSpeed / 100 * Time.deltaTime));
+				Transform.rotation = Quaternion.Lerp(Transform.rotation, Quaternion.Euler(0, Transform.eulerAngles.y,
+					horDelta < 0 ? SkewAmount * (Mathf.Abs(horDelta) / MaxHorAccel) : -SkewAmount * (Mathf.Abs(horDelta) / MaxHorAccel)), curSteerSpeed * Time.deltaTime);
+			}
+			else Transform.rotation = Quaternion.Lerp(Transform.rotation, Quaternion.Euler(0, Transform.eulerAngles.y, 0), curSteerSpeed * Time.deltaTime);
+			#endregion
+
+			#region CAMERA
+			lookCamera.position = Vector3.Lerp(lookCamera.position, Transform.position, CameraEasing * Time.deltaTime);
+			lookCamera.rotation = Quaternion.Lerp(lookCamera.rotation, Quaternion.Euler(verDelta, Transform.eulerAngles.y, Transform.eulerAngles.z), CameraEasing * Time.deltaTime);
+			#endregion
 		}
 
 		if (EngineMode == EngineMode.Accel) accelCharge -= accelCharge <= 0 ? 0 : AccelBurnRate * Time.deltaTime;
@@ -100,6 +117,6 @@ public class DroneController : MonoBehaviour
 	private void OnGUI ()
 	{
 		GUILayout.Box("Loot charges: " + LootCharges);
-		GUILayout.Box("Accel charge: " + accelCharge.ToString("P0"));
+		//GUILayout.Box("Accel charge: " + accelCharge.ToString("P0"));
 	}
 }
