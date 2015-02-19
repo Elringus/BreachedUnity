@@ -2452,6 +2452,7 @@ GameObject:
   - 4: {fileID: 1112573566}
   - 114: {fileID: 1112573565}
   - 154: {fileID: 1112573564}
+  - 114: {fileID: 1112573567}
   m_Layer: 0
   m_Name: terrain-2
   m_TagString: Untagged
@@ -2508,6 +2509,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
+--- !u!114 &1112573567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1112573563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f794e56866546c4a975ff68b5cdbc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1194571133
 Prefab:
   m_ObjectHideFlags: 0
@@ -2879,6 +2891,7 @@ GameObject:
   - 4: {fileID: 1490922713}
   - 114: {fileID: 1490922712}
   - 154: {fileID: 1490922711}
+  - 114: {fileID: 1490922714}
   m_Layer: 0
   m_Name: terrain-4
   m_TagString: Untagged
@@ -2930,11 +2943,22 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1490922710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1000, y: 0, z: -1000}
+  m_LocalPosition: {x: -1000, y: -30, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
+--- !u!114 &1490922714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1490922710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f794e56866546c4a975ff68b5cdbc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1520395896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2945,6 +2969,7 @@ GameObject:
   - 4: {fileID: 1520395899}
   - 114: {fileID: 1520395898}
   - 154: {fileID: 1520395897}
+  - 114: {fileID: 1520395900}
   m_Layer: 0
   m_Name: terrain-3
   m_TagString: Untagged
@@ -2996,11 +3021,22 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1520395896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1000}
+  m_LocalPosition: {x: 0, y: -26, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!114 &1520395900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1520395896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f794e56866546c4a975ff68b5cdbc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1562233923
 GameObject:
   m_ObjectHideFlags: 0
@@ -3387,6 +3423,7 @@ GameObject:
   - 4: {fileID: 1795302517}
   - 114: {fileID: 1795302516}
   - 154: {fileID: 1795302515}
+  - 114: {fileID: 1795302518}
   m_Layer: 0
   m_Name: terrain-1
   m_TagString: Untagged
@@ -3443,6 +3480,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!114 &1795302518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1795302514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f794e56866546c4a975ff68b5cdbc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1826281009
 GameObject:
   m_ObjectHideFlags: 0
