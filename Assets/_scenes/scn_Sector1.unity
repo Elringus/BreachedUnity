@@ -880,11 +880,11 @@ CharacterController:
   m_PrefabInternal: {fileID: 617197475}
   m_GameObject: {fileID: 47058129}
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 1
+  m_Height: 2
+  m_Radius: 2
   m_SlopeLimit: 65
   m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
+  m_SkinWidth: .300000012
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: -1, z: 0}
 --- !u!114 &47058131
@@ -900,21 +900,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Transform: {fileID: 0}
-  SpeedLossByLootCharge: .200000003
-  AccelMoveSpeed: 50
+  EngineMode: 0
   NormalMoveSpeed: 10
   FallSpeed: 15
-  GeneralEasing: 3
+  SpeedLossByLootCharge: 0
+  AccelMoveSpeed: 40
+  AccelSteeringDamp: 5
+  AccelRegenRate: .100000001
+  AccelBurnRate: 0
   HorControlDamping: 1
   VerControlDamping: 15
   MaxHorAccel: 500
   MaxVerAccel: 30
-  SteeringLimit: 50
+  SteeringStart: 50
   SteeringSpeed: 10
-  SteeringSkew: 15
-  EngineMode: 0
-  AccelRegenRate: .100000001
-  AccelBurnRate: .5
+  SkewAmount: 15
+  CameraEasing: 3
 --- !u!4 &47058132
 Transform:
   m_ObjectHideFlags: 0
@@ -922,7 +923,7 @@ Transform:
   m_PrefabInternal: {fileID: 617197475}
   m_GameObject: {fileID: 47058129}
   m_LocalRotation: {x: .0156206759, y: -.131354392, z: .00629564701, w: .9911924}
-  m_LocalPosition: {x: -96, y: 82, z: -79}
+  m_LocalPosition: {x: -97, y: 141, z: -77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4093,7 +4094,7 @@ Transform:
   m_PrefabInternal: {fileID: 285124768}
   m_GameObject: {fileID: 215935985}
   m_LocalRotation: {x: .0156206759, y: -.131354392, z: .00629564701, w: .9911924}
-  m_LocalPosition: {x: -96, y: 82, z: -79}
+  m_LocalPosition: {x: -97, y: 141, z: -77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5576,15 +5577,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 36aebe44a1608244ca8baddf5cc2fd4a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -96
+      value: -97
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 36aebe44a1608244ca8baddf5cc2fd4a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 82
+      value: 141
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 36aebe44a1608244ca8baddf5cc2fd4a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -79
+      value: -77
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 36aebe44a1608244ca8baddf5cc2fd4a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -10849,15 +10850,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 271b705b8b6b0fc4497617d8fc57a360, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -96
+      value: -97
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 271b705b8b6b0fc4497617d8fc57a360, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 82
+      value: 141
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 271b705b8b6b0fc4497617d8fc57a360, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -79
+      value: -77
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 271b705b8b6b0fc4497617d8fc57a360, type: 2}
       propertyPath: m_LocalRotation.x
